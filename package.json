@@ -1,14 +1,16 @@
-
 {
   "name": "my-portfolio",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fontsource/poppins": "^5.0.15",
+    "@fontsource/roboto-slab": "^5.0.21",
     "@shadcn/ui": "^0.0.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.20",
+    "framer-motion": "^11.5.4",
     "lucide-react": "^0.438.0",
     "postcss": "^8.4.45",
     "react": "^18.3.1",

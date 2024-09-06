@@ -1,37 +1,60 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Laptop, Briefcase, User, Mail, ExternalLink, Music, School, Award, Linkedin, Code, Menu } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Home, Laptop, Briefcase, User, Mail, ExternalLink, Music, School, Award, Linkedin, Code, Menu, Sun, Moon } from 'lucide-react';
 
 const Logo = () => (
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <motion.svg 
+    width="40" 
+    height="40" 
+    viewBox="0 0 40 40" 
+    fill="none" 
+    xmlns="https://ibb.co/fdZwhw5"
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
+  >
     <circle cx="20" cy="20" r="20" fill="#3B82F6"/>
     <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="24" fontWeight="bold">JD</text>
-  </svg>
+  </motion.svg>
 );
 
 const Section = ({ title, children }) => (
-  <div className="mb-12">
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="mb-12"
+  >
     <h2 className="text-3xl font-bold mb-6 text-blue-400 border-b-2 border-blue-400 pb-2">{title}</h2>
     {children}
-  </div>
+  </motion.div>
 );
 
 const Card = ({ title, subtitle, content, className = "" }) => (
-  <div className={`bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 ${className}`}>
+  <motion.div
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.3 }}
+    whileHover={{ scale: 1.05 }}
+    className={`bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 ${className}`}
+  >
     <h3 className="text-2xl font-bold mb-2 text-blue-400">{title}</h3>
     {subtitle && <p className="text-lg text-gray-300 mb-3">{subtitle}</p>}
     {content}
-  </div>
+  </motion.div>
 );
-
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
-    const body = document.querySelector('body');
-    body.className = theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900';
+    document.body.className = theme;
   }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+  };
+
 
   const sections = [
     { id: 'home', icon: Home, title: 'Home' },
@@ -47,7 +70,12 @@ const Portfolio = () => {
       case 'home':
         return (
           <Section title="Welcome to My Portfolio">
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+            <motion.div 
+              className="flex flex-col md:flex-row items-center md:items-start gap-8"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
               <div className="flex-1">
                 <p className="text-xl mb-4 text-gray-300">Front-end developer passionate about collaborative work, clear communication, and exceeding project deadlines. Known for thriving in team settings and making significant contributions to a diverse range of projects. Driven by the challenge of transforming ideas into impactful web applications.</p>
                 <ul className="list-disc list-inside space-y-2 text-gray-300 mb-6">
@@ -57,20 +85,27 @@ const Portfolio = () => {
                   <li>Technical Skills: Proficient in front-end technologies; always integrating the latest innovations.</li>
                   <li>Development Passion: Focused on using technology to create engaging user experiences.</li>
                 </ul>
-                <button 
+                <motion.button 
                   className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105"
                   onClick={() => setActiveSection('experience')}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   View My Experience
-                </button>
+                </motion.button>
               </div>
-            </div>
+            </motion.div>
           </Section>
         );
       case 'experience':
         return (
           <Section title="Work Experience">
-            <div className="space-y-6">
+            <motion.div 
+              className="space-y-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ staggerChildren: 0.1 }}
+            >
               <Card
                 title="Junior Frontend Developer"
                 subtitle="Jether Tech, Lisbon | May 2023 - Current"
@@ -112,7 +147,33 @@ const Portfolio = () => {
                   </ul>
                 }
               />
-            </div>
+              <Card
+                title="Retention Sales Manager"
+                subtitle="Golden Markets, Kiev | January 2020 - February 2022"
+                content={
+                  <ul className="list-disc list-inside space-y-1 text-gray-300">
+                    <li>Enhanced Customer Satisfaction: Proactively addressed client needs, ensuring positive experiences.</li>
+                    <li>Versatile Support: Assisted internal and external clients, upholding service excellence.</li>
+                    <li>Resolved Inquiries: Improved customer understanding and satisfaction regarding goods and services.</li>
+                    <li>Personalized Assistance: Delivered tailored advice and support, meeting specific customer needs.</li>
+                    <li>Quality Improvement: Identified and resolved complaint root causes, boosting satisfaction.</li>
+                    <li>Efficient Communication: Minimized wait times with prompt call responses, managing 80 calls/day.</li>
+                  </ul>
+                }
+              />
+              <Card
+                title="Retention Sales Manager"
+                subtitle="Ashford, Kiev | February 2016 - January 2020"
+                content={
+                  <ul className="list-disc list-inside space-y-1 text-gray-300">
+                    <li>Boosted Sales: Enhanced team management, achieving a 13% sales increase through effective leadership.</li>
+                    <li>Grew Client Base: Acquired new customers, demonstrating robust business development capabilities.</li>
+                    <li>Strengthened Client Relations: Fostered satisfaction and loyalty through skillful relationship management.</li>
+                    <li>Forged Strategic Partnerships: Navigated complex negotiations, boosting business opportunities.</li>
+                  </ul>
+                }
+              />
+            </motion.div>
           </Section>
         );
       case 'skills':
@@ -164,12 +225,46 @@ const Portfolio = () => {
                 </>
               }
             />
+            <Card
+                title="Portfolio Website"
+                content={
+                  <>
+                    <p className="mb-4 text-gray-300">Created a responsive personal portfolio website using React and Tailwind CSS.</p>
+                    <a href="#" className="text-yellow-400 hover:text-yellow-300 inline-flex items-center transition-colors duration-300">
+                      View Project <ExternalLink size={16} className="ml-1" />
+                    </a>
+                  </>
+                }
+              />
+              <Card
+                title="E-commerce Platform"
+                content={
+                  <p className="mb-4 text-gray-300">Built a responsive e-commerce website with product catalog, shopping cart, and checkout process using React and integrating with a payment gateway.</p>
+                }
+              />
+              <Card
+                title="Task Management App"
+                content={
+                  <p className="mb-4 text-gray-300">Developed a full-stack task management application using React for the frontend and Node.js for the backend. Implemented user authentication and real-time updates.</p>
+                }
+              />
+              <Card
+                title="Wakimi Hostel Ibadan"
+                content={
+                  <p className="mb-4 text-gray-300">Built a responsive Student Hostel "Wakimi" booking website with  React and integrating booking, with a payment gateway.</p>
+                }
+              />
           </Section>
         );
       case 'education':
         return (
           <Section title="Education and Certifications">
-            <div className="space-y-6">
+            <motion.div 
+              className="space-y-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ staggerChildren: 0.1 }}
+            >
               <Card
                 title="Certificate of Completion Web Development"
                 subtitle="Udemy - California Online Coding | January 2023"
@@ -192,7 +287,7 @@ const Portfolio = () => {
                   </ul>
                 }
               />
-            </div>
+            </motion.div>
           </Section>
         );
       case 'contact':
@@ -218,10 +313,10 @@ const Portfolio = () => {
                     <a href="https://www.linkedin.com/in/janeezy/" target="_blank" rel="noopener noreferrer" className="text-yellow-400 hover:text-yellow-300 transition-colors duration-300">linkedin.com/in/janeezy</a>
                   </li>
                   <li className="flex items-center">
-  <Code className="mr-3 text-blue-400" size={24} />
-  <strong className="mr-2">GitHub:</strong>
-  <a href="https://github.com/janeezy" target="_blank" rel="noopener noreferrer" className="text-yellow-400 hover:text-yellow-300 transition-colors duration-300">github.com/janeezy</a>
-</li>
+                    <Code className="mr-3 text-blue-400" size={24} />
+                    <strong className="mr-2">GitHub:</strong>
+                    <a href="https://github.com/janeezy" target="_blank" rel="noopener noreferrer" className="text-yellow-400 hover:text-yellow-300 transition-colors duration-300">github.com/janeezy</a>
+                  </li>
                 </ul>
               }
             />
@@ -233,59 +328,147 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="min-h-screen font-sans">
-      <header className="fixed top-0 left-0 right-0 bg-opacity-90 backdrop-filter backdrop-blur-lg z-50">
+    <div className="min-h-screen font-sans bg-gradient-to-br from-gray-900 to-gray-800">
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ type: 'spring', stiffness: 120 }}
+        className="fixed top-0 left-0 right-0 bg-opacity-90 backdrop-filter backdrop-blur-lg z-50"
+      >
         <div className="container mx-auto px-4 py-2 flex justify-between items-center">
           <div className="flex items-center">
             <Logo />
-            <h1 className="text-2xl font-bold ml-2">Ezinne Duru</h1>
+            <motion.h1 
+              className="text-2xl font-bold ml-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-300"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              Jane Duru
+            </motion.h1>
           </div>
           <div className="flex items-center">
-            <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="mr-4">
-              {theme === 'dark' ? '🌞' : '🌙'}
-            </button>
-            <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="mr-4 p-2 rounded-full bg-gray-700 text-gray-300"
+            >
+              {theme === 'dark' ? <Sun className="text-yellow-400" /> : <Moon className="text-blue-400" />}
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden p-2 rounded-full bg-gray-700 text-gray-300"
+            >
               <Menu size={24} />
-            </button>
+            </motion.button>
           </div>
         </div>
-      </header>
+      </motion.header>
 
-      <nav className={`fixed ${menuOpen ? 'bottom-0' : '-bottom-full'} left-0 right-0 bg-opacity-90 backdrop-filter backdrop-blur-lg transition-all duration-300 ease-in-out md:top-0 md:left-0 md:right-auto md:h-full md:w-24 z-40`}>
-        <ul className="flex justify-around md:flex-col md:h-full md:justify-center md:space-y-8 p-4">
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.nav
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', stiffness: 120 }}
+            className="fixed top-0 right-0 bottom-0 w-64 bg-gray-800 z-40 md:hidden"
+          >
+            <ul className="flex flex-col h-full justify-center space-y-8 p-4">
+              {sections.map((section) => (
+                <li key={section.id}>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      setActiveSection(section.id);
+                      setMenuOpen(false);
+                    }}
+                    className={`flex items-center p-2 rounded-full transition-all duration-300 ${
+                      activeSection === section.id
+                        ? 'bg-blue-500 text-white'
+                        : 'text-gray-400 hover:text-white hover:bg-gray-700'
+                    }`}
+                  >
+                    <section.icon size={24} className="mr-2" />
+                    <span>{section.title}</span>
+                  </motion.button>
+                </li>
+              ))}
+            </ul>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+
+      <nav className="hidden md:block fixed top-0 left-0 bottom-0 w-24 bg-gray-800 z-40">
+        <ul className="flex flex-col h-full justify-center space-y-8 p-4">
           {sections.map((section) => (
             <li key={section.id}>
-              <button
-                onClick={() => {
-                  setActiveSection(section.id);
-                  setMenuOpen(false);
-                }}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setActiveSection(section.id)}
                 className={`p-2 rounded-full transition-all duration-300 ${
                   activeSection === section.id
-                    ? 'bg-blue-500 text-white shadow-lg'
+                    ? 'bg-blue-500 text-white'
                     : 'text-gray-400 hover:text-white hover:bg-gray-700'
                 }`}
               >
                 <section.icon size={24} />
                 <span className="sr-only">{section.title}</span>
-              </button>
+              </motion.button>
             </li>
           ))}
         </ul>
       </nav>
 
-      <main className="pt-16 md:ml-24 p-8 overflow-y-auto h-screen">
-        <img 
-          src="https://i.ibb.co/zJHYGBT/yVh-Jt4-V.jpg" 
+      <main className="pt-16 md:ml-24 p-8 overflow-y-auto h-screen custom-scrollbar">
+        <motion.img 
+          src="IMG.png" 
           alt="Ezinne Adaego Jane Duru" 
-          className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-blue-500 transition-transform duration-300 hover:scale-105 mx-auto mb-8"
+          className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-blue-500 mx-auto mb-8"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 20 }}
         />
-        <h2 className="text-4xl font-bold mb-4 text-center">Ezinne Adaego Jane Duru</h2>
-        <p className="text-xl mb-8 text-center">Frontend Developer & UI/UX Enthusiast</p>
-        {renderContent()}
+        <motion.h2 
+          className="text-4xl font-bold mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-300"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          Hi! Welcome, I'm Ezinne Adaego Jane Duru
+        </motion.h2>
+        <motion.p 
+          className="text-xl mb-8 text-center text-gray-300"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          Software Engineer ~ Frontend & UI/UX Enthusiast | Creating Seamless User Interactions
+        </motion.p>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeSection}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            {renderContent()}
+          </motion.div>
+        </AnimatePresence>
       </main>
     </div>
   );
 };
 
 export default Portfolio;
+
+
+
+
+
