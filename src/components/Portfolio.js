@@ -268,7 +268,7 @@ const Portfolio = () => {
                 Built a responsive restaurant website with product catalog, shopping cart, and checkout process using React and integrating with a payment gateway.
               </p>
               <a 
-                href="#" 
+                href="https://resturantapp-mu.vercel.app" 
                 className={`${theme === 'dark' ? 'text-yellow-400 hover:text-yellow-300' : 'text-blue-600 hover:text-blue-800'} inline-flex items-center transition-colors duration-300`}
               >
                 View Project <ExternalLink size={16} className="ml-1" />
@@ -278,12 +278,11 @@ const Portfolio = () => {
           theme={theme}
         />
         <Card
-          title="Task Management App"
+          title="QUIZ Management App"
           content={
             <>
               <p className={`mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                Developed a full-stack task management application using React for the frontend and Node.js for the backend. Implemented user authentication and real-time updates.
-              </p>
+                Developed  application uThe quiz app is built with **JavaScript**, styled with CSS, uses Zustand for state management, and retrieves quiz data from the Trivia API. It's hosted on Vercel for smooth performance.</p>
               <a 
                 href="#" 
                 className={`${theme === 'dark' ? 'text-yellow-400 hover:text-yellow-300' : 'text-blue-600 hover:text-blue-800'} inline-flex items-center transition-colors duration-300`}
@@ -302,7 +301,7 @@ const Portfolio = () => {
                 Built a responsive Student Hostel "Wakimi" booking website with React and integrating booking, with a payment gateway.
               </p>
               <a 
-                href="#" 
+                href="https://wakimi-hostel-updated.vercel.app" 
                 className={`${theme === 'dark' ? 'text-yellow-400 hover:text-yellow-300' : 'text-blue-600 hover:text-blue-800'} inline-flex items-center transition-colors duration-300`}
               >
                 View Project <ExternalLink size={16} className="ml-1" />
