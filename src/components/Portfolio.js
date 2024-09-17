@@ -9,7 +9,7 @@ const Logo = () => (
     height="40" 
     viewBox="0 0 40 40" 
     fill="none" 
-    xmlns="Favicon"
+    xmlns="favicon.ico"
     whileHover={{ scale: 1.1 }}
     whileTap={{ scale: 0.9 }}
   >
@@ -112,89 +112,129 @@ const Portfolio = () => {
           </Section>
         );
         case 'experience':
-  return (
-    <Section title="Work Experience" theme={theme}>
-      <motion.div 
-        className="space-y-6"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ staggerChildren: 0.1 }}
-      >
-        <Card
-          title="Junior Frontend Developer"
-          subtitle="Jether Tech, Lisbon | May 2023 - Current"
-          content={
-            <ul className="list-disc list-inside space-y-1 text-gray-300">
-              <li>Advanced in HTML, CSS, JavaScript, React.js for responsive UI development.</li>
-              <li>Aligns technical and visual aspects for optimal UX.</li>
-              <li>Prioritizes clean, efficient code; engages in rigorous code reviews.</li>
-              <li>Quick at identifying and resolving web app issues.</li>
-              <li>Keeps pace with front-end trends and technologies.</li>
-              <li>Ensures project success through strong communication and teamwork.</li>
-            </ul>
-          }
-          theme={theme}
-        />
-        <Card
-          title="Frontend Developer (Internship)"
-          subtitle="Jether Tech, Lisbon | December 2022 - April 2023"
-          content={
-            <ul className="list-disc list-inside space-y-1 text-gray-300">
-              <li>Developed feature-rich web applications using HTML, CSS, JavaScript; specialized in responsive designs.</li>
-              <li>Enhanced UX through close collaboration on UI/UX design and development.</li>
-              <li>Implemented innovative solutions to complex problems, improving user engagement.</li>
-              <li>Proven reliability with effective time management and on-time project delivery.</li>
-              <li>Committed to code quality and ongoing learning in web development.</li>
-              <li>Versatile team player with strong interpersonal skills, contributing to positive project outcomes.</li>
-            </ul>
-          }
-          theme={theme}
-        />
-        <Card
-          title="Music Producer"
-          subtitle="Janeezybeats, Remote | January 2020 - Current"
-          content={
-            <ul className="list-disc list-inside space-y-1 text-gray-300">
-              <li>Founder of JaneezyBeats, showcasing entrepreneurial spirit by producing and marketing beats.</li>
-              <li>Developed a music website (https://janeezy.beatstars.com) for showcasing work to a global audience.</li>
-              <li>Curated a diverse collection of beats across multiple styles and genres.</li>
-              <li>Simplified music licensing, enabling easy online browsing, previewing, and purchase options.</li>
-              <li>Offer exclusive beats with full master ownership, providing unique value for clients.</li>
-            </ul>
-          }
-          theme={theme}
-        />
-        <Card
-          title="Retention Sales Manager"
-          subtitle="Golden Markets, Kiev | January 2020 - February 2022"
-          content={
-            <ul className="list-disc list-inside space-y-1 text-gray-300">
-              <li>Enhanced Customer Satisfaction: Proactively addressed client needs, ensuring positive experiences.</li>
-              <li>Versatile Support: Assisted internal and external clients, upholding service excellence.</li>
-              <li>Resolved Inquiries: Improved customer understanding and satisfaction regarding goods and services.</li>
-              <li>Personalized Assistance: Delivered tailored advice and support, meeting specific customer needs.</li>
-              <li>Quality Improvement: Identified and resolved complaint root causes, boosting satisfaction.</li>
-              <li>Efficient Communication: Minimized wait times with prompt call responses, managing 80 calls/day.</li>
-            </ul>
-          }
-          theme={theme}
-        />
-        <Card
-          title="Retention Sales Manager"
-          subtitle="Ashford, Kiev | February 2016 - January 2020"
-          content={
-            <ul className="list-disc list-inside space-y-1 text-gray-300">
-              <li>Boosted Sales: Enhanced team management, achieving a 13% sales increase through effective leadership.</li>
-              <li>Grew Client Base: Acquired new customers, demonstrating robust business development capabilities.</li>
-              <li>Strengthened Client Relations: Fostered satisfaction and loyalty through skillful relationship management.</li>
-              <li>Forged Strategic Partnerships: Navigated complex negotiations, boosting business opportunities.</li>
-            </ul>
-          }
-          theme={theme}
-        />
-      </motion.div>
-    </Section>
-  );
+          return (
+            <Section title="Work Experience" theme={theme}>
+              <motion.div 
+                className="space-y-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ staggerChildren: 0.1 }}
+              >
+                <Card
+                  title="Junior Frontend Developer"
+                  subtitle="Jether Tech, Lisbon | May 2023 - Current"
+                  content={
+                    <ul className={`list-disc list-inside space-y-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <li>Advanced in HTML, CSS, JavaScript, React.js for responsive UI development.</li>
+                      <li>Aligns technical and visual aspects for optimal UX.</li>
+                      <li>Prioritizes clean, efficient code; engages in rigorous code reviews.</li>
+                      <li>Quick at identifying and resolving web app issues.</li>
+                      <li>Keeps pace with front-end trends and technologies.</li>
+                      <li>Ensures project success through strong communication and teamwork.</li>
+                    </ul>
+                  }
+                  theme={theme}
+                />
+                <Card
+                  title="Frontend Developer (Internship)"
+                  subtitle="Jether Tech, Lisbon | December 2022 - April 2023"
+                  content={
+                    <ul className={`list-disc list-inside space-y-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <li>Developed feature-rich web applications using HTML, CSS, JavaScript; specialized in responsive designs.</li>
+                      <li>Enhanced UX through close collaboration on UI/UX design and development.</li>
+                      <li>Implemented innovative solutions to complex problems, improving user engagement.</li>
+                      <li>Proven reliability with effective time management and on-time project delivery.</li>
+                      <li>Committed to code quality and ongoing learning in web development.</li>
+                      <li>Versatile team player with strong interpersonal skills, contributing to positive project outcomes.</li>
+                    </ul>
+                  }
+                  theme={theme}
+                />
+                <Card
+                  title="Music Producer"
+                  subtitle="Janeezybeats, Remote | January 2020 - Current"
+                  content={
+                    <ul className={`list-disc list-inside space-y-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <li>Founder of JaneezyBeats, showcasing entrepreneurial spirit by producing and marketing beats.</li>
+                      <li>Developed a music website (https://janeezy.beatstars.com) for showcasing work to a global audience.</li>
+                      <li>Curated a diverse collection of beats across multiple styles and genres.</li>
+                      <li>Simplified music licensing, enabling easy online browsing, previewing, and purchase options.</li>
+                      <li>Offer exclusive beats with full master ownership, providing unique value for clients.</li>
+                    </ul>
+                  }
+                  theme={theme}
+                />
+                <Card
+                  title="Retention Sales Manager"
+                  subtitle="Golden Markets, Kiev | January 2020 - February 2022"
+                  content={
+                    <ul className={`list-disc list-inside space-y-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <li>Enhanced Customer Satisfaction: Proactively addressed client needs, ensuring positive experiences.</li>
+                      <li>Versatile Support: Assisted internal and external clients, upholding service excellence.</li>
+                      <li>Resolved Inquiries: Improved customer understanding and satisfaction regarding goods and services.</li>
+                      <li>Personalized Assistance: Delivered tailored advice and support, meeting specific customer needs.</li>
+                      <li>Quality Improvement: Identified and resolved complaint root causes, boosting satisfaction.</li>
+                      <li>Efficient Communication: Minimized wait times with prompt call responses, managing 80 calls/day.</li>
+                    </ul>
+                  }
+                  theme={theme}
+                />
+                <Card
+                  title="Retention Sales Manager"
+                  subtitle="Ashford, Kiev | February 2016 - January 2020"
+                  content={
+                    <ul className={`list-disc list-inside space-y-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <li>Boosted Sales: Enhanced team management, achieving a 13% sales increase through effective leadership.</li>
+                      <li>Grew Client Base: Acquired new customers, demonstrating robust business development capabilities.</li>
+                      <li>Strengthened Client Relations: Fostered satisfaction and loyalty through skillful relationship management.</li>
+                      <li>Forged Strategic Partnerships: Navigated complex negotiations, boosting business opportunities.</li>
+                    </ul>
+                  }
+                  theme={theme}
+                />
+              </motion.div>
+            </Section>
+          );
+        
+        case 'skills':
+          return (
+            <Section title="Skills" theme={theme}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card
+                  title="Technical Skills"
+                  content={
+                    <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <li>HTML5, CSS3 & CSS Preprocessors</li>
+                      <li>JavaScript (ES6+)</li>
+                      <li>React.js</li>
+                      <li>Version Control Systems (Git)</li>
+                      <li>Responsive Design</li>
+                      <li>Build Tools</li>
+                      <li>Testing</li>
+                      <li>APIs</li>
+                      <li>(UI/UX) Principles</li>
+                    </ul>
+                  }
+                  theme={theme}
+                />
+                <Card
+                  title="Soft Skills"
+                  content={
+                    <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <li>Problem-Solving</li>
+                      <li>Communication</li>
+                      <li>Teamwork</li>
+                      <li>Continuous Learning</li>
+                      <li>Critical Thinking</li>
+                    </ul>
+                  }
+                  theme={theme}
+                />
+              </div>
+            </Section>
+          );
+        
+
         case 'skills':
           return (
             <Section title="Skills" theme={theme}>
