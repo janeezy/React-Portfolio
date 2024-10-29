@@ -330,13 +330,13 @@ const Portfolio = () => {
           theme={theme}
         />
         <Card
-          title="Quiz Management App"
+          title="Gym Website"
           content={
             <>
               <p className={`mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                Developed  application The quiz app is built with JavaScript, styled with CSS, uses Zustand for state management, and retrieves quiz data from the Trivia API. It's hosted on Vercel for smooth performance.</p>
+              A responsive Gym Website developed using HTML, CSS, and vanilla JavaScript, featuring a modern design with a mobile-friendly navigation menu, visually appealing sections including trainers showcase, testimonials, and pricing, styled with custom CSS utilizing Flexbox layouts, animations, and Google Fonts, while implementing simple JavaScript for mobile menu toggle functionality.</p>
               <a 
-                href="https://quiz-app-ashy-two.vercel.app" 
+                href="https://gym-rho-one.vercel.app" 
                 className={`${theme === 'dark' ? 'text-yellow-400 hover:text-yellow-300' : 'text-blue-600 hover:text-blue-800'} inline-flex items-center transition-colors duration-300`}
               >
                 View Project <ExternalLink size={16} className="ml-1" />
@@ -589,6 +589,8 @@ const Portfolio = () => {
 >
   Software Engineer ~ Frontend & UI/UX Enthusiast | Creating Seamless User Interactions
 </motion.p>
+
+
  
         <AnimatePresence mode="wait">
           <motion.div
