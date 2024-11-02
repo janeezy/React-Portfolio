@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, Laptop, Briefcase, User, Mail, ExternalLink, Music, School, Award, Linkedin, Code, Menu, Sun, Moon } from 'lucide-react';
+import { Twitter, Facebook, HeartHandshake, Copyright } from 'lucide-react';
 
 
 // Updated Logo component with modern styling
@@ -268,7 +269,64 @@ const Portfolio = () => {
                   } border-l-4 border-blue-500 pl-4`}>
                     Frontend Development Experience
                   </h3>
-        
+                       {/* Current Role */}
+  <Card
+    title={
+      <div className="space-y-2">
+        <div className="flex items-center gap-3">
+          <h4 className="text-2xl font-bold tracking-tight">Frontend Developer</h4>
+          <span className={`px-3 py-1 text-sm font-medium rounded-full
+            ${theme === 'dark'
+              ? 'bg-green-900/30 text-green-300 border border-green-800'
+              : 'bg-green-100 text-green-700 border border-green-200'
+            }`}
+          >
+            Current Role
+          </span>
+        </div>
+        <p className="text-lg text-gray-500">Jether Tech | May 2023 - Present</p>
+      </div>
+    }
+    content={
+      <div className="space-y-6">
+        <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+          <li className="flex items-start gap-3">
+            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+            <span>Develop and maintain responsive web interfaces using React.js, focusing on user experience and accessibility</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+            <span>Collaborate with design team to implement pixel-perfect UI using HTML5, CSS3, and TailwindCSS</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+            <span>Write clean, maintainable JavaScript code following modern ES6+ standards</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+            <span>Participate in code reviews and implement feedback to improve code quality</span>
+          </li>
+        </ul>
+        <div className="flex flex-wrap gap-2">
+          {[
+            'HTML5', 'CSS3', 'JavaScript', 'React', 
+            'Responsive Design', 'TailwindCSS',
+            'Git', 'Team Collaboration'
+          ].map(tech => (
+            <span key={tech} className={`px-3 py-1 text-sm font-medium rounded-full
+              ${theme === 'dark'
+                ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
+                : 'bg-blue-50 text-blue-700 border border-blue-200'
+              }`}
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    }
+    theme={theme}
+  />
                   <Card
                     title={
                       <div className="space-y-2">
@@ -1138,39 +1196,142 @@ const Portfolio = () => {
               </Section>
             );
             
-        case 'contact':
-        return (
-          <Section title="Contact Me" theme={theme}>
-            <p className={`mb-6 text-lg ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
-            <Card
-              content={
-                <ul className={`space-y-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                  <li className="flex items-center">
-                    <Mail className={`mr-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`} size={24} />
-                    <strong className="mr-2">Email:</strong>
-                    <a href="mailto:janeezyofficial@gmail.com" className={`${theme === 'dark' ? 'text-yellow-400 hover:text-yellow-300' : 'text-blue-600 hover:text-blue-800'} transition-colors duration-300`}>janeezyofficial@gmail.com</a>
-                  </li>
-                  <li className="flex items-center">
-                    <Briefcase className={`mr-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`} size={24} />
-                    <strong className="mr-2">Phone:</strong>
-                    <a href="tel:+351920009647" className={`${theme === 'dark' ? 'text-yellow-400 hover:text-yellow-300' : 'text-blue-600 hover:text-blue-800'} transition-colors duration-300`}>+351 920 009 647</a>
-                  </li>
-                  <li className="flex items-center">
-                    <Linkedin className={`mr-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`} size={24} />
-                    <strong className="mr-2">LinkedIn:</strong>
-                    <a href="https://www.linkedin.com/in/janeezy/" target="_blank" rel="noopener noreferrer" className={`${theme === 'dark' ? 'text-yellow-400 hover:text-yellow-300' : 'text-blue-600 hover:text-blue-800'} transition-colors duration-300`}>linkedin.com/in/janeezy</a>
-                  </li>
-                  <li className="flex items-center">
-                    <Code className={`mr-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`} size={24} />
-                    <strong className="mr-2">GitHub:</strong>
-                    <a href="https://github.com/janeezy" target="_blank" rel="noopener noreferrer" className={`${theme === 'dark' ? 'text-yellow-400 hover:text-yellow-300' : 'text-blue-600 hover:text-blue-800'} transition-colors duration-300`}>github.com/janeezy</a>
-                  </li>
-                </ul>
+        // In the contact section:
+case 'contact':
+  return (
+    <Section title="Let's Connect" theme={theme}>
+      <div className="space-y-12">
+        {/* Previous contact content remains the same until social links */}
+
+        {/* Updated Social Links */}
+        <div className="space-y-6">
+          <h3 className={`text-2xl font-bold tracking-tight ${
+            theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
+          }`}>
+            Connect with Me
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              {
+                platform: "LinkedIn",
+                icon: Linkedin,
+                link: "https://www.linkedin.com/in/janeezy/",
+                color: "blue",
+                description: "Professional Network"
+              },
+              {
+                platform: "GitHub",
+                icon: Code,
+                link: "https://github.com/janeezy",
+                color: "purple",
+                description: "Code & Projects"
+              },
+              {
+                platform: "Twitter",
+                icon: Twitter,
+                link: "https://x.com/Iamjaneezy",
+                color: "sky",
+                description: "Updates & Thoughts"
+              },
+              {
+                platform: "Facebook",
+                icon: Facebook,
+                link: "https://www.facebook.com/",
+                color: "indigo",
+                description: "Social Connect"
               }
-              theme={theme}
-            />
-          </Section>
-        );
+            ].map(social => (
+              <motion.a
+                key={social.platform}
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                className={`
+                  p-6 rounded-xl flex flex-col items-center gap-3 text-center
+                  transition-all duration-300
+                  ${theme === 'dark' 
+                    ? `bg-${social.color}-900/20 border border-${social.color}-800/50 hover:border-${social.color}-500` 
+                    : `bg-${social.color}-50 border border-${social.color}-200 hover:border-${social.color}-500`
+                  }
+                `}
+              >
+                <social.icon className={`w-8 h-8 text-${social.color}-500`} />
+                <div>
+                  <div className={`font-medium text-${social.color}-500`}>
+                    {social.platform}
+                  </div>
+                  <div className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                    {social.description}
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        </div>
+
+        {/* Sponsor Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`p-8 rounded-xl text-center ${
+            theme === 'dark' 
+              ? 'bg-gradient-to-br from-pink-900/20 to-purple-900/20 border border-pink-800/50' 
+              : 'bg-gradient-to-br from-pink-50 to-purple-50 border border-pink-200'
+          }`}
+        >
+          <div className="space-y-4">
+            <HeartHandshake className={`w-12 h-12 mx-auto ${
+              theme === 'dark' ? 'text-pink-400' : 'text-pink-600'
+            }`} />
+            <h3 className="text-2xl font-bold">Support My Work</h3>
+            <p className={`max-w-md mx-auto ${
+              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+            }`}>
+              If you find my work valuable, consider supporting my open source contributions
+            </p>
+            <div className="flex justify-center mt-4">
+              <iframe
+                src="https://github.com/sponsors/janeezy/button"
+                title="Sponsor janeezy"
+                height="32"
+                width="114"
+                style={{ border: 0, borderRadius: '6px' }}
+              />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Previous form and location content remains */}
+
+        {/* Attribution Footer */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className={`pt-8 mt-12 border-t ${
+            theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
+          }`}
+        >
+          <div className="flex flex-col items-center justify-center gap-2 text-center">
+            <div className="flex items-center gap-2">
+              <Copyright className="w-4 h-4" />
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                {new Date().getFullYear()} - All rights reserved
+              </p>
+            </div>
+            <p className={`text-sm ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
+              Designed and Developed with 
+              <span className="text-red-500 mx-1">♥</span> 
+              by Jane Duru
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </Section>
+  );
       default:
         return null;
     }
@@ -1211,7 +1372,7 @@ const Portfolio = () => {
   whileHover={{ scale: 1.1 }}
   whileTap={{ scale: 0.9 }}
   onClick={() => setMenuOpen(!menuOpen)}
-  className={`md:hidden p-2 rounded-full ${
+  className={`md:hidden p-2 rounded-full mr-4 ${
     theme === 'dark' ? 'bg-gray-700 text-gray-300' : 'bg-gray-200 text-gray-800'
   }`}
 >
