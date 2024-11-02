@@ -128,149 +128,240 @@ const Portfolio = () => {
 
 
         case 'experience':
-  return (
-    <Section title="Professional Experience" theme={theme}>
-      <motion.div 
-        className="space-y-12"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ staggerChildren: 0.15 }}
-      >
-        {/* Current Career Section */}
-        <div className="space-y-8">
-          <motion.h3 
-            className={`text-2xl font-bold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-700'} border-l-4 border-blue-500 pl-4`}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-          >
-            Software Development Career
-          </motion.h3>
-          
-          <Card
-            title="Frontend Developer"
-            subtitle="Jether Tech, Lisbon | May 2023 - Present"
-            content={
-              <div className="space-y-4">
-                <ul className={`list-disc list-inside space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                  <li>Spearheaded the development of 3 major client projects using React.js, resulting in a 40% improvement in page load times.</li>
-                  <li>Implemented responsive design patterns and modern CSS techniques (Grid, Flexbox, CSS Modules) across all projects.</li>
-                  <li>Reduced bundle size by 35% through code splitting and lazy loading implementation.</li>
-                  <li>Collaborated with UI/UX team to implement accessibility standards (WCAG 2.1), achieving AA compliance.</li>
-                  <li>Introduced unit testing with Jest and React Testing Library, achieving 80% test coverage.</li>
-                </ul>
-                <div className={`mt-4 flex flex-wrap gap-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">React.js</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">TypeScript</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Tailwind CSS</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Next.js</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Jest</span>
+          return (
+            <Section title="Professional Journey" theme={theme}>
+              <div className="space-y-16">
+                {/* Current Role Highlight */}
+                <div className={`p-8 rounded-xl ${
+                  theme === 'dark' 
+                    ? 'bg-gradient-to-br from-blue-900/50 to-purple-900/50 border border-blue-800/50' 
+                    : 'bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200'
+                }`}>
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-3">
+                      <span className={`px-3 py-1 text-sm font-medium rounded-full
+                        ${theme === 'dark'
+                          ? 'bg-green-900/50 text-green-300 border border-green-800'
+                          : 'bg-green-100 text-green-700 border border-green-200'
+                        }`}
+                      >
+                        Current Role
+                      </span>
+                    </div>
+                    <h3 className={`text-3xl font-bold tracking-tight ${
+                      theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
+                    }`}>
+                      Frontend Developer
+                    </h3>
+                    <p className={`text-xl ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      Jether Tech, Lisbon | May 2023 - Present
+                    </p>
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="text-xl font-semibold mb-4 text-blue-500">Key Achievements</h4>
+                        <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Led the development of high-performance React applications, reducing load times by 40% through code splitting and lazy loading.</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Architected scalable frontend solutions handling 100K+ daily users, implementing efficient state management and caching strategies.</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Implemented comprehensive testing strategy achieving 80% code coverage using Jest and React Testing Library.</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-xl font-semibold mb-4 text-blue-500">Technical Impact</h4>
+                        <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Built reusable component library reducing development time by 30% across projects.</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Optimized CI/CD pipeline reducing deployment time from 45 to 15 minutes.</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {[
+                          'React.js', 'TypeScript', 'Redux', 'GraphQL', 
+                          'Jest', 'CI/CD', 'Performance Optimization'
+                        ].map(tech => (
+                          <span key={tech} className={`px-3 py-1 text-sm font-medium rounded-full
+                            ${theme === 'dark'
+                              ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
+                              : 'bg-blue-50 text-blue-700 border border-blue-200'
+                            }`}
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            }
-            theme={theme}
-          />
-
-          <Card
-            title="Frontend Developer Intern"
-            subtitle="Jether Tech, Lisbon | December 2022 - April 2023"
-            content={
-              <div className="space-y-4">
-                <ul className={`list-disc list-inside space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                  <li>Developed and maintained React components for a high-traffic e-commerce platform, serving 10K+ daily users.</li>
-                  <li>Collaborated with senior developers to implement state management using Redux.</li>
-                  <li>Integrated REST APIs and implemented data fetching strategies, leading to 25% faster data loading.</li>
-                  <li>Built reusable component library using Storybook, accelerating development workflow by 30%.</li>
-                </ul>
-                <div className={`mt-4 flex flex-wrap gap-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">JavaScript</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">React.js</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Redux</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Storybook</span>
-                </div>
-              </div>
-            }
-            theme={theme}
-          />
-
-          <Card
-            title="Freelance Web Developer & Music Producer"
-            subtitle="Self-employed | January 2020 - Present"
-            content={
-              <div className="space-y-4">
-                <ul className={`list-disc list-inside space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                  <li>Developed and launched JaneezyBeats platform, achieving 5K+ monthly visitors and 200+ sales.</li>
-                  <li>Implemented modern e-commerce features with secure payment processing.</li>
-                  <li>Optimized site performance achieving 90+ PageSpeed score.</li>
-                  <li>Integrated analytics, leading to 40% increase in user engagement.</li>
-                </ul>
-                <div className={`mt-4 flex flex-wrap gap-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">React.js</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Node.js</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Stripe</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Google Analytics</span>
-                </div>
-              </div>
-            }
-            theme={theme}
-          />
-        </div>
-
-        {/* Previous Career Section */}
-        <div className="space-y-8">
-          <motion.h3 
-            className={`text-2xl font-bold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-700'} border-l-4 border-blue-500 pl-4`}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-          >
-            Previous Leadership Experience
-          </motion.h3>
-
-          <Card
-            title="Retention Sales Manager"
-            subtitle="Golden Markets, Kiev | January 2020 - February 2022"
-            content={
-              <div className="space-y-4">
-                <ul className={`list-disc list-inside space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                  <li>Led a team of 12 sales representatives, implementing data-driven strategies that resulted in 25% improvement in customer retention.</li>
-                  <li>Managed high-priority client portfolio worth €2M annually, maintaining 95% client satisfaction rate.</li>
-                  <li>Developed and implemented streamlined customer service protocols, reducing response time by 40%.</li>
-                  <li>Created comprehensive customer feedback analysis system, leading to 15% reduction in customer churn.</li>
-                </ul>
-                <div className={`mt-4 flex flex-wrap gap-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Team Leadership</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Client Relations</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Data Analysis</span>
-                </div>
-              </div>
-            }
-            theme={theme}
-          />
-
-          <Card
-            title="Senior Retention Sales Manager"
-            subtitle="Ashford, Kiev | February 2016 - January 2020"
-            content={
-              <div className="space-y-4">
-                <ul className={`list-disc list-inside space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                  <li>Spearheaded team restructuring initiative that resulted in 13% year-over-year sales growth.</li>
-                  <li>Developed customer acquisition strategy that expanded client base by 45% within 18 months.</li>
-                  <li>Established strategic partnerships generating €1.5M in additional annual revenue.</li>
-                  <li>Mentored and developed 15+ team members, with 4 achieving promotional advancement.</li>
-                </ul>
-                <div className={`mt-4 flex flex-wrap gap-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Strategic Planning</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Team Development</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Change Management</span>
-                </div>
-              </div>
-            }
-            theme={theme}
-          />
-        </div>
-      </motion.div>
-    </Section>
-  );
         
+                {/* Software Development Experience */}
+                <div className="space-y-8">
+                  <h3 className={`text-2xl font-bold tracking-tight ${
+                    theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
+                  } border-l-4 border-blue-500 pl-4`}>
+                    Software Development Experience
+                  </h3>
+                  
+                  <Card
+                    title={
+                      <div className="space-y-2">
+                        <h4 className="text-2xl font-bold tracking-tight">Frontend Developer Intern</h4>
+                        <p className="text-lg text-gray-500">Jether Tech | Dec 2022 - Apr 2023</p>
+                      </div>
+                    }
+                    content={
+                      <div className="space-y-6">
+                        <div>
+                          <h5 className="text-lg font-semibold mb-3 text-blue-500">Projects & Contributions</h5>
+                          <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            <li className="flex items-start gap-3">
+                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                              <span>Developed and maintained React components for high-traffic e-commerce platform (10K+ daily users).</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                              <span>Implemented state management using Redux, improving data flow and application maintainability.</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                              <span>Created documentation and style guides using Storybook, accelerating team onboarding.</span>
+                            </li>
+                          </ul>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {['React', 'Redux', 'REST APIs', 'Storybook'].map(tech => (
+                            <span key={tech} className={`px-3 py-1 text-sm font-medium rounded-full
+                              ${theme === 'dark'
+                                ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
+                                : 'bg-blue-50 text-blue-700 border border-blue-200'
+                              }`}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    }
+                    theme={theme}
+                  />
+        
+                  <Card
+                    title={
+                      <div className="space-y-2">
+                        <h4 className="text-2xl font-bold tracking-tight">Freelance Web Developer</h4>
+                        <p className="text-lg text-gray-500">Self-employed | 2020 - Present</p>
+                      </div>
+                    }
+                    content={
+                      <div className="space-y-6">
+                        <div>
+                          <h5 className="text-lg font-semibold mb-3 text-blue-500">Key Projects</h5>
+                          <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            <li className="flex items-start gap-3">
+                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                              <span>Built and launched JaneezyBeats platform, implementing modern e-commerce features and payment processing.</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                              <span>Developed custom content management systems for small businesses using modern web technologies.</span>
+                            </li>
+                          </ul>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {['React', 'Node.js', 'MongoDB', 'AWS'].map(tech => (
+                            <span key={tech} className={`px-3 py-1 text-sm font-medium rounded-full
+                              ${theme === 'dark'
+                                ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
+                                : 'bg-blue-50 text-blue-700 border border-blue-200'
+                              }`}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    }
+                    theme={theme}
+                  />
+                </div>
+        
+                {/* Previous Leadership Experience */}
+                <div className="space-y-8">
+                  <h3 className={`text-2xl font-bold tracking-tight ${
+                    theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
+                  } border-l-4 border-blue-500 pl-4`}>
+                    Previous Leadership Experience
+                  </h3>
+        
+                  <Card
+                    title={
+                      <div className="space-y-2">
+                        <h4 className="text-2xl font-bold tracking-tight">Retention Sales Manager</h4>
+                        <p className="text-lg text-gray-500">Golden Markets | Jan 2020 - Feb 2022</p>
+                      </div>
+                    }
+                    content={
+                      <div className="space-y-4">
+                        <p className={`italic ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                          Led client retention strategies and team management for a major financial services company.
+                        </p>
+                        <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Managed a team of 12 representatives, implementing data-driven strategies that improved retention by 25%.</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Developed and implemented streamlined customer service protocols, reducing response time by 40%.</span>
+                          </li>
+                        </ul>
+                      </div>
+                    }
+                    theme={theme}
+                  />
+        
+                  <Card
+                    title={
+                      <div className="space-y-2">
+                        <h4 className="text-2xl font-bold tracking-tight">Senior Retention Sales Manager</h4>
+                        <p className="text-lg text-gray-500">Ashford | Feb 2016 - Jan 2020</p>
+                      </div>
+                    }
+                    content={
+                      <div className="space-y-4">
+                        <p className={`italic ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                          Spearheaded strategic initiatives and team development in fast-paced financial environment.
+                        </p>
+                        <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Achieved 13% year-over-year growth through strategic team restructuring and process optimization.</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Mentored and developed 15+ team members, with 4 achieving promotional advancement.</span>
+                          </li>
+                        </ul>
+                      </div>
+                    }
+                    theme={theme}
+                  />
+                </div>
+              </div>
+            </Section>
+          );
 
         case 'skills':
           return (
