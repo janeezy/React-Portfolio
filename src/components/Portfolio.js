@@ -653,44 +653,230 @@ const Portfolio = () => {
             </Section>
           );
 
-         case 'education':
-        return (
-          <Section title="Education and Certifications" theme={theme}>
-            <motion.div 
-              className="space-y-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ staggerChildren: 0.1 }}
-            >
-              <Card
-                title="Certificate of Completion Web Development"
-                subtitle="Udemy - California Online Coding | January 2023"
-                theme={theme}
-              />
-              <Card
-                title="Path To Software Engineering: From Zero To Hero"
-                subtitle="European Leadership University - Online, Cyprus | September 2022"
-                theme={theme}
-              />
-              <Card
-                title="Bachelor of Science: General Medicine"
-                subtitle="Danylo Halytsky Lviv National Medical University | 2010 - 2016"
-                theme={theme}
-              />
-              <Card
-                title="Additional Certifications"
-                content={
-                  <ul className={`list-disc list-inside mt-2 space-y-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                    <li>Certificate of Completion HTML & CSS (September 2022)</li>
-                    <li>Certificate of Completion Web Development, coding Masterclass: Beginner To Advanced Skills Javascript (2022)</li>
-                    <li>Certificate of Completion React js, React Native, coding Masterclass: Beginner To Advanced Skills (January 2023)</li>
-                  </ul>
-                }
-                theme={theme}
-              />
-            </motion.div>
-          </Section>
-        );
+          case 'education':
+            return (
+              <Section title="Education & Continuous Learning" theme={theme}>
+                <div className="space-y-16">
+                  {/* Current Learning Status */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`p-4 rounded-xl ${
+                      theme === 'dark' 
+                        ? 'bg-blue-900/20 border border-blue-800/50' 
+                        : 'bg-blue-50 border border-blue-200'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></span>
+                      <p className={`text-lg font-medium ${
+                        theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
+                      }`}>
+                        Currently deepening expertise in System Design and Advanced Algorithms
+                      </p>
+                    </div>
+                  </motion.div>
+          
+                  {/* Technical Training & Algorithm Expertise */}
+                  <div className={`p-8 rounded-xl ${
+                    theme === 'dark' 
+                      ? 'bg-gradient-to-br from-blue-900/50 to-purple-900/50 border border-blue-800/50' 
+                      : 'bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200'
+                  }`}>
+                    <div className="space-y-8">
+                      <h3 className={`text-3xl font-bold tracking-tight ${
+                        theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
+                      }`}>
+                        Technical Expertise & Algorithm Mastery
+                      </h3>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className={`p-6 rounded-lg ${
+                          theme === 'dark' ? 'bg-gray-800/50' : 'bg-white'
+                        }`}>
+                          <h4 className="text-xl font-semibold mb-4 text-blue-500">AlgoExpert Training</h4>
+                          <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            <li className="flex items-start gap-3">
+                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                              <span>Completed 100+ algorithmic challenges across all difficulty levels</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                              <span>Mastered key patterns: Dynamic Programming, Graph Algorithms, Tree Traversal</span>
+                            </li>
+                          </ul>
+                        </div>
+          
+                        <div className={`p-6 rounded-lg ${
+                          theme === 'dark' ? 'bg-gray-800/50' : 'bg-white'
+                        }`}>
+                          <h4 className="text-xl font-semibold mb-4 text-blue-500">System Design</h4>
+                          <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            <li className="flex items-start gap-3">
+                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                              <span>Studying scalable architectures and microservices design patterns</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                              <span>Practicing system design interviews and implementation</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+          
+                  {/* Formal Education */}
+                  <div className="space-y-8">
+                    <h3 className={`text-2xl font-bold tracking-tight ${
+                      theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
+                    } border-l-4 border-blue-500 pl-4`}>
+                      Formal Education
+                    </h3>
+          
+                    <Card
+                      title="Certificate of Completion Web Development"
+                      subtitle="Udemy - California Online Coding | January 2023"
+                      content={
+                        <div className="space-y-4 mt-4">
+                          <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            <li>• Complete web development bootcamp covering modern technologies</li>
+                            <li>• Advanced JavaScript, React, and Node.js training</li>
+                            <li>• Practical project implementations and best practices</li>
+                          </ul>
+                          <div className="flex flex-wrap gap-2 mt-4">
+                            {['JavaScript', 'React.js', 'Node.js', 'Web Development'].map(skill => (
+                              <span key={skill} className={`px-3 py-1 text-sm font-medium rounded-full
+                                ${theme === 'dark'
+                                  ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
+                                  : 'bg-blue-50 text-blue-700 border border-blue-200'
+                                }`}
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      }
+                      theme={theme}
+                    />
+          
+                    <Card
+                      title="Path To Software Engineering: From Zero To Hero"
+                      subtitle="European Leadership University - Online, Cyprus | September 2022"
+                      content={
+                        <div className="space-y-4 mt-4">
+                          <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            <li>• Comprehensive software engineering fundamentals</li>
+                            <li>• Data structures and algorithms foundation</li>
+                            <li>• Modern development practices and methodologies</li>
+                          </ul>
+                          <div className="flex flex-wrap gap-2 mt-4">
+                            {['Software Engineering', 'Data Structures', 'Algorithms', 'Best Practices'].map(skill => (
+                              <span key={skill} className={`px-3 py-1 text-sm font-medium rounded-full
+                                ${theme === 'dark'
+                                  ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
+                                  : 'bg-blue-50 text-blue-700 border border-blue-200'
+                                }`}
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      }
+                      theme={theme}
+                    />
+          
+                    <Card
+                      title="Bachelor of Science: General Medicine"
+                      subtitle="Danylo Halytsky Lviv National Medical University | 2010 - 2016"
+                      content={
+                        <div className="space-y-4 mt-4">
+                          <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            Strong foundation in analytical thinking and problem-solving, now applied to software development.
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {[
+                              'Analytical Thinking',
+                              'Research Methods',
+                              'Complex Problem Solving',
+                              'Attention to Detail'
+                            ].map(skill => (
+                              <span key={skill} className={`px-3 py-1 text-sm font-medium rounded-full
+                                ${theme === 'dark'
+                                  ? 'bg-gray-800 text-gray-300 border border-gray-700'
+                                  : 'bg-gray-100 text-gray-700 border border-gray-200'
+                                }`}
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      }
+                      theme={theme}
+                    />
+                  </div>
+          
+                  {/* Additional Certifications */}
+                  <div className="space-y-8">
+                    <h3 className={`text-2xl font-bold tracking-tight ${
+                      theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
+                    } border-l-4 border-blue-500 pl-4`}>
+                      Additional Certifications
+                    </h3>
+          
+                    <Card
+                      title="Professional Development"
+                      content={
+                        <ul className={`list-disc list-inside mt-4 space-y-3 ${
+                          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
+                          <li>Certificate of Completion HTML & CSS (September 2022)</li>
+                          <li>Certificate of Completion Web Development, coding Masterclass: Beginner To Advanced Skills Javascript (2022)</li>
+                          <li>Certificate of Completion React js, React Native, coding Masterclass: Beginner To Advanced Skills (January 2023)</li>
+                          <li>AlgoExpert Certificate - Data Structures and Algorithms (2024)</li>
+                        </ul>
+                      }
+                      theme={theme}
+                    />
+                  </div>
+          
+                  {/* Current Learning Platforms */}
+                  <div className={`p-6 rounded-xl ${
+                    theme === 'dark' ? 'bg-gray-800/50' : 'bg-white'
+                  }`}>
+                    <h3 className="text-xl font-semibold mb-6 text-blue-500">Active Learning Platforms</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      {[
+                        { name: 'AlgoExpert', status: 'Advanced', icon: Code },
+                        { name: 'LeetCode', status: 'Active', icon: Code },
+                        { name: 'System Design', status: 'In Progress', icon: Laptop },
+                        { name: 'Frontend Masters', status: 'Active', icon: Laptop }
+                      ].map(platform => (
+                        <div
+                          key={platform.name}
+                          className={`p-4 rounded-lg border ${
+                            theme === 'dark' 
+                              ? 'border-gray-700 hover:border-blue-500' 
+                              : 'border-gray-200 hover:border-blue-500'
+                          } transition-colors duration-300`}
+                        >
+                          <h5 className="font-semibold mb-2">{platform.name}</h5>
+                          <span className={`text-sm ${
+                            theme === 'dark' ? 'text-blue-400' : 'text-blue-600'
+                          }`}>
+                            {platform.status}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Section>
+            );
+            
         case 'contact':
         return (
           <Section title="Contact Me" theme={theme}>
