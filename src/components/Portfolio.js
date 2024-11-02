@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Laptop, Briefcase, User, Mail, ExternalLink, Music, School, Award, Linkedin, Code, Menu, Sun, Moon } from 'lucide-react';
+import { Home, Laptop, Briefcase, User, Mail, ExternalLink, Music, School, Award, Linkedin, Code, Menu, Sun, Moon, Euro } from 'lucide-react';
 import { Twitter, Facebook, HeartHandshake, Copyright } from 'lucide-react';
+
 
 
 // Updated Logo component with modern styling
@@ -88,6 +89,7 @@ const Portfolio = () => {
     { id: 'experience', icon: Briefcase, title: 'Experience' },
     { id: 'skills', icon: User, title: 'Skills' },
     { id: 'projects', icon: Laptop, title: 'Projects' },
+    { id: 'pricing', icon: Euro, title: 'Pricing' }, // Add this new line
     { id: 'education', icon: School, title: 'Education' },
     { id: 'contact', icon: Mail, title: 'Contact' },
   ];
@@ -961,6 +963,225 @@ const Portfolio = () => {
               </div>
             </Section>
           );
+          case 'pricing':
+  return (
+    <Section title="Services & Pricing" theme={theme}>
+      <div className="space-y-12">
+        {/* Intro Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`p-6 rounded-xl ${
+            theme === 'dark' 
+              ? 'bg-gradient-to-br from-blue-900/20 to-purple-900/20 border border-blue-800/50' 
+              : 'bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200'
+          }`}
+        >
+          <div className="text-center space-y-2">
+            <h3 className="text-xl font-semibold">Frontend Development Services</h3>
+            <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+              Based in Lisbon, Portugal • Prices in EUR
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Basic Package */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className={`p-8 rounded-xl ${
+              theme === 'dark' 
+                ? 'bg-gray-800/90 border border-gray-700' 
+                : 'bg-white border border-gray-200'
+            }`}
+          >
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-2xl font-bold text-blue-500 mb-2">Landing Page</h3>
+                <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Perfect for small businesses
+                </p>
+              </div>
+              <div className="text-3xl font-bold">
+                €500
+                <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>/project</span>
+              </div>
+              <ul className="space-y-4">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  Responsive Design
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  Modern UI/UX
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  SEO Optimization
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  5-day Delivery
+                </li>
+              </ul>
+            </div>
+          </motion.div>
+
+          {/* Standard Package */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className={`p-8 rounded-xl relative ${
+              theme === 'dark' 
+                ? 'bg-gradient-to-br from-blue-900/50 to-purple-900/50 border border-blue-500' 
+                : 'bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200'
+            }`}
+          >
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <span className="px-4 py-1 bg-blue-500 text-white text-sm rounded-full">
+                Popular
+              </span>
+            </div>
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-2xl font-bold text-blue-500 mb-2">Multi-page Website</h3>
+                <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                  For growing businesses
+                </p>
+              </div>
+              <div className="text-3xl font-bold">
+                €1200
+                <span className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>/project</span>
+              </div>
+              <ul className="space-y-4">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  Up to 5 Pages
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  React.js Development
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  Contact Form Integration
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  2 Weeks Delivery
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  1 Month Support
+                </li>
+              </ul>
+            </div>
+          </motion.div>
+
+          {/* Custom Package */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className={`p-8 rounded-xl ${
+              theme === 'dark' 
+                ? 'bg-gray-800/90 border border-gray-700' 
+                : 'bg-white border border-gray-200'
+            }`}
+          >
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-2xl font-bold text-blue-500 mb-2">Custom Project</h3>
+                <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Tailored solutions
+                </p>
+              </div>
+              <div className="text-3xl font-bold">
+                Custom
+                <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Based on requirements
+                </p>
+              </div>
+              <ul className="space-y-4">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  Custom Features
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  Complex Functionality
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  Tailored Timeline
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                  Extended Support
+                </li>
+              </ul>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Additional Services */}
+        <div className={`p-6 rounded-xl ${
+          theme === 'dark' 
+            ? 'bg-gray-800/50 border border-gray-700' 
+            : 'bg-gray-50 border border-gray-200'
+        }`}>
+          <h3 className="text-xl font-semibold mb-4">Additional Services</h3>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <li className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+              Maintenance: €50/hour
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+              Code Review: €40/hour
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+              Bug Fixes: €45/hour
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+              Consultation: €35/hour
+            </li>
+          </ul>
+        </div>
+
+        {/* Contact CTA */}
+        <motion.div
+          whileHover={{ scale: 1.01 }}
+          className={`p-8 rounded-xl text-center ${
+            theme === 'dark' 
+              ? 'bg-gradient-to-br from-blue-900/20 to-purple-900/20 border border-blue-800/50' 
+              : 'bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200'
+          }`}
+        >
+          <h3 className="text-2xl font-bold mb-4">Need a Custom Solution?</h3>
+          <p className={`mb-6 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+            Let's discuss your project requirements and create something amazing together.
+          </p>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setActiveSection('contact')}
+            className="px-8 py-3 bg-blue-500 text-white rounded-full font-semibold hover:bg-blue-600 transition-colors duration-300"
+          >
+            Get in Touch
+          </motion.button>
+        </motion.div>
+
+        {/* Notes */}
+        <div className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p>* All prices are in EUR and exclude VAT</p>
+          <p>* Payment terms: 50% upfront, 50% upon completion</p>
+          <p>* Prices may vary based on project complexity</p>
+        </div>
+      </div>
+    </Section>
+  );
+
 
           case 'education':
             return (
