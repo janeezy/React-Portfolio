@@ -363,43 +363,254 @@ const Portfolio = () => {
             </Section>
           );
 
-        case 'skills':
-          return (
-            <Section title="Skills" theme={theme}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card
-                  title="Technical Skills"
-                  content={
-                    <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                      <li>HTML5, CSS3 & CSS Preprocessors</li>
-                      <li>JavaScript (ES6+)</li>
-                      <li>React.js</li>
-                      <li>Version Control Systems (Git)</li>
-                      <li>Responsive Design</li>
-                      <li>Build Tools</li>
-                      <li>Testing</li>
-                      <li>APIs</li>
-                      <li>(UI/UX) Principles</li>
-                    </ul>
-                  }
-                  theme={theme}
-                />
-              <Card
-                title="Soft Skills"
-                content={
-                  <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                    <li>Problem-Solving</li>
-                    <li>Communication</li>
-                    <li>Teamwork</li>
-                    <li>Continuous Learning</li>
-                    <li>Critical Thinking</li>
-                  </ul>
-                }
-                theme={theme}
-              />
-            </div>
-          </Section>
-        );
+          case 'skills':
+            return (
+              <Section title="Technical Expertise" theme={theme}>
+                <div className="space-y-12">
+                  {/* Core Technical Skills */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <Card
+                      title={
+                        <div className="space-y-2">
+                          <h3 className="text-2xl font-bold tracking-tight">Frontend Development</h3>
+                          <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                            Specialized in building scalable web applications
+                          </p>
+                        </div>
+                      }
+                      content={
+                        <div className="space-y-6 mt-4">
+                          {/* Languages & Core */}
+                          <div>
+                            <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                              Languages & Core Technologies
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {[
+                                { name: 'JavaScript', level: 'Advanced' },
+                                { name: 'TypeScript', level: 'Advanced' },
+                                { name: 'HTML5', level: 'Advanced' },
+                                { name: 'CSS3/Sass', level: 'Advanced' }
+                              ].map(tech => (
+                                <span key={tech.name} className={`px-4 py-2 rounded-full text-sm font-medium
+                                  ${theme === 'dark'
+                                    ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
+                                    : 'bg-blue-50 text-blue-700 border border-blue-200'
+                                  }`}
+                                >
+                                  {tech.name}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+          
+                          {/* Frameworks & Libraries */}
+                          <div>
+                            <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                              Frameworks & Libraries
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {[
+                                'React.js',
+                                'Next.js',
+                                'Redux',
+                                'TailwindCSS',
+                                'React Query',
+                                'Framer Motion'
+                              ].map(tech => (
+                                <span key={tech} className={`px-4 py-2 rounded-full text-sm font-medium
+                                  ${theme === 'dark'
+                                    ? 'bg-purple-900/30 text-purple-300 border border-purple-800'
+                                    : 'bg-purple-50 text-purple-700 border border-purple-200'
+                                  }`}
+                                >
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+          
+                          {/* Testing & Tools */}
+                          <div>
+                            <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                              Testing & Development Tools
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {[
+                                'Jest',
+                                'React Testing Library',
+                                'Cypress',
+                                'Git/GitHub',
+                                'Webpack',
+                                'Docker'
+                              ].map(tool => (
+                                <span key={tool} className={`px-4 py-2 rounded-full text-sm font-medium
+                                  ${theme === 'dark'
+                                    ? 'bg-teal-900/30 text-teal-300 border border-teal-800'
+                                    : 'bg-teal-50 text-teal-700 border border-teal-200'
+                                  }`}
+                                >
+                                  {tool}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      }
+                      theme={theme}
+                    />
+          
+                    <Card
+                      title={
+                        <div className="space-y-2">
+                          <h3 className="text-2xl font-bold tracking-tight">Computer Science & Algorithms</h3>
+                          <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                            Strong foundation in CS fundamentals
+                          </p>
+                        </div>
+                      }
+                      content={
+                        <div className="space-y-6 mt-4">
+                          {/* Data Structures */}
+                          <div>
+                            <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                              Data Structures
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {[
+                                'Arrays & Strings',
+                                'Linked Lists',
+                                'Trees & Graphs',
+                                'Hash Tables',
+                                'Heaps',
+                                'Tries'
+                              ].map(ds => (
+                                <span key={ds} className={`px-4 py-2 rounded-full text-sm font-medium
+                                  ${theme === 'dark'
+                                    ? 'bg-green-900/30 text-green-300 border border-green-800'
+                                    : 'bg-green-50 text-green-700 border border-green-200'
+                                  }`}
+                                >
+                                  {ds}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+          
+                          {/* Algorithms */}
+                          <div>
+                            <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                              Algorithms & Techniques
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {[
+                                'Dynamic Programming',
+                                'Graph Algorithms',
+                                'Binary Search',
+                                'Two Pointers',
+                                'Backtracking',
+                                'Sliding Window'
+                              ].map(algo => (
+                                <span key={algo} className={`px-4 py-2 rounded-full text-sm font-medium
+                                  ${theme === 'dark'
+                                    ? 'bg-yellow-900/30 text-yellow-300 border border-yellow-800'
+                                    : 'bg-yellow-50 text-yellow-700 border border-yellow-200'
+                                  }`}
+                                >
+                                  {algo}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+          
+                          {/* System Design */}
+                          <div>
+                            <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                              System Design Concepts
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {[
+                                'Scalability',
+                                'Load Balancing',
+                                'Caching',
+                                'API Design',
+                                'Microservices',
+                                'Database Design'
+                              ].map(concept => (
+                                <span key={concept} className={`px-4 py-2 rounded-full text-sm font-medium
+                                  ${theme === 'dark'
+                                    ? 'bg-red-900/30 text-red-300 border border-red-800'
+                                    : 'bg-red-50 text-red-700 border border-red-200'
+                                  }`}
+                                >
+                                  {concept}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      }
+                      theme={theme}
+                    />
+                  </div>
+          
+                  {/* Professional Skills */}
+                  <Card
+                    title={
+                      <div className="space-y-2">
+                        <h3 className="text-2xl font-bold tracking-tight">Professional Skills</h3>
+                        <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                          Software engineering practices & soft skills
+                        </p>
+                      </div>
+                    }
+                    content={
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                        <div>
+                          <h4 className={`text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                            Engineering Practices
+                          </h4>
+                          <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            <li>• Clean Code & Best Practices</li>
+                            <li>• Test-Driven Development</li>
+                            <li>• Performance Optimization</li>
+                            <li>• Code Review</li>
+                            <li>• Agile/Scrum</li>
+                          </ul>
+                        </div>
+                        
+                        <div>
+                          <h4 className={`text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                            Problem Solving
+                          </h4>
+                          <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            <li>• Analytical Thinking</li>
+                            <li>• Algorithm Design</li>
+                            <li>• System Architecture</li>
+                            <li>• Debugging</li>
+                            <li>• Technical Documentation</li>
+                          </ul>
+                        </div>
+                        
+                        <div>
+                          <h4 className={`text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                            Collaboration
+                          </h4>
+                          <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            <li>• Team Leadership</li>
+                            <li>• Communication</li>
+                            <li>• Project Management</li>
+                            <li>• Mentoring</li>
+                            <li>• Cross-functional Teams</li>
+                          </ul>
+                        </div>
+                      </div>
+                    }
+                    theme={theme}
+                  />
+                </div>
+              </Section>
+            );
 
         
         case 'projects':
@@ -471,14 +682,14 @@ const Portfolio = () => {
                       content={
                         <div className="space-y-4">
                           <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                            Full-stack restaurant management system with real-time order tracking and analytics dashboard.
+                            Frontend restaurant management system with real-time order tracking and analytics dashboard.
                           </p>
                           <div className="space-y-3">
                             <h5 className={`font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
                               Technical Challenges Solved
                             </h5>
                             <ul className={`list-disc list-inside space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                              <li>Implemented WebSocket for real-time order updates</li>
+                              <li>Implemented using Html and CSS3 for real-time order updates</li>
                               <li>Built responsive UI with React and TailwindCSS</li>
                               <li>Integrated secure payment processing with Stripe</li>
                             </ul>
@@ -655,9 +866,9 @@ const Portfolio = () => {
 
           case 'education':
             return (
-              <Section title="Education & Continuous Learning" theme={theme}>
+              <Section title="Education & Professional Development" theme={theme}>
                 <div className="space-y-16">
-                  {/* Current Learning Status */}
+                  {/* Current Tech Learning Status */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -672,89 +883,41 @@ const Portfolio = () => {
                       <p className={`text-lg font-medium ${
                         theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
                       }`}>
-                        Currently deepening expertise in System Design and Advanced Algorithms
+                        Currently advancing in System Design and Advanced Algorithms
                       </p>
                     </div>
                   </motion.div>
           
-                  {/* Technical Training & Algorithm Expertise */}
-                  <div className={`p-8 rounded-xl ${
-                    theme === 'dark' 
-                      ? 'bg-gradient-to-br from-blue-900/50 to-purple-900/50 border border-blue-800/50' 
-                      : 'bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200'
-                  }`}>
-                    <div className="space-y-8">
-                      <h3 className={`text-3xl font-bold tracking-tight ${
-                        theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
-                      }`}>
-                        Technical Expertise & Algorithm Mastery
-                      </h3>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className={`p-6 rounded-lg ${
-                          theme === 'dark' ? 'bg-gray-800/50' : 'bg-white'
-                        }`}>
-                          <h4 className="text-xl font-semibold mb-4 text-blue-500">AlgoExpert Training</h4>
-                          <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                            <li className="flex items-start gap-3">
-                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                              <span>Completed 100+ algorithmic challenges across all difficulty levels</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                              <span>Mastered key patterns: Dynamic Programming, Graph Algorithms, Tree Traversal</span>
-                            </li>
-                          </ul>
-                        </div>
-          
-                        <div className={`p-6 rounded-lg ${
-                          theme === 'dark' ? 'bg-gray-800/50' : 'bg-white'
-                        }`}>
-                          <h4 className="text-xl font-semibold mb-4 text-blue-500">System Design</h4>
-                          <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                            <li className="flex items-start gap-3">
-                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                              <span>Studying scalable architectures and microservices design patterns</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                              <span>Practicing system design interviews and implementation</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-          
-                  {/* Formal Education */}
+                  {/* Software Engineering Education */}
                   <div className="space-y-8">
                     <h3 className={`text-2xl font-bold tracking-tight ${
                       theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
                     } border-l-4 border-blue-500 pl-4`}>
-                      Formal Education
+                      Software Engineering Education
                     </h3>
           
+                    {/* AlgoExpert and Technical Training */}
                     <Card
-                      title="Certificate of Completion Web Development"
-                      subtitle="Udemy - California Online Coding | January 2023"
+                      title="Technical Expertise & Algorithm Mastery"
                       content={
-                        <div className="space-y-4 mt-4">
-                          <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                            <li>• Complete web development bootcamp covering modern technologies</li>
-                            <li>• Advanced JavaScript, React, and Node.js training</li>
-                            <li>• Practical project implementations and best practices</li>
-                          </ul>
-                          <div className="flex flex-wrap gap-2 mt-4">
-                            {['JavaScript', 'React.js', 'Node.js', 'Web Development'].map(skill => (
-                              <span key={skill} className={`px-3 py-1 text-sm font-medium rounded-full
-                                ${theme === 'dark'
-                                  ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
-                                  : 'bg-blue-50 text-blue-700 border border-blue-200'
-                                }`}
-                              >
-                                {skill}
-                              </span>
-                            ))}
+                        <div className="space-y-6 mt-4">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                              <h4 className="text-xl font-semibold mb-4 text-blue-500">AlgoExpert Training</h4>
+                              <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                                <li>• Completed 100+ algorithmic challenges</li>
+                                <li>• Mastered DSA patterns and optimization</li>
+                                <li>• Advanced problem-solving techniques</li>
+                              </ul>
+                            </div>
+                            <div>
+                              <h4 className="text-xl font-semibold mb-4 text-blue-500">System Design</h4>
+                              <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                                <li>• Scalable architecture design</li>
+                                <li>• Microservices and distributed systems</li>
+                                <li>• Performance optimization</li>
+                              </ul>
+                            </div>
                           </div>
                         </div>
                       }
@@ -762,17 +925,60 @@ const Portfolio = () => {
                     />
           
                     <Card
-                      title="Path To Software Engineering: From Zero To Hero"
+                      title="Software Engineering Certification"
                       subtitle="European Leadership University - Online, Cyprus | September 2022"
                       content={
                         <div className="space-y-4 mt-4">
                           <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
                             <li>• Comprehensive software engineering fundamentals</li>
-                            <li>• Data structures and algorithms foundation</li>
                             <li>• Modern development practices and methodologies</li>
+                            <li>• Frontend web development</li>
                           </ul>
-                          <div className="flex flex-wrap gap-2 mt-4">
-                            {['Software Engineering', 'Data Structures', 'Algorithms', 'Best Practices'].map(skill => (
+                        </div>
+                      }
+                      theme={theme}
+                    />
+          
+                    {/* Web Development Certifications */}
+                    <Card
+                      title="Web Development Certifications"
+                      content={
+                        <div className="space-y-4 mt-4">
+                          <ul className={`list-disc list-inside ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            <li>Advanced Web Development (Udemy) - January 2023</li>
+                            <li>React.js & React Native Masterclass - January 2023</li>
+                            <li>Web Development & JavaScript Advanced Skills - 2022</li>
+                            <li>HTML & CSS Certification - September 2022</li>
+                          </ul>
+                        </div>
+                      }
+                      theme={theme}
+                    />
+                  </div>
+          
+                  {/* Business & Finance Education */}
+                  <div className="space-y-8">
+                    <h3 className={`text-2xl font-bold tracking-tight ${
+                      theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
+                    } border-l-4 border-blue-500 pl-4`}>
+                      Business & Finance Education
+                    </h3>
+          
+                    <Card
+                      title="Economics & Business Certification"
+                      subtitle="IBM | 2017"
+                      content={
+                        <div className="space-y-4 mt-4">
+                          <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            Comprehensive business and economics training from IBM, covering market analysis, business strategy, and economic principles.
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {[
+                              'Business Analysis',
+                              'Economic Principles',
+                              'Market Strategy',
+                              'Financial Planning'
+                            ].map(skill => (
                               <span key={skill} className={`px-3 py-1 text-sm font-medium rounded-full
                                 ${theme === 'dark'
                                   ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
@@ -789,19 +995,58 @@ const Portfolio = () => {
                     />
           
                     <Card
-                      title="Bachelor of Science: General Medicine"
+                      title="Cryptocurrency & Blockchain Mastery"
+                      subtitle="2017"
+                      content={
+                        <div className="space-y-4 mt-4">
+                          <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            Specialized training in cryptocurrency markets and blockchain technology, leading to roles in financial services.
+                          </p>
+                          <div className="flex flex-wrap gap-2">
+                            {[
+                              'Blockchain Technology',
+                              'Cryptocurrency Markets',
+                              'Trading Strategies',
+                              'Market Analysis'
+                            ].map(skill => (
+                              <span key={skill} className={`px-3 py-1 text-sm font-medium rounded-full
+                                ${theme === 'dark'
+                                  ? 'bg-purple-900/30 text-purple-300 border border-purple-800'
+                                  : 'bg-purple-50 text-purple-700 border border-purple-200'
+                                }`}
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      }
+                      theme={theme}
+                    />
+                  </div>
+          
+                  {/* Prior Education */}
+                  <div className="space-y-8">
+                    <h3 className={`text-2xl font-bold tracking-tight ${
+                      theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
+                    } border-l-4 border-blue-500 pl-4`}>
+                      Prior Education
+                    </h3>
+          
+                    <Card
+                      title="Bachelor of Science: Medicine"
                       subtitle="Danylo Halytsky Lviv National Medical University | 2010 - 2016"
                       content={
                         <div className="space-y-4 mt-4">
                           <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                            Strong foundation in analytical thinking and problem-solving, now applied to software development.
+                            Completed medical education before successfully transitioning into technology and finance sectors, demonstrating strong adaptability and commitment to continuous learning.
                           </p>
                           <div className="flex flex-wrap gap-2">
                             {[
-                              'Analytical Thinking',
-                              'Research Methods',
-                              'Complex Problem Solving',
-                              'Attention to Detail'
+                              'Career Transition',
+                              'Adaptability',
+                              'Continuous Learning',
+                              'Professional Growth'
                             ].map(skill => (
                               <span key={skill} className={`px-3 py-1 text-sm font-medium rounded-full
                                 ${theme === 'dark'
@@ -819,40 +1064,16 @@ const Portfolio = () => {
                     />
                   </div>
           
-                  {/* Additional Certifications */}
-                  <div className="space-y-8">
-                    <h3 className={`text-2xl font-bold tracking-tight ${
-                      theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
-                    } border-l-4 border-blue-500 pl-4`}>
-                      Additional Certifications
-                    </h3>
-          
-                    <Card
-                      title="Professional Development"
-                      content={
-                        <ul className={`list-disc list-inside mt-4 space-y-3 ${
-                          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-                        }`}>
-                          <li>Certificate of Completion HTML & CSS (September 2022)</li>
-                          <li>Certificate of Completion Web Development, coding Masterclass: Beginner To Advanced Skills Javascript (2022)</li>
-                          <li>Certificate of Completion React js, React Native, coding Masterclass: Beginner To Advanced Skills (January 2023)</li>
-                          <li>AlgoExpert Certificate - Data Structures and Algorithms (2024)</li>
-                        </ul>
-                      }
-                      theme={theme}
-                    />
-                  </div>
-          
-                  {/* Current Learning Platforms */}
+                  {/* Active Learning Platforms */}
                   <div className={`p-6 rounded-xl ${
                     theme === 'dark' ? 'bg-gray-800/50' : 'bg-white'
                   }`}>
-                    <h3 className="text-xl font-semibold mb-6 text-blue-500">Active Learning Platforms</h3>
+                    <h3 className="text-xl font-semibold mb-6 text-blue-500">Current Learning Focus</h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       {[
                         { name: 'AlgoExpert', status: 'Advanced', icon: Code },
-                        { name: 'LeetCode', status: 'Active', icon: Code },
                         { name: 'System Design', status: 'In Progress', icon: Laptop },
+                        { name: 'LeetCode', status: 'Active', icon: Code },
                         { name: 'Frontend Masters', status: 'Active', icon: Laptop }
                       ].map(platform => (
                         <div
