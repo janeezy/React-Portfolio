@@ -94,126 +94,181 @@ const Portfolio = () => {
   const renderContent = () => {
     switch (activeSection) {
       case 'home':
-  return (
-    <Section title="Welcome to My Portfolio" theme={theme}>
-      <motion.div 
-        className="flex flex-col md:flex-row items-center md:items-start gap-8"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="flex-1">
-          <p className={`text-xl mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-            Front-end developer passionate about collaborative work, clear communication, and exceeding project deadlines. Known for thriving in team settings and making significant contributions to a diverse range of projects. Driven by the challenge of transforming ideas into impactful web applications.
-          </p>
-          <ul className={`list-disc list-inside space-y-2 mb-6 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                  <li>Team Collaboration: Thrive in group settings, driving towards shared success.</li>
-                  <li>Communication: Master at exchanging ideas and aligning with project goals.</li>
-                  <li>Deadline Commitment: Consistently deliver projects on time, exceeding expectations.</li>
-                  <li>Technical Skills: Proficient in front-end technologies; always integrating the latest innovations.</li>
-                  <li>Development Passion: Focused on using technology to create engaging user experiences.</li>
-                </ul>
-                <motion.button 
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105"
-                  onClick={() => setActiveSection('experience')}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+        return (
+          <Section title="" theme={theme}>
+            <div className="max-w-4xl mx-auto space-y-12">
+              {/* Hero Section */}
+              <motion.div 
+                className="text-center space-y-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <motion.h1 
+                  className={`text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 ${
+                    theme === 'dark'
+                      ? 'bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 text-transparent bg-clip-text'
+                      : 'text-gray-900'
+                  }`}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
                 >
-                  View My Experience
-                </motion.button>
+                   Frontend Engineer
+                </motion.h1>
+                <motion.p 
+                  className={`text-xl sm:text-2xl leading-relaxed max-w-3xl mx-auto ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                  }`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  Building modern web experiences with HTML5, CSS3, JavaScript, and React.js
+                </motion.p>
+                <motion.p 
+                  className={`text-lg max-w-2xl mx-auto ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                  }`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  Currently advancing in Data Structures & Algorithms
+                </motion.p>
+              </motion.div>
+
+              {/* Key Skills Section */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                  {
+                    title: "Frontend Development",
+                    skills: ["HTML5", "CSS3", "JavaScript", "React.js", "Responsive Design", "TailwindCSS"],
+                    description: "Building responsive, modern web applications with focus on user experience"
+                  },
+                  {
+                    title: "Current Focus",
+                    skills: ["Data Structures", "Algorithms", "Problem Solving", "Optimization"],
+                    description: "Actively expanding knowledge in computer science fundamentals"
+                  },
+                  {
+                    title: "Professional Background",
+                    skills: ["Team Leadership", "Client Relations", "Adaptability", "Communication"],
+                    description: "7 years of leadership experience in financial services"
+                  }
+                ].map((section, index) => (
+                  <motion.div
+                    key={section.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 + index * 0.1 }}
+                    className={`p-6 rounded-xl ${
+                      theme === 'dark' 
+                        ? 'bg-gray-800/50 border border-gray-700' 
+                        : 'bg-white/50 border border-gray-200'
+                    }`}
+                  >
+                    <h3 className="text-xl font-bold mb-4">{section.title}</h3>
+                    <p className={`text-sm mb-4 ${
+                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                    }`}>
+                      {section.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {section.skills.map(skill => (
+                        <span key={skill} className={`px-3 py-1 text-sm font-medium rounded-full
+                          ${theme === 'dark'
+                            ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
+                            : 'bg-blue-50 text-blue-700 border border-blue-200'
+                          }`}
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
               </div>
-            </motion.div>
+
+              {/* Career Journey */}
+              <div className={`p-6 rounded-xl ${
+                theme === 'dark' 
+                  ? 'bg-gradient-to-br from-blue-900/20 to-purple-900/20 border border-blue-800/50' 
+                  : 'bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200'
+              }`}>
+                <h3 className="text-2xl font-bold mb-4">My Journey</h3>
+                <p className={`text-lg leading-relaxed mb-6 ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                }`}>
+                  Transitioned from a successful 7-year career in financial services to frontend development in 2022. 
+                  After relocating from Ukraine to Portugal due to the conflict, I've devoted myself to mastering modern web technologies 
+                  and computer science fundamentals.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <motion.button 
+                    className={`
+                      px-6 py-3 rounded-full text-lg font-semibold
+                      bg-gradient-to-r from-blue-500 to-blue-700
+                      text-white shadow-lg hover:shadow-xl
+                      transition-all duration-300
+                    `}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setActiveSection('experience')}
+                  >
+                    View Experience
+                  </motion.button>
+                  <motion.a
+                    href="/resume.pdf"
+                    className={`
+                      px-6 py-3 rounded-full text-lg font-semibold
+                      border-2 border-blue-500
+                      ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}
+                      hover:bg-blue-500 hover:text-white
+                      transition-all duration-300
+                    `}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Download Resume
+                  </motion.a>
+                </div>
+              </div>
+            </div>
           </Section>
         );
 
-
         case 'experience':
           return (
-            <Section title="Professional Journey" theme={theme}>
+            <Section title="Professional Experience" theme={theme}>
               <div className="space-y-16">
-                {/* Current Role Highlight */}
-                <div className={`p-8 rounded-xl ${
+                {/* Current Status */}
+                <div className={`p-6 rounded-xl ${
                   theme === 'dark' 
                     ? 'bg-gradient-to-br from-blue-900/50 to-purple-900/50 border border-blue-800/50' 
                     : 'bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200'
                 }`}>
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-3">
-                      <span className={`px-3 py-1 text-sm font-medium rounded-full
-                        ${theme === 'dark'
-                          ? 'bg-green-900/50 text-green-300 border border-green-800'
-                          : 'bg-green-100 text-green-700 border border-green-200'
-                        }`}
-                      >
-                        Current Role
-                      </span>
-                    </div>
-                    <h3 className={`text-3xl font-bold tracking-tight ${
-                      theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
+                  <div className="flex items-center gap-3">
+                    <span className="relative flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <p className={`text-lg font-medium ${
+                      theme === 'dark' ? 'text-green-400' : 'text-green-700'
                     }`}>
-                      Frontend Developer
-                    </h3>
-                    <p className={`text-xl ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                      Jether Tech, Lisbon | May 2023 - Present
+                      Frontend Developer | Currently advancing in Data Structures & Algorithms
                     </p>
-                    <div className="space-y-6">
-                      <div>
-                        <h4 className="text-xl font-semibold mb-4 text-blue-500">Key Achievements</h4>
-                        <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                          <li className="flex items-start gap-3">
-                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                            <span>Led the development of high-performance React applications, reducing load times by 40% through code splitting and lazy loading.</span>
-                          </li>
-                          <li className="flex items-start gap-3">
-                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                            <span>Architected scalable frontend solutions handling 100K+ daily users, implementing efficient state management and caching strategies.</span>
-                          </li>
-                          <li className="flex items-start gap-3">
-                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                            <span>Implemented comprehensive testing strategy achieving 80% code coverage using Jest and React Testing Library.</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="text-xl font-semibold mb-4 text-blue-500">Technical Impact</h4>
-                        <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                          <li className="flex items-start gap-3">
-                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                            <span>Built reusable component library reducing development time by 30% across projects.</span>
-                          </li>
-                          <li className="flex items-start gap-3">
-                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                            <span>Optimized CI/CD pipeline reducing deployment time from 45 to 15 minutes.</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {[
-                          'React.js', 'TypeScript', 'Redux', 'GraphQL', 
-                          'Jest', 'CI/CD', 'Performance Optimization'
-                        ].map(tech => (
-                          <span key={tech} className={`px-3 py-1 text-sm font-medium rounded-full
-                            ${theme === 'dark'
-                              ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
-                              : 'bg-blue-50 text-blue-700 border border-blue-200'
-                            }`}
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
                   </div>
                 </div>
         
-                {/* Software Development Experience */}
+                {/* Current Frontend Development Experience */}
                 <div className="space-y-8">
                   <h3 className={`text-2xl font-bold tracking-tight ${
                     theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
                   } border-l-4 border-blue-500 pl-4`}>
-                    Software Development Experience
+                    Frontend Development Experience
                   </h3>
-                  
+        
                   <Card
                     title={
                       <div className="space-y-2">
@@ -223,25 +278,25 @@ const Portfolio = () => {
                     }
                     content={
                       <div className="space-y-6">
-                        <div>
-                          <h5 className="text-lg font-semibold mb-3 text-blue-500">Projects & Contributions</h5>
-                          <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                            <li className="flex items-start gap-3">
-                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                              <span>Developed and maintained React components for high-traffic e-commerce platform (10K+ daily users).</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                              <span>Implemented state management using Redux, improving data flow and application maintainability.</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                              <span>Created documentation and style guides using Storybook, accelerating team onboarding.</span>
-                            </li>
-                          </ul>
-                        </div>
+                        <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Built responsive web interfaces using HTML5, CSS3, and JavaScript</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Developed React components for e-commerce platform</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Implemented UI designs using Tailwind CSS</span>
+                          </li>
+                        </ul>
                         <div className="flex flex-wrap gap-2">
-                          {['React', 'Redux', 'REST APIs', 'Storybook'].map(tech => (
+                          {[
+                            'HTML5', 'CSS3', 'JavaScript', 'React', 
+                            'Responsive Design', 'TailwindCSS'
+                          ].map(tech => (
                             <span key={tech} className={`px-3 py-1 text-sm font-medium rounded-full
                               ${theme === 'dark'
                                 ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
@@ -260,27 +315,24 @@ const Portfolio = () => {
                   <Card
                     title={
                       <div className="space-y-2">
-                        <h4 className="text-2xl font-bold tracking-tight">Freelance Web Developer</h4>
-                        <p className="text-lg text-gray-500">Self-employed | 2020 - Present</p>
+                        <h4 className="text-2xl font-bold tracking-tight">Frontend Projects</h4>
+                        <p className="text-lg text-gray-500">Self-Directed | 2022 - Present</p>
                       </div>
                     }
                     content={
                       <div className="space-y-6">
-                        <div>
-                          <h5 className="text-lg font-semibold mb-3 text-blue-500">Key Projects</h5>
-                          <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                            <li className="flex items-start gap-3">
-                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                              <span>Built and launched JaneezyBeats platform, implementing modern e-commerce features and payment processing.</span>
-                            </li>
-                            <li className="flex items-start gap-3">
-                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                              <span>Developed custom content management systems for small businesses using modern web technologies.</span>
-                            </li>
-                          </ul>
-                        </div>
+                        <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Developed JaneezyBeats platform with React and modern CSS</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Created responsive restaurant and gym websites</span>
+                          </li>
+                        </ul>
                         <div className="flex flex-wrap gap-2">
-                          {['React', 'Node.js', 'MongoDB', 'AWS'].map(tech => (
+                          {['React', 'JavaScript', 'HTML5', 'CSS3'].map(tech => (
                             <span key={tech} className={`px-3 py-1 text-sm font-medium rounded-full
                               ${theme === 'dark'
                                 ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
@@ -291,6 +343,38 @@ const Portfolio = () => {
                             </span>
                           ))}
                         </div>
+                      </div>
+                    }
+                    theme={theme}
+                  />
+                </div>
+        
+                {/* Financial Technology Experience */}
+                <div className="space-y-8">
+                  <h3 className={`text-2xl font-bold tracking-tight ${
+                    theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
+                  } border-l-4 border-blue-500 pl-4`}>
+                    Financial Technology Experience
+                  </h3>
+        
+                  <Card
+                    title="Cryptocurrency & Business Development"
+                    subtitle="2017 - 2020"
+                    content={
+                      <div className="space-y-4">
+                        <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                          Combined expertise in cryptocurrency markets and business development:
+                        </p>
+                        <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Mastered cryptocurrency trading and blockchain technology fundamentals</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                            <span>Developed analytical and problem-solving skills in fast-paced markets</span>
+                          </li>
+                        </ul>
                       </div>
                     }
                     theme={theme}
@@ -302,7 +386,7 @@ const Portfolio = () => {
                   <h3 className={`text-2xl font-bold tracking-tight ${
                     theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
                   } border-l-4 border-blue-500 pl-4`}>
-                    Previous Leadership Experience
+                    Leadership Experience
                   </h3>
         
                   <Card
@@ -314,17 +398,14 @@ const Portfolio = () => {
                     }
                     content={
                       <div className="space-y-4">
-                        <p className={`italic ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                          Led client retention strategies and team management for a major financial services company.
-                        </p>
                         <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
                           <li className="flex items-start gap-3">
                             <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                            <span>Managed a team of 12 representatives, implementing data-driven strategies that improved retention by 25%.</span>
+                            <span>Led team of 12 representatives, improving retention by 25%</span>
                           </li>
                           <li className="flex items-start gap-3">
                             <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                            <span>Developed and implemented streamlined customer service protocols, reducing response time by 40%.</span>
+                            <span>Managed high-priority client portfolio worth €2M annually</span>
                           </li>
                         </ul>
                       </div>
@@ -341,17 +422,14 @@ const Portfolio = () => {
                     }
                     content={
                       <div className="space-y-4">
-                        <p className={`italic ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                          Spearheaded strategic initiatives and team development in fast-paced financial environment.
-                        </p>
                         <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
                           <li className="flex items-start gap-3">
                             <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                            <span>Achieved 13% year-over-year growth through strategic team restructuring and process optimization.</span>
+                            <span>Achieved 13% year-over-year growth through strategic team management</span>
                           </li>
                           <li className="flex items-start gap-3">
                             <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                            <span>Mentored and developed 15+ team members, with 4 achieving promotional advancement.</span>
+                            <span>Developed and mentored 15+ team members to career advancement</span>
                           </li>
                         </ul>
                       </div>
@@ -362,256 +440,218 @@ const Portfolio = () => {
               </div>
             </Section>
           );
-
           case 'skills':
-            return (
-              <Section title="Technical Expertise" theme={theme}>
-                <div className="space-y-12">
-                  {/* Core Technical Skills */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <Card
-                      title={
-                        <div className="space-y-2">
-                          <h3 className="text-2xl font-bold tracking-tight">Frontend Development</h3>
-                          <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                            Specialized in building scalable web applications
-                          </p>
-                        </div>
-                      }
-                      content={
-                        <div className="space-y-6 mt-4">
-                          {/* Languages & Core */}
-                          <div>
-                            <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
-                              Languages & Core Technologies
-                            </h4>
-                            <div className="flex flex-wrap gap-2">
-                              {[
-                                { name: 'JavaScript', level: 'Advanced' },
-                                { name: 'TypeScript', level: 'Advanced' },
-                                { name: 'HTML5', level: 'Advanced' },
-                                { name: 'CSS3/Sass', level: 'Advanced' }
-                              ].map(tech => (
-                                <span key={tech.name} className={`px-4 py-2 rounded-full text-sm font-medium
-                                  ${theme === 'dark'
-                                    ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
-                                    : 'bg-blue-50 text-blue-700 border border-blue-200'
-                                  }`}
-                                >
-                                  {tech.name}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-          
-                          {/* Frameworks & Libraries */}
-                          <div>
-                            <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
-                              Frameworks & Libraries
-                            </h4>
-                            <div className="flex flex-wrap gap-2">
-                              {[
-                                'React.js',
-                                'Next.js',
-                                'Redux',
-                                'TailwindCSS',
-                                'React Query',
-                                'Framer Motion'
-                              ].map(tech => (
-                                <span key={tech} className={`px-4 py-2 rounded-full text-sm font-medium
-                                  ${theme === 'dark'
-                                    ? 'bg-purple-900/30 text-purple-300 border border-purple-800'
-                                    : 'bg-purple-50 text-purple-700 border border-purple-200'
-                                  }`}
-                                >
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-          
-                          {/* Testing & Tools */}
-                          <div>
-                            <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
-                              Testing & Development Tools
-                            </h4>
-                            <div className="flex flex-wrap gap-2">
-                              {[
-                                'Jest',
-                                'React Testing Library',
-                                'Cypress',
-                                'Git/GitHub',
-                                'Webpack',
-                                'Docker'
-                              ].map(tool => (
-                                <span key={tool} className={`px-4 py-2 rounded-full text-sm font-medium
-                                  ${theme === 'dark'
-                                    ? 'bg-teal-900/30 text-teal-300 border border-teal-800'
-                                    : 'bg-teal-50 text-teal-700 border border-teal-200'
-                                  }`}
-                                >
-                                  {tool}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      }
-                      theme={theme}
-                    />
-          
-                    <Card
-                      title={
-                        <div className="space-y-2">
-                          <h3 className="text-2xl font-bold tracking-tight">Computer Science & Algorithms</h3>
-                          <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                            Strong foundation in CS fundamentals
-                          </p>
-                        </div>
-                      }
-                      content={
-                        <div className="space-y-6 mt-4">
-                          {/* Data Structures */}
-                          <div>
-                            <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
-                              Data Structures
-                            </h4>
-                            <div className="flex flex-wrap gap-2">
-                              {[
-                                'Arrays & Strings',
-                                'Linked Lists',
-                                'Trees & Graphs',
-                                'Hash Tables',
-                                'Heaps',
-                                'Tries'
-                              ].map(ds => (
-                                <span key={ds} className={`px-4 py-2 rounded-full text-sm font-medium
-                                  ${theme === 'dark'
-                                    ? 'bg-green-900/30 text-green-300 border border-green-800'
-                                    : 'bg-green-50 text-green-700 border border-green-200'
-                                  }`}
-                                >
-                                  {ds}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-          
-                          {/* Algorithms */}
-                          <div>
-                            <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
-                              Algorithms & Techniques
-                            </h4>
-                            <div className="flex flex-wrap gap-2">
-                              {[
-                                'Dynamic Programming',
-                                'Graph Algorithms',
-                                'Binary Search',
-                                'Two Pointers',
-                                'Backtracking',
-                                'Sliding Window'
-                              ].map(algo => (
-                                <span key={algo} className={`px-4 py-2 rounded-full text-sm font-medium
-                                  ${theme === 'dark'
-                                    ? 'bg-yellow-900/30 text-yellow-300 border border-yellow-800'
-                                    : 'bg-yellow-50 text-yellow-700 border border-yellow-200'
-                                  }`}
-                                >
-                                  {algo}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-          
-                          {/* System Design */}
-                          <div>
-                            <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
-                              System Design Concepts
-                            </h4>
-                            <div className="flex flex-wrap gap-2">
-                              {[
-                                'Scalability',
-                                'Load Balancing',
-                                'Caching',
-                                'API Design',
-                                'Microservices',
-                                'Database Design'
-                              ].map(concept => (
-                                <span key={concept} className={`px-4 py-2 rounded-full text-sm font-medium
-                                  ${theme === 'dark'
-                                    ? 'bg-red-900/30 text-red-300 border border-red-800'
-                                    : 'bg-red-50 text-red-700 border border-red-200'
-                                  }`}
-                                >
-                                  {concept}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      }
-                      theme={theme}
-                    />
-                  </div>
-          
-                  {/* Professional Skills */}
-                  <Card
-                    title={
-                      <div className="space-y-2">
-                        <h3 className="text-2xl font-bold tracking-tight">Professional Skills</h3>
-                        <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                          Software engineering practices & soft skills
-                        </p>
-                      </div>
-                    }
-                    content={
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
-                        <div>
-                          <h4 className={`text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
-                            Engineering Practices
-                          </h4>
-                          <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                            <li>• Clean Code & Best Practices</li>
-                            <li>• Test-Driven Development</li>
-                            <li>• Performance Optimization</li>
-                            <li>• Code Review</li>
-                            <li>• Agile/Scrum</li>
-                          </ul>
-                        </div>
-                        
-                        <div>
-                          <h4 className={`text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
-                            Problem Solving
-                          </h4>
-                          <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                            <li>• Analytical Thinking</li>
-                            <li>• Algorithm Design</li>
-                            <li>• System Architecture</li>
-                            <li>• Debugging</li>
-                            <li>• Technical Documentation</li>
-                          </ul>
-                        </div>
-                        
-                        <div>
-                          <h4 className={`text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
-                            Collaboration
-                          </h4>
-                          <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                            <li>• Team Leadership</li>
-                            <li>• Communication</li>
-                            <li>• Project Management</li>
-                            <li>• Mentoring</li>
-                            <li>• Cross-functional Teams</li>
-                          </ul>
-                        </div>
-                      </div>
-                    }
-                    theme={theme}
-                  />
+  return (
+    <Section title="Technical Skills" theme={theme}>
+      <div className="space-y-12">
+        {/* Core Frontend Skills */}
+        <Card
+          title={
+            <div className="space-y-2">
+              <h3 className="text-2xl font-bold tracking-tight">Frontend Development Skills</h3>
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                Core web development technologies and frameworks
+              </p>
+            </div>
+          }
+          content={
+            <div className="space-y-8 mt-4">
+              {/* HTML & CSS */}
+              <div>
+                <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                  HTML & CSS
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    'HTML5',
+                    'CSS3',
+                    'Flexbox',
+                    'CSS Grid',
+                    'Responsive Design',
+                    'SASS/SCSS',
+                    'TailwindCSS'
+                  ].map(tech => (
+                    <span key={tech} className={`px-4 py-2 rounded-full text-sm font-medium
+                      ${theme === 'dark'
+                        ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
+                        : 'bg-blue-50 text-blue-700 border border-blue-200'
+                      }`}
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-              </Section>
-            );
+              </div>
 
+              {/* JavaScript */}
+              <div>
+                <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                  JavaScript
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    'ES6+',
+                    'DOM Manipulation',
+                    'Async/Await',
+                    'Fetch API',
+                    'Event Handling',
+                    'JSON',
+                    'Local Storage'
+                  ].map(tech => (
+                    <span key={tech} className={`px-4 py-2 rounded-full text-sm font-medium
+                      ${theme === 'dark'
+                        ? 'bg-yellow-900/30 text-yellow-300 border border-yellow-800'
+                        : 'bg-yellow-50 text-yellow-700 border border-yellow-200'
+                      }`}
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* React */}
+              <div>
+                <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                  React.js
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    'Components',
+                    'Props & State',
+                    'Hooks',
+                    'Context API',
+                    'React Router',
+                    'API Integration'
+                  ].map(tech => (
+                    <span key={tech} className={`px-4 py-2 rounded-full text-sm font-medium
+                      ${theme === 'dark'
+                        ? 'bg-purple-900/30 text-purple-300 border border-purple-800'
+                        : 'bg-purple-50 text-purple-700 border border-purple-200'
+                      }`}
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          }
+          theme={theme}
+        />
+
+        {/* Currently Learning */}
+        <Card
+          title={
+            <div className="space-y-2">
+              <h3 className="text-2xl font-bold tracking-tight">Currently Learning</h3>
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                Expanding knowledge in algorithms and data structures
+              </p>
+            </div>
+          }
+          content={
+            <div className="space-y-6 mt-4">
+              <div>
+                <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                  Data Structures & Algorithms
+                </h4>
+                <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                  <li>• Basic data structures (Arrays, Objects, Sets)</li>
+                  <li>• Array methods and manipulations</li>
+                  <li>• Basic sorting algorithms</li>
+                  <li>• Problem-solving strategies</li>
+                </ul>
+              </div>
+            </div>
+          }
+          theme={theme}
+        />
+
+        {/* Development Tools */}
+        <Card
+          title={
+            <div className="space-y-2">
+              <h3 className="text-2xl font-bold tracking-tight">Development Tools</h3>
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                Essential tools for web development
+              </p>
+            </div>
+          }
+          content={
+            <div className="space-y-4 mt-4">
+              <div className="flex flex-wrap gap-2">
+                {[
+                  'VS Code',
+                  'Git Basics',
+                  'GitHub',
+                  'Chrome DevTools',
+                  'Responsive Design',
+                  'Vercel Deployment'
+                ].map(tool => (
+                  <span key={tool} className={`px-4 py-2 rounded-full text-sm font-medium
+                    ${theme === 'dark'
+                      ? 'bg-green-900/30 text-green-300 border border-green-800'
+                      : 'bg-green-50 text-green-700 border border-green-200'
+                    }`}
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </div>
+          }
+          theme={theme}
+        />
+
+        {/* Soft Skills */}
+        <Card
+          title={
+            <div className="space-y-2">
+              <h3 className="text-2xl font-bold tracking-tight">Professional Skills</h3>
+            </div>
+          }
+          content={
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+              <div>
+                <h4 className={`text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                  Learning & Growth
+                </h4>
+                <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                  <li>• Fast Learner</li>
+                  <li>• Problem Solving</li>
+                  <li>• Attention to Detail</li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className={`text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                  Communication
+                </h4>
+                <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                  <li>• Team Collaboration</li>
+                  <li>• Clear Communication</li>
+                  <li>• Active Listening</li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className={`text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                  Work Style
+                </h4>
+                <ul className={`space-y-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                  <li>• Time Management</li>
+                  <li>• Organization</li>
+                  <li>• Adaptability</li>
+                </ul>
+              </div>
+            </div>
+          }
+          theme={theme}
+        />
+      </div>
+    </Section>
+  );
         
         case 'projects':
           return (
