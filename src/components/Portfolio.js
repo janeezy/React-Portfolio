@@ -737,19 +737,139 @@ const Portfolio = () => {
                           }`}
                         >
                           Featured Project
-                        </span>
+                          </span>
                       </div>
                       <h3 className={`text-3xl font-bold tracking-tight ${
                         theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
                       }`}>
                         JaneezyBeats Platform
                       </h3>
-                      <p className={`text-lg leading-relaxed ${
+                      <p className={`text-lg leading-relaxed mb-6 ${
                         theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                       }`}>
-                        Full-stack e-commerce platform for digital music distribution, featuring advanced audio processing and secure payment integration.
+                        Original beats produced and crafted by me, featuring unique sounds across multiple genres. 
+                        Professional beat store integrated with BeatStars Pro Page, offering seamless music distribution
+                        and licensing. Custom-branded storefront for premium beat sales and instant delivery.
                       </p>
-                      {/* Technical details remain the same */}
+
+
+                      {/* Production Details */}
+                      <div className="mb-6">
+                        <h4 className={`text-lg font-semibold mb-3 ${
+                          theme === 'dark' ? 'text-blue-400' : 'text-blue-600'
+                        }`}>
+                          Production Expertise
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {[
+                            'Original Production',
+                            'Hip Hop',
+                            'Trap',
+                            'R&B',
+                            'Custom Beats',
+                            'Unique Sound Design'
+                          ].map(tech => (
+                            <span key={tech} className={`px-3 py-1 text-sm font-medium rounded-full
+                              ${theme === 'dark'
+                                ? 'bg-blue-900/30 text-blue-300 border border-blue-800'
+                                : 'bg-blue-50 text-blue-700 border border-blue-200'
+                              }`}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Beat Features */}
+                      <div className="mb-6">
+                        <h4 className={`text-lg font-semibold mb-3 ${
+                          theme === 'dark' ? 'text-blue-400' : 'text-blue-600'
+                        }`}>
+                          Beat Features
+                        </h4>
+                        <ul className={`grid grid-cols-2 gap-2 ${
+                          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
+                          <li className="flex items-center gap-2">
+                            <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                            100% Original Production
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                            High-Quality Mix & Master
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                            Multiple License Options
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                            Instant Download Access
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* Store Features */}
+                      <div className="mb-6">
+                        <h4 className={`text-lg font-semibold mb-3 ${
+                          theme === 'dark' ? 'text-blue-400' : 'text-blue-600'
+                        }`}>
+                          Store Features
+                        </h4>
+                        <ul className={`space-y-2 ${
+                          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
+                          <li className="flex items-start gap-2">
+                            <span className="mt-1.5 w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
+                            <span>Exclusive beats produced by me, available for instant purchase</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="mt-1.5 w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
+                            <span>Professional licensing options for all budgets</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="mt-1.5 w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
+                            <span>Secure platform with instant beat delivery</span>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex flex-wrap gap-4">
+                        <motion.a
+                          href="https://janeezy.beatstars.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className={`
+                            inline-flex items-center gap-2 px-6 py-3 rounded-full
+                            bg-blue-500 hover:bg-blue-600 text-white font-semibold
+                            transition-colors duration-300 shadow-lg
+                          `}
+                        >
+                          <Music className="w-5 h-5" />
+                          Listen to My Beats
+                        </motion.a>
+                        <motion.a
+                          href="https://janeezy.beatstars.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className={`
+                            inline-flex items-center gap-2 px-6 py-3 rounded-full
+                            border-2 border-blue-500
+                            ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}
+                            hover:bg-blue-500 hover:text-white
+                            transition-all duration-300
+                          `}
+                        >
+                          <ExternalLink className="w-5 h-5" />
+                          View Beat Store
+                        </motion.a>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
