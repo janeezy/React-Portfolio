@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence,  } from 'framer-motion';
 import { Home, Laptop, Briefcase, User, Mail, ExternalLink, Music, School, Award, Linkedin, Code, Menu, Sun, Moon, Euro } from 'lucide-react';
 import { Twitter, Facebook, HeartHandshake, Copyright } from 'lucide-react';
 
@@ -137,7 +137,8 @@ const Portfolio = () => {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
                 >
-                  Currently advancing in Data Structures & Algorithms
+                  Currently advancing in Data Structures & Algorithms, exploring mobile development, 
+                  and expanding into blockchain engineering for 2025
                 </motion.p>
               </motion.div>
 
@@ -234,6 +235,7 @@ const Portfolio = () => {
                     whileTap={{ scale: 0.95 }}
                   >
                     Download Resume
+                    discuss the reaosn  for the moment we are gere 
                   </motion.a>
                 </div>
               </div>
@@ -1793,10 +1795,10 @@ case 'contact':
       <main className={`pt-16 md:ml-24 p-8 overflow-y-auto h-screen custom-scrollbar ${
   theme === 'dark' ? 'text-white' : 'text-gray-800'
 }`}>
-       <motion.img 
+    <motion.img 
   src="IMG.png" 
   alt="Ezinne Adaego Jane Duru" 
-  className={`w-32 h-32 rounded-full object-cover shadow-lg mx-auto mb-8 ${
+  className={`w-32 h-32 rounded-full object-cover shadow-lg mx-auto mb-8 mt-12 ${
     theme === 'dark' ? 'border-4 border-blue-500' : 'border-4 border-blue-300'
   }`}
   initial={{ scale: 0, rotate: -180 }}
