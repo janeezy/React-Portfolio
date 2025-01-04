@@ -138,7 +138,7 @@ const Portfolio = () => {
                   transition={{ delay: 0.4 }}
                 >
                   Currently advancing in Data Structures & Algorithms, exploring mobile development, 
-                  and expanding into blockchain engineering for 2025
+    and expanding into blockchain engineering for 2025
                 </motion.p>
               </motion.div>
 
@@ -222,8 +222,9 @@ const Portfolio = () => {
                   >
                     View Experience
                   </motion.button>
+
                   <motion.a
-                    href="/resume.pdf"
+                    href="https://maroon-linda-94.tiiny.site/"
                     className={`
                       px-6 py-3 rounded-full text-lg font-semibold
                       border-2 border-blue-500
@@ -235,7 +236,7 @@ const Portfolio = () => {
                     whileTap={{ scale: 0.95 }}
                   >
                     Download Resume
-                    discuss the reaosn  for the moment we are gere 
+                    
                   </motion.a>
                 </div>
               </div>
@@ -1796,7 +1797,7 @@ case 'contact':
   theme === 'dark' ? 'text-white' : 'text-gray-800'
 }`}>
     <motion.img 
-  src="IMG.png" 
+  src="/IMG.png" 
   alt="Ezinne Adaego Jane Duru" 
   className={`w-32 h-32 rounded-full object-cover shadow-lg mx-auto mb-8 mt-12 ${
     theme === 'dark' ? 'border-4 border-blue-500' : 'border-4 border-blue-300'
