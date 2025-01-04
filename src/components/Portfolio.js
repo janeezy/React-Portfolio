@@ -204,7 +204,7 @@ const Portfolio = () => {
                 <p className={`text-lg leading-relaxed mb-6 ${
                   theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                 }`}>
-                  Transitioned from a successful 7-year career in financial services to frontend development in 2022. 
+                  Transitioned from a successful 7-year career in sales & financial services to frontend development in 2022. 
                   After relocating from Ukraine to Portugal due to the conflict, I've devoted myself to mastering modern web technologies 
                   and computer science fundamentals.
                 </p>
@@ -449,7 +449,7 @@ const Portfolio = () => {
                   <h3 className={`text-2xl font-bold tracking-tight ${
                     theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
                   } border-l-4 border-blue-500 pl-4`}>
-                    Leadership Experience
+                    Previous Professional Experience
                   </h3>
         
                   <Card
