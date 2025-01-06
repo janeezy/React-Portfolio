@@ -412,37 +412,7 @@ const Portfolio = () => {
                   />
                 </div>
         
-                {/* Financial Technology Experience */}
-                <div className="space-y-8">
-                  <h3 className={`text-2xl font-bold tracking-tight ${
-                    theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
-                  } border-l-4 border-blue-500 pl-4`}>
-                    Financial Technology Experience
-                  </h3>
-        
-                  <Card
-                    title="Cryptocurrency & Business Development"
-                    subtitle="2017 - 2020"
-                    content={
-                      <div className="space-y-4">
-                        <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                          Combined expertise in cryptocurrency markets and business development:
-                        </p>
-                        <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                          <li className="flex items-start gap-3">
-                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                            <span>Mastered cryptocurrency trading and blockchain technology fundamentals</span>
-                          </li>
-                          <li className="flex items-start gap-3">
-                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                            <span>Developed analytical and problem-solving skills in fast-paced markets</span>
-                          </li>
-                        </ul>
-                      </div>
-                    }
-                    theme={theme}
-                  />
-                </div>
+                
         
                 {/* Previous Leadership Experience */}
                 <div className="space-y-8">
@@ -475,8 +445,8 @@ const Portfolio = () => {
                     }
                     theme={theme}
                   />
-        
-                  <Card
+
+<Card
                     title={
                       <div className="space-y-2">
                         <h4 className="text-2xl font-bold tracking-tight">Senior Retention Sales Manager</h4>
@@ -500,6 +470,41 @@ const Portfolio = () => {
                     theme={theme}
                   />
                 </div>
+
+                  {/* Financial Technology Experience */}
+        <div className="space-y-8">
+          
+          <h3 className={`text-2xl  font-bold tracking-tight ${
+                      theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
+                    } border-l-4 border-blue-500 pl-4`}>
+                      Financial Sales  Experience
+                    </h3>
+          
+                    <Card
+                      title="Cryptocurrency & Business Development"
+                      subtitle="2017 - 2020"
+                      content={
+                        <div className="space-y-4">
+                          <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            Combined expertise in cryptocurrency markets and business development:
+                          </p>
+                          <ul className={`space-y-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                            <li className="flex items-start gap-3">
+                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                              <span>Mastered cryptocurrency trading and blockchain technology fundamentals</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                              <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                              <span>Developed analytical and problem-solving skills in fast-paced markets</span>
+                            </li>
+                          </ul>
+                        </div>
+                      }
+                      theme={theme}
+                    />
+                  </div>
+        
+                 
               </div>
             </Section>
           );
@@ -609,7 +614,7 @@ const Portfolio = () => {
             <div className="space-y-2">
               <h3 className="text-2xl font-bold tracking-tight">Currently Learning</h3>
               <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                Expanding knowledge in algorithms and data structures
+              Mobile development with React Native while expanding my knowledge in algorithms and data structures to build innovative and efficient solutions.
               </p>
             </div>
           }
