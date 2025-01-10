@@ -1330,8 +1330,7 @@ const Portfolio = () => {
                       <p className={`text-lg font-medium ${
                         theme === 'dark' ? 'text-blue-400' : 'text-blue-700'
                       }`}>
-                        Currently advancing in System Design and Advanced Algorithms
-                      </p>
+                    Currently progressing in System Design, Advanced Algorithms, and Blockchain Development.                      </p>
                     </div>
                   </motion.div>
           
