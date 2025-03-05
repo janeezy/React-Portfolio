@@ -265,11 +265,15 @@ const Portfolio = () => {
                     theme === "dark" ? "text-gray-300" : "text-gray-700"
                   }`}
                 >
-                  Transitioned from a successful 7-year career in sales &
-                  financial services to frontend development in 2022. After
-                  relocating from Ukraine to Portugal due to the conflict, I've
-                  devoted myself to mastering modern web technologies and
-                  computer science fundamentals.
+                  Transitioning from a successful 8-year career in sales and
+                  financial services, I worked as a financial analyst, trading
+                  stocks, cryptocurrency, and providing financial services. In
+                  2022, after relocating from Ukraine to Portugal due to the
+                  conflict, I shifted my focus to frontend development. Since
+                  then, I have been dedicated to mastering modern web
+                  technologies and computer science fundamentals, leveraging my
+                  analytical skills and problem-solving expertise from the
+                  financial sector to build high-performance interfaces.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <motion.button
@@ -2375,7 +2379,8 @@ const Portfolio = () => {
           transition={{ delay: 0.4 }}
         >
           Frontend Software Engineer | UI/UX-Focused Developer | Creating
-          High-Performance Interfaces
+          High-Performance Interfaces | with 8 years of Financial sales
+          Experience 🚀
         </motion.p>
 
         <AnimatePresence mode="wait">
