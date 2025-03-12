@@ -2330,7 +2330,7 @@ const Portfolio = () => {
       </AnimatePresence>
 
       <nav className="hidden md:block fixed top-0 left-0 bottom-0 w-24 bg-gray-800 z-40">
-        <ul className="flex flex-col h-full justify-center space-y-8 p-4">
+        <ul className="flex flex-col h-full justify-center  items-center  space-y-8 p-4">
           {sections.map((section) => (
             <li key={section.id}>
               <motion.button
