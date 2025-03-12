@@ -16,9 +16,7 @@ import {
   Sun,
   Moon,
   Euro,
-  ChevronLeft,
-  ChevronRight,
-  Quote,
+  
 } from "lucide-react";
 import { Twitter, Facebook, HeartHandshake, Copyright } from "lucide-react";
 
