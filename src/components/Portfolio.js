@@ -16,6 +16,9 @@ import {
   Sun,
   Moon,
   Euro,
+  ChevronLeft,
+  ChevronRight,
+  Quote,
 } from "lucide-react";
 import { Twitter, Facebook, HeartHandshake, Copyright } from "lucide-react";
 
@@ -101,6 +104,233 @@ const Card = ({ title, subtitle, content, className = "", theme }) => (
   </motion.div>
 );
 
+// Testimonials Carousel Component
+const TestimonialsCarousel = ({ theme }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
+  
+  // Sample testimonials data
+  const testimonials = [
+    {
+      id: 1,
+      name: "Alex Rodriguez",
+      role: "Web Developer at TechCorp",
+      image: "https://cdn.pixabay.com/photo/2025/01/08/21/23/lavender-9320152_1280.jpg",
+      content: "Jane's frontend skills are exceptional. She delivered our company website with stunning animations and perfect responsiveness. Her attention to detail and commitment to quality makes her stand out.",
+      rating: 5
+    },
+    {
+      id: 2,
+      name: "Sarah Chen",
+      role: "Startup Founder",
+      image: "https://cdn.pixabay.com/photo/2023/08/06/14/34/woman-8173091_1280.jpg",
+      content: "Working with Jane was a game-changer for our startup. Her ability to translate our vision into a beautiful, functional website exceeded our expectations. She's not just a developer, but a true problem solver.",
+      rating: 5
+    },
+    {
+      id: 3,
+      name: "Michael Johnson",
+      role: "Marketing Director",
+      image: "https://cdn.pixabay.com/photo/2020/10/28/14/01/man-5693573_1280.jpg",
+      content: "Jane's work on our e-commerce platform significantly improved user engagement and conversion rates. Her deep understanding of UX principles and technical skills make her an invaluable asset to any project.",
+      rating: 5
+    },
+    {
+      id: 4,
+      name: "Elena Petrova",
+      role: "Restaurant Owner",
+      image: "https://cdn.pixabay.com/photo/2023/04/07/09/19/woman-7905926_1280.jpg",
+      content: "Jane created a beautiful website for my restaurant that perfectly captured our brand. The online ordering system she implemented has boosted our sales by 40%. Highly recommended!",
+      rating: 5
+    },
+    {
+      id: 5,
+      name: "David Wong",
+      role: "Fitness Trainer",
+      image: "https://cdn.pixabay.com/photo/2016/11/29/03/52/man-1867175_1280.jpg",
+      content: "Jane developed a sleek, modern website for my fitness business that has helped me attract new clients. Her work is clean, professional, and delivered exactly on time.",
+      rating: 5
+    }
+  ];
+  
+  // Autoplay logic
+  useEffect(() => {
+    if (!autoplay) return;
+    
+    const interval = setInterval(() => {
+      nextTestimonial();
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [currentIndex, autoplay]);
+  
+  const nextTestimonial = () => {
+    setDirection(1);
+    setCurrentIndex(prevIndex => 
+      prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+  
+  const prevTestimonial = () => {
+    setDirection(-1);
+    setCurrentIndex(prevIndex => 
+      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+    );
+  };
+  
+  // Variant for slide animations
+  const slideVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 300 : -100,
+      opacity: 0
+    }),
+    center: {
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction) => ({
+      x: direction < 0 ? 300 : -100,
+      opacity: 0
+    })
+  };
+  
+  // Star rating component
+  const StarRating = ({ rating }) => {
+    return (
+      <div className="flex">
+        {[...Array(5)].map((_, i) => (
+          <svg 
+            key={i} 
+            className={`w-5 h-5 ${i < rating ? "text-yellow-400" : "text-gray-300"}`} 
+            fill="currentColor" 
+            viewBox="0 0 20 20"
+          >
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+        ))}
+      </div>
+    );
+  };
+
+  return (
+    <div className={`p-6 rounded-xl relative ${theme === "dark" ? "bg-gray-800/70 border border-gray-700" : "bg-white border border-gray-200"}`}>
+      <h3 className={`text-2xl font-bold mb-8 text-center ${theme === "dark" ? "text-gray-200" : "text-gray-800"}`}>
+        Client Testimonials
+      </h3>
+      
+      {/* Testimonial carousel */}
+      <div className="relative overflow-hidden px-4 py-2">
+        <AnimatePresence custom={direction} initial={false}>
+          <motion.div
+            key={currentIndex}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 }
+            }}
+            className="w-full"
+          >
+            <div className="text-center space-y-6">
+              <div className="relative mx-auto w-20 h-20">
+                <img 
+                  src={testimonials[currentIndex].image} 
+                  alt={testimonials[currentIndex].name}
+                  className="w-20 h-20 rounded-full object-cover mx-auto"
+                />
+                <Quote 
+                  className={`absolute -bottom-2 -right-2 p-1 rounded-full ${
+                    theme === "dark" ? "bg-blue-600 text-white" : "bg-blue-500 text-white"
+                  }`} 
+                  size={24} 
+                />
+              </div>
+              
+              <blockquote className={`relative text-lg italic max-w-2xl mx-auto ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
+                "{testimonials[currentIndex].content}"
+              </blockquote>
+              
+              <div className="space-y-2">
+                <h4 className={`font-semibold ${theme === "dark" ? "text-gray-200" : "text-gray-800"}`}>
+                  {testimonials[currentIndex].name}
+                </h4>
+                <p className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                  {testimonials[currentIndex].role}
+                </p>
+                <div className="flex justify-center">
+                  <StarRating rating={testimonials[currentIndex].rating} />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+        
+        {/* Navigation buttons */}
+        <div className="absolute inset-0 flex items-center justify-between pointer-events-none">
+          <button 
+            onClick={prevTestimonial}
+            className={`p-2 rounded-full pointer-events-auto ${
+              theme === "dark" 
+                ? "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white" 
+                : "bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-800"
+            }`}
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button 
+            onClick={nextTestimonial}
+            className={`p-2 rounded-full pointer-events-auto ${
+              theme === "dark" 
+                ? "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white" 
+                : "bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-800"
+            }`}
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+      </div>
+      
+      {/* Indicators */}
+      <div className="flex justify-center mt-6 space-x-2">
+        {testimonials.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => {
+              setDirection(idx > currentIndex ? 1 : -1);
+              setCurrentIndex(idx);
+            }}
+            className={`w-2 h-2 rounded-full transition-all ${
+              idx === currentIndex
+                ? theme === "dark"
+                  ? "bg-blue-500 w-4"
+                  : "bg-blue-600 w-4"
+                : theme === "dark"
+                ? "bg-gray-600"
+                : "bg-gray-300"
+            }`}
+          />
+        ))}
+      </div>
+      
+      {/* Autoplay control */}
+      <div className="mt-6 text-center">
+        <button
+          onClick={() => setAutoplay(!autoplay)}
+          className={`text-sm underline ${
+            theme === "dark" ? "text-gray-400 hover:text-gray-300" : "text-gray-600 hover:text-gray-800"
+          }`}
+        >
+          {autoplay ? "Pause" : "Play"} Slideshow
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -130,6 +360,7 @@ const Portfolio = () => {
         return (
           <Section title="" theme={theme}>
             <div className="max-w-4xl mx-auto space-y-12">
+            <TestimonialsCarousel theme={theme} />
               {/* Hero Section */}
               <motion.div
                 className="text-center space-y-6"
