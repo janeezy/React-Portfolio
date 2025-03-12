@@ -20,34 +20,38 @@ import {
 } from "lucide-react";
 import { Twitter, Facebook, HeartHandshake, Copyright } from "lucide-react";
 
-// Updated Logo component with modern styling
-const Logo = () => (
-  <motion.svg
-    width="48"
-    height="48"
-    viewBox="0 0 48 48"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
+// Updated Logo component with modern styling and home page navigation
+const Logo = ({ setActiveSection }) => (
+  <motion.button
+    onClick={() => setActiveSection('home')}
+    className="focus:outline-none"
     whileHover={{ scale: 1.1 }}
     whileTap={{ scale: 0.9 }}
-    className="drop-shadow-xl"
   >
-    <circle cx="24" cy="24" r="24" className="fill-blue-600" />
-    <text
-      x="50%"
-      y="50%"
-      dominantBaseline="middle"
-      textAnchor="middle"
-      fill="white"
-      fontSize="28"
-      fontFamily="Inter, system-ui, sans-serif"
-      fontWeight="bold"
+    <motion.svg
+      width="48"
+      height="48"
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="drop-shadow-xl cursor-pointer"
     >
-      JD
-    </text>
-  </motion.svg>
+      <circle cx="24" cy="24" r="24" className="fill-blue-600" />
+      <text
+        x="50%"
+        y="50%"
+        dominantBaseline="middle"
+        textAnchor="middle"
+        fill="white"
+        fontSize="28"
+        fontFamily="Inter, system-ui, sans-serif"
+        fontWeight="bold"
+      >
+        JD
+      </text>
+    </motion.svg>
+  </motion.button>
 );
-
 const Section = ({ title, children, theme }) => (
   <motion.div
     initial={{ opacity: 0, y: 50 }}
@@ -2247,7 +2251,7 @@ const Portfolio = () => {
       >
         <div className="container mx-auto px-4 py-2 flex justify-between items-center">
           <div className="flex items-center">
-            <Logo />
+          <Logo setActiveSection={setActiveSection} />
             <motion.h1
               className={`text-2xl font-bold ml-2 ${
                 theme === "dark"
