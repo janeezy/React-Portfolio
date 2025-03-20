@@ -46,6 +46,7 @@ const Logo = ({ setActiveSection }) => (
         fontSize="28"
         fontFamily="Inter, system-ui, sans-serif"
         fontWeight="bold"
+        
       >
         JD
       </text>
@@ -301,7 +302,7 @@ const Portfolio = () => {
                   </motion.button>
 
                   <motion.a
-                    href="https://red-esma-48.tiiny.site/"
+                    href="https://tomato-inessa-47.tiiny.site/"
                     className={`
                       px-6 py-3 rounded-full text-lg font-semibold
                       border-2 border-blue-500
