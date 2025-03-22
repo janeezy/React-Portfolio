@@ -2088,7 +2088,7 @@ const Portfolio = () => {
                   Connect with Me
                 </h3>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                   {[
                     {
                       platform: "LinkedIn",
@@ -2110,6 +2110,13 @@ const Portfolio = () => {
                       link: "https://x.com/Iamjaneezy",
                       color: "sky",
                       description: "Updates & Thoughts",
+                    },
+                    {
+                      platform: "Medium",
+                      icon: ExternalLink,
+                      link: "https://medium.com/@janeezy",
+                      color: "green",
+                      description: "Articles & Blog",
                     },
                     {
                       platform: "Facebook",
