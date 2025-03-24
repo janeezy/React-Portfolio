@@ -302,7 +302,7 @@ const Portfolio = () => {
                   </motion.button>
 
                   <motion.a
-                    href="https://salmon-kania-79.tiiny.site"
+                    href="https://jane-duru.tiiny.site"
                     className={`
                       px-6 py-3 rounded-full text-lg font-semibold
                       border-2 border-blue-500
