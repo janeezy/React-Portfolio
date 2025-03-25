@@ -324,424 +324,423 @@ const Portfolio = () => {
 
       case "experience":
         return (
-          <Section title="Professional Experience" theme={theme}>
-            <div className="space-y-16">
-              {/* Current Status */}
-              <div
-                className={`p-6 rounded-xl ${theme === "dark"
-                    ? "bg-gradient-to-br from-blue-900/50 to-purple-900/50 border border-blue-800/50"
-                    : "bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200"
-                  }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                  </span>
-                  <p
-                    className={`text-lg font-medium ${theme === "dark"
-                        ? "text-green-400"
-                        : "text-green-700"
-                      }`}
-                  >
-                    Frontend Developer | Currently advancing
-                    in Data Structures & Algorithms
-                  </p>
-                </div>
-              </div>
+            <Section title="Professional Experience" theme={theme}>
+                <div className="space-y-16">
+                    {/* Current Status */}
+                    <div
+                        className={`p-6 rounded-xl ${
+                            theme === "dark"
+                                ? "bg-gradient-to-br from-blue-900/50 to-purple-900/50 border border-blue-800/50"
+                                : "bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200"
+                        }`}
+                    >
+                        <div className="flex items-center gap-3">
+                            <span className="relative flex h-3 w-3">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                            </span>
+                            <p
+                                className={`text-lg font-medium ${
+                                    theme === "dark"
+                                        ? "text-green-400"
+                                        : "text-green-700"
+                                }`}
+                            >
+                                Frontend Developer | Currently advancing in Data
+                                Structures & Algorithms
+                            </p>
+                        </div>
+                    </div>
 
-              {/* Current Frontend Development Experience */}
-              <div className="space-y-8">
-                <h3
-                  className={`text-2xl font-bold tracking-tight ${theme === "dark"
-                      ? "text-blue-400"
-                      : "text-blue-700"
-                    } border-l-4 border-blue-500 pl-4`}
-                >
-                  Frontend Development Experience
-                </h3>
-                {/* Current Role */}
-                <Card
-                  title={
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-3">
-                        <h4 className="text-2xl font-bold tracking-tight">
-                          Frontend Developer
-                        </h4>
-                        <span
-                          className={`px-3 py-1 text-sm font-medium rounded-full
-            ${theme === "dark"
-                              ? "bg-green-900/30 text-green-300 border border-green-800"
-                              : "bg-green-100 text-green-700 border border-green-200"
-                            }`}
+                    {/* Current Frontend Development Experience */}
+                    <div className="space-y-8">
+                        <h3
+                            className={`text-2xl font-bold tracking-tight ${
+                                theme === "dark"
+                                    ? "text-blue-400"
+                                    : "text-blue-700"
+                            } border-l-4 border-blue-500 pl-4`}
                         >
-                          Current Role
-                        </span>
-                      </div>
-                      <p className="text-lg text-gray-500">
-                        Jether Tech | May 2023 - Present
-                      </p>
-                    </div>
-                  }
-                  content={
-                    <div className="space-y-6">
-                      <ul
-                        className={`space-y-3 ${theme === "dark"
-                            ? "text-gray-300"
-                            : "text-gray-700"
-                          }`}
-                      >
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Develop and maintain
-                            responsive web
-                            interfaces using
-                            React.js, focusing on
-                            user experience and
-                            accessibility
-                          </span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Collaborate with design
-                            team to implement
-                            pixel-perfect UI using
-                            HTML5, CSS3, and
-                            TailwindCSS
-                          </span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Write clean,
-                            maintainable JavaScript
-                            code following modern
-                            ES6+ standards
-                          </span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Participate in code
-                            reviews and implement
-                            feedback to improve code
-                            quality
-                          </span>
-                        </li>
-                      </ul>
-                      <div className="flex flex-wrap gap-2">
-                        {[
-                          "HTML5",
-                          "CSS3",
-                          "JavaScript",
-                          "React",
-                          "Responsive Design",
-                          "TailwindCSS",
-                          "Git",
-                          "Team Collaboration",
-                        ].map((tech) => (
-                          <span
-                            key={tech}
-                            className={`px-3 py-1 text-sm font-medium rounded-full
-              ${theme === "dark"
-                                ? "bg-blue-900/30 text-blue-300 border border-blue-800"
-                                : "bg-blue-50 text-blue-700 border border-blue-200"
+                            Frontend Development Experience
+                        </h3>
+                        {/* Current Role */}
+                        <Card
+                            title={
+                                <div className="space-y-2">
+                                    <div className="flex items-center gap-3">
+                                        <h4 className="text-2xl font-bold tracking-tight">
+                                            Frontend Developer
+                                        </h4>
+                                        <span
+                                            className={`px-3 py-1 text-sm font-medium rounded-full
+            ${
+                theme === "dark"
+                    ? "bg-green-900/30 text-green-300 border border-green-800"
+                    : "bg-green-100 text-green-700 border border-green-200"
+            }`}
+                                        >
+                                            Current Role
+                                        </span>
+                                    </div>
+                                    <p className="text-lg text-gray-500">
+                                        Jether Tech | May 2023 - Present
+                                    </p>
+                                </div>
+                            }
+                            content={
+                                <div className="space-y-6">
+                                    <ul
+                                        className={`space-y-3 ${
+                                            theme === "dark"
+                                                ? "text-gray-300"
+                                                : "text-gray-700"
+                                        }`}
+                                    >
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                                Built responsive UIs with
+                                                React.js, JavaScript, and
+                                                Tailwind CSS, boosting
+                                                cross-browser compatibility by
+                                                25% and performance by 35%. 
+                                               
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                            Cut
+                                                bug rate by 40% through rigorous
+                                                testing and debugging.
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                            Developed
+                                                reusable components, reducing
+                                                feature development time by 30%.
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                            Translated wireframes into
+                                                interactive features, enhancing
+                                                user engagement.
+                                            </span>
+                                        </li>
+                                    </ul>
+                                    <div className="flex flex-wrap gap-2">
+                                        {[
+                                            "HTML5",
+                                            "CSS3",
+                                            "JavaScript",
+                                            "React",
+                                            "Responsive Design",
+                                            "TailwindCSS",
+                                            "Git",
+                                            "Team Collaboration",
+                                        ].map((tech) => (
+                                            <span
+                                                key={tech}
+                                                className={`px-3 py-1 text-sm font-medium rounded-full
+              ${
+                  theme === "dark"
+                      ? "bg-blue-900/30 text-blue-300 border border-blue-800"
+                      : "bg-blue-50 text-blue-700 border border-blue-200"
+              }`}
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            }
+                            theme={theme}
+                        />
+                        <Card
+                            title={
+                                <div className="space-y-2">
+                                    <h4 className="text-2xl font-bold tracking-tight">
+                                        Frontend Developer Intern
+                                    </h4>
+                                    <p className="text-lg text-gray-500">
+                                        Jether Tech | Dec 2022 - Apr 2023
+                                    </p>
+                                </div>
+                            }
+                            content={
+                                <div className="space-y-6">
+                                    <ul
+                                        className={`space-y-3 ${
+                                            theme === "dark"
+                                                ? "text-gray-300"
+                                                : "text-gray-700"
+                                        }`}
+                                    >
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                            Built feature-rich web applications using HTML5, CSS3, and JavaScript with
+                                            focus on responsive design principles.
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                            Developed mobile-first interfaces that improved user engagement metrics by
+                                            20% on smartphone devices.
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                            Utilized Git for version control and participated in code reviews that improved
+                                            overall code quality.
+                                            </span>
+                                        </li>
+                                    </ul>
+                                    <div className="flex flex-wrap gap-2">
+                                        {[
+                                            "HTML5",
+                                            "CSS3",
+                                            "JavaScript",
+                                            "React",
+                                            "Responsive Design",
+                                            "TailwindCSS",
+                                        ].map((tech) => (
+                                            <span
+                                                key={tech}
+                                                className={`px-3 py-1 text-sm font-medium rounded-full
+                              ${
+                                  theme === "dark"
+                                      ? "bg-blue-900/30 text-blue-300 border border-blue-800"
+                                      : "bg-blue-50 text-blue-700 border border-blue-200"
                               }`}
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  }
-                  theme={theme}
-                />
-                <Card
-                  title={
-                    <div className="space-y-2">
-                      <h4 className="text-2xl font-bold tracking-tight">
-                        Frontend Developer Intern
-                      </h4>
-                      <p className="text-lg text-gray-500">
-                        Jether Tech | Dec 2022 - Apr
-                        2023
-                      </p>
-                    </div>
-                  }
-                  content={
-                    <div className="space-y-6">
-                      <ul
-                        className={`space-y-3 ${theme === "dark"
-                            ? "text-gray-300"
-                            : "text-gray-700"
-                          }`}
-                      >
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Built responsive web
-                            interfaces using HTML5,
-                            CSS3, and JavaScript
-                          </span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Developed React
-                            components for
-                            e-commerce platform
-                          </span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Implemented UI designs
-                            using Tailwind CSS
-                          </span>
-                        </li>
-                      </ul>
-                      <div className="flex flex-wrap gap-2">
-                        {[
-                          "HTML5",
-                          "CSS3",
-                          "JavaScript",
-                          "React",
-                          "Responsive Design",
-                          "TailwindCSS",
-                        ].map((tech) => (
-                          <span
-                            key={tech}
-                            className={`px-3 py-1 text-sm font-medium rounded-full
-                              ${theme === "dark"
-                                ? "bg-blue-900/30 text-blue-300 border border-blue-800"
-                                : "bg-blue-50 text-blue-700 border border-blue-200"
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            }
+                            theme={theme}
+                        />
+
+                        <Card
+                            title={
+                                <div className="space-y-2">
+                                    <h4 className="text-2xl font-bold tracking-tight">
+                                        Frontend Projects
+                                    </h4>
+                                    <p className="text-lg text-gray-500">
+                                        Self-Directed | 2022 - Present
+                                    </p>
+                                </div>
+                            }
+                            content={
+                                <div className="space-y-6">
+                                    <ul
+                                        className={`space-y-3 ${
+                                            theme === "dark"
+                                                ? "text-gray-300"
+                                                : "text-gray-700"
+                                        }`}
+                                    >
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                                Developed JaneezyBeats platform
+                                                with React and modern CSS
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                                Created responsive restaurant
+                                                and gym websites
+                                            </span>
+                                        </li>
+                                    </ul>
+                                    <div className="flex flex-wrap gap-2">
+                                        {[
+                                            "React",
+                                            "JavaScript",
+                                            "HTML5",
+                                            "CSS3",
+                                        ].map((tech) => (
+                                            <span
+                                                key={tech}
+                                                className={`px-3 py-1 text-sm font-medium rounded-full
+                              ${
+                                  theme === "dark"
+                                      ? "bg-blue-900/30 text-blue-300 border border-blue-800"
+                                      : "bg-blue-50 text-blue-700 border border-blue-200"
                               }`}
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            }
+                            theme={theme}
+                        />
                     </div>
-                  }
-                  theme={theme}
-                />
 
-                <Card
-                  title={
-                    <div className="space-y-2">
-                      <h4 className="text-2xl font-bold tracking-tight">
-                        Frontend Projects
-                      </h4>
-                      <p className="text-lg text-gray-500">
-                        Self-Directed | 2022 - Present
-                      </p>
-                    </div>
-                  }
-                  content={
-                    <div className="space-y-6">
-                      <ul
-                        className={`space-y-3 ${theme === "dark"
-                            ? "text-gray-300"
-                            : "text-gray-700"
-                          }`}
-                      >
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Developed JaneezyBeats
-                            platform with React and
-                            modern CSS
-                          </span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Created responsive
-                            restaurant and gym
-                            websites
-                          </span>
-                        </li>
-                      </ul>
-                      <div className="flex flex-wrap gap-2">
-                        {[
-                          "React",
-                          "JavaScript",
-                          "HTML5",
-                          "CSS3",
-                        ].map((tech) => (
-                          <span
-                            key={tech}
-                            className={`px-3 py-1 text-sm font-medium rounded-full
-                              ${theme === "dark"
-                                ? "bg-blue-900/30 text-blue-300 border border-blue-800"
-                                : "bg-blue-50 text-blue-700 border border-blue-200"
-                              }`}
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  }
-                  theme={theme}
-                />
-              </div>
+                    {/* Previous Leadership Experience */}
+                    <div className="space-y-8">
+                        <h3
+                            className={`text-2xl font-bold tracking-tight ${
+                                theme === "dark"
+                                    ? "text-blue-400"
+                                    : "text-blue-700"
+                            } border-l-4 border-blue-500 pl-4`}
+                        >
+                            Previous Professional Experience
+                        </h3>
 
-              {/* Previous Leadership Experience */}
-              <div className="space-y-8">
-                <h3
-                  className={`text-2xl font-bold tracking-tight ${theme === "dark"
-                      ? "text-blue-400"
-                      : "text-blue-700"
-                    } border-l-4 border-blue-500 pl-4`}
-                >
-                  Previous Professional Experience
-                </h3>
+                        <Card
+                            title={
+                                <div className="space-y-2">
+                                    <h4 className="text-2xl font-bold tracking-tight">
+                                        Retention Sales Manager
+                                    </h4>
+                                    <p className="text-lg text-gray-500">
+                                        Golden Markets | Jan 2020 - Feb 2022
+                                    </p>
+                                </div>
+                            }
+                            content={
+                                <div className="space-y-4">
+                                    <ul
+                                        className={`space-y-3 ${
+                                            theme === "dark"
+                                                ? "text-gray-300"
+                                                : "text-gray-700"
+                                        }`}
+                                    >
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                                Led team of 12 representatives,
+                                                improving retention by 25%
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                                Managed high-priority client
+                                                portfolio worth €2M annually
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            }
+                            theme={theme}
+                        />
 
-                <Card
-                  title={
-                    <div className="space-y-2">
-                      <h4 className="text-2xl font-bold tracking-tight">
-                        Retention Sales Manager
-                      </h4>
-                      <p className="text-lg text-gray-500">
-                        Golden Markets | Jan 2020 - Feb
-                        2022
-                      </p>
+                        <Card
+                            title={
+                                <div className="space-y-2">
+                                    <h4 className="text-2xl font-bold tracking-tight">
+                                        Senior Retention Sales Manager
+                                    </h4>
+                                    <p className="text-lg text-gray-500">
+                                        Ashford | Feb 2016 - Jan 2020
+                                    </p>
+                                </div>
+                            }
+                            content={
+                                <div className="space-y-4">
+                                    <ul
+                                        className={`space-y-3 ${
+                                            theme === "dark"
+                                                ? "text-gray-300"
+                                                : "text-gray-700"
+                                        }`}
+                                    >
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                            Provided expert guidance on cryptocurrency investment strategies, blockchain
+                                            technology fundamentals, and digital asset portfolio diversification.
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                                Developed and mentored 15+ team
+                                                members to career advancement
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            }
+                            theme={theme}
+                        />
                     </div>
-                  }
-                  content={
-                    <div className="space-y-4">
-                      <ul
-                        className={`space-y-3 ${theme === "dark"
-                            ? "text-gray-300"
-                            : "text-gray-700"
-                          }`}
-                      >
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Led team of 12
-                            representatives,
-                            improving retention by
-                            25%
-                          </span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Managed high-priority
-                            client portfolio worth
-                            €2M annually
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                  }
-                  theme={theme}
-                />
 
-                <Card
-                  title={
-                    <div className="space-y-2">
-                      <h4 className="text-2xl font-bold tracking-tight">
-                        Senior Retention Sales Manager
-                      </h4>
-                      <p className="text-lg text-gray-500">
-                        Ashford | Feb 2016 - Jan 2020
-                      </p>
-                    </div>
-                  }
-                  content={
-                    <div className="space-y-4">
-                      <ul
-                        className={`space-y-3 ${theme === "dark"
-                            ? "text-gray-300"
-                            : "text-gray-700"
-                          }`}
-                      >
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Achieved 13%
-                            year-over-year growth
-                            through strategic team
-                            management
-                          </span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Developed and mentored
-                            15+ team members to
-                            career advancement
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                  }
-                  theme={theme}
-                />
-              </div>
+                    {/* Financial Technology Experience */}
+                    <div className="space-y-8">
+                        <h3
+                            className={`text-2xl  font-bold tracking-tight ${
+                                theme === "dark"
+                                    ? "text-blue-400"
+                                    : "text-blue-700"
+                            } border-l-4 border-blue-500 pl-4`}
+                        >
+                            Financial Sales Experience
+                        </h3>
 
-              {/* Financial Technology Experience */}
-              <div className="space-y-8">
-                <h3
-                  className={`text-2xl  font-bold tracking-tight ${theme === "dark"
-                      ? "text-blue-400"
-                      : "text-blue-700"
-                    } border-l-4 border-blue-500 pl-4`}
-                >
-                  Financial Sales Experience
-                </h3>
-
-                <Card
-                  title="Cryptocurrency & Business Development"
-                  subtitle="2017 - 2020"
-                  content={
-                    <div className="space-y-4">
-                      <p
-                        className={`${theme === "dark"
-                            ? "text-gray-300"
-                            : "text-gray-700"
-                          }`}
-                      >
-                        Combined expertise in
-                        cryptocurrency markets and
-                        business development:
-                      </p>
-                      <ul
-                        className={`space-y-3 ${theme === "dark"
-                            ? "text-gray-300"
-                            : "text-gray-700"
-                          }`}
-                      >
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Mastered cryptocurrency
-                            trading and blockchain
-                            technology fundamentals
-                          </span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                          <span>
-                            Developed analytical and
-                            problem-solving skills
-                            in fast-paced markets
-                          </span>
-                        </li>
-                      </ul>
+                        <Card
+                            title="Cryptocurrency & Business Development"
+                            subtitle="2017 - 2020"
+                            content={
+                                <div className="space-y-4">
+                                    <p
+                                        className={`${
+                                            theme === "dark"
+                                                ? "text-gray-300"
+                                                : "text-gray-700"
+                                        }`}
+                                    >
+                                        Combined expertise in cryptocurrency
+                                        markets and business development:
+                                    </p>
+                                    <ul
+                                        className={`space-y-3 ${
+                                            theme === "dark"
+                                                ? "text-gray-300"
+                                                : "text-gray-700"
+                                        }`}
+                                    >
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                                Mastered cryptocurrency trading
+                                                and blockchain technology
+                                                fundamentals
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+                                            <span>
+                                                Developed analytical and
+                                                problem-solving skills in
+                                                fast-paced markets
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            }
+                            theme={theme}
+                        />
                     </div>
-                  }
-                  theme={theme}
-                />
-              </div>
-            </div>
-          </Section>
+                </div>
+            </Section>
         );
       case "skills":
         return (
