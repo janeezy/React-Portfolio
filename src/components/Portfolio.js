@@ -163,8 +163,8 @@ const Portfolio = () => {
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: 0.3 }}
                                 >
-                                    Building modern web experiences with HTML5,
-                                    CSS3, JavaScript, and React.js
+                                    Building modern web experiences with React.js,  JavaScript, HTML5,
+                                    CSS3, and other frameworks. 
                                 </motion.p>
                                 <motion.p
                                     className={`text-lg max-w-2xl mx-auto ${
