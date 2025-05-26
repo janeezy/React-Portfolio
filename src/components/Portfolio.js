@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     Home,
@@ -9,61 +9,56 @@ import {
     ExternalLink,
     Music,
     School,
-    Award,
     Linkedin,
     Code,
     Menu,
     Sun,
     Moon,
     Euro,
+    Twitter,
+    Facebook,
+    HeartHandshake,
+    Copyright,
+    Github
 } from "lucide-react";
-import { Twitter, Facebook, HeartHandshake, Copyright } from "lucide-react";
 
-// Updated Logo component with modern styling and home page navigation
+// Modern Logo with glassmorphism effect
 const Logo = ({ setActiveSection }) => (
     <motion.button
         onClick={() => setActiveSection("home")}
-        className="focus:outline-none"
+        className="focus:outline-none group"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
     >
-        <motion.svg
-            width="48"
-            height="48"
-            viewBox="0 0 48 48"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="drop-shadow-xl cursor-pointer"
+        <motion.div
+            className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 shadow-xl shadow-purple-500/25 backdrop-blur-xl border border-white/20"
+            whileHover={{ 
+                boxShadow: "0 20px 40px rgba(139, 92, 246, 0.4)",
+                rotate: [0, -5, 5, 0],
+                transition: { duration: 0.6 }
+            }}
         >
-            <circle cx="24" cy="24" r="24" className="fill-blue-600" />
-            <text
-                x="50%"
-                y="50%"
-                dominantBaseline="middle"
-                textAnchor="middle"
-                fill="white"
-                fontSize="28"
-                fontFamily="Inter, system-ui, sans-serif"
-                fontWeight="bold"
-            >
-                JD 
-            </text>
-        </motion.svg>
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/20 to-transparent" />
+            <div className="flex items-center justify-center h-full">
+                <span className="text-white font-bold text-lg tracking-tight">JD</span>
+            </div>
+        </motion.div>
     </motion.button>
 );
+
 const Section = ({ title, children, theme }) => (
     <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-12"
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="mb-16"
     >
         <h2
-            className={`text-3xl font-bold mb-6 ${
+            className={`text-4xl font-bold mb-8 ${
                 theme === "dark"
-                    ? "text-blue-400 border-blue-400"
-                    : "text-blue-700 border-blue-700"
-            } border-b-2 pb-2`}
+                    ? "bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text"
+                    : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-transparent bg-clip-text"
+            } border-b border-gradient-to-r from-indigo-500/20 to-pink-500/20 pb-4`}
         >
             {title}
         </h2>
@@ -71,31 +66,44 @@ const Section = ({ title, children, theme }) => (
     </motion.div>
 );
 
-const Card = ({ title, subtitle, content, className = "", theme }) => (
+const Card = ({ title, subtitle, content, className = "", theme, featured = false }) => (
     <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3 }}
-        whileHover={{ scale: 1.03, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
-        className={`${
-            theme === "dark"
-                ? "bg-gray-800 border-gray-700"
-                : "bg-white border-gray-200"
-        } p-6 rounded-lg shadow-md transition-all duration-300 border ${className}`}
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        whileHover={{ 
+            scale: 1.02, 
+            y: -5,
+            boxShadow: theme === "dark" 
+                ? "0 25px 50px rgba(139, 92, 246, 0.15)" 
+                : "0 25px 50px rgba(139, 92, 246, 0.10)"
+        }}
+        className={`
+            ${theme === "dark"
+                ? "bg-gray-900/70 border-gray-700/50"
+                : "bg-white/70 border-gray-200/50"
+            } 
+            ${featured ? "ring-2 ring-purple-500/20" : ""}
+            p-8 rounded-3xl backdrop-blur-xl border transition-all duration-300 
+            ${className}
+        `}
+        style={{
+            background: theme === "dark"
+                ? "linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(31, 41, 55, 0.8) 100%)"
+                : "linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(249, 250, 251, 0.8) 100%)"
+        }}
     >
         <h3
-            className={`text-2xl font-bold mb-2 ${
-                theme === "dark" ? "text-blue-400" : "text-blue-700"
+            className={`text-2xl font-bold mb-3 ${
+                theme === "dark" 
+                    ? "bg-gradient-to-r from-indigo-400 to-purple-400 text-transparent bg-clip-text" 
+                    : "bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text"
             }`}
         >
             {title}
         </h3>
         {subtitle && (
-            <p
-                className={`text-lg mb-3 ${
-                    theme === "dark" ? "text-gray-400" : "text-gray-600"
-                }`}
-            >
+            <p className={`text-lg mb-4 ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
                 {subtitle}
             </p>
         )}
@@ -112,6 +120,9 @@ const Portfolio = () => {
 
     useEffect(() => {
         document.body.className = theme;
+        document.body.style.background = theme === "dark" 
+            ? "linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)"
+            : "linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%)";
     }, [theme]);
 
     const toggleTheme = () => {
@@ -123,7 +134,7 @@ const Portfolio = () => {
         { id: "experience", icon: Briefcase, title: "Experience" },
         { id: "skills", icon: User, title: "Skills" },
         { id: "projects", icon: Laptop, title: "Projects" },
-        { id: "pricing", icon: Euro, title: "Pricing" }, // Add this new line
+        { id: "pricing", icon: Euro, title: "Pricing" },
         { id: "education", icon: School, title: "Education" },
         { id: "contact", icon: Mail, title: "Contact" },
     ];
@@ -133,131 +144,100 @@ const Portfolio = () => {
             case "home":
                 return (
                     <Section title="" theme={theme}>
-                        <div className="max-w-4xl mx-auto space-y-12">
+                        <div className="max-w-5xl mx-auto space-y-16">
                             {/* Hero Section */}
                             <motion.div
-                                className="text-center space-y-6"
-                                initial={{ opacity: 0, y: 20 }}
+                                className="text-center space-y-8"
+                                initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6 }}
+                                transition={{ duration: 0.8, ease: "easeOut" }}
                             >
                                 <motion.h1
-                                    className={`text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 ${
+                                    className={`text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 ${
                                         theme === "dark"
-                                            ? "bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 text-transparent bg-clip-text"
-                                            : "text-gray-900"
+                                            ? "bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text"
+                                            : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-transparent bg-clip-text"
                                     }`}
-                                    initial={{ opacity: 0, y: -20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.2 }}
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: 0.2, duration: 0.8 }}
                                 >
                                     Frontend Engineer
                                 </motion.h1>
                                 <motion.p
-                                    className={`text-xl sm:text-2xl leading-relaxed max-w-3xl mx-auto ${
-                                        theme === "dark"
-                                            ? "text-gray-300"
-                                            : "text-gray-600"
+                                    className={`text-xl sm:text-2xl leading-relaxed max-w-4xl mx-auto ${
+                                        theme === "dark" ? "text-gray-300" : "text-gray-600"
                                     }`}
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.3 }}
+                                    transition={{ delay: 0.4, duration: 0.8 }}
                                 >
-                                    Building modern web experiences with
-                                    React.js, JavaScript, HTML5, CSS3, and other
-                                    frameworks.
+                                    Building modern web experiences with 4+ years of expertise in
+                                    React.js, JavaScript, HTML5, CSS3, and cutting-edge frameworks.
                                 </motion.p>
                                 <motion.p
-                                    className={`text-lg max-w-2xl mx-auto ${
-                                        theme === "dark"
-                                            ? "text-gray-400"
-                                            : "text-gray-600"
+                                    className={`text-lg max-w-3xl mx-auto ${
+                                        theme === "dark" ? "text-gray-400" : "text-gray-500"
                                     }`}
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.4 }}
+                                    transition={{ delay: 0.6, duration: 0.8 }}
                                 >
-                                    Currently advancing in Data Structures &
-                                    Algorithms, exploring mobile development,
-                                    and expanding into blockchain engineering
-                                    for 2025
+                                    Aspiring blockchain developer currently advancing in Algorithms & Data Structures, 
+                                    exploring Web3 technologies, and building scalable solutions at Roy.
                                 </motion.p>
                             </motion.div>
 
-                            {/* Key Skills Section */}
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            {/* Key Skills Grid */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 {[
                                     {
-                                        title: "Frontend Development",
-                                        skills: [
-                                            "HTML5",
-                                            "CSS3",
-                                            "JavaScript",
-                                            "React.js",
-                                            "Responsive Design",
-                                            "TailwindCSS",
-                                        ],
-                                        description:
-                                            "Building responsive, modern web applications with focus on user experience",
+                                        title: "Frontend Mastery",
+                                        skills: ["React.js", "JavaScript (ES6+)", "HTML5 & CSS3", "Tailwind CSS", "Responsive Design"],
+                                        description: "4+ years crafting pixel-perfect, high-performance web applications",
+                                        gradient: "from-blue-500 to-cyan-500"
                                     },
                                     {
                                         title: "Current Focus",
-                                        skills: [
-                                            "Data Structures",
-                                            "Algorithms",
-                                            "Problem Solving",
-                                            "Optimization",
-                                        ],
-                                        description:
-                                            "Actively expanding knowledge in computer science fundamentals",
+                                        skills: ["Data Structures", "Algorithms", "Problem Solving", "System Design"],
+                                        description: "Continuously expanding computer science fundamentals",
+                                        gradient: "from-purple-500 to-pink-500"
                                     },
                                     {
-                                        title: "Professional Background",
-                                        skills: [
-                                            "Team Leadership",
-                                            "Client Relations",
-                                            "Adaptability",
-                                            "Communication",
-                                        ],
-                                        description:
-                                            "7 years of leadership experience in financial services",
+                                        title: "Professional Edge",
+                                        skills: ["Team Leadership", "Financial Background", "Client Relations", "Strategic Thinking"],
+                                        description: "Unique blend of tech expertise and business acumen",
+                                        gradient: "from-indigo-500 to-purple-500"
                                     },
                                 ].map((section, index) => (
                                     <motion.div
                                         key={section.title}
-                                        initial={{ opacity: 0, y: 20 }}
+                                        initial={{ opacity: 0, y: 30 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        transition={{
-                                            delay: 0.2 + index * 0.1,
-                                        }}
-                                        className={`p-6 rounded-xl ${
+                                        transition={{ delay: 0.3 + index * 0.2, duration: 0.6 }}
+                                        className={`p-8 rounded-3xl backdrop-blur-xl border ${
                                             theme === "dark"
-                                                ? "bg-gray-800/50 border border-gray-700"
-                                                : "bg-white/50 border border-gray-200"
-                                        }`}
+                                                ? "bg-gray-900/50 border-gray-700/50"
+                                                : "bg-white/50 border-gray-200/50"
+                                        } hover:scale-105 transition-all duration-300`}
+                                        whileHover={{ y: -10 }}
                                     >
-                                        <h3 className="text-xl font-bold mb-4">
-                                            {section.title}
-                                        </h3>
-                                        <p
-                                            className={`text-sm mb-4 ${
-                                                theme === "dark"
-                                                    ? "text-gray-400"
-                                                    : "text-gray-600"
-                                            }`}
-                                        >
+                                        <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${section.gradient} mb-6 flex items-center justify-center`}>
+                                            <div className="w-6 h-6 bg-white rounded-lg opacity-80" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold mb-4">{section.title}</h3>
+                                        <p className={`text-sm mb-6 ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
                                             {section.description}
                                         </p>
                                         <div className="flex flex-wrap gap-2">
                                             {section.skills.map((skill) => (
                                                 <span
                                                     key={skill}
-                                                    className={`px-3 py-1 text-sm font-medium rounded-full
-                          ${
-                              theme === "dark"
-                                  ? "bg-blue-900/30 text-blue-300 border border-blue-800"
-                                  : "bg-blue-50 text-blue-700 border border-blue-200"
-                          }`}
+                                                    className={`px-4 py-2 text-sm font-medium rounded-full backdrop-blur-sm
+                                                        ${theme === "dark"
+                                                            ? "bg-gray-800/60 text-gray-300 border border-gray-700/50"
+                                                            : "bg-white/60 text-gray-700 border border-gray-300/50"
+                                                        }`}
                                                 >
                                                     {skill}
                                                 </span>
@@ -267,68 +247,51 @@ const Portfolio = () => {
                                 ))}
                             </div>
 
-                            {/* Career Journey */}
-                            <div
-                                className={`p-6 rounded-xl ${
+                            {/* CTA Section */}
+                            <motion.div
+                                className={`p-10 rounded-3xl backdrop-blur-xl ${
                                     theme === "dark"
-                                        ? "bg-gradient-to-br from-blue-900/20 to-purple-900/20 border border-blue-800/50"
-                                        : "bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200"
+                                        ? "bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border border-indigo-500/20"
+                                        : "bg-gradient-to-br from-indigo-50/80 to-purple-50/80 border border-indigo-200/50"
                                 }`}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.8, duration: 0.6 }}
                             >
-                                <h3 className="text-2xl font-bold mb-4">
-                                    My Journey
+                                <h3 className="text-3xl font-bold mb-6 text-center">
+                                    Let's Build Something Amazing
                                 </h3>
-                                <p
-                                    className={`text-lg leading-relaxed mb-6 ${
-                                        theme === "dark"
-                                            ? "text-gray-300"
-                                            : "text-gray-700"
-                                    }`}
-                                >
-                                    Blending 8 years in financial sales with
-                                    data-driven problem solving, I craft high
-                                    performance, user centric applications.
-                                    Since transitioning to tech in 2022, I’ve
-                                    mastered modern frontend frameworks and
-                                    scalable design. Now, I’m driven to merge my
-                                    finance expertise with blockchain, building
-                                    secure dApps and smart contract solutions
-                                    that shape the future of web, fintech, and
-                                    decentralized systems.
+                                <p className={`text-lg text-center mb-8 max-w-3xl mx-auto ${
+                                    theme === "dark" ? "text-gray-300" : "text-gray-600"
+                                }`}>
+                                    With 4+ years of frontend expertise and a unique financial background, 
+                                    I create scalable, user-centric applications that drive business results.
                                 </p>
-                                <div className="flex flex-wrap gap-4">
+                                <div className="flex flex-wrap justify-center gap-6">
                                     <motion.button
-                                        className={`
-                      px-6 py-3 rounded-full text-lg font-semibold
-                      bg-gradient-to-r from-blue-500 to-blue-700
-                      text-white shadow-lg hover:shadow-xl
-                      transition-all duration-300
-                    `}
-                                        whileHover={{ scale: 1.05 }}
+                                        className="px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold shadow-xl shadow-purple-500/25 hover:shadow-2xl hover:shadow-purple-500/40 transition-all duration-300"
+                                        whileHover={{ scale: 1.05, y: -2 }}
                                         whileTap={{ scale: 0.95 }}
-                                        onClick={() =>
-                                            setActiveSection("experience")
-                                        }
+                                        onClick={() => setActiveSection("experience")}
                                     >
                                         View Experience
                                     </motion.button>
-
                                     <motion.a
                                         href="https://drive.google.com/file/d/10LwRHKhvkRVzPEWhE8oNdgD1_pRukgLB/view?usp=sharing"
-                                        className={`
-                      px-6 py-3 rounded-full text-lg font-semibold
-                      border-2 border-blue-500
-                      ${theme === "dark" ? "text-blue-400" : "text-blue-600"}
-                      hover:bg-blue-500 hover:text-white
-                      transition-all duration-300
-                    `}
-                                        whileHover={{ scale: 1.05 }}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`px-8 py-4 rounded-2xl border-2 font-semibold transition-all duration-300
+                                            ${theme === "dark"
+                                                ? "border-indigo-400 text-indigo-400 hover:bg-indigo-400 hover:text-white"
+                                                : "border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white"
+                                            }`}
+                                        whileHover={{ scale: 1.05, y: -2 }}
                                         whileTap={{ scale: 0.95 }}
                                     >
                                         Download Resume
                                     </motion.a>
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
                     </Section>
                 );
@@ -336,136 +299,69 @@ const Portfolio = () => {
             case "experience":
                 return (
                     <Section title="Professional Experience" theme={theme}>
-                        <div className="space-y-16">
-                            {/* Current Status */}
-                            <div
-                                className={`p-6 rounded-xl ${
+                        <div className="space-y-12">
+                            {/* Current Status Banner */}
+                            <motion.div
+                                className={`p-6 rounded-3xl backdrop-blur-xl border ${
                                     theme === "dark"
-                                        ? "bg-gradient-to-br from-blue-900/50 to-purple-900/50 border border-blue-800/50"
-                                        : "bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200"
+                                        ? "bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-green-500/20"
+                                        : "bg-gradient-to-r from-green-50/80 to-emerald-50/80 border-green-200/50"
                                 }`}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
                             >
-                                <div className="flex items-center gap-3">
-                                    <span className="relative flex h-3 w-3">
-                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                        <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                                    </span>
-                                    <p
-                                        className={`text-lg font-medium ${
-                                            theme === "dark"
-                                                ? "text-green-400"
-                                                : "text-green-700"
-                                        }`}
-                                    >
-                                        Frontend Developer | Currently advancing
-                                        in Data Structures & Algorithms
+                                <div className="flex items-center gap-4">
+                                    <div className="relative">
+                                        <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
+                                        <div className="absolute inset-0 w-4 h-4 bg-green-500 rounded-full animate-ping opacity-30"></div>
+                                    </div>
+                                    <p className={`text-lg font-semibold ${theme === "dark" ? "text-green-400" : "text-green-700"}`}>
+                                        Frontend Developer at Roy | 4+ Years Experience | Advancing in Algorithms & System Design
                                     </p>
                                 </div>
-                            </div>
+                            </motion.div>
 
-                            {/* Current Frontend Development Experience */}
+                            {/* Experience Cards */}
                             <div className="space-y-8">
-                                <h3
-                                    className={`text-2xl font-bold tracking-tight ${
-                                        theme === "dark"
-                                            ? "text-blue-400"
-                                            : "text-blue-700"
-                                    } border-l-4 border-blue-500 pl-4`}
-                                >
-                                    Frontend Development Experience
-                                </h3>
                                 {/* Current Role */}
                                 <Card
                                     title={
-                                        <div className="space-y-2">
-                                            <div className="flex items-center gap-3">
-                                                <h4 className="text-2xl font-bold tracking-tight">
-                                                    Frontend Developer
-                                                </h4>
-                                                <span
-                                                    className={`px-3 py-1 text-sm font-medium rounded-full
-            ${
-                theme === "dark"
-                    ? "bg-green-900/30 text-green-300 border border-green-800"
-                    : "bg-green-100 text-green-700 border border-green-200"
-            }`}
-                                                >
-                                                    Current Role
-                                                </span>
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <div>
+                                                <h4 className="text-2xl font-bold">Frontend Developer</h4>
+                                                <p className="text-lg text-gray-500">Roy | March 2025 - Present</p>
                                             </div>
-                                            <p className="text-lg text-gray-500">
-                                                Jether Tech | May 2023 - Present
-                                            </p>
+                                            <span className={`px-4 py-2 text-sm font-medium rounded-full
+                                                ${theme === "dark"
+                                                    ? "bg-green-900/40 text-green-300 border border-green-800/50"
+                                                    : "bg-green-100 text-green-700 border border-green-200"
+                                                }`}>
+                                                Current Role
+                                            </span>
                                         </div>
                                     }
                                     content={
                                         <div className="space-y-6">
-                                            <ul
-                                                className={`space-y-3 ${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Built responsive UIs
-                                                        with React.js,
-                                                        JavaScript, and Tailwind
-                                                        CSS, boosting
-                                                        cross-browser
-                                                        compatibility by 25% and
-                                                        performance by 35%.
-                                                    </span>
-                                                </li>
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Cut bug rate by 40%
-                                                        through rigorous testing
-                                                        and debugging.
-                                                    </span>
-                                                </li>
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Developed reusable
-                                                        components, reducing
-                                                        feature development time
-                                                        by 30%.
-                                                    </span>
-                                                </li>
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Translated wireframes
-                                                        into interactive
-                                                        features, enhancing user
-                                                        engagement.
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                            <div className="flex flex-wrap gap-2">
+                                            <ul className="space-y-4">
                                                 {[
-                                                    "HTML5",
-                                                    "CSS3",
-                                                    "JavaScript",
-                                                    "React",
-                                                    "Responsive Design",
-                                                    "TailwindCSS",
-                                                    "Git",
-                                                    "Team Collaboration",
-                                                ].map((tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className={`px-3 py-1 text-sm font-medium rounded-full
-              ${
-                  theme === "dark"
-                      ? "bg-blue-900/30 text-blue-300 border border-blue-800"
-                      : "bg-blue-50 text-blue-700 border border-blue-200"
-              }`}
-                                                    >
+                                                    "Built and optimized core UI features including user dashboard, secure login page, and interactive forms using React.js, HTML5, Tailwind CSS, and CSS3",
+                                                    "Improved front-end performance by 30% through efficient component structuring and CSS optimization",
+                                                    "Collaborated with back-end developers to integrate REST APIs, ensuring real-time data rendering",
+                                                    "Worked closely with UX/UI designers to implement pixel-perfect interfaces from Figma designs"
+                                                ].map((item, index) => (
+                                                    <li key={index} className="flex items-start gap-3">
+                                                        <div className="w-2 h-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 mt-2 flex-shrink-0"></div>
+                                                        <span>{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            <div className="flex flex-wrap gap-3">
+                                                {["React.js", "TypeScript", "Tailwind CSS", "REST APIs", "Figma", "Performance Optimization"].map((tech) => (
+                                                    <span key={tech} className={`px-4 py-2 text-sm font-medium rounded-full backdrop-blur-sm
+                                                        ${theme === "dark"
+                                                            ? "bg-indigo-900/40 text-indigo-300 border border-indigo-800/50"
+                                                            : "bg-indigo-50 text-indigo-700 border border-indigo-200/50"
+                                                        }`}>
                                                         {tech}
                                                     </span>
                                                 ))}
@@ -473,78 +369,39 @@ const Portfolio = () => {
                                         </div>
                                     }
                                     theme={theme}
+                                    featured={true}
                                 />
+
+                                {/* Previous Role */}
                                 <Card
                                     title={
-                                        <div className="space-y-2">
-                                            <h4 className="text-2xl font-bold tracking-tight">
-                                                Frontend Developer Intern
-                                            </h4>
-                                            <p className="text-lg text-gray-500">
-                                                Jether Tech | Dec 2022 - Apr
-                                                2023
-                                            </p>
+                                        <div className="mb-4">
+                                            <h4 className="text-2xl font-bold">Junior Frontend Developer</h4>
+                                            <p className="text-lg text-gray-500">Jether Tech | December 2022 - March 2025</p>
                                         </div>
                                     }
                                     content={
                                         <div className="space-y-6">
-                                            <ul
-                                                className={`space-y-3 ${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Built feature-rich web
-                                                        applications using
-                                                        HTML5, CSS3, and
-                                                        JavaScript with focus on
-                                                        responsive design
-                                                        principles.
-                                                    </span>
-                                                </li>
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Developed mobile-first
-                                                        interfaces that improved
-                                                        user engagement metrics
-                                                        by 20% on smartphone
-                                                        devices.
-                                                    </span>
-                                                </li>
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Utilized Git for version
-                                                        control and participated
-                                                        in code reviews that
-                                                        improved overall code
-                                                        quality.
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                            <div className="flex flex-wrap gap-2">
+                                            <ul className="space-y-4">
                                                 {[
-                                                    "HTML5",
-                                                    "CSS3",
-                                                    "JavaScript",
-                                                    "React",
-                                                    "Responsive Design",
-                                                    "TailwindCSS",
-                                                ].map((tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className={`px-3 py-1 text-sm font-medium rounded-full
-                              ${
-                                  theme === "dark"
-                                      ? "bg-blue-900/30 text-blue-300 border border-blue-800"
-                                      : "bg-blue-50 text-blue-700 border border-blue-200"
-                              }`}
-                                                    >
+                                                    "Developed responsive user interfaces improving cross-browser compatibility by 25%",
+                                                    "Optimized website performance by 35% through code refactoring and lazy loading",
+                                                    "Reduced bug rate by 40% through comprehensive testing and systematic debugging",
+                                                    "Created reusable React components reducing development time by 30%"
+                                                ].map((item, index) => (
+                                                    <li key={index} className="flex items-start gap-3">
+                                                        <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 mt-2 flex-shrink-0"></div>
+                                                        <span>{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            <div className="flex flex-wrap gap-3">
+                                                {["React.js", "JavaScript", "HTML5", "CSS3", "Git", "Testing"].map((tech) => (
+                                                    <span key={tech} className={`px-4 py-2 text-sm font-medium rounded-full backdrop-blur-sm
+                                                        ${theme === "dark"
+                                                            ? "bg-purple-900/40 text-purple-300 border border-purple-800/50"
+                                                            : "bg-purple-50 text-purple-700 border border-purple-200/50"
+                                                        }`}>
                                                         {tech}
                                                     </span>
                                                 ))}
@@ -554,223 +411,28 @@ const Portfolio = () => {
                                     theme={theme}
                                 />
 
+                                {/* Internship */}
                                 <Card
                                     title={
-                                        <div className="space-y-2">
-                                            <h4 className="text-2xl font-bold tracking-tight">
-                                                Frontend Projects
-                                            </h4>
-                                            <p className="text-lg text-gray-500">
-                                                Self-Directed | 2022 - Present
-                                            </p>
+                                        <div className="mb-4">
+                                            <h4 className="text-2xl font-bold">Frontend Developer Intern</h4>
+                                            <p className="text-lg text-gray-500">Jether Tech | June 2022 - November 2022</p>
                                         </div>
                                     }
                                     content={
                                         <div className="space-y-6">
-                                            <ul
-                                                className={`space-y-3 ${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Developed JaneezyBeats
-                                                        platform with React and
-                                                        modern CSS
-                                                    </span>
-                                                </li>
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Created responsive
-                                                        restaurant and gym
-                                                        websites
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                            <div className="flex flex-wrap gap-2">
+                                            <ul className="space-y-4">
                                                 {[
-                                                    "React",
-                                                    "JavaScript",
-                                                    "HTML5",
-                                                    "CSS3",
-                                                ].map((tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className={`px-3 py-1 text-sm font-medium rounded-full
-                              ${
-                                  theme === "dark"
-                                      ? "bg-blue-900/30 text-blue-300 border border-blue-800"
-                                      : "bg-blue-50 text-blue-700 border border-blue-200"
-                              }`}
-                                                    >
-                                                        {tech}
-                                                    </span>
+                                                    "Built feature-rich web applications using HTML5, CSS3, and JavaScript",
+                                                    "Developed mobile-first interfaces improving user engagement by 20%",
+                                                    "Utilized Git for version control and participated in code reviews",
+                                                    "Created custom JavaScript solutions for complex UI interactions"
+                                                ].map((item, index) => (
+                                                    <li key={index} className="flex items-start gap-3">
+                                                        <div className="w-2 h-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 mt-2 flex-shrink-0"></div>
+                                                        <span>{item}</span>
+                                                    </li>
                                                 ))}
-                                            </div>
-                                        </div>
-                                    }
-                                    theme={theme}
-                                />
-                            </div>
-
-                            {/* Previous Leadership Experience */}
-                            <div className="space-y-8">
-                                <h3
-                                    className={`text-2xl font-bold tracking-tight ${
-                                        theme === "dark"
-                                            ? "text-blue-400"
-                                            : "text-blue-700"
-                                    } border-l-4 border-blue-500 pl-4`}
-                                >
-                                    Previous Professional Experience
-                                </h3>
-
-                                <Card
-                                    title={
-                                        <div className="space-y-2">
-                                            <h4 className="text-2xl font-bold tracking-tight">
-                                                Retention Sales Manager
-                                            </h4>
-                                            <p className="text-lg text-gray-500">
-                                                Golden Markets | Jan 2020 - Feb
-                                                2022
-                                            </p>
-                                        </div>
-                                    }
-                                    content={
-                                        <div className="space-y-4">
-                                            <ul
-                                                className={`space-y-3 ${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Led team of 12
-                                                        representatives,
-                                                        improving retention by
-                                                        25%
-                                                    </span>
-                                                </li>
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Managed high-priority
-                                                        client portfolio worth
-                                                        €2M annually
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    }
-                                    theme={theme}
-                                />
-
-                                <Card
-                                    title={
-                                        <div className="space-y-2">
-                                            <h4 className="text-2xl font-bold tracking-tight">
-                                                Senior Retention Sales Manager
-                                            </h4>
-                                            <p className="text-lg text-gray-500">
-                                                Ashford | Feb 2016 - Jan 2020
-                                            </p>
-                                        </div>
-                                    }
-                                    content={
-                                        <div className="space-y-4">
-                                            <ul
-                                                className={`space-y-3 ${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Provided expert guidance
-                                                        on cryptocurrency
-                                                        investment strategies,
-                                                        blockchain technology
-                                                        fundamentals, and
-                                                        digital asset portfolio
-                                                        diversification.
-                                                    </span>
-                                                </li>
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Developed and mentored
-                                                        15+ team members to
-                                                        career advancement
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    }
-                                    theme={theme}
-                                />
-                            </div>
-
-                            {/* Financial Technology Experience */}
-                            <div className="space-y-8">
-                                <h3
-                                    className={`text-2xl  font-bold tracking-tight ${
-                                        theme === "dark"
-                                            ? "text-blue-400"
-                                            : "text-blue-700"
-                                    } border-l-4 border-blue-500 pl-4`}
-                                >
-                                    Financial Sales Experience
-                                </h3>
-
-                                <Card
-                                    title="Cryptocurrency & Business Development"
-                                    subtitle="2017 - 2020"
-                                    content={
-                                        <div className="space-y-4">
-                                            <p
-                                                className={`${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                Combined expertise in
-                                                cryptocurrency markets and
-                                                business development:
-                                            </p>
-                                            <ul
-                                                className={`space-y-3 ${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Mastered cryptocurrency
-                                                        trading and blockchain
-                                                        technology fundamentals
-                                                    </span>
-                                                </li>
-                                                <li className="flex items-start gap-3">
-                                                    <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                    <span>
-                                                        Developed analytical and
-                                                        problem-solving skills
-                                                        in fast-paced markets
-                                                    </span>
-                                                </li>
                                             </ul>
                                         </div>
                                     }
@@ -780,328 +442,67 @@ const Portfolio = () => {
                         </div>
                     </Section>
                 );
+
             case "skills":
                 return (
                     <Section title="Technical Skills" theme={theme}>
-                        <div className="space-y-12">
-                            {/* Core Frontend Skills */}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            {/* Core Technologies */}
                             <Card
-                                title={
-                                    <div className="space-y-2">
-                                        <h3 className="text-2xl font-bold tracking-tight">
-                                            Frontend Development Skills
-                                        </h3>
-                                        <p
-                                            className={`text-sm ${
-                                                theme === "dark"
-                                                    ? "text-gray-400"
-                                                    : "text-gray-600"
-                                            }`}
-                                        >
-                                            Core web development technologies
-                                            and frameworks
-                                        </p>
-                                    </div>
-                                }
+                                title="Core Technologies"
                                 content={
-                                    <div className="space-y-8 mt-4">
-                                        {/* HTML & CSS */}
-                                        <div>
-                                            <h4
-                                                className={`text-lg font-semibold mb-3 ${
-                                                    theme === "dark"
-                                                        ? "text-blue-400"
-                                                        : "text-blue-600"
-                                                }`}
-                                            >
-                                                HTML & CSS
-                                            </h4>
-                                            <div className="flex flex-wrap gap-2">
-                                                {[
-                                                    "HTML5",
-                                                    "CSS3",
-                                                    "Flexbox",
-                                                    "CSS Grid",
-                                                    "Responsive Design",
-                                                    "SASS/SCSS",
-                                                    "TailwindCSS",
-                                                ].map((tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className={`px-4 py-2 rounded-full text-sm font-medium
-                      ${
-                          theme === "dark"
-                              ? "bg-blue-900/30 text-blue-300 border border-blue-800"
-                              : "bg-blue-50 text-blue-700 border border-blue-200"
-                      }`}
-                                                    >
-                                                        {tech}
-                                                    </span>
-                                                ))}
+                                    <div className="space-y-6">
+                                        {[
+                                            { category: "Frontend", skills: ["HTML5", "CSS3", "JavaScript (ES6+)", "React.js", "Responsive Design"], color: "from-blue-500 to-cyan-500" },
+                                            { category: "Styling", skills: ["Tailwind CSS", "CSS Preprocessors", "Flexbox", "CSS Grid"], color: "from-purple-500 to-pink-500" },
+                                            { category: "Tools", skills: ["Git", "VS Code", "Chrome DevTools", "Figma"], color: "from-green-500 to-teal-500" }
+                                        ].map((group) => (
+                                            <div key={group.category}>
+                                                <h4 className={`text-lg font-semibold mb-3 bg-gradient-to-r ${group.color} text-transparent bg-clip-text`}>
+                                                    {group.category}
+                                                </h4>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {group.skills.map((skill) => (
+                                                        <span key={skill} className={`px-3 py-2 text-sm font-medium rounded-full backdrop-blur-sm
+                                                            ${theme === "dark"
+                                                                ? "bg-gray-800/60 text-gray-300 border border-gray-700/50"
+                                                                : "bg-white/60 text-gray-700 border border-gray-300/50"
+                                                            }`}>
+                                                            {skill}
+                                                        </span>
+                                                    ))}
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        {/* JavaScript */}
-                                        <div>
-                                            <h4
-                                                className={`text-lg font-semibold mb-3 ${
-                                                    theme === "dark"
-                                                        ? "text-blue-400"
-                                                        : "text-blue-600"
-                                                }`}
-                                            >
-                                                JavaScript
-                                            </h4>
-                                            <div className="flex flex-wrap gap-2">
-                                                {[
-                                                    "ES6+",
-                                                    "DOM Manipulation",
-                                                    "Async/Await",
-                                                    "Fetch API",
-                                                    "Event Handling",
-                                                    "JSON",
-                                                    "Local Storage",
-                                                ].map((tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className={`px-4 py-2 rounded-full text-sm font-medium
-                      ${
-                          theme === "dark"
-                              ? "bg-yellow-900/30 text-yellow-300 border border-yellow-800"
-                              : "bg-yellow-50 text-yellow-700 border border-yellow-200"
-                      }`}
-                                                    >
-                                                        {tech}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-
-                                        {/* React */}
-                                        <div>
-                                            <h4
-                                                className={`text-lg font-semibold mb-3 ${
-                                                    theme === "dark"
-                                                        ? "text-blue-400"
-                                                        : "text-blue-600"
-                                                }`}
-                                            >
-                                                React.js
-                                            </h4>
-                                            <div className="flex flex-wrap gap-2">
-                                                {[
-                                                    "Components",
-                                                    "Props & State",
-                                                    "Hooks",
-                                                    "Context API",
-                                                    "React Router",
-                                                    "API Integration",
-                                                ].map((tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className={`px-4 py-2 rounded-full text-sm font-medium
-                      ${
-                          theme === "dark"
-                              ? "bg-purple-900/30 text-purple-300 border border-purple-800"
-                              : "bg-purple-50 text-purple-700 border border-purple-200"
-                      }`}
-                                                    >
-                                                        {tech}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
+                                        ))}
                                     </div>
                                 }
                                 theme={theme}
                             />
 
-                            {/* Currently Learning */}
+                            {/* Learning & Growth */}
                             <Card
-                                title={
-                                    <div className="space-y-2">
-                                        <h3 className="text-2xl font-bold tracking-tight">
-                                            Currently Learning
-                                        </h3>
-                                        <p
-                                            className={`text-sm ${
-                                                theme === "dark"
-                                                    ? "text-gray-400"
-                                                    : "text-gray-600"
-                                            }`}
-                                        >
-                                            Mobile development with React Native
-                                            while expanding my knowledge in
-                                            algorithms and data structures to
-                                            build innovative and efficient
-                                            solutions.
-                                        </p>
-                                    </div>
-                                }
+                                title="Currently Learning"
                                 content={
-                                    <div className="space-y-6 mt-4">
+                                    <div className="space-y-6">
                                         <div>
-                                            <h4
-                                                className={`text-lg font-semibold mb-3 ${
-                                                    theme === "dark"
-                                                        ? "text-blue-400"
-                                                        : "text-blue-600"
-                                                }`}
-                                            >
-                                                Data Structures & Algorithms
+                                            <h4 className="text-lg font-semibold mb-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-transparent bg-clip-text">
+                                                Algorithms & Data Structures
                                             </h4>
-                                            <ul
-                                                className={`space-y-2 ${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <li>
-                                                    • Basic data structures
-                                                    (Arrays, Objects, Sets)
-                                                </li>
-                                                <li>
-                                                    • Array methods and
-                                                    manipulations
-                                                </li>
-                                                <li>
-                                                    • Basic sorting algorithms
-                                                </li>
-                                                <li>
-                                                    • Problem-solving strategies
-                                                </li>
+                                            <ul className="space-y-2 text-sm">
+                                                <li>• Advanced problem-solving techniques</li>
+                                                <li>• Algorithm optimization strategies</li>
+                                                <li>• System design fundamentals</li>
                                             </ul>
                                         </div>
-                                    </div>
-                                }
-                                theme={theme}
-                            />
-
-                            {/* Development Tools */}
-                            <Card
-                                title={
-                                    <div className="space-y-2">
-                                        <h3 className="text-2xl font-bold tracking-tight">
-                                            Development Tools
-                                        </h3>
-                                        <p
-                                            className={`text-sm ${
-                                                theme === "dark"
-                                                    ? "text-gray-400"
-                                                    : "text-gray-600"
-                                            }`}
-                                        >
-                                            Essential tools for web development
-                                        </p>
-                                    </div>
-                                }
-                                content={
-                                    <div className="space-y-4 mt-4">
-                                        <div className="flex flex-wrap gap-2">
-                                            {[
-                                                "VS Code",
-                                                "Git Basics",
-                                                "GitHub",
-                                                "Chrome DevTools",
-                                                "Responsive Design",
-                                                "Vercel Deployment",
-                                            ].map((tool) => (
-                                                <span
-                                                    key={tool}
-                                                    className={`px-4 py-2 rounded-full text-sm font-medium
-                    ${
-                        theme === "dark"
-                            ? "bg-green-900/30 text-green-300 border border-green-800"
-                            : "bg-green-50 text-green-700 border border-green-200"
-                    }`}
-                                                >
-                                                    {tool}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                }
-                                theme={theme}
-                            />
-
-                            {/* Soft Skills */}
-                            <Card
-                                title={
-                                    <div className="space-y-2">
-                                        <h3 className="text-2xl font-bold tracking-tight">
-                                            Professional Skills
-                                        </h3>
-                                    </div>
-                                }
-                                content={
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
                                         <div>
-                                            <h4
-                                                className={`text-lg font-semibold mb-4 ${
-                                                    theme === "dark"
-                                                        ? "text-blue-400"
-                                                        : "text-blue-600"
-                                                }`}
-                                            >
-                                                Learning & Growth
+                                            <h4 className="text-lg font-semibold mb-3 bg-gradient-to-r from-pink-500 to-rose-500 text-transparent bg-clip-text">
+                                                Blockchain Development
                                             </h4>
-                                            <ul
-                                                className={`space-y-2 ${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <li>• Fast Learner</li>
-                                                <li>• Problem Solving</li>
-                                                <li>• Attention to Detail</li>
-                                            </ul>
-                                        </div>
-
-                                        <div>
-                                            <h4
-                                                className={`text-lg font-semibold mb-4 ${
-                                                    theme === "dark"
-                                                        ? "text-blue-400"
-                                                        : "text-blue-600"
-                                                }`}
-                                            >
-                                                Communication
-                                            </h4>
-                                            <ul
-                                                className={`space-y-2 ${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <li>• Team Collaboration</li>
-                                                <li>• Clear Communication</li>
-                                                <li>• Active Listening</li>
-                                            </ul>
-                                        </div>
-
-                                        <div>
-                                            <h4
-                                                className={`text-lg font-semibold mb-4 ${
-                                                    theme === "dark"
-                                                        ? "text-blue-400"
-                                                        : "text-blue-600"
-                                                }`}
-                                            >
-                                                Work Style
-                                            </h4>
-                                            <ul
-                                                className={`space-y-2 ${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <li>• Time Management</li>
-                                                <li>• Organization</li>
-                                                <li>• Adaptability</li>
+                                            <ul className="space-y-2 text-sm">
+                                                <li>• Web3 technologies & dApps</li>
+                                                <li>• Solidity programming</li>
+                                                <li>• Smart contract development</li>
+                                                <li>• DeFi protocols & tokenomics</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -1114,1521 +515,529 @@ const Portfolio = () => {
 
             case "projects":
                 return (
-                    <Section title="Technical Projects" theme={theme}>
-                        <div className="space-y-16">
+                    <Section title="Featured Projects" theme={theme}>
+                        <div className="space-y-12">
                             {/* Featured Project */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className={`p-8 rounded-xl ${
-                                    theme === "dark"
-                                        ? "bg-gradient-to-br from-blue-900/50 to-purple-900/50 border border-blue-800/50"
-                                        : "bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200"
-                                }`}
-                            >
-                                <div className="flex flex-col md:flex-row gap-8">
-                                    <div className="flex-1 space-y-6">
-                                        <div className="flex items-center gap-3">
-                                            <span
-                                                className={`px-3 py-1 text-sm font-medium rounded-full
-                          ${
-                              theme === "dark"
-                                  ? "bg-blue-900/50 text-blue-300 border border-blue-800"
-                                  : "bg-blue-100 text-blue-700 border border-blue-200"
-                          }`}
-                                            >
-                                                Featured Project
-                                            </span>
-                                        </div>
-                                        <h3
-                                            className={`text-3xl font-bold tracking-tight ${
-                                                theme === "dark"
-                                                    ? "text-blue-400"
-                                                    : "text-blue-700"
-                                            }`}
-                                        >
-                                            JaneezyBeats Platform
-                                        </h3>
-                                        <p
-                                            className={`text-lg leading-relaxed mb-6 ${
-                                                theme === "dark"
-                                                    ? "text-gray-300"
-                                                    : "text-gray-700"
-                                            }`}
-                                        >
-                                            Original beats produced and crafted
-                                            by me, featuring unique sounds
-                                            across multiple genres. Professional
-                                            beat store integrated with BeatStars
-                                            Pro Page, offering seamless music
-                                            distribution and licensing.
-                                            Custom-branded storefront for
-                                            premium beat sales and instant
-                                            delivery.
+                            <Card
+                                title="JaneezyBeats Platform"
+                                content={
+                                    <div className="space-y-6">
+                                        <p className="text-lg">
+                                            Professional beat store featuring original music production, 
+                                            integrated with BeatStars Pro Page for seamless distribution and licensing.
                                         </p>
-
-                                        {/* Production Details */}
-                                        <div className="mb-6">
-                                            <h4
-                                                className={`text-lg font-semibold mb-3 ${
-                                                    theme === "dark"
-                                                        ? "text-blue-400"
-                                                        : "text-blue-600"
-                                                }`}
-                                            >
-                                                Production Expertise
-                                            </h4>
-                                            <div className="flex flex-wrap gap-2">
-                                                {[
-                                                    "Original Production",
-                                                    "Hip Hop",
-                                                    "Trap",
-                                                    "R&B",
-                                                    "Custom Beats",
-                                                    "Unique Sound Design",
-                                                ].map((tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className={`px-3 py-1 text-sm font-medium rounded-full
-                              ${
-                                  theme === "dark"
-                                      ? "bg-blue-900/30 text-blue-300 border border-blue-800"
-                                      : "bg-blue-50 text-blue-700 border border-blue-200"
-                              }`}
-                                                    >
-                                                        {tech}
-                                                    </span>
-                                                ))}
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div>
+                                                <h5 className="font-semibold mb-3 text-indigo-400">Technical Features</h5>
+                                                <ul className="space-y-2 text-sm">
+                                                    <li>• Custom-branded storefront</li>
+                                                    <li>• Instant download system</li>
+                                                    <li>• Multiple licensing options</li>
+                                                    <li>• Responsive audio player</li>
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <h5 className="font-semibold mb-3 text-purple-400">Music Production</h5>
+                                                <ul className="space-y-2 text-sm">
+                                                    <li>• Original hip-hop beats</li>
+                                                    <li>• Trap & R&B production</li>
+                                                    <li>• Professional mixing</li>
+                                                    <li>• Custom sound design</li>
+                                                </ul>
                                             </div>
                                         </div>
-
-                                        {/* Beat Features */}
-                                        <div className="mb-6">
-                                            <h4
-                                                className={`text-lg font-semibold mb-3 ${
-                                                    theme === "dark"
-                                                        ? "text-blue-400"
-                                                        : "text-blue-600"
-                                                }`}
-                                            >
-                                                Beat Features
-                                            </h4>
-                                            <ul
-                                                className={`grid grid-cols-2 gap-2 ${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <li className="flex items-center gap-2">
-                                                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                                                    100% Original Production
-                                                </li>
-                                                <li className="flex items-center gap-2">
-                                                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                                                    High-Quality Mix & Master
-                                                </li>
-                                                <li className="flex items-center gap-2">
-                                                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                                                    Multiple License Options
-                                                </li>
-                                                <li className="flex items-center gap-2">
-                                                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                                                    Instant Download Access
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        {/* Store Features */}
-                                        <div className="mb-6">
-                                            <h4
-                                                className={`text-lg font-semibold mb-3 ${
-                                                    theme === "dark"
-                                                        ? "text-blue-400"
-                                                        : "text-blue-600"
-                                                }`}
-                                            >
-                                                Store Features
-                                            </h4>
-                                            <ul
-                                                className={`space-y-2 ${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <li className="flex items-start gap-2">
-                                                    <span className="mt-1.5 w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
-                                                    <span>
-                                                        Exclusive beats produced
-                                                        by me, available for
-                                                        instant purchase
-                                                    </span>
-                                                </li>
-                                                <li className="flex items-start gap-2">
-                                                    <span className="mt-1.5 w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
-                                                    <span>
-                                                        Professional licensing
-                                                        options for all budgets
-                                                    </span>
-                                                </li>
-                                                <li className="flex items-start gap-2">
-                                                    <span className="mt-1.5 w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
-                                                    <span>
-                                                        Secure platform with
-                                                        instant beat delivery
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        {/* Action Buttons */}
                                         <div className="flex flex-wrap gap-4">
                                             <motion.a
                                                 href="https://janeezy.beatstars.com"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                                                 whileHover={{ scale: 1.05 }}
-                                                whileTap={{ scale: 0.95 }}
-                                                className={`
-                            inline-flex items-center gap-2 px-6 py-3 rounded-full
-                            bg-blue-500 hover:bg-blue-600 text-white font-semibold
-                            transition-colors duration-300 shadow-lg
-                          `}
                                             >
                                                 <Music className="w-5 h-5" />
-                                                Listen to My Beats
+                                                Listen to Beats
                                             </motion.a>
                                             <motion.a
-                                                href="https://janeezy.beatstars.com"
+                                                href="https://www.janeduru.site"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
+                                                className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl border-2 font-semibold transition-all duration-300
+                                                    ${theme === "dark"
+                                                        ? "border-indigo-400 text-indigo-400 hover:bg-indigo-400 hover:text-white"
+                                                        : "border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white"
+                                                    }`}
                                                 whileHover={{ scale: 1.05 }}
-                                                whileTap={{ scale: 0.95 }}
-                                                className={`
-                            inline-flex items-center gap-2 px-6 py-3 rounded-full
-                            border-2 border-blue-500
-                            ${
-                                theme === "dark"
-                                    ? "text-blue-400"
-                                    : "text-blue-600"
-                            }
-                            hover:bg-blue-500 hover:text-white
-                            transition-all duration-300
-                          `}
                                             >
                                                 <ExternalLink className="w-5 h-5" />
-                                                View Beat Store
+                                                View Portfolio
                                             </motion.a>
                                         </div>
                                     </div>
-                                </div>
-                            </motion.div>
+                                }
+                                theme={theme}
+                                featured={true}
+                            />
 
-                            {/* Recent Projects Section */}
-                            <div className="space-y-8">
-                                <h3
-                                    className={`text-2xl font-bold tracking-tight ${
-                                        theme === "dark"
-                                            ? "text-blue-400"
-                                            : "text-blue-700"
-                                    }`}
-                                >
-                                    Recent Projects
-                                </h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    {/* Restaurant Platform */}
-                                    <Card
-                                        title={
-                                            <div className="space-y-2">
-                                                <h4 className="text-2xl font-bold tracking-tight">
-                                                    Restaurant Platform
-                                                </h4>
-                                                <div className="flex items-center gap-2">
-                                                    <span
-                                                        className={`px-2 py-1 text-xs font-medium rounded-full
-                              ${
-                                  theme === "dark"
-                                      ? "bg-green-900/30 text-green-300 border border-green-800"
-                                      : "bg-green-50 text-green-700 border border-green-200"
-                              }`}
-                                                    >
-                                                        Active Development
+                            {/* Other Projects */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <Card
+                                    title="Restaurant Platform"
+                                    content={
+                                        <div className="space-y-4">
+                                            <p>Modern restaurant website with responsive design and interactive menu system.</p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {["HTML5", "CSS3", "JavaScript", "Responsive Design"].map((tech) => (
+                                                    <span key={tech} className={`px-3 py-1 text-sm font-medium rounded-full backdrop-blur-sm
+                                                        ${theme === "dark"
+                                                            ? "bg-gray-800/60 text-gray-300 border border-gray-700/50"
+                                                            : "bg-white/60 text-gray-700 border border-gray-300/50"
+                                                        }`}>
+                                                        {tech}
                                                     </span>
-                                                </div>
+                                                ))}
                                             </div>
-                                        }
-                                        content={
-                                            <div className="space-y-4">
-                                                <p
-                                                    className={`${
-                                                        theme === "dark"
-                                                            ? "text-gray-300"
-                                                            : "text-gray-700"
-                                                    }`}
-                                                >
-                                                    Frontend restaurant
-                                                    management system with
-                                                    real-time order tracking and
-                                                    analytics dashboard.
-                                                </p>
-                                                <div className="space-y-3">
-                                                    <h5
-                                                        className={`font-semibold ${
-                                                            theme === "dark"
-                                                                ? "text-blue-400"
-                                                                : "text-blue-600"
-                                                        }`}
-                                                    >
-                                                        Technical Challenges
-                                                        Solved
-                                                    </h5>
-                                                    <ul
-                                                        className={`list-disc list-inside space-y-2 ${
-                                                            theme === "dark"
-                                                                ? "text-gray-300"
-                                                                : "text-gray-700"
-                                                        }`}
-                                                    >
-                                                        <li>
-                                                            Implemented using
-                                                            Html and CSS3 for
-                                                            real-time order
-                                                            updates
-                                                        </li>
-                                                        <li>
-                                                            Built responsive UI
-                                                            with React and
-                                                            TailwindCSS
-                                                        </li>
-                                                        <li>
-                                                            Integrated secure
-                                                            payment processing
-                                                            with Stripe
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div className="flex flex-wrap gap-2 mt-4">
-                                                    {[
-                                                        "React",
-                                                        "WebSocket",
-                                                        "Node.js",
-                                                        "Stripe",
-                                                    ].map((tech) => (
-                                                        <span
-                                                            key={tech}
-                                                            className={`px-3 py-1 text-sm font-medium rounded-full
-                                ${
-                                    theme === "dark"
-                                        ? "bg-blue-900/30 text-blue-300 border border-blue-800"
-                                        : "bg-blue-50 text-blue-700 border border-blue-200"
-                                }`}
-                                                        >
-                                                            {tech}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                                <div className="flex gap-4 mt-4">
-                                                    <a
-                                                        href="https://resturantapp-mu.vercel.app"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium
-                                ${
-                                    theme === "dark"
-                                        ? "bg-blue-600 hover:bg-blue-700 text-white"
-                                        : "bg-blue-100 hover:bg-blue-200 text-blue-700"
-                                }`}
-                                                    >
-                                                        Live Demo{" "}
-                                                        <ExternalLink
-                                                            size={16}
-                                                        />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        }
-                                        theme={theme}
-                                    />
-
-                                    {/* Gym Website */}
-                                    <Card
-                                        title={
-                                            <div className="space-y-2">
-                                                <h4 className="text-2xl font-bold tracking-tight">
-                                                    Fitness Hub
-                                                </h4>
-                                                <div className="flex items-center gap-2">
-                                                    <span
-                                                        className={`px-2 py-1 text-xs font-medium rounded-full
-                              ${
-                                  theme === "dark"
-                                      ? "bg-blue-900/30 text-blue-300 border border-blue-800"
-                                      : "bg-blue-50 text-blue-700 border border-blue-200"
-                              }`}
-                                                    >
-                                                        Completed
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        }
-                                        content={
-                                            <div className="space-y-4">
-                                                <p
-                                                    className={`${
-                                                        theme === "dark"
-                                                            ? "text-gray-300"
-                                                            : "text-gray-700"
-                                                    }`}
-                                                >
-                                                    Modern fitness platform with
-                                                    membership management and
-                                                    workout tracking
-                                                    capabilities.
-                                                </p>
-                                                <div className="space-y-3">
-                                                    <h5
-                                                        className={`font-semibold ${
-                                                            theme === "dark"
-                                                                ? "text-blue-400"
-                                                                : "text-blue-600"
-                                                        }`}
-                                                    >
-                                                        Key Features
-                                                    </h5>
-                                                    <ul
-                                                        className={`list-disc list-inside space-y-2 ${
-                                                            theme === "dark"
-                                                                ? "text-gray-300"
-                                                                : "text-gray-700"
-                                                        }`}
-                                                    >
-                                                        <li>
-                                                            Custom animation
-                                                            system for workout
-                                                            demonstrations
-                                                        </li>
-                                                        <li>
-                                                            Responsive design
-                                                            with CSS Grid and
-                                                            Flexbox
-                                                        </li>
-                                                        <li>
-                                                            Progressive Web App
-                                                            capabilities
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div className="flex flex-wrap gap-2 mt-4">
-                                                    {[
-                                                        "React",
-                                                        "CSS3",
-                                                        "JavaScript",
-                                                        "PWA",
-                                                    ].map((tech) => (
-                                                        <span
-                                                            key={tech}
-                                                            className={`px-3 py-1 text-sm font-medium rounded-full
-                                ${
-                                    theme === "dark"
-                                        ? "bg-blue-900/30 text-blue-300 border border-blue-800"
-                                        : "bg-blue-50 text-blue-700 border border-blue-200"
-                                }`}
-                                                        >
-                                                            {tech}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                                <div className="flex gap-4 mt-4">
-                                                    <a
-                                                        href="https://gym-rho-one.vercel.app"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium
-                                ${
-                                    theme === "dark"
-                                        ? "bg-blue-600 hover:bg-blue-700 text-white"
-                                        : "bg-blue-100 hover:bg-blue-200 text-blue-700"
-                                }`}
-                                                    >
-                                                        View Project{" "}
-                                                        <ExternalLink
-                                                            size={16}
-                                                        />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        }
-                                        theme={theme}
-                                    />
-
-                                    {/* More GitHub Projects Section */}
-                                    <div
-                                        className={`col-span-full p-8 rounded-xl ${
-                                            theme === "dark"
-                                                ? "bg-gray-800/50 border border-gray-700"
-                                                : "bg-gray-50 border border-gray-200"
-                                        }`}
-                                    >
-                                        <h3
-                                            className={`text-2xl font-bold tracking-tight mb-6 ${
-                                                theme === "dark"
-                                                    ? "text-blue-400"
-                                                    : "text-blue-700"
-                                            }`}
-                                        >
-                                            More on GitHub
-                                        </h3>
-                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                            {[
-                                                {
-                                                    name: "React Component Library",
-                                                    description:
-                                                        "A collection of reusable React components with Storybook documentation",
-                                                    tags: [
-                                                        "React",
-                                                        "Storybook",
-                                                        "TypeScript",
-                                                    ],
-                                                },
-                                                {
-                                                    name: "Algorithm Visualizer",
-                                                    description:
-                                                        "Interactive visualization of common algorithms and data structures",
-                                                    tags: [
-                                                        "JavaScript",
-                                                        "Canvas API",
-                                                        "Algorithms",
-                                                    ],
-                                                },
-                                                {
-                                                    name: "Portfolio Template",
-                                                    description:
-                                                        "Modern portfolio template built with Next.js and TailwindCSS",
-                                                    tags: [
-                                                        "Next.js",
-                                                        "TailwindCSS",
-                                                        "React",
-                                                    ],
-                                                },
-                                            ].map((project) => (
-                                                <div
-                                                    key={project.name}
-                                                    className="space-y-4"
-                                                >
-                                                    <h4
-                                                        className={`text-lg font-semibold ${
-                                                            theme === "dark"
-                                                                ? "text-gray-200"
-                                                                : "text-gray-800"
-                                                        }`}
-                                                    >
-                                                        {project.name}
-                                                    </h4>
-                                                    <p
-                                                        className={`text-sm ${
-                                                            theme === "dark"
-                                                                ? "text-gray-400"
-                                                                : "text-gray-600"
-                                                        }`}
-                                                    >
-                                                        {project.description}
-                                                    </p>
-                                                    <div className="flex flex-wrap gap-2">
-                                                        {project.tags.map(
-                                                            (tag) => (
-                                                                <span
-                                                                    key={tag}
-                                                                    className={`px-2 py-1 text-xs font-medium rounded-full
-                                  ${
-                                      theme === "dark"
-                                          ? "bg-gray-700 text-gray-300"
-                                          : "bg-gray-200 text-gray-700"
-                                  }`}
-                                                                >
-                                                                    {tag}
-                                                                </span>
-                                                            )
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                        <div className="mt-8 text-center">
                                             <a
-                                                href="https://github.com/janeezy"
+                                                href="https://resturantapp-mu.vercel.app"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium
-                            ${
-                                theme === "dark"
-                                    ? "bg-gray-700 hover:bg-gray-600 text-white"
-                                    : "bg-gray-200 hover:bg-gray-300 text-gray-800"
-                            }`}
+                                                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
+                                                    ${theme === "dark"
+                                                        ? "bg-indigo-600 hover:bg-indigo-700 text-white"
+                                                        : "bg-indigo-100 hover:bg-indigo-200 text-indigo-700"
+                                                    }`}
                                             >
-                                                View More on GitHub{" "}
-                                                <Code size={16} />
+                                                Live Demo <ExternalLink size={16} />
                                             </a>
                                         </div>
-                                    </div>
-                                </div>
+                                    }
+                                    theme={theme}
+                                />
+
+                                <Card
+                                    title="Fitness Hub"
+                                    content={
+                                        <div className="space-y-4">
+                                            <p>Modern fitness platform with workout tracking and membership management.</p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {["React", "CSS3", "JavaScript", "PWA"].map((tech) => (
+                                                    <span key={tech} className={`px-3 py-1 text-sm font-medium rounded-full backdrop-blur-sm
+                                                        ${theme === "dark"
+                                                            ? "bg-gray-800/60 text-gray-300 border border-gray-700/50"
+                                                            : "bg-white/60 text-gray-700 border border-gray-300/50"
+                                                        }`}>
+                                                        {tech}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                            <a
+                                                href="https://gym-rho-one.vercel.app"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
+                                                    ${theme === "dark"
+                                                        ? "bg-purple-600 hover:bg-purple-700 text-white"
+                                                        : "bg-purple-100 hover:bg-purple-200 text-purple-700"
+                                                    }`}
+                                            >
+                                                View Project <ExternalLink size={16} />
+                                            </a>
+                                        </div>
+                                    }
+                                    theme={theme}
+                                />
                             </div>
                         </div>
                     </Section>
                 );
+
             case "pricing":
                 return (
                     <Section title="Services & Pricing" theme={theme}>
                         <div className="space-y-12">
                             {/* Intro Banner */}
                             <motion.div
+                                className={`p-8 rounded-3xl text-center backdrop-blur-xl ${
+                                    theme === "dark"
+                                        ? "bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border border-indigo-500/20"
+                                        : "bg-gradient-to-br from-indigo-50/80 to-purple-50/80 border border-indigo-200/50"
+                                }`}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className={`p-6 rounded-xl ${
-                                    theme === "dark"
-                                        ? "bg-gradient-to-br from-blue-900/20 to-purple-900/20 border border-blue-800/50"
-                                        : "bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200"
-                                }`}
                             >
-                                <div className="text-center space-y-2">
-                                    <h3 className="text-xl font-semibold">
-                                        Frontend Development Services
-                                    </h3>
-                                    <p
-                                        className={`${
-                                            theme === "dark"
-                                                ? "text-gray-400"
-                                                : "text-gray-600"
-                                        }`}
-                                    >
-                                        Based in Lisbon, Portugal • Prices in
-                                        EUR
-                                    </p>
-                                </div>
+                                <h3 className="text-2xl font-bold mb-4">Frontend Development Services</h3>
+                                <p className={`${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                    Based in Lisbon, Portugal • Prices in EUR • 4+ Years Experience
+                                </p>
                             </motion.div>
 
                             {/* Pricing Cards */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                {/* Basic Package */}
-                                <motion.div
-                                    whileHover={{ scale: 1.02 }}
-                                    className={`p-8 rounded-xl ${
-                                        theme === "dark"
-                                            ? "bg-gray-800/90 border border-gray-700"
-                                            : "bg-white border border-gray-200"
-                                    }`}
-                                >
-                                    <div className="space-y-6">
-                                        <div>
-                                            <h3 className="text-2xl font-bold text-blue-500 mb-2">
-                                                Landing Page
-                                            </h3>
-                                            <p
-                                                className={`${
-                                                    theme === "dark"
-                                                        ? "text-gray-400"
-                                                        : "text-gray-600"
-                                                }`}
-                                            >
-                                                Perfect for small businesses
-                                            </p>
+                                <Card
+                                    title="Landing Page"
+                                    content={
+                                        <div className="space-y-6">
+                                            <div className="text-center">
+                                                <div className="text-4xl font-bold text-indigo-500 mb-2">€500</div>
+                                                <p className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                                    Perfect for small businesses
+                                                </p>
+                                            </div>
+                                            <ul className="space-y-3">
+                                                {["Responsive Design", "Modern UI/UX", "SEO Optimization", "5-day Delivery"].map((feature) => (
+                                                    <li key={feature} className="flex items-center gap-3">
+                                                        <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+                                                        <span>{feature}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
                                         </div>
-                                        <div className="text-3xl font-bold">
-                                            €500
-                                            <span
-                                                className={`text-sm ${
-                                                    theme === "dark"
-                                                        ? "text-gray-400"
-                                                        : "text-gray-600"
-                                                }`}
-                                            >
-                                                /project
-                                            </span>
-                                        </div>
-                                        <ul className="space-y-4">
-                                            <li className="flex items-center">
-                                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                                                Responsive Design
-                                            </li>
-                                            <li className="flex items-center">
-                                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                                                Modern UI/UX
-                                            </li>
-                                            <li className="flex items-center">
-                                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                                                SEO Optimization
-                                            </li>
-                                            <li className="flex items-center">
-                                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                                                5-day Delivery
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </motion.div>
+                                    }
+                                    theme={theme}
+                                />
 
-                                {/* Standard Package */}
-                                <motion.div
-                                    whileHover={{ scale: 1.02 }}
-                                    className={`p-8 rounded-xl relative ${
-                                        theme === "dark"
-                                            ? "bg-gradient-to-br from-blue-900/50 to-purple-900/50 border border-blue-500"
-                                            : "bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200"
-                                    }`}
-                                >
-                                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                                        <span className="px-4 py-1 bg-blue-500 text-white text-sm rounded-full">
-                                            Popular
-                                        </span>
-                                    </div>
-                                    <div className="space-y-6">
-                                        <div>
-                                            <h3 className="text-2xl font-bold text-blue-500 mb-2">
-                                                Multi-page Website
-                                            </h3>
-                                            <p
-                                                className={`${
-                                                    theme === "dark"
-                                                        ? "text-gray-400"
-                                                        : "text-gray-600"
-                                                }`}
-                                            >
-                                                For growing businesses
-                                            </p>
+                                <Card
+                                    title="Multi-page Website"
+                                    content={
+                                        <div className="space-y-6">
+                                            <div className="text-center">
+                                                <div className="text-4xl font-bold text-purple-500 mb-2">€1200</div>
+                                                <p className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                                    For growing businesses
+                                                </p>
+                                            </div>
+                                            <ul className="space-y-3">
+                                                {["Up to 5 Pages", "React.js Development", "Contact Forms", "2 Weeks Delivery", "1 Month Support"].map((feature) => (
+                                                    <li key={feature} className="flex items-center gap-3">
+                                                        <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                                        <span>{feature}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
                                         </div>
-                                        <div className="text-3xl font-bold">
-                                            €1200
-                                            <span
-                                                className={`text-sm ${
-                                                    theme === "dark"
-                                                        ? "text-gray-400"
-                                                        : "text-gray-600"
-                                                }`}
-                                            >
-                                                /project
-                                            </span>
-                                        </div>
-                                        <ul className="space-y-4">
-                                            <li className="flex items-center">
-                                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                                                Up to 5 Pages
-                                            </li>
+                                    }
+                                    theme={theme}
+                                    featured={true}
+                                />
 
-                                            <li className="flex items-center">
-                                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                                                React.js Development
-                                            </li>
-                                            <li className="flex items-center">
-                                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                                                Contact Form Integration
-                                            </li>
-                                            <li className="flex items-center">
-                                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                                                2 Weeks Delivery
-                                            </li>
-                                            <li className="flex items-center">
-                                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                                                1 Month Support
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </motion.div>
-
-                                {/* Custom Package */}
-                                <motion.div
-                                    whileHover={{ scale: 1.02 }}
-                                    className={`p-8 rounded-xl ${
-                                        theme === "dark"
-                                            ? "bg-gray-800/90 border border-gray-700"
-                                            : "bg-white border border-gray-200"
-                                    }`}
-                                >
-                                    <div className="space-y-6">
-                                        <div>
-                                            <h3 className="text-2xl font-bold text-blue-500 mb-2">
-                                                Custom Project
-                                            </h3>
-                                            <p
-                                                className={`${
-                                                    theme === "dark"
-                                                        ? "text-gray-400"
-                                                        : "text-gray-600"
-                                                }`}
-                                            >
-                                                Tailored solutions
-                                            </p>
+                                <Card
+                                    title="Custom Project"
+                                    content={
+                                        <div className="space-y-6">
+                                            <div className="text-center">
+                                                <div className="text-4xl font-bold text-pink-500 mb-2">Custom</div>
+                                                <p className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                                    Tailored solutions
+                                                </p>
+                                            </div>
+                                            <ul className="space-y-3">
+                                                {["Custom Features", "Complex Functionality", "Tailored Timeline", "Extended Support"].map((feature) => (
+                                                    <li key={feature} className="flex items-center gap-3">
+                                                        <div className="w-2 h-2 bg-pink-500 rounded-full"></div>
+                                                        <span>{feature}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
                                         </div>
-                                        <div className="text-3xl font-bold">
-                                            Custom
-                                            <p
-                                                className={`text-sm ${
-                                                    theme === "dark"
-                                                        ? "text-gray-400"
-                                                        : "text-gray-600"
-                                                }`}
-                                            >
-                                                Based on requirements
-                                            </p>
-                                        </div>
-                                        <ul className="space-y-4">
-                                            <li className="flex items-center">
-                                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                                                Custom Features
-                                            </li>
-                                            <li className="flex items-center">
-                                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                                                Complex Functionality
-                                            </li>
-                                            <li className="flex items-center">
-                                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                                                Tailored Timeline
-                                            </li>
-                                            <li className="flex items-center">
-                                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                                                Extended Support
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </motion.div>
-                            </div>
-
-                            {/* Additional Services */}
-                            <div
-                                className={`p-6 rounded-xl ${
-                                    theme === "dark"
-                                        ? "bg-gray-800/50 border border-gray-700"
-                                        : "bg-gray-50 border border-gray-200"
-                                }`}
-                            >
-                                <h3 className="text-xl font-semibold mb-4">
-                                    Additional Services
-                                </h3>
-                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <li className="flex items-center gap-2">
-                                        <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                                        Maintenance: €50/hour
-                                    </li>
-                                    <li className="flex items-center gap-2">
-                                        <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                                        Code Review: €40/hour
-                                    </li>
-                                    <li className="flex items-center gap-2">
-                                        <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                                        Bug Fixes: €45/hour
-                                    </li>
-                                    <li className="flex items-center gap-2">
-                                        <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                                        Consultation: €35/hour
-                                    </li>
-                                </ul>
+                                    }
+                                    theme={theme}
+                                />
                             </div>
 
                             {/* Contact CTA */}
                             <motion.div
-                                whileHover={{ scale: 1.01 }}
-                                className={`p-8 rounded-xl text-center ${
+                                className={`p-8 rounded-3xl text-center backdrop-blur-xl ${
                                     theme === "dark"
-                                        ? "bg-gradient-to-br from-blue-900/20 to-purple-900/20 border border-blue-800/50"
-                                        : "bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200"
+                                        ? "bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/20"
+                                        : "bg-gradient-to-br from-purple-50/80 to-pink-50/80 border border-purple-200/50"
                                 }`}
+                                whileHover={{ scale: 1.02 }}
                             >
-                                <h3 className="text-2xl font-bold mb-4">
-                                    Need a Custom Solution?
-                                </h3>
-                                <p
-                                    className={`mb-6 ${
-                                        theme === "dark"
-                                            ? "text-gray-400"
-                                            : "text-gray-600"
-                                    }`}
-                                >
-                                    Let's discuss your project requirements and
-                                    create something amazing together.
+                                <h3 className="text-2xl font-bold mb-4">Ready to Start Your Project?</h3>
+                                <p className={`mb-6 ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                    Let's discuss your requirements and create something amazing together.
                                 </p>
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => setActiveSection("contact")}
-                                    className="px-8 py-3 bg-blue-500 text-white rounded-full font-semibold hover:bg-blue-600 transition-colors duration-300"
+                                    className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl font-semibold hover:shadow-xl transition-all duration-300"
                                 >
                                     Get in Touch
                                 </motion.button>
                             </motion.div>
-
-                            {/* Notes */}
-                            <div
-                                className={`text-sm ${
-                                    theme === "dark"
-                                        ? "text-gray-400"
-                                        : "text-gray-600"
-                                }`}
-                            >
-                                <p>* All prices are in EUR and exclude VAT</p>
-                                <p>
-                                    * Payment terms: 50% upfront, 50% upon
-                                    completion
-                                </p>
-                                <p>
-                                    * Prices may vary based on project
-                                    complexity
-                                </p>
-                            </div>
                         </div>
                     </Section>
                 );
 
             case "education":
                 return (
-                    <Section
-                        title="Education & Professional Development"
-                        theme={theme}
-                    >
-                        <div className="space-y-16">
-                            {/* Current Tech Learning Status */}
+                    <Section title="Education & Certifications" theme={theme}>
+                        <div className="space-y-12">
+                            {/* Current Learning */}
                             <motion.div
+                                className={`p-6 rounded-3xl backdrop-blur-xl ${
+                                    theme === "dark"
+                                        ? "bg-gradient-to-r from-blue-900/30 to-indigo-900/30 border border-blue-500/20"
+                                        : "bg-gradient-to-r from-blue-50/80 to-indigo-50/80 border border-blue-200/50"
+                                }`}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className={`p-4 rounded-xl ${
-                                    theme === "dark"
-                                        ? "bg-blue-900/20 border border-blue-800/50"
-                                        : "bg-blue-50 border border-blue-200"
-                                }`}
                             >
                                 <div className="flex items-center gap-3">
-                                    <span className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></span>
-                                    <p
-                                        className={`text-lg font-medium ${
-                                            theme === "dark"
-                                                ? "text-blue-400"
-                                                : "text-blue-700"
-                                        }`}
-                                    >
-                                        Currently progressing in System Design,
-                                        Advanced Algorithms, and Blockchain
-                                        Development.{" "}
+                                    <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
+                                    <p className={`text-lg font-medium ${theme === "dark" ? "text-blue-400" : "text-blue-700"}`}>
+                                        Aspiring blockchain developer advancing in Algorithms, System Design, and Web3 Technologies
                                     </p>
                                 </div>
                             </motion.div>
 
-                            {/* Software Engineering Education */}
-                            <div className="space-y-8">
-                                <h3
-                                    className={`text-2xl font-bold tracking-tight ${
-                                        theme === "dark"
-                                            ? "text-blue-400"
-                                            : "text-blue-700"
-                                    } border-l-4 border-blue-500 pl-4`}
-                                >
-                                    Software Engineering Education
-                                </h3>
-
-                                {/* AlgoExpert and Technical Training */}
+                            {/* Technical Education */}
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                 <Card
-                                    title="Technical Expertise & Algorithm Mastery"
+                                    title="Algorithm Fundamentals"
+                                    subtitle="AlgoExpert | January 2022 - July 2022"
                                     content={
-                                        <div className="space-y-6 mt-4">
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                                <div>
-                                                    <h4 className="text-xl font-semibold mb-4 text-blue-500">
-                                                        AlgoExpert Training
-                                                    </h4>
-                                                    <ul
-                                                        className={`space-y-3 ${
-                                                            theme === "dark"
-                                                                ? "text-gray-300"
-                                                                : "text-gray-700"
-                                                        }`}
-                                                    >
-                                                        <li>
-                                                            • Completed 100+
-                                                            algorithmic
-                                                            challenges
-                                                        </li>
-                                                        <li>
-                                                            • Mastered DSA
-                                                            patterns and
-                                                            optimization
-                                                        </li>
-                                                        <li>
-                                                            • Advanced
-                                                            problem-solving
-                                                            techniques
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div>
-                                                    <h4 className="text-xl font-semibold mb-4 text-blue-500">
-                                                        System Design
-                                                    </h4>
-                                                    <ul
-                                                        className={`space-y-3 ${
-                                                            theme === "dark"
-                                                                ? "text-gray-300"
-                                                                : "text-gray-700"
-                                                        }`}
-                                                    >
-                                                        <li>
-                                                            • Scalable
-                                                            architecture design
-                                                        </li>
-                                                        <li>
-                                                            • Microservices and
-                                                            distributed systems
-                                                        </li>
-                                                        <li>
-                                                            • Performance
-                                                            optimization
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                    theme={theme}
-                                />
-
-                                <Card
-                                    title="Software Engineering Certification"
-                                    subtitle="European Leadership University - Online, Cyprus | September 2022"
-                                    content={
-                                        <div className="space-y-4 mt-4">
-                                            <ul
-                                                className={`space-y-2 ${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <li>
-                                                    • Comprehensive software
-                                                    engineering fundamentals
-                                                </li>
-                                                <li>
-                                                    • Modern development
-                                                    practices and methodologies
-                                                </li>
-                                                <li>
-                                                    • Frontend web development
-                                                </li>
+                                        <div className="space-y-4">
+                                            <p>Comprehensive algorithmic problem-solving and data structures mastery.</p>
+                                            <ul className="space-y-2 text-sm">
+                                                <li>• Advanced problem-solving techniques</li>
+                                                <li>• Algorithm optimization strategies</li>
+                                                <li>• Data structure implementations</li>
                                             </ul>
                                         </div>
                                     }
                                     theme={theme}
                                 />
 
-                                {/* Web Development Certifications */}
                                 <Card
-                                    title="Web Development Certifications"
+                                    title="Responsive JavaScript Frameworks"
+                                    subtitle="Google | April 2022 - June 2022"
                                     content={
-                                        <div className="space-y-4 mt-4">
-                                            <ul
-                                                className={`list-disc list-inside ${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                <li>
-                                                    Advanced Web Development
-                                                    (Udemy) - January 2023
-                                                </li>
-                                                <li>
-                                                    React.js & React Native
-                                                    Masterclass - January 2023
-                                                </li>
-                                                <li>
-                                                    Web Development & JavaScript
-                                                    Advanced Skills - 2022
-                                                </li>
-                                                <li>
-                                                    HTML & CSS Certification -
-                                                    September 2022
-                                                </li>
+                                        <div className="space-y-4">
+                                            <p>Certificate in Responsive Web Design and JavaScript Frameworks.</p>
+                                            <ul className="space-y-2 text-sm">
+                                                <li>• Modern JavaScript frameworks</li>
+                                                <li>• Responsive design principles</li>
+                                                <li>• Cross-browser compatibility</li>
                                             </ul>
                                         </div>
                                     }
                                     theme={theme}
                                 />
-                            </div>
-
-                            {/* Business & Finance Education */}
-                            <div className="space-y-8">
-                                <h3
-                                    className={`text-2xl font-bold tracking-tight ${
-                                        theme === "dark"
-                                            ? "text-blue-400"
-                                            : "text-blue-700"
-                                    } border-l-4 border-blue-500 pl-4`}
-                                >
-                                    Business & Finance Education
-                                </h3>
 
                                 <Card
-                                    title="Economics & Business Certification"
-                                    subtitle="IBM | 2017"
+                                    title="Meta Front-End Developer Certificate"
+                                    subtitle="Coursera | January 2022 - May 2022"
                                     content={
-                                        <div className="space-y-4 mt-4">
-                                            <p
-                                                className={`${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                Comprehensive business and
-                                                economics training from IBM,
-                                                covering market analysis,
-                                                business strategy, and economic
-                                                principles.
-                                            </p>
-                                            <div className="flex flex-wrap gap-2">
-                                                {[
-                                                    "Business Analysis",
-                                                    "Economic Principles",
-                                                    "Market Strategy",
-                                                    "Financial Planning",
-                                                ].map((skill) => (
-                                                    <span
-                                                        key={skill}
-                                                        className={`px-3 py-1 text-sm font-medium rounded-full
-                                ${
-                                    theme === "dark"
-                                        ? "bg-blue-900/30 text-blue-300 border border-blue-800"
-                                        : "bg-blue-50 text-blue-700 border border-blue-200"
-                                }`}
-                                                    >
-                                                        {skill}
-                                                    </span>
-                                                ))}
-                                            </div>
+                                        <div className="space-y-4">
+                                            <p>Comprehensive frontend development certification from Meta.</p>
+                                            <ul className="space-y-2 text-sm">
+                                                <li>• React.js development</li>
+                                                <li>• Modern CSS techniques</li>
+                                                <li>• Version control with Git</li>
+                                            </ul>
                                         </div>
                                     }
                                     theme={theme}
                                 />
 
                                 <Card
-                                    title="Cryptocurrency & Blockchain Mastery"
-                                    subtitle="2017"
+                                    title="Bachelor of Science: General Medicine"
+                                    subtitle="Danylo Halytsky Lviv National Medical University | 2016"
                                     content={
-                                        <div className="space-y-4 mt-4">
-                                            <p
-                                                className={`${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                Specialized training in
-                                                cryptocurrency markets and
-                                                blockchain technology, leading
-                                                to roles in financial services.
-                                            </p>
-                                            <div className="flex flex-wrap gap-2">
-                                                {[
-                                                    "Blockchain Technology",
-                                                    "Cryptocurrency Markets",
-                                                    "Trading Strategies",
-                                                    "Market Analysis",
-                                                ].map((skill) => (
-                                                    <span
-                                                        key={skill}
-                                                        className={`px-3 py-1 text-sm font-medium rounded-full
-                                ${
-                                    theme === "dark"
-                                        ? "bg-purple-900/30 text-purple-300 border border-purple-800"
-                                        : "bg-purple-50 text-purple-700 border border-purple-200"
-                                }`}
-                                                    >
-                                                        {skill}
-                                                    </span>
-                                                ))}
-                                            </div>
+                                        <div className="space-y-4">
+                                            <p>Strong analytical and problem-solving foundation from medical education.</p>
+                                            <ul className="space-y-2 text-sm">
+                                                <li>• Analytical thinking</li>
+                                                <li>• Attention to detail</li>
+                                                <li>• Complex problem solving</li>
+                                            </ul>
                                         </div>
                                     }
                                     theme={theme}
                                 />
-                            </div>
-
-                            {/* Prior Education */}
-                            <div className="space-y-8">
-                                <h3
-                                    className={`text-2xl font-bold tracking-tight ${
-                                        theme === "dark"
-                                            ? "text-blue-400"
-                                            : "text-blue-700"
-                                    } border-l-4 border-blue-500 pl-4`}
-                                >
-                                    Prior Education
-                                </h3>
-
-                                <Card
-                                    title="Bachelor of Science: Medicine"
-                                    subtitle="Danylo Halytsky Lviv National Medical University | 2010 - 2016"
-                                    content={
-                                        <div className="space-y-4 mt-4">
-                                            <p
-                                                className={`${
-                                                    theme === "dark"
-                                                        ? "text-gray-300"
-                                                        : "text-gray-700"
-                                                }`}
-                                            >
-                                                Completed medical education
-                                                before successfully
-                                                transitioning into technology
-                                                and finance sectors,
-                                                demonstrating strong
-                                                adaptability and commitment to
-                                                continuous learning.
-                                            </p>
-                                            <div className="flex flex-wrap gap-2">
-                                                {[
-                                                    "Career Transition",
-                                                    "Adaptability",
-                                                    "Continuous Learning",
-                                                    "Professional Growth",
-                                                ].map((skill) => (
-                                                    <span
-                                                        key={skill}
-                                                        className={`px-3 py-1 text-sm font-medium rounded-full
-                                ${
-                                    theme === "dark"
-                                        ? "bg-gray-800 text-gray-300 border border-gray-700"
-                                        : "bg-gray-100 text-gray-700 border border-gray-200"
-                                }`}
-                                                    >
-                                                        {skill}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    }
-                                    theme={theme}
-                                />
-                            </div>
-
-                            {/* Active Learning Platforms */}
-                            <div
-                                className={`p-6 rounded-xl ${
-                                    theme === "dark"
-                                        ? "bg-gray-800/50"
-                                        : "bg-white"
-                                }`}
-                            >
-                                <h3 className="text-xl font-semibold mb-6 text-blue-500">
-                                    Current Learning Focus
-                                </h3>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                    {[
-                                        {
-                                            name: "AlgoExpert",
-                                            status: "Advanced",
-                                            icon: Code,
-                                        },
-                                        {
-                                            name: "System Design",
-                                            status: "In Progress",
-                                            icon: Laptop,
-                                        },
-                                        {
-                                            name: "LeetCode",
-                                            status: "Active",
-                                            icon: Code,
-                                        },
-                                        {
-                                            name: "Frontend Masters",
-                                            status: "Active",
-                                            icon: Laptop,
-                                        },
-                                    ].map((platform) => (
-                                        <div
-                                            key={platform.name}
-                                            className={`p-4 rounded-lg border ${
-                                                theme === "dark"
-                                                    ? "border-gray-700 hover:border-blue-500"
-                                                    : "border-gray-200 hover:border-blue-500"
-                                            } transition-colors duration-300`}
-                                        >
-                                            <h5 className="font-semibold mb-2">
-                                                {platform.name}
-                                            </h5>
-                                            <span
-                                                className={`text-sm ${
-                                                    theme === "dark"
-                                                        ? "text-blue-400"
-                                                        : "text-blue-600"
-                                                }`}
-                                            >
-                                                {platform.status}
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
                             </div>
                         </div>
                     </Section>
                 );
 
-            // In the contact section:
             case "contact":
                 return (
                     <Section title="Let's Connect" theme={theme}>
                         <div className="space-y-12">
-                            {/* Previous contact content remains the same until social links */}
-
-                            {/* Updated Social Links */}
-                            <div className="space-y-6">
-                                <h3
-                                    className={`text-2xl font-bold tracking-tight ${
-                                        theme === "dark"
-                                            ? "text-blue-400"
-                                            : "text-blue-700"
-                                    }`}
-                                >
-                                    Connect with Me
-                                </h3>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-                                    {[
-                                        {
-                                            platform: "LinkedIn",
-                                            icon: Linkedin,
-                                            link: "https://www.linkedin.com/in/janeezy/",
-                                            color: "blue",
-                                            description: "Professional Network",
-                                        },
-                                        {
-                                            platform: "GitHub",
-                                            icon: Code,
-                                            link: "https://github.com/janeezy",
-                                            color: "purple",
-                                            description: "Code & Projects",
-                                        },
-                                        {
-                                            platform: "Twitter",
-                                            icon: Twitter,
-                                            link: "https://x.com/Iamjaneezy",
-                                            color: "sky",
-                                            description: "Updates & Thoughts",
-                                        },
-                                        {
-                                            platform: "Medium",
-                                            icon: ExternalLink,
-                                            link: "https://medium.com/@janeezy",
-                                            color: "green",
-                                            description: "Articles & Blog",
-                                        },
-                                        {
-                                            platform: "Facebook",
-                                            icon: Facebook,
-                                            link: "https://www.facebook.com/",
-                                            color: "indigo",
-                                            description: "Social Connect",
-                                        },
-                                    ].map((social) => (
-                                        <motion.a
-                                            key={social.platform}
-                                            href={social.link}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            whileHover={{ scale: 1.05, y: -5 }}
-                                            whileTap={{ scale: 0.95 }}
-                                            className={`
-                  p-6 rounded-xl flex flex-col items-center gap-3 text-center
-                  transition-all duration-300
-                  ${
-                      theme === "dark"
-                          ? `bg-${social.color}-900/20 border border-${social.color}-800/50 hover:border-${social.color}-500`
-                          : `bg-${social.color}-50 border border-${social.color}-200 hover:border-${social.color}-500`
-                  }
-                `}
-                                        >
-                                            <social.icon
-                                                className={`w-8 h-8 text-${social.color}-500`}
-                                            />
-                                            <div>
-                                                <div
-                                                    className={`font-medium text-${social.color}-500`}
-                                                >
-                                                    {social.platform}
+                            {/* Contact Info */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <Card
+                                    title="Get In Touch"
+                                    content={
+                                        <div className="space-y-6">
+                                            <div className="space-y-4">
+                                                <div className="flex items-center gap-3">
+                                                    <Mail className="w-5 h-5 text-indigo-500" />
+                                                    <span>janeezyofficial@gmail.com</span>
                                                 </div>
-                                                <div
-                                                    className={`text-sm ${
-                                                        theme === "dark"
-                                                            ? "text-gray-400"
-                                                            : "text-gray-600"
-                                                    }`}
-                                                >
-                                                    {social.description}
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-5 h-5 flex items-center justify-center">📍</div>
+                                                    <span>Lisbon, Portugal</span>
                                                 </div>
                                             </div>
-                                        </motion.a>
-                                    ))}
-                                </div>
+                                            <p className="text-sm text-gray-500">
+                                                Available for frontend development projects, 
+                                                collaborations, and freelance opportunities.
+                                            </p>
+                                        </div>
+                                    }
+                                    theme={theme}
+                                />
+
+                                <Card
+                                    title="Professional Links"
+                                    content={
+                                        <div className="space-y-4">
+                                            {[
+                                                { name: "Portfolio", url: "https://www.janeduru.site", icon: ExternalLink },
+                                                { name: "LinkedIn", url: "https://www.linkedin.com/in/janeezy/", icon: Linkedin },
+                                                { name: "GitHub", url: "https://github.com/janeezy", icon: Github },
+                                                { name: "Twitter", url: "https://x.com/Iamjaneezy", icon: Twitter }
+                                            ].map((link) => (
+                                                <motion.a
+                                                    key={link.name}
+                                                    href={link.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-3 p-3 rounded-xl border border-gray-300/20 hover:border-indigo-500/50 transition-all duration-300"
+                                                    whileHover={{ scale: 1.02, x: 5 }}
+                                                >
+                                                    <link.icon className="w-5 h-5 text-indigo-500" />
+                                                    <span>{link.name}</span>
+                                                    <ExternalLink className="w-4 h-4 ml-auto opacity-50" />
+                                                </motion.a>
+                                            ))}
+                                        </div>
+                                    }
+                                    theme={theme}
+                                />
                             </div>
 
-                            {/* Sponsor Section */}
+                            {/* Support Section */}
                             <motion.div
+                                className={`p-8 rounded-3xl text-center backdrop-blur-xl ${
+                                    theme === "dark"
+                                        ? "bg-gradient-to-br from-pink-900/30 to-purple-900/30 border border-pink-500/20"
+                                        : "bg-gradient-to-br from-pink-50/80 to-purple-50/80 border border-pink-200/50"
+                                }`}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className={`p-8 rounded-xl text-center ${
-                                    theme === "dark"
-                                        ? "bg-gradient-to-br from-pink-900/20 to-purple-900/20 border border-pink-800/50"
-                                        : "bg-gradient-to-br from-pink-50 to-purple-50 border border-pink-200"
-                                }`}
                             >
-                                <div className="space-y-4">
-                                    <HeartHandshake
-                                        className={`w-12 h-12 mx-auto ${
-                                            theme === "dark"
-                                                ? "text-pink-400"
-                                                : "text-pink-600"
-                                        }`}
-                                    />
-                                    <h3 className="text-2xl font-bold">
-                                        Support My Work
-                                    </h3>
-                                    <p
-                                        className={`max-w-md mx-auto ${
-                                            theme === "dark"
-                                                ? "text-gray-400"
-                                                : "text-gray-600"
-                                        }`}
-                                    >
-                                        If you find my work valuable, consider
-                                        supporting my open source contributions
-                                    </p>
-                                    <div className="flex justify-center mt-4">
-                                        <iframe
-                                            src="https://github.com/sponsors/janeezy/button"
-                                            title="Sponsor janeezy"
-                                            height="32"
-                                            width="114"
-                                            style={{
-                                                border: 0,
-                                                borderRadius: "6px",
-                                            }}
-                                        />
-                                    </div>
-                                </div>
+                                <HeartHandshake className={`w-12 h-12 mx-auto mb-4 ${theme === "dark" ? "text-pink-400" : "text-pink-600"}`} />
+                                <h3 className="text-2xl font-bold mb-4">Support My Work</h3>
+                                <p className={`max-w-md mx-auto mb-6 ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                    If you find my work valuable, consider supporting my open source contributions
+                                </p>
+                                <iframe
+                                    src="https://github.com/sponsors/janeezy/button"
+                                    title="Sponsor janeezy"
+                                    height="32"
+                                    width="114"
+                                    style={{ border: 0, borderRadius: "8px" }}
+                                />
                             </motion.div>
 
-                            {/* Previous form and location content remains */}
-
-                            {/* Attribution Footer */}
+                            {/* Footer */}
                             <motion.div
+                                className={`pt-8 border-t ${theme === "dark" ? "border-gray-800" : "border-gray-200"}`}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.5 }}
-                                className={`pt-8 mt-12 border-t ${
-                                    theme === "dark"
-                                        ? "border-gray-800"
-                                        : "border-gray-200"
-                                }`}
                             >
-                                <div className="flex flex-col items-center justify-center gap-2 text-center">
-                                    <div className="flex items-center gap-2">
+                                <div className="text-center space-y-3">
+                                    <div className="flex items-center justify-center gap-2">
                                         <Copyright className="w-4 h-4" />
-                                        <p
-                                            className={`text-sm ${
-                                                theme === "dark"
-                                                    ? "text-gray-400"
-                                                    : "text-gray-600"
-                                            }`}
-                                        >
-                                            {new Date().getFullYear()} - All
-                                            rights reserved
-                                        </p>
-                                    </div>
-                                    <p
-                                        className={`text-sm ${
-                                            theme === "dark"
-                                                ? "text-gray-500"
-                                                : "text-gray-500"
-                                        }`}
-                                    >
-                                        Designed and Developed with
-                                        <span className="text-red-500 mx-1">
-                                            ♥
+                                        <span className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                            {new Date().getFullYear()} - All rights reserved
                                         </span>
-                                        by Jane Duru
+                                    </div>
+                                    <p className={`text-sm ${theme === "dark" ? "text-gray-500" : "text-gray-500"}`}>
+                                        Designed and Developed with <span className="text-red-500">♥</span> by Jane Duru
                                     </p>
                                 </div>
                             </motion.div>
                         </div>
                     </Section>
                 );
+
             default:
                 return null;
         }
     };
 
     return (
-        <div
-            className={`min-h-screen font-sans transition-colors duration-300 ${
-                theme === "dark"
-                    ? "bg-gradient-to-br from-gray-900 to-gray-800 text-white"
-                    : "bg-gradient-to-br from-gray-100 to-white text-gray-900"
-            }`}
-        >
+        <div className={`min-h-screen font-sans transition-all duration-300 ${
+            theme === "dark" ? "text-white" : "text-gray-900"
+        }`}>
+            {/* Header */}
             <motion.header
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ type: "spring", stiffness: 120 }}
-                className={`fixed top-0 left-0 right-0 bg-opacity-90 backdrop-filter backdrop-blur-lg z-50 ${
+                className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b ${
                     theme === "dark"
-                        ? "bg-gray-800 shadow-lg"
-                        : "bg-white shadow-md"
+                        ? "bg-gray-900/80 border-gray-800/50"
+                        : "bg-white/80 border-gray-200/50"
                 }`}
             >
-                <div className="container mx-auto px-4 py-2 flex justify-between items-center">
-                    <div className="flex items-center">
+                <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+                    <div className="flex items-center gap-4">
                         <Logo setActiveSection={setActiveSection} />
-                        <motion.h1
-                            className={`text-2xl font-bold ml-2 ${
-                                theme === "dark"
-                                    ? "bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-300"
-                                    : "text-gray-800"
-                            }`}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.2 }}
                         >
-                            Jane Duru
-                        </motion.h1>
+                            <h1 className={`text-2xl font-bold ${
+                                theme === "dark"
+                                    ? "bg-gradient-to-r from-indigo-400 to-purple-400 text-transparent bg-clip-text"
+                                    : "bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text"
+                            }`}>
+                                Jane Duru
+                            </h1>
+                            <p className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                Frontend Engineer
+                            </p>
+                        </motion.div>
                     </div>
-                    <div className="flex items-center">
+                    
+                    <div className="flex items-center gap-4">
                         <motion.button
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={() => setMenuOpen(!menuOpen)}
-                            className={`md:hidden p-2 rounded-full mr-4 ${
+                            className={`md:hidden p-3 rounded-2xl backdrop-blur-xl ${
                                 theme === "dark"
-                                    ? "bg-gray-700 text-gray-300"
-                                    : "bg-gray-200 text-gray-800"
+                                    ? "bg-gray-800/50 text-gray-300 border border-gray-700/50"
+                                    : "bg-white/50 text-gray-800 border border-gray-300/50"
                             }`}
                         >
-                            <Menu size={24} />
+                            <Menu size={20} />
                         </motion.button>
+                        
                         <motion.button
-                            whileHover={{ scale: 1.1 }}
+                            whileHover={{ scale: 1.1, rotate: 180 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={toggleTheme}
-                            className={`mr-4 p-2 rounded-full ${
+                            className={`p-3 rounded-2xl backdrop-blur-xl transition-all duration-300 ${
                                 theme === "dark"
-                                    ? "bg-gray-700 text-yellow-400"
-                                    : "bg-gray-300 text-gray-800"
+                                    ? "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30"
+                                    : "bg-indigo-500/20 text-indigo-600 border border-indigo-500/30"
                             }`}
                         >
-                            {theme === "dark" ? (
-                                <Sun size={24} />
-                            ) : (
-                                <Moon size={24} />
-                            )}
+                            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
                         </motion.button>
                     </div>
                 </div>
             </motion.header>
 
+            {/* Mobile Menu */}
             <AnimatePresence>
                 {menuOpen && (
                     <motion.nav
@@ -2636,107 +1045,123 @@ const Portfolio = () => {
                         animate={{ x: 0 }}
                         exit={{ x: "100%" }}
                         transition={{ type: "spring", stiffness: 120 }}
-                        className="fixed top-0 right-0 bottom-0 w-64 bg-gray-800 z-40 md:hidden"
+                        className={`fixed top-0 right-0 bottom-0 w-80 z-40 md:hidden backdrop-blur-xl ${
+                            theme === "dark" ? "bg-gray-900/95" : "bg-white/95"
+                        }`}
                     >
-                        <ul className="flex flex-col h-full justify-center space-y-8 p-4">
-                            {sections.map((section) => (
-                                <li key={section.id}>
-                                    <motion.button
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                        onClick={() => {
-                                            setActiveSection(section.id);
-                                            setMenuOpen(false);
-                                        }}
-                                        className={`flex items-center p-2 rounded-full transition-all duration-300 ${
-                                            activeSection === section.id
-                                                ? "bg-blue-500 text-white"
-                                                : "text-gray-400 hover:text-white hover:bg-gray-700"
-                                        }`}
-                                    >
-                                        <section.icon
-                                            size={24}
-                                            className="mr-2"
-                                        />
-                                        <span>{section.title}</span>
-                                    </motion.button>
-                                </li>
-                            ))}
-                        </ul>
+                        <div className="p-8 pt-24">
+                            <ul className="space-y-4">
+                                {sections.map((section) => (
+                                    <li key={section.id}>
+                                        <motion.button
+                                            whileHover={{ scale: 1.02, x: 10 }}
+                                            whileTap={{ scale: 0.98 }}
+                                            onClick={() => {
+                                                setActiveSection(section.id);
+                                                setMenuOpen(false);
+                                            }}
+                                            className={`flex items-center gap-4 w-full p-4 rounded-2xl transition-all duration-300 ${
+                                                activeSection === section.id
+                                                    ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg"
+                                                    : theme === "dark"
+                                                    ? "text-gray-400 hover:text-white hover:bg-gray-800/50"
+                                                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+                                            }`}
+                                        >
+                                            <section.icon size={20} />
+                                            <span className="font-medium">{section.title}</span>
+                                        </motion.button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </motion.nav>
                 )}
             </AnimatePresence>
 
-            <nav className="hidden md:block fixed top-0 left-0 bottom-0 w-24 bg-gray-800 z-40">
-                <ul className="flex flex-col h-full justify-center  items-center  space-y-8 p-4">
+            {/* Desktop Sidebar */}
+            <nav className={`hidden md:block fixed top-0 left-0 bottom-0 w-20 z-40 backdrop-blur-xl ${
+                theme === "dark" ? "bg-gray-900/80" : "bg-white/80"
+            }`}>
+                <div className="flex flex-col items-center justify-center h-full space-y-6 p-4">
                     {sections.map((section) => (
-                        <li key={section.id}>
-                            <motion.button
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                                onClick={() => setActiveSection(section.id)}
-                                className={`p-2 rounded-full transition-all duration-300 ${
-                                    activeSection === section.id
-                                        ? "bg-blue-500 text-white"
-                                        : "text-gray-400 hover:text-white hover:bg-gray-700"
-                                }`}
-                            >
-                                <section.icon size={24} />
-                                <span className="sr-only">{section.title}</span>
-                            </motion.button>
-                        </li>
+                        <motion.button
+                            key={section.id}
+                            whileHover={{ scale: 1.2, rotate: 5 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => setActiveSection(section.id)}
+                            className={`p-4 rounded-2xl transition-all duration-300 ${
+                                activeSection === section.id
+                                    ? "bg-gradient-to-br from-indigo-500 to-purple-500 text-white shadow-xl shadow-purple-500/25"
+                                    : theme === "dark"
+                                    ? "text-gray-400 hover:text-white hover:bg-gray-800/50"
+                                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+                            }`}
+                            title={section.title}
+                        >
+                            <section.icon size={24} />
+                        </motion.button>
                     ))}
-                </ul>
+                </div>
             </nav>
 
-            <main
-                className={`pt-16 md:ml-24 p-8 overflow-y-auto h-screen custom-scrollbar ${
-                    theme === "dark" ? "text-white" : "text-gray-800"
-                }`}
-            >
-                <motion.img
-                    src="/IMG.png"
-                    alt="Ezinne Adaego Jane Duru"
-                    className={`w-32 h-32 rounded-full object-cover shadow-lg mx-auto mb-8 mt-12 ${
-                        theme === "dark"
-                            ? "border-4 border-blue-500"
-                            : "border-4 border-blue-300"
-                    }`}
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                />
-                <motion.h2
-                    className={`text-4xl font-bold mb-4 text-center ${
-                        theme === "dark"
-                            ? "bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-300"
-                            : "text-blue-700"
-                    }`}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                >
-                    Welcome, I'm Ezinne Adaego Jane Duru
-                </motion.h2>
-                <motion.p
-                    className={`text-xl mb-8 text-center ${
-                        theme === "dark" ? "text-gray-300" : "text-gray-600"
-                    }`}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                >
-                    Frontend Software Engineer | UI/UX-Focused Developer | 8+
-                    Years in Financial Sales 🚀
-                </motion.p>
+            {/* Main Content */}
+            <main className="pt-24 md:ml-20 px-6 md:px-12 pb-12">
+                {/* Profile Section - Only show on home */}
+                {activeSection === "home" && (
+                    <motion.div
+                        className="text-center mb-16"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <motion.div
+                            className="relative inline-block mb-8"
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                        >
+                            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-1">
+                                <img
+                                    src="/IMG.png"
+                                    alt="Ezinne Adaego Jane Duru"
+                                    className="w-full h-full rounded-full object-cover"
+                                />
+                            </div>
+                            <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-white animate-pulse"></div>
+                        </motion.div>
+                        
+                        <motion.h2
+                            className={`text-4xl md:text-5xl font-bold mb-4 ${
+                                theme === "dark"
+                                    ? "bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text"
+                                    : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-transparent bg-clip-text"
+                            }`}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3, duration: 0.8 }}
+                        >
+                            Ezinne Adaego Jane Duru
+                        </motion.h2>
+                        
+                        <motion.p
+                            className={`text-xl ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5, duration: 0.8 }}
+                        >
+                            Frontend Software Engineer | 4+ Years Experience | Aspiring Blockchain Developer 🚀
+                        </motion.p>
+                    </motion.div>
+                )}
 
+                {/* Content */}
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={activeSection}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.4 }}
                     >
                         {renderContent()}
                     </motion.div>
