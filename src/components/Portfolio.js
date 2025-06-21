@@ -20,6 +20,9 @@ import {
     HeartHandshake,
     Copyright,
     Github,
+    Rocket,
+    Sparkles,
+    Building2,
 } from "lucide-react";
 
 // Modern Logo with glassmorphism effect
@@ -55,15 +58,17 @@ const Section = ({ title, children, theme }) => (
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="mb-16"
     >
-        <h2
-            className={`text-4xl font-bold mb-8 ${
-                theme === "dark"
-                    ? "bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text"
-                    : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-transparent bg-clip-text"
-            } border-b border-gradient-to-r from-indigo-500/20 to-pink-500/20 pb-4`}
-        >
-            {title}
-        </h2>
+        {title && (
+            <h2
+                className={`text-4xl font-bold mb-8 ${
+                    theme === "dark"
+                        ? "bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text"
+                        : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-transparent bg-clip-text"
+                } border-b border-gradient-to-r from-indigo-500/20 to-pink-500/20 pb-4`}
+            >
+                {title}
+            </h2>
+        )}
         {children}
     </motion.div>
 );
@@ -105,15 +110,17 @@ const Card = ({
                     : "linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(249, 250, 251, 0.8) 100%)",
         }}
     >
-        <h3
-            className={`text-2xl font-bold mb-3 ${
-                theme === "dark"
-                    ? "bg-gradient-to-r from-indigo-400 to-purple-400 text-transparent bg-clip-text"
-                    : "bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text"
-            }`}
-        >
-            {title}
-        </h3>
+        {title && (
+            <h3
+                className={`text-2xl font-bold mb-3 ${
+                    theme === "dark"
+                        ? "bg-gradient-to-r from-indigo-400 to-purple-400 text-transparent bg-clip-text"
+                        : "bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text"
+                }`}
+            >
+                {title}
+            </h3>
+        )}
         {subtitle && (
             <p
                 className={`text-lg mb-4 ${
@@ -162,13 +169,61 @@ const Portfolio = () => {
                 return (
                     <Section title="" theme={theme}>
                         <div className="max-w-5xl mx-auto space-y-16">
-                            {/* Hero Section */}
+                            {/* Hero Section with Animations */}
                             <motion.div
                                 className="text-center space-y-8"
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, ease: "easeOut" }}
                             >
+                                {/* Animated Sparkles */}
+                                <motion.div
+                                    className="flex justify-center gap-4 mb-6"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.5 }}
+                                >
+                                    <motion.div
+                                        animate={{ 
+                                            y: [-10, 10, -10],
+                                            rotate: [0, 180, 360]
+                                        }}
+                                        transition={{ 
+                                            duration: 4,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                    >
+                                        <Sparkles className="w-6 h-6 text-purple-400" />
+                                    </motion.div>
+                                    <motion.div
+                                        animate={{ 
+                                            y: [10, -10, 10],
+                                            rotate: [360, 180, 0]
+                                        }}
+                                        transition={{ 
+                                            duration: 3.5,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                    >
+                                        <Rocket className="w-8 h-8 text-indigo-400" />
+                                    </motion.div>
+                                    <motion.div
+                                        animate={{ 
+                                            y: [-10, 10, -10],
+                                            rotate: [0, -180, -360]
+                                        }}
+                                        transition={{ 
+                                            duration: 4.5,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                    >
+                                        <Building2 className="w-6 h-6 text-pink-400" />
+                                    </motion.div>
+                                </motion.div>
+
                                 <motion.h1
                                     className={`text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 ${
                                         theme === "dark"
@@ -179,8 +234,9 @@ const Portfolio = () => {
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: 0.2, duration: 0.8 }}
                                 >
-                                    Frontend Engineer
+                                    Tech Entrepreneur & Innovator
                                 </motion.h1>
+                                
                                 <motion.p
                                     className={`text-xl sm:text-2xl leading-relaxed max-w-4xl mx-auto ${
                                         theme === "dark"
@@ -191,10 +247,9 @@ const Portfolio = () => {
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: 0.4, duration: 0.8 }}
                                 >
-                                    Building modern web experiences with 4+
-                                    years of expertise in React.js, JavaScript,
-                                    HTML5, CSS3, and cutting-edge frameworks.
+                                    Co-Founder & CEO at Zemio Labs LTD | Building the future of digital solutions
                                 </motion.p>
+                                
                                 <motion.p
                                     className={`text-lg max-w-3xl mx-auto ${
                                         theme === "dark"
@@ -205,53 +260,65 @@ const Portfolio = () => {
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: 0.6, duration: 0.8 }}
                                 >
-                                    Aspiring blockchain developer currently
-                                    advancing in Algorithms & Data Structures,
-                                    exploring Web3 technologies, and building
-                                    scalable solutions at Roy.
+                                    Currently developing cutting-edge applications that solve real-world problems. 
+                                    Our innovative products are coming soon to transform how people interact with technology.
                                 </motion.p>
+
+                                {/* Status Badge */}
+                                <motion.div
+                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30"
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: 0.8 }}
+                                >
+                                    <div className="relative">
+                                        <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                                        <div className="absolute inset-0 w-3 h-3 bg-green-500 rounded-full animate-ping opacity-30"></div>
+                                    </div>
+                                    <span className={theme === "dark" ? "text-green-400" : "text-green-700"}>
+                                        Actively Building at Zemio Labs
+                                    </span>
+                                </motion.div>
                             </motion.div>
 
-                            {/* Key Skills Grid */}
+                            {/* Key Highlights Grid */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 {[
                                     {
-                                        title: "Frontend Mastery",
+                                        title: "Entrepreneurial Vision",
+                                        icon: Rocket,
                                         skills: [
-                                            "React.js",
-                                            "JavaScript (ES6+)",
-                                            "HTML5 & CSS3",
-                                            "Tailwind CSS",
-                                            "Responsive Design",
+                                            "Strategic Leadership",
+                                            "Product Innovation",
+                                            "Market Analysis",
+                                            "Business Development",
                                         ],
-                                        description:
-                                            "4+ years crafting pixel-perfect, high-performance web applications",
-                                        gradient: "from-blue-500 to-cyan-500",
-                                    },
-                                    {
-                                        title: "Current Focus",
-                                        skills: [
-                                            "Data Structures",
-                                            "Algorithms",
-                                            "Problem Solving",
-                                            "System Design",
-                                        ],
-                                        description:
-                                            "Continuously expanding computer science fundamentals",
+                                        description: "Building Zemio Labs from the ground up with innovative solutions",
                                         gradient: "from-purple-500 to-pink-500",
                                     },
                                     {
-                                        title: "Professional Edge",
+                                        title: "Technical Excellence",
+                                        icon: Code,
                                         skills: [
-                                            "Team Leadership",
-                                            "Financial Background",
-                                            "Client Relations",
-                                            "Strategic Thinking",
+                                            "React.js Expert",
+                                            "Full-Stack Development",
+                                            "Mobile Solutions",
+                                            "Cloud Architecture",
                                         ],
-                                        description:
-                                            "Unique blend of tech expertise and business acumen",
-                                        gradient:
-                                            "from-indigo-500 to-purple-500",
+                                        description: "4+ years crafting world-class applications",
+                                        gradient: "from-blue-500 to-cyan-500",
+                                    },
+                                    {
+                                        title: "Coming Soon",
+                                        icon: Sparkles,
+                                        skills: [
+                                            "Revolutionary Apps",
+                                            "AI Integration",
+                                            "Social Impact",
+                                            "Global Reach",
+                                        ],
+                                        description: "Game-changing products launching soon",
+                                        gradient: "from-indigo-500 to-purple-500",
                                     },
                                 ].map((section, index) => (
                                     <motion.div
@@ -269,21 +336,19 @@ const Portfolio = () => {
                                         } hover:scale-105 transition-all duration-300`}
                                         whileHover={{ y: -10 }}
                                     >
-                                        <div
+                                        <motion.div
                                             className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${section.gradient} mb-6 flex items-center justify-center`}
+                                            whileHover={{ rotate: 360 }}
+                                            transition={{ duration: 0.6 }}
                                         >
-                                            <div className="w-6 h-6 bg-white rounded-lg opacity-80" />
-                                        </div>
+                                            <section.icon className="w-6 h-6 text-white" />
+                                        </motion.div>
                                         <h3 className="text-2xl font-bold mb-4">
                                             {section.title}
                                         </h3>
-                                        <p
-                                            className={`text-sm mb-6 ${
-                                                theme === "dark"
-                                                    ? "text-gray-400"
-                                                    : "text-gray-600"
-                                            }`}
-                                        >
+                                        <p className={`text-sm mb-6 ${
+                                            theme === "dark" ? "text-gray-400" : "text-gray-600"
+                                        }`}>
                                             {section.description}
                                         </p>
                                         <div className="flex flex-wrap gap-2">
@@ -291,10 +356,9 @@ const Portfolio = () => {
                                                 <span
                                                     key={skill}
                                                     className={`px-4 py-2 text-sm font-medium rounded-full backdrop-blur-sm
-                                                        ${
-                                                            theme === "dark"
-                                                                ? "bg-gray-800/60 text-gray-300 border border-gray-700/50"
-                                                                : "bg-white/60 text-gray-700 border border-gray-300/50"
+                                                        ${theme === "dark"
+                                                            ? "bg-gray-800/60 text-gray-300 border border-gray-700/50"
+                                                            : "bg-white/60 text-gray-700 border border-gray-300/50"
                                                         }`}
                                                 >
                                                     {skill}
@@ -317,46 +381,50 @@ const Portfolio = () => {
                                 transition={{ delay: 0.8, duration: 0.6 }}
                             >
                                 <h3 className="text-3xl font-bold mb-6 text-center">
-                                    Let's Build Something Amazing
+                                    Ready to Transform Your Ideas?
                                 </h3>
-                                <p
-                                    className={`text-lg text-center mb-8 max-w-3xl mx-auto ${
-                                        theme === "dark"
-                                            ? "text-gray-300"
-                                            : "text-gray-600"
-                                    }`}
-                                >
-                                    With 4+ years of frontend expertise and 8
-                                    years of financial sales experience in
-                                    fintech and cryptocurrency, I create
-                                    scalable, user-centric applications that
-                                    drive business results.
+                                <p className={`text-lg text-center mb-8 max-w-3xl mx-auto ${
+                                    theme === "dark" ? "text-gray-300" : "text-gray-600"
+                                }`}>
+                                    With 4+ years of frontend expertise and 8 years of financial sales experience in fintech and cryptocurrency, 
+                                    I bring a unique blend of technical skills and business acumen to build transformative digital solutions.
                                 </p>
                                 <div className="flex flex-wrap justify-center gap-6">
                                     <motion.button
                                         className="px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold shadow-xl shadow-purple-500/25 hover:shadow-2xl hover:shadow-purple-500/40 transition-all duration-300"
                                         whileHover={{ scale: 1.05, y: -2 }}
                                         whileTap={{ scale: 0.95 }}
-                                        onClick={() =>
-                                            setActiveSection("experience")
-                                        }
+                                        onClick={() => setActiveSection("experience")}
                                     >
-                                        View Experience
+                                        Explore My Journey
                                     </motion.button>
                                     <motion.a
-                                        href="https://drive.google.com/file/d/1iu5KOmd_Wm24LPaWRsUkrXBHenoWYpTH/view?usp=sharing"
+                                        href="https://calendly.com/janeezyofficial/30min"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className={`px-8 py-4 rounded-2xl border-2 font-semibold transition-all duration-300
-                                            ${
-                                                theme === "dark"
-                                                    ? "border-indigo-400 text-indigo-400 hover:bg-indigo-400 hover:text-white"
-                                                    : "border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white"
+                                            ${theme === "dark"
+                                                ? "border-green-400 text-green-400 hover:bg-green-400 hover:text-white"
+                                                : "border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
                                             }`}
                                         whileHover={{ scale: 1.05, y: -2 }}
                                         whileTap={{ scale: 0.95 }}
                                     >
-                                        Download Resume
+                                        Book a Meeting
+                                    </motion.a>
+                                    <motion.a
+                                        href="https://zemiolabs.com"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`px-8 py-4 rounded-2xl border-2 font-semibold transition-all duration-300
+                                            ${theme === "dark"
+                                                ? "border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
+                                                : "border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"
+                                            }`}
+                                        whileHover={{ scale: 1.05, y: -2 }}
+                                        whileTap={{ scale: 0.95 }}
+                                    >
+                                        Visit Zemio Labs
                                     </motion.a>
                                 </div>
                             </motion.div>
@@ -366,271 +434,360 @@ const Portfolio = () => {
 
             case "experience":
                 return (
-                    <Section title="Professional Experience" theme={theme}>
+                    <Section title="Professional Journey" theme={theme}>
                         <div className="space-y-12">
-                            {/* Current Status Banner */}
+                            {/* Current Role - Zemio Labs */}
                             <motion.div
-                                className={`p-6 rounded-3xl backdrop-blur-xl border ${
-                                    theme === "dark"
-                                        ? "bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-green-500/20"
-                                        : "bg-gradient-to-r from-green-50/80 to-emerald-50/80 border-green-200/50"
-                                }`}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6 }}
                             >
-                                <div className="flex items-center gap-4">
-                                    <div className="relative">
-                                        <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
-                                        <div className="absolute inset-0 w-4 h-4 bg-green-500 rounded-full animate-ping opacity-30"></div>
-                                    </div>
-                                    <p
-                                        className={`text-lg font-semibold ${
-                                            theme === "dark"
-                                                ? "text-green-400"
-                                                : "text-green-700"
-                                        }`}
-                                    >
-                                        Frontend Developer at Roy | 4+ Years
-                                        Experience | Advancing in Algorithms &
-                                        System Design
-                                    </p>
-                                </div>
-                            </motion.div>
-
-                            {/* Experience Cards */}
-                            <div className="space-y-8">
-                                {/* Current Role */}
                                 <Card
                                     title={
-                                        <div className="flex items-center gap-4 mb-4">
+                                        <div className="flex items-center justify-between mb-4">
                                             <div>
-                                                <h4 className="text-2xl font-bold">
-                                                    Frontend Developer
+                                                <h4 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
+                                                    Co-Founder & CEO
                                                 </h4>
-                                                <p className="text-lg text-gray-500">
-                                                    Roy | March 2025 - Present
+                                                <p className="text-xl text-gray-500">
+                                                    Zemio Labs LTD | Present
                                                 </p>
                                             </div>
-                                            <span
-                                                className={`px-4 py-2 text-sm font-medium rounded-full
-                                                ${
-                                                    theme === "dark"
+                                            <motion.div
+                                                className="flex gap-2"
+                                                initial={{ opacity: 0, x: 20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: 0.3 }}
+                                            >
+                                                <span className={`px-4 py-2 text-sm font-medium rounded-full
+                                                    ${theme === "dark"
+                                                        ? "bg-gradient-to-r from-purple-900/40 to-pink-900/40 text-purple-300 border border-purple-800/50"
+                                                        : "bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 border border-purple-200"
+                                                    }`}>
+                                                    Founder
+                                                </span>
+                                                <span className={`px-4 py-2 text-sm font-medium rounded-full
+                                                    ${theme === "dark"
                                                         ? "bg-green-900/40 text-green-300 border border-green-800/50"
                                                         : "bg-green-100 text-green-700 border border-green-200"
-                                                }`}
-                                            >
-                                                Current Role
-                                            </span>
+                                                    }`}>
+                                                    Active
+                                                </span>
+                                            </motion.div>
                                         </div>
                                     }
                                     content={
                                         <div className="space-y-6">
-                                            <ul className="space-y-4">
+                                            <motion.p 
+                                                className="text-lg leading-relaxed"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ delay: 0.2 }}
+                                            >
+                                                Leading a UK-registered software company (Company No. 16513457) focused on building smart, scalable, and human-centered solutions. 
+                                                Currently developing multiple applications set to launch soon, designed to revolutionize how people interact with technology.
+                                            </motion.p>
+                                            
+                                            <motion.ul 
+                                                className="space-y-4"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ delay: 0.4 }}
+                                            >
                                                 {[
-                                                    "Built and optimized core UI features including user dashboard, secure login page, and interactive forms using React.js, HTML5, Tailwind CSS, and CSS3",
-                                                    "Improved front-end performance by 30% through efficient component structuring and CSS optimization",
-                                                    "Collaborated with back-end developers to integrate REST APIs, ensuring real-time data rendering",
-                                                    "Worked closely with UX/UI designers to implement pixel-perfect interfaces from Figma designs",
+                                                    "Architecting and developing innovative applications from concept to deployment",
+                                                    "Building a suite of products that solve real-world problems for businesses and communities",
+                                                    "Leading technical strategy and implementation using cutting-edge technologies",
+                                                    "Creating scalable solutions with focus on user experience and social impact",
+                                                    "Establishing Zemio Labs as a creative lab and strategic partner in digital transformation",
                                                 ].map((item, index) => (
-                                                    <li
+                                                    <motion.li
                                                         key={index}
                                                         className="flex items-start gap-3"
+                                                        initial={{ opacity: 0, x: -20 }}
+                                                        animate={{ opacity: 1, x: 0 }}
+                                                        transition={{ delay: 0.5 + index * 0.1 }}
                                                     >
-                                                        <div className="w-2 h-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 mt-2 flex-shrink-0"></div>
+                                                        <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 mt-2 flex-shrink-0"></div>
                                                         <span>{item}</span>
-                                                    </li>
+                                                    </motion.li>
                                                 ))}
-                                            </ul>
-                                            <div className="flex flex-wrap gap-3">
+                                            </motion.ul>
+
+                                            <motion.div 
+                                                className="mt-6 p-4 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20"
+                                                initial={{ opacity: 0, scale: 0.95 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                transition={{ delay: 0.8 }}
+                                            >
+                                                <p className="text-sm italic">
+                                                    "We don't just build apps — we craft experiences. Zemio Labs is a creative lab, 
+                                                    a strategic partner, and a passionate builder of better digital futures."
+                                                </p>
+                                            </motion.div>
+
+                                            <motion.div 
+                                                className="flex flex-wrap gap-3"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ delay: 1 }}
+                                            >
                                                 {[
+                                                    "Strategic Leadership",
+                                                    "Product Development",
                                                     "React.js",
-                                                    "TypeScript",
-                                                    "Tailwind CSS",
-                                                    "REST APIs",
-                                                    "Figma",
-                                                    "Performance Optimization",
+                                                    "Mobile Development",
+                                                    "Innovation Strategy",
+                                                    "Business Development",
                                                 ].map((tech) => (
                                                     <span
                                                         key={tech}
                                                         className={`px-4 py-2 text-sm font-medium rounded-full backdrop-blur-sm
-                                                        ${
-                                                            theme === "dark"
-                                                                ? "bg-indigo-900/40 text-indigo-300 border border-indigo-800/50"
-                                                                : "bg-indigo-50 text-indigo-700 border border-indigo-200/50"
+                                                        ${theme === "dark"
+                                                            ? "bg-purple-900/40 text-purple-300 border border-purple-800/50"
+                                                            : "bg-purple-50 text-purple-700 border border-purple-200/50"
                                                         }`}
                                                     >
                                                         {tech}
                                                     </span>
                                                 ))}
-                                            </div>
+                                            </motion.div>
+
+                                            <motion.div 
+                                                className="flex flex-wrap gap-4 pt-4"
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                transition={{ delay: 1.2 }}
+                                            >
+                                                <div className="w-full mb-3">
+                                                    <p className="text-sm text-gray-500 flex items-center gap-2">
+                                                        <Building2 className="w-4 h-4" />
+                                                        Registered in England & Wales • Company No. 16513457
+                                                    </p>
+                                                </div>
+                                                <motion.a
+                                                    href="https://zemiolabs.com"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                                                    whileHover={{ scale: 1.05 }}
+                                                >
+                                                    <ExternalLink className="w-5 h-5" />
+                                                    Visit Website
+                                                </motion.a>
+                                                <motion.a
+                                                    href="https://www.linkedin.com/company/zemio-labs-ltd"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl border-2 font-semibold transition-all duration-300
+                                                        ${theme === "dark"
+                                                            ? "border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
+                                                            : "border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"
+                                                        }`}
+                                                    whileHover={{ scale: 1.05 }}
+                                                >
+                                                    <Linkedin className="w-5 h-5" />
+                                                    Company LinkedIn
+                                                </motion.a>
+                                                <motion.a
+                                                    href="https://x.com/zemiolabs"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl border-2 font-semibold transition-all duration-300
+                                                        ${theme === "dark"
+                                                            ? "border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
+                                                            : "border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"
+                                                        }`}
+                                                    whileHover={{ scale: 1.05 }}
+                                                >
+                                                    <Twitter className="w-5 h-5" />
+                                                    Company Twitter
+                                                </motion.a>
+                                            </motion.div>
                                         </div>
                                     }
                                     theme={theme}
                                     featured={true}
                                 />
+                            </motion.div>
 
-                                {/* Previous Role */}
-                                <Card
-                                    title={
-                                        <div className="mb-4">
-                                            <h4 className="text-2xl font-bold">
-                                                Junior Frontend Developer
-                                            </h4>
-                                            <p className="text-lg text-gray-500">
-                                                Jether Tech | December 2022 -
-                                                March 2025
-                                            </p>
-                                        </div>
-                                    }
-                                    content={
-                                        <div className="space-y-6">
-                                            <ul className="space-y-4">
+                            {/* Previous Roles */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.3 }}
+                            >
+                                <h3 className={`text-2xl font-bold mb-6 ${
+                                    theme === "dark" ? "text-gray-300" : "text-gray-700"
+                                }`}>
+                                    Previous Experience
+                                </h3>
+                                <div className="space-y-6">
+                                    <Card
+                                        title="Frontend Developer"
+                                        subtitle="Roy | March 2025"
+                                        content={
+                                            <ul className="space-y-3">
                                                 {[
-                                                    "Developed responsive user interfaces improving cross-browser compatibility by 25%",
-                                                    "Optimized website performance by 35% through code refactoring and lazy loading",
-                                                    "Reduced bug rate by 40% through comprehensive testing and systematic debugging",
-                                                    "Created reusable React components reducing development time by 30%",
+                                                    "Built and optimized core UI features including user dashboard, secure login page, and interactive forms",
+                                                    "Improved front-end performance by 30% through efficient component structuring",
+                                                    "Collaborated with back-end developers to integrate REST APIs",
+                                                    "Worked closely with UX/UI designers to implement pixel-perfect interfaces",
                                                 ].map((item, index) => (
-                                                    <li
-                                                        key={index}
-                                                        className="flex items-start gap-3"
-                                                    >
-                                                        <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 mt-2 flex-shrink-0"></div>
+                                                    <li key={index} className="flex items-start gap-3">
+                                                        <div className="w-2 h-2 rounded-full bg-green-500 mt-2 flex-shrink-0"></div>
                                                         <span>{item}</span>
                                                     </li>
                                                 ))}
                                             </ul>
-                                            <div className="flex flex-wrap gap-3">
-                                                {[
-                                                    "React.js",
-                                                    "JavaScript",
-                                                    "HTML5",
-                                                    "CSS3",
-                                                    "Git",
-                                                    "Testing",
-                                                ].map((tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className={`px-4 py-2 text-sm font-medium rounded-full backdrop-blur-sm
-                                                        ${
-                                                            theme === "dark"
-                                                                ? "bg-purple-900/40 text-purple-300 border border-purple-800/50"
-                                                                : "bg-purple-50 text-purple-700 border border-purple-200/50"
-                                                        }`}
-                                                    >
-                                                        {tech}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    }
-                                    theme={theme}
-                                />
+                                        }
+                                        theme={theme}
+                                    />
 
-                                {/* Internship */}
-                                <Card
-                                    title={
-                                        <div className="mb-4">
-                                            <h4 className="text-2xl font-bold">
-                                                Frontend Developer Intern
-                                            </h4>
-                                            <p className="text-lg text-gray-500">
-                                                Jether Tech | June 2022 -
-                                                November 2022
-                                            </p>
-                                        </div>
-                                    }
-                                    content={
-                                        <div className="space-y-6">
-                                            <ul className="space-y-4">
+                                    <Card
+                                        title="Junior Frontend Developer"
+                                        subtitle="Jether Tech | December 2022 - March 2025"
+                                        content={
+                                            <ul className="space-y-3">
+                                                {[
+                                                    "Developed responsive user interfaces improving cross-browser compatibility by 25%",
+                                                    "Optimized website performance by 35% through code refactoring",
+                                                    "Created reusable React components reducing development time by 30%",
+                                                ].map((item, index) => (
+                                                    <li key={index} className="flex items-start gap-3">
+                                                        <div className="w-2 h-2 rounded-full bg-indigo-500 mt-2 flex-shrink-0"></div>
+                                                        <span>{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        }
+                                        theme={theme}
+                                    />
+
+                                    <Card
+                                        title="Frontend Developer Intern"
+                                        subtitle="Jether Tech | June 2022 - November 2022"
+                                        content={
+                                            <ul className="space-y-3">
                                                 {[
                                                     "Built feature-rich web applications using HTML5, CSS3, and JavaScript",
                                                     "Developed mobile-first interfaces improving user engagement by 20%",
-                                                    "Utilized Git for version control and participated in code reviews",
-                                                    "Created custom JavaScript solutions for complex UI interactions",
                                                 ].map((item, index) => (
-                                                    <li
-                                                        key={index}
-                                                        className="flex items-start gap-3"
-                                                    >
-                                                        <div className="w-2 h-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 mt-2 flex-shrink-0"></div>
+                                                    <li key={index} className="flex items-start gap-3">
+                                                        <div className="w-2 h-2 rounded-full bg-cyan-500 mt-2 flex-shrink-0"></div>
                                                         <span>{item}</span>
                                                     </li>
                                                 ))}
                                             </ul>
-                                        </div>
-                                    }
-                                    theme={theme}
-                                />
-                            </div>
+                                        }
+                                        theme={theme}
+                                    />
+                                </div>
+
+                                {/* Financial Sales Background */}
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.5 }}
+                                    className="mt-12"
+                                >
+                                    <h3 className={`text-2xl font-bold mb-6 ${
+                                        theme === "dark" ? "text-gray-300" : "text-gray-700"
+                                    }`}>
+                                        Financial Sales Background
+                                    </h3>
+                                    <Card
+                                        title="Senior Financial Sales Specialist"
+                                        subtitle="Various Fintech & Cryptocurrency Companies | 2014 - 2022"
+                                        content={
+                                            <div className="space-y-4">
+                                                <p className="text-lg">
+                                                    8 years of experience in financial sales, specializing in fintech and cryptocurrency markets.
+                                                </p>
+                                                <ul className="space-y-3">
+                                                    {[
+                                                        "Led high-performing sales teams in fintech and crypto markets",
+                                                        "Developed strategic partnerships with major financial institutions",
+                                                        "Achieved consistent 150%+ quota attainment across multiple roles",
+                                                        "Built deep understanding of financial markets and blockchain technology",
+                                                        "Transitioned to tech to combine financial expertise with software development",
+                                                    ].map((item, index) => (
+                                                        <li key={index} className="flex items-start gap-3">
+                                                            <div className="w-2 h-2 rounded-full bg-gradient-to-r from-gold-500 to-yellow-500 mt-2 flex-shrink-0"></div>
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                                <div className="flex flex-wrap gap-2 mt-4">
+                                                    {[
+                                                        "Financial Sales",
+                                                        "Cryptocurrency",
+                                                        "Fintech",
+                                                        "Team Leadership",
+                                                        "Strategic Partnerships",
+                                                        "Market Analysis",
+                                                    ].map((skill) => (
+                                                        <span
+                                                            key={skill}
+                                                            className={`px-3 py-1 text-sm font-medium rounded-full
+                                                                ${theme === "dark"
+                                                                    ? "bg-yellow-900/40 text-yellow-300 border border-yellow-800/50"
+                                                                    : "bg-yellow-50 text-yellow-700 border border-yellow-200/50"
+                                                                }`}
+                                                        >
+                                                            {skill}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        }
+                                        theme={theme}
+                                        featured={true}
+                                    />
+                                </motion.div>
+                            </motion.div>
                         </div>
                     </Section>
                 );
 
             case "skills":
                 return (
-                    <Section title="Technical Skills" theme={theme}>
+                    <Section title="Technical Expertise" theme={theme}>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                            {/* Core Technologies */}
                             <Card
                                 title="Core Technologies"
                                 content={
                                     <div className="space-y-6">
                                         {[
                                             {
-                                                category: "Frontend",
-                                                skills: [
-                                                    "HTML5",
-                                                    "CSS3",
-                                                    "JavaScript (ES6+)",
-                                                    "React.js",
-                                                    "Responsive Design",
-                                                ],
+                                                category: "Frontend Mastery",
+                                                skills: ["React.js", "JavaScript (ES6+)", "HTML5", "CSS3", "Tailwind CSS"],
                                                 color: "from-blue-500 to-cyan-500",
                                             },
                                             {
-                                                category: "Styling",
-                                                skills: [
-                                                    "Tailwind CSS",
-                                                    "CSS Preprocessors",
-                                                    "Flexbox",
-                                                    "CSS Grid",
-                                                ],
+                                                category: "Development Tools",
+                                                skills: ["Git", "VS Code", "Figma", "REST APIs", "Responsive Design"],
                                                 color: "from-purple-500 to-pink-500",
-                                            },
-                                            {
-                                                category: "Tools",
-                                                skills: [
-                                                    "Git",
-                                                    "VS Code",
-                                                    "Chrome DevTools",
-                                                    "Figma",
-                                                ],
-                                                color: "from-green-500 to-teal-500",
                                             },
                                         ].map((group) => (
                                             <div key={group.category}>
-                                                <h4
-                                                    className={`text-lg font-semibold mb-3 bg-gradient-to-r ${group.color} text-transparent bg-clip-text`}
-                                                >
+                                                <h4 className={`text-lg font-semibold mb-3 bg-gradient-to-r ${group.color} text-transparent bg-clip-text`}>
                                                     {group.category}
                                                 </h4>
                                                 <div className="flex flex-wrap gap-2">
-                                                    {group.skills.map(
-                                                        (skill) => (
-                                                            <span
-                                                                key={skill}
-                                                                className={`px-3 py-2 text-sm font-medium rounded-full backdrop-blur-sm
-                                                            ${
-                                                                theme === "dark"
+                                                    {group.skills.map((skill) => (
+                                                        <motion.span
+                                                            key={skill}
+                                                            className={`px-3 py-2 text-sm font-medium rounded-full backdrop-blur-sm
+                                                                ${theme === "dark"
                                                                     ? "bg-gray-800/60 text-gray-300 border border-gray-700/50"
                                                                     : "bg-white/60 text-gray-700 border border-gray-300/50"
-                                                            }`}
-                                                            >
-                                                                {skill}
-                                                            </span>
-                                                        )
-                                                    )}
+                                                                }`}
+                                                            whileHover={{ scale: 1.05 }}
+                                                        >
+                                                            {skill}
+                                                        </motion.span>
+                                                    ))}
                                                 </div>
                                             </div>
                                         ))}
@@ -639,45 +796,30 @@ const Portfolio = () => {
                                 theme={theme}
                             />
 
-                            {/* Learning & Growth */}
                             <Card
-                                title="Currently Learning"
+                                title="Leadership & Innovation"
                                 content={
                                     <div className="space-y-6">
                                         <div>
                                             <h4 className="text-lg font-semibold mb-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-transparent bg-clip-text">
-                                                Algorithms & Data Structures
+                                                Entrepreneurial Skills
                                             </h4>
                                             <ul className="space-y-2 text-sm">
-                                                <li>
-                                                    • Advanced problem-solving
-                                                    techniques
-                                                </li>
-                                                <li>
-                                                    • Algorithm optimization
-                                                    strategies
-                                                </li>
-                                                <li>
-                                                    • System design fundamentals
-                                                </li>
+                                                <li>• Strategic product development</li>
+                                                <li>• Team building and leadership</li>
+                                                <li>• Market analysis and positioning</li>
+                                                <li>• Business development</li>
                                             </ul>
                                         </div>
                                         <div>
                                             <h4 className="text-lg font-semibold mb-3 bg-gradient-to-r from-pink-500 to-rose-500 text-transparent bg-clip-text">
-                                                Blockchain Development
+                                                Currently Exploring
                                             </h4>
                                             <ul className="space-y-2 text-sm">
-                                                <li>
-                                                    • Web3 technologies & dApps
-                                                </li>
-                                                <li>• Solidity programming</li>
-                                                <li>
-                                                    • Smart contract development
-                                                </li>
-                                                <li>
-                                                    • DeFi protocols &
-                                                    tokenomics
-                                                </li>
+                                                <li>• Advanced algorithms & data structures</li>
+                                                <li>• Blockchain & Web3 technologies</li>
+                                                <li>• AI/ML integration</li>
+                                                <li>• Cloud architecture</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -690,194 +832,113 @@ const Portfolio = () => {
 
             case "projects":
                 return (
-                    <Section title="Featured Projects" theme={theme}>
+                    <Section title="Portfolio & Projects" theme={theme}>
                         <div className="space-y-12">
-                            {/* Featured Project */}
-                            <Card
-                                title="JaneezyBeats Platform"
-                                content={
-                                    <div className="space-y-6">
-                                        <p className="text-lg">
-                                            Professional beat store featuring
-                                            original music production,
-                                            integrated with BeatStars Pro Page
-                                            for seamless distribution and
-                                            licensing.
-                                        </p>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <div>
-                                                <h5 className="font-semibold mb-3 text-indigo-400">
-                                                    Technical Features
-                                                </h5>
+                            {/* Zemio Labs Projects */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                            >
+                                <Card
+                                    title="Zemio Labs Applications"
+                                    content={
+                                        <div className="space-y-6">
+                                            <motion.div 
+                                                className="p-6 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20"
+                                                whileHover={{ scale: 1.02 }}
+                                            >
+                                                <div className="flex items-center gap-3 mb-3">
+                                                    <Rocket className="w-6 h-6 text-purple-400" />
+                                                    <h4 className="text-xl font-bold">Coming Soon</h4>
+                                                </div>
+                                                <p className="text-lg mb-4">
+                                                    Revolutionary applications currently in development. 
+                                                    Our products focus on solving real-world problems with innovative solutions.
+                                                </p>
                                                 <ul className="space-y-2 text-sm">
-                                                    <li>
-                                                        • Custom-branded
-                                                        storefront
-                                                    </li>
-                                                    <li>
-                                                        • Instant download
-                                                        system
-                                                    </li>
-                                                    <li>
-                                                        • Multiple licensing
-                                                        options
-                                                    </li>
-                                                    <li>
-                                                        • Responsive audio
-                                                        player
-                                                    </li>
+                                                    <li>• Human-centered design approach</li>
+                                                    <li>• Scalable architecture</li>
+                                                    <li>• Social impact focus</li>
+                                                    <li>• Cross-platform compatibility</li>
                                                 </ul>
-                                            </div>
-                                            <div>
-                                                <h5 className="font-semibold mb-3 text-purple-400">
-                                                    Music Production
-                                                </h5>
-                                                <ul className="space-y-2 text-sm">
-                                                    <li>
-                                                        • Original hip-hop beats
-                                                    </li>
-                                                    <li>
-                                                        • Trap & R&B production
-                                                    </li>
-                                                    <li>
-                                                        • Professional mixing
-                                                    </li>
-                                                    <li>
-                                                        • Custom sound design
-                                                    </li>
-                                                </ul>
+                                            </motion.div>
+                                            
+                                            <div className="flex flex-wrap gap-4">
+                                                <motion.a
+                                                    href="https://zemiolabs.com"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                                                    whileHover={{ scale: 1.05 }}
+                                                >
+                                                    <Building2 className="w-5 h-5" />
+                                                    Learn More About Zemio Labs
+                                                </motion.a>
                                             </div>
                                         </div>
-                                        <div className="flex flex-wrap gap-4">
-                                            <motion.a
-                                                href="https://janeezy.beatstars.com"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                                                whileHover={{ scale: 1.05 }}
-                                            >
-                                                <Music className="w-5 h-5" />
-                                                Listen to Beats
-                                            </motion.a>
-                                            <motion.a
-                                                href="https://www.janeduru.site"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl border-2 font-semibold transition-all duration-300
-                                                    ${
-                                                        theme === "dark"
-                                                            ? "border-indigo-400 text-indigo-400 hover:bg-indigo-400 hover:text-white"
-                                                            : "border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white"
-                                                    }`}
-                                                whileHover={{ scale: 1.05 }}
-                                            >
-                                                <ExternalLink className="w-5 h-5" />
-                                                View Portfolio
-                                            </motion.a>
-                                        </div>
-                                    </div>
-                                }
-                                theme={theme}
-                                featured={true}
-                            />
+                                    }
+                                    theme={theme}
+                                    featured={true}
+                                />
+                            </motion.div>
 
                             {/* Other Projects */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <Card
-                                    title="Restaurant Platform"
-                                    content={
-                                        <div className="space-y-4">
-                                            <p>
-                                                Modern restaurant website with
-                                                responsive design and
-                                                interactive menu system.
-                                            </p>
-                                            <div className="flex flex-wrap gap-2">
-                                                {[
-                                                    "HTML5",
-                                                    "CSS3",
-                                                    "JavaScript",
-                                                    "Responsive Design",
-                                                ].map((tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className={`px-3 py-1 text-sm font-medium rounded-full backdrop-blur-sm
-                                                        ${
-                                                            theme === "dark"
-                                                                ? "bg-gray-800/60 text-gray-300 border border-gray-700/50"
-                                                                : "bg-white/60 text-gray-700 border border-gray-300/50"
-                                                        }`}
+                            <div className="space-y-6">
+                                <h3 className={`text-2xl font-bold mb-4 ${
+                                    theme === "dark" ? "text-gray-300" : "text-gray-700"
+                                }`}>
+                                    Previous Work
+                                </h3>
+                                
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <Card
+                                        title="JaneezyBeats Platform"
+                                        content={
+                                            <div className="space-y-4">
+                                                <p>Professional beat store featuring original music production.</p>
+                                                <div className="flex gap-3">
+                                                    <a
+                                                        href="https://janeezy.beatstars.com"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
+                                                            ${theme === "dark"
+                                                                ? "bg-indigo-600 hover:bg-indigo-700 text-white"
+                                                                : "bg-indigo-100 hover:bg-indigo-200 text-indigo-700"
+                                                            }`}
                                                     >
-                                                        {tech}
-                                                    </span>
-                                                ))}
+                                                        <Music size={16} />
+                                                        Listen to Beats
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <a
-                                                href="https://resturantapp-mu.vercel.app"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
-                                                    ${
-                                                        theme === "dark"
+                                        }
+                                        theme={theme}
+                                    />
+
+                                    <Card
+                                        title="Restaurant Platform"
+                                        content={
+                                            <div className="space-y-4">
+                                                <p>Modern restaurant website with responsive design.</p>
+                                                <a
+                                                    href="https://resturantapp-mu.vercel.app"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
+                                                        ${theme === "dark"
                                                             ? "bg-indigo-600 hover:bg-indigo-700 text-white"
                                                             : "bg-indigo-100 hover:bg-indigo-200 text-indigo-700"
-                                                    }`}
-                                            >
-                                                Live Demo{" "}
-                                                <ExternalLink size={16} />
-                                            </a>
-                                        </div>
-                                    }
-                                    theme={theme}
-                                />
-
-                                <Card
-                                    title="Fitness Hub"
-                                    content={
-                                        <div className="space-y-4">
-                                            <p>
-                                                Modern fitness platform with
-                                                workout tracking and membership
-                                                management.
-                                            </p>
-                                            <div className="flex flex-wrap gap-2">
-                                                {[
-                                                    "React",
-                                                    "CSS3",
-                                                    "JavaScript",
-                                                    "PWA",
-                                                ].map((tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className={`px-3 py-1 text-sm font-medium rounded-full backdrop-blur-sm
-                                                        ${
-                                                            theme === "dark"
-                                                                ? "bg-gray-800/60 text-gray-300 border border-gray-700/50"
-                                                                : "bg-white/60 text-gray-700 border border-gray-300/50"
                                                         }`}
-                                                    >
-                                                        {tech}
-                                                    </span>
-                                                ))}
+                                                >
+                                                    <ExternalLink size={16} />
+                                                    View Demo
+                                                </a>
                                             </div>
-                                            <a
-                                                href="https://gym-rho-one.vercel.app"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
-                                                    ${
-                                                        theme === "dark"
-                                                            ? "bg-purple-600 hover:bg-purple-700 text-white"
-                                                            : "bg-purple-100 hover:bg-purple-200 text-purple-700"
-                                                    }`}
-                                            >
-                                                View Project{" "}
-                                                <ExternalLink size={16} />
-                                            </a>
-                                        </div>
-                                    }
-                                    theme={theme}
-                                />
+                                        }
+                                        theme={theme}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </Section>
@@ -885,9 +946,8 @@ const Portfolio = () => {
 
             case "pricing":
                 return (
-                    <Section title="Services & Pricing" theme={theme}>
+                    <Section title="Services & Collaboration" theme={theme}>
                         <div className="space-y-12">
-                            {/* Intro Banner */}
                             <motion.div
                                 className={`p-8 rounded-3xl text-center backdrop-blur-xl ${
                                     theme === "dark"
@@ -898,51 +958,29 @@ const Portfolio = () => {
                                 animate={{ opacity: 1, y: 0 }}
                             >
                                 <h3 className="text-2xl font-bold mb-4">
-                                    Frontend Development Services
+                                    Partner with Zemio Labs
                                 </h3>
-                                <p
-                                    className={`${
-                                        theme === "dark"
-                                            ? "text-gray-400"
-                                            : "text-gray-600"
-                                    }`}
-                                >
-                                    Based in Lisbon, Portugal • Prices in EUR •
-                                    4+ Years Experience
+                                <p className={`${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                    Transform your ideas into reality with our innovative solutions
                                 </p>
                             </motion.div>
 
-                            {/* Pricing Cards */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 <Card
-                                    title="Landing Page"
+                                    title="Startup Consultation"
                                     content={
                                         <div className="space-y-6">
                                             <div className="text-center">
                                                 <div className="text-4xl font-bold text-indigo-500 mb-2">
-                                                    €500
+                                                    Let's Talk
                                                 </div>
-                                                <p
-                                                    className={`text-sm ${
-                                                        theme === "dark"
-                                                            ? "text-gray-400"
-                                                            : "text-gray-600"
-                                                    }`}
-                                                >
-                                                    Perfect for small businesses
+                                                <p className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                                    Strategic guidance
                                                 </p>
                                             </div>
                                             <ul className="space-y-3">
-                                                {[
-                                                    "Responsive Design",
-                                                    "Modern UI/UX",
-                                                    "SEO Optimization",
-                                                    "5-day Delivery",
-                                                ].map((feature) => (
-                                                    <li
-                                                        key={feature}
-                                                        className="flex items-center gap-3"
-                                                    >
+                                                {["Technical Architecture", "Product Strategy", "Market Analysis", "Growth Planning"].map((feature) => (
+                                                    <li key={feature} className="flex items-center gap-3">
                                                         <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
                                                         <span>{feature}</span>
                                                     </li>
@@ -954,35 +992,20 @@ const Portfolio = () => {
                                 />
 
                                 <Card
-                                    title="Multi-page Website"
+                                    title="Development Partnership"
                                     content={
                                         <div className="space-y-6">
                                             <div className="text-center">
                                                 <div className="text-4xl font-bold text-purple-500 mb-2">
-                                                    €1200
+                                                    Collaborate
                                                 </div>
-                                                <p
-                                                    className={`text-sm ${
-                                                        theme === "dark"
-                                                            ? "text-gray-400"
-                                                            : "text-gray-600"
-                                                    }`}
-                                                >
-                                                    For growing businesses
+                                                <p className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                                    Build together
                                                 </p>
                                             </div>
                                             <ul className="space-y-3">
-                                                {[
-                                                    "Up to 5 Pages",
-                                                    "React.js Development",
-                                                    "Contact Forms",
-                                                    "2 Weeks Delivery",
-                                                    "1 Month Support",
-                                                ].map((feature) => (
-                                                    <li
-                                                        key={feature}
-                                                        className="flex items-center gap-3"
-                                                    >
+                                                {["Full-Stack Development", "Mobile Solutions", "API Integration", "Ongoing Support"].map((feature) => (
+                                                    <li key={feature} className="flex items-center gap-3">
                                                         <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
                                                         <span>{feature}</span>
                                                     </li>
@@ -995,34 +1018,20 @@ const Portfolio = () => {
                                 />
 
                                 <Card
-                                    title="Custom Project"
+                                    title="Investment Opportunities"
                                     content={
                                         <div className="space-y-6">
                                             <div className="text-center">
                                                 <div className="text-4xl font-bold text-pink-500 mb-2">
-                                                    Custom
+                                                    Join Us
                                                 </div>
-                                                <p
-                                                    className={`text-sm ${
-                                                        theme === "dark"
-                                                            ? "text-gray-400"
-                                                            : "text-gray-600"
-                                                    }`}
-                                                >
-                                                    Tailored solutions
+                                                <p className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                                    Invest in innovation
                                                 </p>
                                             </div>
                                             <ul className="space-y-3">
-                                                {[
-                                                    "Custom Features",
-                                                    "Complex Functionality",
-                                                    "Tailored Timeline",
-                                                    "Extended Support",
-                                                ].map((feature) => (
-                                                    <li
-                                                        key={feature}
-                                                        className="flex items-center gap-3"
-                                                    >
+                                                {["Early-Stage Investment", "Strategic Partnership", "Global Impact", "High Growth Potential"].map((feature) => (
+                                                    <li key={feature} className="flex items-center gap-3">
                                                         <div className="w-2 h-2 bg-pink-500 rounded-full"></div>
                                                         <span>{feature}</span>
                                                     </li>
@@ -1034,7 +1043,6 @@ const Portfolio = () => {
                                 />
                             </div>
 
-                            {/* Contact CTA */}
                             <motion.div
                                 className={`p-8 rounded-3xl text-center backdrop-blur-xl ${
                                     theme === "dark"
@@ -1044,26 +1052,31 @@ const Portfolio = () => {
                                 whileHover={{ scale: 1.02 }}
                             >
                                 <h3 className="text-2xl font-bold mb-4">
-                                    Ready to Start Your Project?
+                                    Let's Build the Future Together
                                 </h3>
-                                <p
-                                    className={`mb-6 ${
-                                        theme === "dark"
-                                            ? "text-gray-400"
-                                            : "text-gray-600"
-                                    }`}
-                                >
-                                    Let's discuss your requirements and create
-                                    something amazing together.
+                                <p className={`mb-6 ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                    Ready to discuss your ideas? Schedule a 30-minute call to explore how we can collaborate.
                                 </p>
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={() => setActiveSection("contact")}
-                                    className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl font-semibold hover:shadow-xl transition-all duration-300"
-                                >
-                                    Get in Touch
-                                </motion.button>
+                                <div className="flex flex-wrap justify-center gap-4">
+                                    <motion.a
+                                        href="https://calendly.com/janeezyofficial/30min"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-2xl font-semibold hover:shadow-xl transition-all duration-300"
+                                    >
+                                        📅 Book a 30-min Meeting
+                                    </motion.a>
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        onClick={() => setActiveSection("contact")}
+                                        className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl font-semibold hover:shadow-xl transition-all duration-300"
+                                    >
+                                        Contact Details
+                                    </motion.button>
+                                </div>
                             </motion.div>
                         </div>
                     </Section>
@@ -1071,133 +1084,44 @@ const Portfolio = () => {
 
             case "education":
                 return (
-                    <Section title="Education & Certifications" theme={theme}>
-                        <div className="space-y-12">
-                            {/* Current Learning */}
-                            <motion.div
-                                className={`p-6 rounded-3xl backdrop-blur-xl ${
-                                    theme === "dark"
-                                        ? "bg-gradient-to-r from-blue-900/30 to-indigo-900/30 border border-blue-500/20"
-                                        : "bg-gradient-to-r from-blue-50/80 to-indigo-50/80 border border-blue-200/50"
-                                }`}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                            >
-                                <div className="flex items-center gap-3">
-                                    <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-                                    <p
-                                        className={`text-lg font-medium ${
-                                            theme === "dark"
-                                                ? "text-blue-400"
-                                                : "text-blue-700"
-                                        }`}
-                                    >
-                                        Aspiring blockchain developer advancing
-                                        in Algorithms, System Design, and Web3
-                                        Technologies
-                                    </p>
-                                </div>
-                            </motion.div>
-
-                            {/* Technical Education */}
+                    <Section title="Education & Growth" theme={theme}>
+                        <div className="space-y-8">
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                 <Card
-                                    title="Algorithm Fundamentals"
-                                    subtitle="AlgoExpert | January 2022 - July 2022"
+                                    title="Technical Certifications"
                                     content={
                                         <div className="space-y-4">
-                                            <p>
-                                                Comprehensive algorithmic
-                                                problem-solving and data
-                                                structures mastery.
-                                            </p>
-                                            <ul className="space-y-2 text-sm">
-                                                <li>
-                                                    • Advanced problem-solving
-                                                    techniques
-                                                </li>
-                                                <li>
-                                                    • Algorithm optimization
-                                                    strategies
-                                                </li>
-                                                <li>
-                                                    • Data structure
-                                                    implementations
-                                                </li>
-                                            </ul>
+                                            <div className="space-y-3">
+                                                <h4 className="font-semibold">Meta Front-End Developer Certificate</h4>
+                                                <p className="text-sm">Coursera | 2022</p>
+                                            </div>
+                                            <div className="space-y-3">
+                                                <h4 className="font-semibold">Responsive JavaScript Frameworks</h4>
+                                                <p className="text-sm">Google | 2022</p>
+                                            </div>
+                                            <div className="space-y-3">
+                                                <h4 className="font-semibold">Algorithm Fundamentals</h4>
+                                                <p className="text-sm">AlgoExpert | 2022</p>
+                                            </div>
                                         </div>
                                     }
                                     theme={theme}
                                 />
 
                                 <Card
-                                    title="Responsive JavaScript Frameworks"
-                                    subtitle="Google | April 2022 - June 2022"
+                                    title="Academic Background"
                                     content={
                                         <div className="space-y-4">
-                                            <p>
-                                                Certificate in Responsive Web
-                                                Design and JavaScript
-                                                Frameworks.
-                                            </p>
-                                            <ul className="space-y-2 text-sm">
-                                                <li>
-                                                    • Modern JavaScript
-                                                    frameworks
-                                                </li>
-                                                <li>
-                                                    • Responsive design
-                                                    principles
-                                                </li>
-                                                <li>
-                                                    • Cross-browser
-                                                    compatibility
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    }
-                                    theme={theme}
-                                />
-
-                                <Card
-                                    title="Meta Front-End Developer Certificate"
-                                    subtitle="Coursera | January 2022 - May 2022"
-                                    content={
-                                        <div className="space-y-4">
-                                            <p>
-                                                Comprehensive frontend
-                                                development certification from
-                                                Meta.
-                                            </p>
-                                            <ul className="space-y-2 text-sm">
-                                                <li>• React.js development</li>
-                                                <li>• Modern CSS techniques</li>
-                                                <li>
-                                                    • Version control with Git
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    }
-                                    theme={theme}
-                                />
-
-                                <Card
-                                    title="Bachelor of Science: General Medicine"
-                                    subtitle="Danylo Halytsky Lviv National Medical University | 2016"
-                                    content={
-                                        <div className="space-y-4">
-                                            <p>
-                                                Strong analytical and
-                                                problem-solving foundation from
-                                                medical education.
-                                            </p>
-                                            <ul className="space-y-2 text-sm">
-                                                <li>• Analytical thinking</li>
-                                                <li>• Attention to detail</li>
-                                                <li>
-                                                    • Complex problem solving
-                                                </li>
-                                            </ul>
+                                            <div>
+                                                <h4 className="font-semibold">Bachelor of Science: General Medicine</h4>
+                                                <p className="text-sm">Danylo Halytsky Lviv National Medical University | 2016</p>
+                                                <p className="text-sm mt-2">Strong analytical and problem-solving foundation</p>
+                                            </div>
+                                            <div className="mt-4 p-3 rounded-xl bg-gradient-to-r from-indigo-500/10 to-purple-500/10">
+                                                <p className="text-sm italic">
+                                                    "My medical background gives me a unique perspective on problem-solving and attention to detail in tech."
+                                                </p>
+                                            </div>
                                         </div>
                                     }
                                     theme={theme}
@@ -1211,7 +1135,6 @@ const Portfolio = () => {
                 return (
                     <Section title="Let's Connect" theme={theme}>
                         <div className="space-y-12">
-                            {/* Contact Info */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <Card
                                     title="Get In Touch"
@@ -1220,152 +1143,151 @@ const Portfolio = () => {
                                             <div className="space-y-4">
                                                 <div className="flex items-center gap-3">
                                                     <Mail className="w-5 h-5 text-indigo-500" />
-                                                    <span>
-                                                        janeezyofficial@gmail.com
-                                                    </span>
+                                                    <span>janeezyofficial@gmail.com</span>
                                                 </div>
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-5 h-5 flex items-center justify-center">
-                                                        📍
-                                                    </div>
-                                                    <span>
-                                                        Lisbon, Portugal
-                                                    </span>
+                                                    <Mail className="w-5 h-5 text-purple-500" />
+                                                    <span>support@zemiolabs.com</span>
+                                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-5 h-5 flex items-center justify-center">📱</div>
+                                                    <span>+351 920 009 647</span>
+                                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-5 h-5 flex items-center justify-center">💬</div>
+                                                    <a href="https://wa.me/351920009647" target="_blank" rel="noopener noreferrer" className="hover:text-green-500 transition-colors">
+                                                        WhatsApp
+                                                    </a>
+                                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    <Building2 className="w-5 h-5 text-purple-500" />
+                                                    <span>Zemio Labs LTD</span>
+                                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-5 h-5 flex items-center justify-center">🇬🇧</div>
+                                                    <span>UK Registered Company</span>
+                                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-5 h-5 flex items-center justify-center">📍</div>
+                                                    <span>Based in Lisbon, Portugal</span>
                                                 </div>
                                             </div>
                                             <p className="text-sm text-gray-500">
-                                                Available for frontend
-                                                development projects,
-                                                collaborations, and freelance
-                                                opportunities.
+                                                Open to partnerships, investments, and innovative collaborations.
                                             </p>
+                                            <motion.a
+                                                href="https://calendly.com/janeezyofficial/30min"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-2 px-6 py-3 mt-4 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                                                whileHover={{ scale: 1.05 }}
+                                            >
+                                                📅 Schedule a Meeting
+                                            </motion.a>
                                         </div>
                                     }
                                     theme={theme}
                                 />
 
                                 <Card
-                                    title="Professional Links"
+                                    title="Connect Online"
                                     content={
-                                        <div className="space-y-4">
-                                            {[
-                                                {
-                                                    name: "Portfolio",
-                                                    url: "https://www.janeduru.site",
-                                                    icon: ExternalLink,
-                                                },
-                                                {
-                                                    name: "LinkedIn",
-                                                    url: "https://www.linkedin.com/in/janeezy/",
-                                                    icon: Linkedin,
-                                                },
-                                                {
-                                                    name: "GitHub",
-                                                    url: "https://github.com/janeezy",
-                                                    icon: Github,
-                                                },
-                                                {
-                                                    name: "Twitter",
-                                                    url: "https://x.com/Iamjaneezy",
-                                                    icon: Twitter,
-                                                },
-                                            ].map((link) => (
-                                                <motion.a
-                                                    key={link.name}
-                                                    href={link.url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="flex items-center gap-3 p-3 rounded-xl border border-gray-300/20 hover:border-indigo-500/50 transition-all duration-300"
-                                                    whileHover={{
-                                                        scale: 1.02,
-                                                        x: 5,
-                                                    }}
-                                                >
-                                                    <link.icon className="w-5 h-5 text-indigo-500" />
-                                                    <span>{link.name}</span>
-                                                    <ExternalLink className="w-4 h-4 ml-auto opacity-50" />
-                                                </motion.a>
-                                            ))}
+                                        <div className="space-y-6">
+                                            <div>
+                                                <h4 className="text-sm font-semibold mb-3 text-purple-400">Company Links</h4>
+                                                <div className="space-y-3">
+                                                    <motion.a
+                                                        href="https://zemiolabs.com"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="flex items-center gap-3 p-3 rounded-xl border border-gray-300/20 hover:border-purple-500/50 transition-all duration-300"
+                                                        whileHover={{ scale: 1.02, x: 5 }}
+                                                    >
+                                                        <Building2 className="w-5 h-5 text-purple-500" />
+                                                        <span>Zemio Labs Website</span>
+                                                        <ExternalLink className="w-4 h-4 ml-auto opacity-50" />
+                                                    </motion.a>
+                                                    <motion.a
+                                                        href="https://www.linkedin.com/company/zemio-labs-ltd"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="flex items-center gap-3 p-3 rounded-xl border border-gray-300/20 hover:border-purple-500/50 transition-all duration-300"
+                                                        whileHover={{ scale: 1.02, x: 5 }}
+                                                    >
+                                                        <Linkedin className="w-5 h-5 text-purple-500" />
+                                                        <span>Zemio Labs LinkedIn</span>
+                                                        <ExternalLink className="w-4 h-4 ml-auto opacity-50" />
+                                                    </motion.a>
+                                                    <motion.a
+                                                        href="https://x.com/zemiolabs"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="flex items-center gap-3 p-3 rounded-xl border border-gray-300/20 hover:border-purple-500/50 transition-all duration-300"
+                                                        whileHover={{ scale: 1.02, x: 5 }}
+                                                    >
+                                                        <Twitter className="w-5 h-5 text-purple-500" />
+                                                        <span>Zemio Labs Twitter</span>
+                                                        <ExternalLink className="w-4 h-4 ml-auto opacity-50" />
+                                                    </motion.a>
+                                                </div>
+                                            </div>
+                                            
+                                            <div>
+                                                <h4 className="text-sm font-semibold mb-3 text-indigo-400">Personal Links</h4>
+                                                <div className="space-y-3">
+                                                    <motion.a
+                                                        href="https://www.linkedin.com/in/janeezy/"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="flex items-center gap-3 p-3 rounded-xl border border-gray-300/20 hover:border-indigo-500/50 transition-all duration-300"
+                                                        whileHover={{ scale: 1.02, x: 5 }}
+                                                    >
+                                                        <Linkedin className="w-5 h-5 text-indigo-500" />
+                                                        <span>My LinkedIn</span>
+                                                        <ExternalLink className="w-4 h-4 ml-auto opacity-50" />
+                                                    </motion.a>
+                                                    <motion.a
+                                                        href="https://github.com/janeezy"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="flex items-center gap-3 p-3 rounded-xl border border-gray-300/20 hover:border-indigo-500/50 transition-all duration-300"
+                                                        whileHover={{ scale: 1.02, x: 5 }}
+                                                    >
+                                                        <Github className="w-5 h-5 text-indigo-500" />
+                                                        <span>My GitHub</span>
+                                                        <ExternalLink className="w-4 h-4 ml-auto opacity-50" />
+                                                    </motion.a>
+                                                    <motion.a
+                                                        href="https://x.com/Iamjaneezy"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="flex items-center gap-3 p-3 rounded-xl border border-gray-300/20 hover:border-indigo-500/50 transition-all duration-300"
+                                                        whileHover={{ scale: 1.02, x: 5 }}
+                                                    >
+                                                        <Twitter className="w-5 h-5 text-indigo-500" />
+                                                        <span>My Twitter</span>
+                                                        <ExternalLink className="w-4 h-4 ml-auto opacity-50" />
+                                                    </motion.a>
+                                                </div>
+                                            </div>
                                         </div>
                                     }
                                     theme={theme}
                                 />
                             </div>
 
-                            {/* Support Section */}
                             <motion.div
-                                className={`p-8 rounded-3xl text-center backdrop-blur-xl ${
-                                    theme === "dark"
-                                        ? "bg-gradient-to-br from-pink-900/30 to-purple-900/30 border border-pink-500/20"
-                                        : "bg-gradient-to-br from-pink-50/80 to-purple-50/80 border border-pink-200/50"
-                                }`}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                            >
-                                <HeartHandshake
-                                    className={`w-12 h-12 mx-auto mb-4 ${
-                                        theme === "dark"
-                                            ? "text-pink-400"
-                                            : "text-pink-600"
-                                    }`}
-                                />
-                                <h3 className="text-2xl font-bold mb-4">
-                                    Support My Work
-                                </h3>
-                                <p
-                                    className={`max-w-md mx-auto mb-6 ${
-                                        theme === "dark"
-                                            ? "text-gray-400"
-                                            : "text-gray-600"
-                                    }`}
-                                >
-                                    If you find my work valuable, consider
-                                    supporting my open source contributions
-                                </p>
-                                <iframe
-                                    src="https://github.com/sponsors/janeezy/button"
-                                    title="Sponsor janeezy"
-                                    height="32"
-                                    width="114"
-                                    style={{ border: 0, borderRadius: "8px" }}
-                                />
-                            </motion.div>
-
-                            {/* Footer */}
-                            <motion.div
-                                className={`pt-8 border-t ${
-                                    theme === "dark"
-                                        ? "border-gray-800"
-                                        : "border-gray-200"
-                                }`}
+                                className={`pt-8 border-t ${theme === "dark" ? "border-gray-800" : "border-gray-200"}`}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.5 }}
                             >
                                 <div className="text-center space-y-3">
-                                    <div className="flex items-center justify-center gap-2">
-                                        <Copyright className="w-4 h-4" />
-                                        <span
-                                            className={`text-sm ${
-                                                theme === "dark"
-                                                    ? "text-gray-400"
-                                                    : "text-gray-600"
-                                            }`}
-                                        >
-                                            {new Date().getFullYear()} - All
-                                            rights reserved
-                                        </span>
-                                    </div>
-                                    <p
-                                        className={`text-sm ${
-                                            theme === "dark"
-                                                ? "text-gray-500"
-                                                : "text-gray-500"
-                                        }`}
-                                    >
-                                        Designed and Developed with{" "}
-                                        <span className="text-red-500">♥</span>{" "}
-                                        by Jane Duru
+                                    <p className={`text-sm ${theme === "dark" ? "text-gray-500" : "text-gray-500"}`}>
+                                        Designed and Developed with <span className="text-red-500">♥</span> by Jane Duru
+                                    </p>
+                                    <p className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                        © {new Date().getFullYear()} Zemio Labs LTD - Building the Future
                                     </p>
                                 </div>
                             </motion.div>
@@ -1379,20 +1301,14 @@ const Portfolio = () => {
     };
 
     return (
-        <div
-            className={`min-h-screen font-sans transition-all duration-300 ${
-                theme === "dark" ? "text-white" : "text-gray-900"
-            }`}
-        >
+        <div className={`min-h-screen font-sans transition-all duration-300 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
             {/* Header */}
             <motion.header
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ type: "spring", stiffness: 120 }}
                 className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b ${
-                    theme === "dark"
-                        ? "bg-gray-900/80 border-gray-800/50"
-                        : "bg-white/80 border-gray-200/50"
+                    theme === "dark" ? "bg-gray-900/80 border-gray-800/50" : "bg-white/80 border-gray-200/50"
                 }`}
             >
                 <div className="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -1403,23 +1319,15 @@ const Portfolio = () => {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.2 }}
                         >
-                            <h1
-                                className={`text-2xl font-bold ${
-                                    theme === "dark"
-                                        ? "bg-gradient-to-r from-indigo-400 to-purple-400 text-transparent bg-clip-text"
-                                        : "bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text"
-                                }`}
-                            >
+                            <h1 className={`text-2xl font-bold ${
+                                theme === "dark"
+                                    ? "bg-gradient-to-r from-indigo-400 to-purple-400 text-transparent bg-clip-text"
+                                    : "bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text"
+                            }`}>
                                 Jane Duru
                             </h1>
-                            <p
-                                className={`text-sm ${
-                                    theme === "dark"
-                                        ? "text-gray-400"
-                                        : "text-gray-600"
-                                }`}
-                            >
-                                Frontend Engineer
+                            <p className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
+                                Founder & CEO at Zemio Labs
                             </p>
                         </motion.div>
                     </div>
@@ -1448,11 +1356,7 @@ const Portfolio = () => {
                                     : "bg-indigo-500/20 text-indigo-600 border border-indigo-500/30"
                             }`}
                         >
-                            {theme === "dark" ? (
-                                <Sun size={20} />
-                            ) : (
-                                <Moon size={20} />
-                            )}
+                            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
                         </motion.button>
                     </div>
                 </div>
@@ -1490,9 +1394,7 @@ const Portfolio = () => {
                                             }`}
                                         >
                                             <section.icon size={20} />
-                                            <span className="font-medium">
-                                                {section.title}
-                                            </span>
+                                            <span className="font-medium">{section.title}</span>
                                         </motion.button>
                                     </li>
                                 ))}
@@ -1503,11 +1405,9 @@ const Portfolio = () => {
             </AnimatePresence>
 
             {/* Desktop Sidebar */}
-            <nav
-                className={`hidden md:block fixed top-0 left-0 bottom-0 w-20 z-40 backdrop-blur-xl ${
-                    theme === "dark" ? "bg-gray-900/80" : "bg-white/80"
-                }`}
-            >
+            <nav className={`hidden md:block fixed top-0 left-0 bottom-0 w-20 z-40 backdrop-blur-xl ${
+                theme === "dark" ? "bg-gray-900/80" : "bg-white/80"
+            }`}>
                 <div className="flex flex-col items-center justify-center h-full space-y-6 p-4">
                     {sections.map((section) => (
                         <motion.button
@@ -1548,11 +1448,15 @@ const Portfolio = () => {
                             <div className="w-32 h-32 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-1">
                                 <img
                                     src="/IMG.png"
-                                    alt="Ezinne Adaego Jane Duru"
+                                    alt="Jane Duru"
                                     className="w-full h-full rounded-full object-cover"
                                 />
                             </div>
-                            <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-white animate-pulse"></div>
+                            <motion.div 
+                                className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-white"
+                                animate={{ scale: [1, 1.2, 1] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                            />
                         </motion.div>
 
                         <motion.h2
@@ -1569,17 +1473,12 @@ const Portfolio = () => {
                         </motion.h2>
 
                         <motion.p
-                            className={`text-xl ${
-                                theme === "dark"
-                                    ? "text-gray-300"
-                                    : "text-gray-600"
-                            }`}
+                            className={`text-xl ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5, duration: 0.8 }}
                         >
-                            Frontend Software Engineer | 4+ Years Experience |
-                            Aspiring Blockchain Developer 🚀
+                            Co-Founder & CEO at Zemio Labs | Building Tomorrow's Digital Solutions 🚀
                         </motion.p>
                     </motion.div>
                 )}
@@ -1597,7 +1496,8 @@ const Portfolio = () => {
                     </motion.div>
                 </AnimatePresence>
             </main>
-        </div>
+        
+              </div>
     );
 };
 
