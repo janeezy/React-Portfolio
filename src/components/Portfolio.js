@@ -887,7 +887,7 @@ const Portfolio = () => {
                                 <h3 className={`text-2xl font-bold mb-4 ${
                                     theme === "dark" ? "text-gray-300" : "text-gray-700"
                                 }`}>
-                                    Previous Work
+                                    Personal Projects
                                 </h3>
                                 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -895,7 +895,18 @@ const Portfolio = () => {
                                         title="JaneezyBeats Platform"
                                         content={
                                             <div className="space-y-4">
-                                                <p>Professional beat store featuring original music production.</p>
+                                                <p>Professional beat store featuring original music production with integrated licensing system.</p>
+                                                <div className="flex flex-wrap gap-2 mb-3">
+                                                    {["BeatStars API", "Audio Streaming", "E-commerce", "Music Production"].map((tech) => (
+                                                        <span key={tech} className={`px-2 py-1 text-xs rounded-full ${
+                                                            theme === "dark" 
+                                                                ? "bg-purple-900/40 text-purple-300" 
+                                                                : "bg-purple-100 text-purple-700"
+                                                        }`}>
+                                                            {tech}
+                                                        </span>
+                                                    ))}
+                                                </div>
                                                 <div className="flex gap-3">
                                                     <a
                                                         href="https://janeezy.beatstars.com"
@@ -920,7 +931,18 @@ const Portfolio = () => {
                                         title="Restaurant Platform"
                                         content={
                                             <div className="space-y-4">
-                                                <p>Modern restaurant website with responsive design.</p>
+                                                <p>Modern restaurant website with responsive design and interactive menu system.</p>
+                                                <div className="flex flex-wrap gap-2 mb-3">
+                                                    {["HTML5", "CSS3", "JavaScript", "Responsive Design"].map((tech) => (
+                                                        <span key={tech} className={`px-2 py-1 text-xs rounded-full ${
+                                                            theme === "dark" 
+                                                                ? "bg-blue-900/40 text-blue-300" 
+                                                                : "bg-blue-100 text-blue-700"
+                                                        }`}>
+                                                            {tech}
+                                                        </span>
+                                                    ))}
+                                                </div>
                                                 <a
                                                     href="https://resturantapp-mu.vercel.app"
                                                     target="_blank"
@@ -933,6 +955,74 @@ const Portfolio = () => {
                                                 >
                                                     <ExternalLink size={16} />
                                                     View Demo
+                                                </a>
+                                            </div>
+                                        }
+                                        theme={theme}
+                                    />
+
+                                    <Card
+                                        title="Fitness Hub"
+                                        content={
+                                            <div className="space-y-4">
+                                                <p>Modern fitness platform with workout tracking, membership management, and progress analytics.</p>
+                                                <div className="flex flex-wrap gap-2 mb-3">
+                                                    {["React", "CSS3", "JavaScript", "PWA", "Fitness API"].map((tech) => (
+                                                        <span key={tech} className={`px-2 py-1 text-xs rounded-full ${
+                                                            theme === "dark" 
+                                                                ? "bg-green-900/40 text-green-300" 
+                                                                : "bg-green-100 text-green-700"
+                                                        }`}>
+                                                            {tech}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                                <a
+                                                    href="https://gym-rho-one.vercel.app"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
+                                                        ${theme === "dark"
+                                                            ? "bg-green-600 hover:bg-green-700 text-white"
+                                                            : "bg-green-100 hover:bg-green-200 text-green-700"
+                                                        }`}
+                                                >
+                                                    <ExternalLink size={16} />
+                                                    View Project
+                                                </a>
+                                            </div>
+                                        }
+                                        theme={theme}
+                                    />
+
+                                    <Card
+                                        title="Portfolio Website"
+                                        content={
+                                            <div className="space-y-4">
+                                                <p>Personal portfolio showcasing my journey, skills, and creative work as a developer.</p>
+                                                <div className="flex flex-wrap gap-2 mb-3">
+                                                    {["Next.js", "Tailwind CSS", "Framer Motion", "SEO"].map((tech) => (
+                                                        <span key={tech} className={`px-2 py-1 text-xs rounded-full ${
+                                                            theme === "dark" 
+                                                                ? "bg-pink-900/40 text-pink-300" 
+                                                                : "bg-pink-100 text-pink-700"
+                                                        }`}>
+                                                            {tech}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                                <a
+                                                    href="https://www.janeduru.site"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
+                                                        ${theme === "dark"
+                                                            ? "bg-pink-600 hover:bg-pink-700 text-white"
+                                                            : "bg-pink-100 hover:bg-pink-200 text-pink-700"
+                                                        }`}
+                                                >
+                                                    <ExternalLink size={16} />
+                                                    Visit Portfolio
                                                 </a>
                                             </div>
                                         }
@@ -1149,14 +1239,16 @@ const Portfolio = () => {
                                                     <Mail className="w-5 h-5 text-purple-500" />
                                                     <span>support@zemiolabs.com</span>
                                                 </div>
-                                                <div className="flex items-center gap-3">
+                                                {/* <div className="flex items-center gap-3">
                                                     <div className="w-5 h-5 flex items-center justify-center">📱</div>
-                                                    <span>+351 920 009 647</span>
-                                                </div>
+                                                    <a href="tel:+351920009647" className="hover:text-indigo-500 transition-colors">
+                                                        Contact Me: +351 920 009 647
+                                                    </a>
+                                                </div> */}
                                                 <div className="flex items-center gap-3">
                                                     <div className="w-5 h-5 flex items-center justify-center">💬</div>
                                                     <a href="https://wa.me/351920009647" target="_blank" rel="noopener noreferrer" className="hover:text-green-500 transition-colors">
-                                                        WhatsApp
+                                                        WhatsApp (Business Inquiries)
                                                     </a>
                                                 </div>
                                                 <div className="flex items-center gap-3">
@@ -1460,7 +1552,7 @@ const Portfolio = () => {
                         </motion.div>
 
                         <motion.h2
-                            className={`text-4xl md:text-5xl font-bold mb-4 ${
+                            className={`text-4xl md:text-5xl font-bold mb-4 leading-relaxed ${
                                 theme === "dark"
                                     ? "bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text"
                                     : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-transparent bg-clip-text"
@@ -1468,6 +1560,7 @@ const Portfolio = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3, duration: 0.8 }}
+                            style={{ paddingBottom: '0.25rem' }}
                         >
                             Ezinne Adaego Jane Duru
                         </motion.h2>
@@ -1496,6 +1589,8 @@ const Portfolio = () => {
                     </motion.div>
                 </AnimatePresence>
             </main>
+        
+        
         
               </div>
     );
