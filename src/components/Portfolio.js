@@ -28,7 +28,7 @@ import {
     Target
 } from "lucide-react";
 
-// Modern Logo with glassmorphism effect
+
 const Logo = ({ setActiveSection }) => (
     <motion.button
         onClick={() => setActiveSection("home")}
@@ -172,14 +172,14 @@ const Portfolio = () => {
                 return (
                     <Section title="" theme={theme}>
                         <div className="max-w-5xl mx-auto space-y-16">
-                            {/* Hero Section with Animations */}
+                            {}
                             <motion.div
                                 className="text-center space-y-8"
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, ease: "easeOut" }}
                             >
-                                {/* Animated Sparkles */}
+                                {}
                                 <motion.div
                                     className="flex justify-center gap-4 mb-6"
                                     initial={{ opacity: 0 }}
@@ -284,7 +284,7 @@ const Portfolio = () => {
                                 </motion.div>
                             </motion.div>
 
-                            {/* Key Highlights Grid */}
+                            {}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 {[
                                     {
@@ -372,7 +372,7 @@ const Portfolio = () => {
                                 ))}
                             </div>
 
-                            {/* CTA Section */}
+                            {}
                             <motion.div
                                 className={`p-10 rounded-3xl backdrop-blur-xl ${
                                     theme === "dark"
@@ -439,7 +439,7 @@ const Portfolio = () => {
                 return (
                     <Section title="Professional Journey" theme={theme}>
                         <div className="space-y-12">
-                            {/* Current Role - Zemio Labs */}
+                            {}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -623,7 +623,7 @@ const Portfolio = () => {
                                     />
                                 </div>
 
-                                {/* Financial Sales Background */}
+                                {}
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
@@ -773,7 +773,7 @@ const Portfolio = () => {
                 return (
                     <Section title="Portfolio & Projects" theme={theme}>
                         <div className="space-y-12">
-                            {/* Zemio Labs Website - Featured Project */}
+                            {}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -917,7 +917,7 @@ const Portfolio = () => {
                                 />
                             </motion.div>
 
-                            {/* Other Projects */}
+                            {}
                             <div className="space-y-6">
                                 <h3 className={`text-2xl font-bold mb-4 ${
                                     theme === "dark" ? "text-gray-300" : "text-gray-700"
@@ -1525,7 +1525,7 @@ const Portfolio = () => {
                 )}
             </AnimatePresence>
 
-            {/* Desktop Sidebar */}
+            {}
             <nav className={`hidden md:block fixed top-0 left-0 bottom-0 w-20 z-40 backdrop-blur-xl ${
                 theme === "dark" ? "bg-gray-900/80" : "bg-white/80"
             }`}>
@@ -1551,9 +1551,9 @@ const Portfolio = () => {
                 </div>
             </nav>
 
-            {/* Main Content */}
+            {}
             <main className="pt-24 md:ml-20 px-6 md:px-12 pb-12">
-                {/* Profile Section - Only show on home */}
+                {}
                 {activeSection === "home" && (
                     <motion.div
                         className="text-center mb-16"
@@ -1600,12 +1600,12 @@ const Portfolio = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5, duration: 0.8 }}
                         >
-                            Co-Founder & CEO at Zemio Labs | Building Tomorrow's Digital Solutions 🚀
+                            Co-Founder & Head of Frontend Engineering at Zemio Labs | Building Tomorrow's Digital Solutions 🚀
                         </motion.p>
                     </motion.div>
                 )}
 
-                {/* Content */}
+                {}
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={activeSection}
