@@ -1448,7 +1448,7 @@ const Portfolio = () => {
                                 Jane Duru
                             </h1>
                             <p className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
-                                Founder & CEO at Zemio Labs
+                                Frontend Engineer
                             </p>
                         </motion.div>
                     </div>
