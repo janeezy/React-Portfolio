@@ -16,13 +16,16 @@ import {
     Moon,
     Euro,
     Twitter,
-    Facebook,
-    HeartHandshake,
-    Copyright,
     Github,
     Rocket,
     Sparkles,
     Building2,
+    Globe,
+    Smartphone,
+    Users,
+    TrendingUp,
+    Award,
+    Target
 } from "lucide-react";
 
 // Modern Logo with glassmorphism effect
@@ -158,7 +161,7 @@ const Portfolio = () => {
         { id: "experience", icon: Briefcase, title: "Experience" },
         { id: "skills", icon: User, title: "Skills" },
         { id: "projects", icon: Laptop, title: "Projects" },
-        { id: "pricing", icon: Euro, title: "Pricing" },
+        { id: "pricing", icon: Euro, title: "Services" },
         { id: "education", icon: School, title: "Education" },
         { id: "contact", icon: Mail, title: "Contact" },
     ];
@@ -260,8 +263,8 @@ const Portfolio = () => {
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: 0.6, duration: 0.8 }}
                                 >
-                                    Currently developing cutting-edge applications that solve real-world problems. 
-                                    Our innovative products are coming soon to transform how people interact with technology.
+                                    Developing cutting-edge applications that solve real-world problems. 
+                                    Our innovative products are transforming how people interact with technology.
                                 </motion.p>
 
                                 {/* Status Badge */}
@@ -309,15 +312,15 @@ const Portfolio = () => {
                                         gradient: "from-blue-500 to-cyan-500",
                                     },
                                     {
-                                        title: "Coming Soon",
-                                        icon: Sparkles,
+                                        title: "Market Success",
+                                        icon: TrendingUp,
                                         skills: [
-                                            "Revolutionary Apps",
-                                            "AI Integration",
-                                            "Social Impact",
-                                            "Global Reach",
+                                            "8 Years Financial Sales",
+                                            "Fintech Expertise",
+                                            "Cryptocurrency",
+                                            "Strategic Partnerships",
                                         ],
-                                        description: "Game-changing products launching soon",
+                                        description: "Proven track record in business growth",
                                         gradient: "from-indigo-500 to-purple-500",
                                     },
                                 ].map((section, index) => (
@@ -485,7 +488,7 @@ const Portfolio = () => {
                                                 transition={{ delay: 0.2 }}
                                             >
                                                 Leading a UK-registered software company (Company No. 16513457) focused on building smart, scalable, and human-centered solutions. 
-                                                Currently developing multiple applications set to launch soon, designed to revolutionize how people interact with technology.
+                                                Currently developing multiple applications designed to revolutionize how people interact with technology.
                                             </motion.p>
                                             
                                             <motion.ul 
@@ -515,18 +518,6 @@ const Portfolio = () => {
                                             </motion.ul>
 
                                             <motion.div 
-                                                className="mt-6 p-4 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20"
-                                                initial={{ opacity: 0, scale: 0.95 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                transition={{ delay: 0.8 }}
-                                            >
-                                                <p className="text-sm italic">
-                                                    "We don't just build apps — we craft experiences. Zemio Labs is a creative lab, 
-                                                    a strategic partner, and a passionate builder of better digital futures."
-                                                </p>
-                                            </motion.div>
-
-                                            <motion.div 
                                                 className="flex flex-wrap gap-3"
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
@@ -552,58 +543,6 @@ const Portfolio = () => {
                                                     </span>
                                                 ))}
                                             </motion.div>
-
-                                            <motion.div 
-                                                className="flex flex-wrap gap-4 pt-4"
-                                                initial={{ opacity: 0, y: 20 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                transition={{ delay: 1.2 }}
-                                            >
-                                                <div className="w-full mb-3">
-                                                    <p className="text-sm text-gray-500 flex items-center gap-2">
-                                                        <Building2 className="w-4 h-4" />
-                                                        Registered in England & Wales • Company No. 16513457
-                                                    </p>
-                                                </div>
-                                                <motion.a
-                                                    href="https://zemiolabs.com"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                                                    whileHover={{ scale: 1.05 }}
-                                                >
-                                                    <ExternalLink className="w-5 h-5" />
-                                                    Visit Website
-                                                </motion.a>
-                                                <motion.a
-                                                    href="https://www.linkedin.com/company/zemio-labs-ltd"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl border-2 font-semibold transition-all duration-300
-                                                        ${theme === "dark"
-                                                            ? "border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
-                                                            : "border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"
-                                                        }`}
-                                                    whileHover={{ scale: 1.05 }}
-                                                >
-                                                    <Linkedin className="w-5 h-5" />
-                                                    Company LinkedIn
-                                                </motion.a>
-                                                <motion.a
-                                                    href="https://x.com/zemiolabs"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl border-2 font-semibold transition-all duration-300
-                                                        ${theme === "dark"
-                                                            ? "border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
-                                                            : "border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"
-                                                        }`}
-                                                    whileHover={{ scale: 1.05 }}
-                                                >
-                                                    <Twitter className="w-5 h-5" />
-                                                    Company Twitter
-                                                </motion.a>
-                                            </motion.div>
                                         </div>
                                     }
                                     theme={theme}
@@ -620,7 +559,7 @@ const Portfolio = () => {
                                 <h3 className={`text-2xl font-bold mb-6 ${
                                     theme === "dark" ? "text-gray-300" : "text-gray-700"
                                 }`}>
-                                    Previous Experience
+                                    Development Experience
                                 </h3>
                                 <div className="space-y-6">
                                     <Card
@@ -713,7 +652,7 @@ const Portfolio = () => {
                                                         "Transitioned to tech to combine financial expertise with software development",
                                                     ].map((item, index) => (
                                                         <li key={index} className="flex items-start gap-3">
-                                                            <div className="w-2 h-2 rounded-full bg-gradient-to-r from-gold-500 to-yellow-500 mt-2 flex-shrink-0"></div>
+                                                            <div className="w-2 h-2 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 mt-2 flex-shrink-0"></div>
                                                             <span>{item}</span>
                                                         </li>
                                                     ))}
@@ -761,7 +700,7 @@ const Portfolio = () => {
                                         {[
                                             {
                                                 category: "Frontend Mastery",
-                                                skills: ["React.js", "JavaScript (ES6+)", "HTML5", "CSS3", "Tailwind CSS"],
+                                                skills: ["React.js", "Next.js", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3", "Tailwind CSS"],
                                                 color: "from-blue-500 to-cyan-500",
                                             },
                                             {
@@ -834,36 +773,118 @@ const Portfolio = () => {
                 return (
                     <Section title="Portfolio & Projects" theme={theme}>
                         <div className="space-y-12">
-                            {/* Zemio Labs Projects */}
+                            {/* Zemio Labs Website - Featured Project */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                             >
                                 <Card
-                                    title="Zemio Labs Applications"
+                                    title={
+                                        <div className="flex items-center justify-between mb-4">
+                                            <div>
+                                                <h4 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
+                                                    Zemio Labs Website
+                                                </h4>
+                                                <p className="text-xl text-gray-500">
+                                                    Company Website & Digital Presence
+                                                </p>
+                                            </div>
+                                            <motion.div
+                                                className="flex gap-2"
+                                                initial={{ opacity: 0, x: 20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: 0.3 }}
+                                            >
+                                                <span className={`px-4 py-2 text-sm font-medium rounded-full
+                                                    ${theme === "dark"
+                                                        ? "bg-gradient-to-r from-purple-900/40 to-pink-900/40 text-purple-300 border border-purple-800/50"
+                                                        : "bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 border border-purple-200"
+                                                    }`}>
+                                                    Live
+                                                </span>
+                                                <span className={`px-4 py-2 text-sm font-medium rounded-full
+                                                    ${theme === "dark"
+                                                        ? "bg-blue-900/40 text-blue-300 border border-blue-800/50"
+                                                        : "bg-blue-100 text-blue-700 border border-blue-200"
+                                                    }`}>
+                                                    Corporate
+                                                </span>
+                                            </motion.div>
+                                        </div>
+                                    }
                                     content={
                                         <div className="space-y-6">
-                                            <motion.div 
-                                                className="p-6 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20"
-                                                whileHover={{ scale: 1.02 }}
+                                            <motion.p 
+                                                className="text-lg leading-relaxed"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ delay: 0.2 }}
                                             >
-                                                <div className="flex items-center gap-3 mb-3">
-                                                    <Rocket className="w-6 h-6 text-purple-400" />
-                                                    <h4 className="text-xl font-bold">Coming Soon</h4>
-                                                </div>
-                                                <p className="text-lg mb-4">
-                                                    Revolutionary applications currently in development. 
-                                                    Our products focus on solving real-world problems with innovative solutions.
-                                                </p>
-                                                <ul className="space-y-2 text-sm">
-                                                    <li>• Human-centered design approach</li>
-                                                    <li>• Scalable architecture</li>
-                                                    <li>• Social impact focus</li>
-                                                    <li>• Cross-platform compatibility</li>
-                                                </ul>
-                                            </motion.div>
+                                                Professional corporate website showcasing Zemio Labs' mission, services, and innovative approach to digital solutions. 
+                                                Built with modern web technologies and optimized for performance and user experience.
+                                            </motion.p>
                                             
-                                            <div className="flex flex-wrap gap-4">
+                                            <motion.div 
+                                                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ delay: 0.4 }}
+                                            >
+                                                <div className="space-y-3">
+                                                    <h5 className="font-semibold text-purple-400">Key Features</h5>
+                                                    <ul className="space-y-2 text-sm">
+                                                        <li>• Modern responsive design</li>
+                                                        <li>• Performance optimized</li>
+                                                        <li>• SEO optimized</li>
+                                                        <li>• Professional branding</li>
+                                                        <li>• Contact integration</li>
+                                                    </ul>
+                                                </div>
+                                                <div className="space-y-3">
+                                                    <h5 className="font-semibold text-pink-400">Business Impact</h5>
+                                                    <ul className="space-y-2 text-sm">
+                                                        <li>• Enhanced company credibility</li>
+                                                        <li>• Professional online presence</li>
+                                                        <li>• Lead generation platform</li>
+                                                        <li>• Brand awareness</li>
+                                                        <li>• Client acquisition tool</li>
+                                                    </ul>
+                                                </div>
+                                            </motion.div>
+
+                                            <motion.div 
+                                                className="flex flex-wrap gap-3"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ delay: 0.6 }}
+                                            >
+                                                {[
+                                                    "React.js",
+                                                    "Tailwind CSS",
+                                                    "Responsive Design",
+                                                    "SEO Optimization",
+                                                    "Corporate Branding",
+                                                    "Performance Optimization",
+                                                ].map((tech) => (
+                                                    <span
+                                                        key={tech}
+                                                        className={`px-4 py-2 text-sm font-medium rounded-full backdrop-blur-sm
+                                                        ${theme === "dark"
+                                                            ? "bg-purple-900/40 text-purple-300 border border-purple-800/50"
+                                                            : "bg-purple-50 text-purple-700 border border-purple-200/50"
+                                                        }`}
+                                                    >
+                                                        {tech}
+                                                    </span>
+                                                ))}
+                                            </motion.div>
+
+                                            <motion.div 
+                                                className="flex flex-wrap gap-4 pt-4"
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                transition={{ delay: 0.8 }}
+                                            >
                                                 <motion.a
                                                     href="https://zemiolabs.com"
                                                     target="_blank"
@@ -871,10 +892,24 @@ const Portfolio = () => {
                                                     className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                                                     whileHover={{ scale: 1.05 }}
                                                 >
-                                                    <Building2 className="w-5 h-5" />
-                                                    Learn More About Zemio Labs
+                                                    <Globe className="w-5 h-5" />
+                                                    Visit Website
                                                 </motion.a>
-                                            </div>
+                                                <motion.a
+                                                    href="https://www.linkedin.com/company/zemio-labs-ltd"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl border-2 font-semibold transition-all duration-300
+                                                        ${theme === "dark"
+                                                            ? "border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
+                                                            : "border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"
+                                                        }`}
+                                                    whileHover={{ scale: 1.05 }}
+                                                >
+                                                    <Linkedin className="w-5 h-5" />
+                                                    Company Page
+                                                </motion.a>
+                                            </motion.div>
                                         </div>
                                     }
                                     theme={theme}
@@ -887,7 +922,7 @@ const Portfolio = () => {
                                 <h3 className={`text-2xl font-bold mb-4 ${
                                     theme === "dark" ? "text-gray-300" : "text-gray-700"
                                 }`}>
-                                    Personal Projects
+                                    Additional Projects
                                 </h3>
                                 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -895,7 +930,7 @@ const Portfolio = () => {
                                         title="JaneezyBeats Platform"
                                         content={
                                             <div className="space-y-4">
-                                                <p>Professional beat store featuring original music production with integrated licensing system.</p>
+                                                <p>Professional beat store featuring original music production with integrated licensing system and audio streaming capabilities.</p>
                                                 <div className="flex flex-wrap gap-2 mb-3">
                                                     {["BeatStars API", "Audio Streaming", "E-commerce", "Music Production"].map((tech) => (
                                                         <span key={tech} className={`px-2 py-1 text-xs rounded-full ${
@@ -931,7 +966,7 @@ const Portfolio = () => {
                                         title="Restaurant Platform"
                                         content={
                                             <div className="space-y-4">
-                                                <p>Modern restaurant website with responsive design and interactive menu system.</p>
+                                                <p>Modern restaurant website with responsive design and interactive menu system optimized for customer engagement.</p>
                                                 <div className="flex flex-wrap gap-2 mb-3">
                                                     {["HTML5", "CSS3", "JavaScript", "Responsive Design"].map((tech) => (
                                                         <span key={tech} className={`px-2 py-1 text-xs rounded-full ${
@@ -965,7 +1000,7 @@ const Portfolio = () => {
                                         title="Fitness Hub"
                                         content={
                                             <div className="space-y-4">
-                                                <p>Modern fitness platform with workout tracking, membership management, and progress analytics.</p>
+                                                <p>Modern fitness platform with workout tracking, membership management, and progress analytics for health enthusiasts.</p>
                                                 <div className="flex flex-wrap gap-2 mb-3">
                                                     {["React", "CSS3", "JavaScript", "PWA", "Fitness API"].map((tech) => (
                                                         <span key={tech} className={`px-2 py-1 text-xs rounded-full ${
@@ -996,10 +1031,10 @@ const Portfolio = () => {
                                     />
 
                                     <Card
-                                        title="Portfolio Website"
+                                        title="Personal Portfolio"
                                         content={
                                             <div className="space-y-4">
-                                                <p>Personal portfolio showcasing my journey, skills, and creative work as a developer.</p>
+                                                <p>Professional portfolio showcasing my journey, skills, and creative work as a developer and entrepreneur.</p>
                                                 <div className="flex flex-wrap gap-2 mb-3">
                                                     {["Next.js", "Tailwind CSS", "Framer Motion", "SEO"].map((tech) => (
                                                         <span key={tech} className={`px-2 py-1 text-xs rounded-full ${
@@ -1239,12 +1274,6 @@ const Portfolio = () => {
                                                     <Mail className="w-5 h-5 text-purple-500" />
                                                     <span>support@zemiolabs.com</span>
                                                 </div>
-                                                {/* <div className="flex items-center gap-3">
-                                                    <div className="w-5 h-5 flex items-center justify-center">📱</div>
-                                                    <a href="tel:+351920009647" className="hover:text-indigo-500 transition-colors">
-                                                        Contact Me: +351 920 009 647
-                                                    </a>
-                                                </div> */}
                                                 <div className="flex items-center gap-3">
                                                     <div className="w-5 h-5 flex items-center justify-center">💬</div>
                                                     <a href="https://wa.me/351920009647" target="_blank" rel="noopener noreferrer" className="hover:text-green-500 transition-colors">
@@ -1589,10 +1618,7 @@ const Portfolio = () => {
                     </motion.div>
                 </AnimatePresence>
             </main>
-        
-        
-        
-              </div>
+        </div>
     );
 };
 
