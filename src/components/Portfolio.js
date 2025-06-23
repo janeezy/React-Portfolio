@@ -288,12 +288,12 @@ const Portfolio = () => {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 {[
                                     {
-                                        title: "Entrepreneurial Vision",
+                                        title: "Vision",
                                         icon: Rocket,
                                         skills: [
-                                            "Strategic Leadership",
-                                            "Product Innovation",
-                                            "Market Analysis",
+                                            " Launch products",
+                                            "Web & Mobile Innovations",
+                                            "user-Centric Design",
                                             "Business Development",
                                         ],
                                         description: "Building Zemio Labs from the ground up with innovative solutions",
@@ -303,10 +303,10 @@ const Portfolio = () => {
                                         title: "Technical Excellence",
                                         icon: Code,
                                         skills: [
-                                            "React.js Expert",
-                                            "Full-Stack Development",
+                                            "React.js ",
+                                            "web Development",
                                             "Mobile Solutions",
-                                            "Cloud Architecture",
+                                            "Responsive Design",
                                         ],
                                         description: "4+ years crafting world-class applications",
                                         gradient: "from-blue-500 to-cyan-500",
@@ -315,12 +315,12 @@ const Portfolio = () => {
                                         title: "Market Success",
                                         icon: TrendingUp,
                                         skills: [
-                                            "8 Years Financial Sales",
-                                            "Fintech Expertise",
-                                            "Cryptocurrency",
-                                            "Strategic Partnerships",
+                                            "Grow Startups",
+                                            "create Value for Users",
+                                            "scalable Solutions",
+                                            "Social Impact",
                                         ],
-                                        description: "Proven track record in business growth",
+                                        description: " Business growth Solutions ",
                                         gradient: "from-indigo-500 to-purple-500",
                                     },
                                 ].map((section, index) => (
@@ -447,15 +447,15 @@ const Portfolio = () => {
                             >
                                 <Card
                                     title={
-                                        <div className="flex items-center justify-between mb-4">
-                                            <div>
-                                                <h4 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
-                                                    Co-Founder & CEO
-                                                </h4>
-                                                <p className="text-xl text-gray-500">
-                                                    Zemio Labs LTD | Present
-                                                </p>
-                                            </div>
+                                         <div className="flex items-center justify-between mb-4">
+                                         <div>
+                                           <h4 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
+                                                  Co-Founder & CEO
+                                             </h4>
+                                           <p className="text-xl text-gray-500">
+                                              Zemio Labs LTD | Present
+                                             </p>
+                                       </div>
                                             <motion.div
                                                 className="flex gap-2"
                                                 initial={{ opacity: 0, x: 20 }}
@@ -477,7 +477,7 @@ const Portfolio = () => {
                                                     Active
                                                 </span>
                                             </motion.div>
-                                        </div>
+                                    </div>
                                     }
                                     content={
                                         <div className="space-y-6">
@@ -1600,7 +1600,7 @@ const Portfolio = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5, duration: 0.8 }}
                         >
-                            Co-Founder & Head of Frontend Engineering at Zemio Labs | Building Tomorrow's Digital Solutions 🚀
+                           
                         </motion.p>
                     </motion.div>
                 )}
