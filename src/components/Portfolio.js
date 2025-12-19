@@ -330,14 +330,14 @@ const ThemePicker = ({ currentTheme, setCurrentTheme, mode, colors }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-40"
+              className="fixed inset-0 z-[60]"
               onClick={() => setOpen(false)}
             />
             <motion.div
               initial={{ opacity: 0, y: 8, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 8, scale: 0.95 }}
-              className="absolute top-full right-0 mt-3 p-2 rounded-2xl backdrop-blur-2xl z-50 min-w-[170px]"
+              className="absolute top-full right-0 mt-3 p-2 rounded-2xl backdrop-blur-2xl z-[70] min-w-[170px]"
               style={{
                 background: `${colors.bgCard}f8`,
                 border: `1px solid ${colors.border}`,
@@ -542,6 +542,36 @@ const Portfolio = () => {
                 {item.label}
               </motion.button>
             ))}
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: nav.length * 0.1 }}
+              className="flex items-center gap-3 mt-8"
+            >
+              <ThemePicker
+                currentTheme={theme}
+                setCurrentTheme={setTheme}
+                mode={mode}
+                colors={colors}
+              />
+              <motion.button
+                onClick={() => setMode(mode === "dark" ? "light" : "dark")}
+                className="p-2.5 rounded-xl"
+                style={{
+                  background: `${colors.accent}10`,
+                  border: `1px solid ${colors.border}`,
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {mode === "dark" ? (
+                  <Sun size={18} style={{ color: colors.accent }} />
+                ) : (
+                  <Moon size={18} style={{ color: colors.accent }} />
+                )}
+              </motion.button>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
