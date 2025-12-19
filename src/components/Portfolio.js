@@ -612,7 +612,7 @@ const Portfolio = () => {
                 className="text-lg leading-relaxed max-w-xl mb-8"
                 style={{ color: colors.textSecondary }}
               >
-                I build fast, accessible, user centered web applications.
+                I build fast, accessible, user-centered web applications.
                 Currently co-founding{" "}
                 <a
                   href="https://zemiolabs.com"
@@ -623,8 +623,7 @@ const Portfolio = () => {
                 >
                   Zemio Labs
                 </a>
-                . I also decode tech, psychology & culture turning complexity
-                into clarity.
+                . I also write about AI, technology, and human behavior on X and Medium.
               </motion.p>
 
               <motion.div
@@ -634,14 +633,15 @@ const Portfolio = () => {
                 className="flex flex-wrap gap-4"
               >
                 <MagneticBtn
-                  onClick={() => scrollTo("contact")}
+                  href="https://calendly.com/janeezyofficial/30min"
+                  target="_blank"
                   className={`group px-7 py-3.5 bg-gradient-to-r ${colors.gradient} text-white rounded-2xl font-semibold flex items-center gap-2`}
                   style={{ boxShadow: `0 8px 30px ${colors.glow}` }}
                 >
-                  Let's talk{" "}
-                  <ArrowRight
+                  Schedule a call{" "}
+                  <Calendar
                     size={18}
-                    className="group-hover:translate-x-1 transition-transform"
+                    className="group-hover:scale-110 transition-transform"
                   />
                 </MagneticBtn>
                 <MagneticBtn
@@ -740,27 +740,25 @@ const Portfolio = () => {
               01 / ABOUT
             </span>
             <h2 className="text-4xl sm:text-5xl font-extrabold mt-3 tracking-tight">
-              Medicine, Finance, and <span className="text-gradient">Code</span>
+              Building <span className="text-gradient">fast, scalable</span> web experiences
             </h2>
             <p
               className="text-xl mt-4 max-w-2xl"
               style={{ color: colors.textSecondary }}
             >
-              A non-traditional path that gives me a unique perspective on
-              building products people actually use.
+              Frontend engineer specializing in React, Next.js, and TypeScript. I ship performant, accessible applications that users love.
             </p>
           </Reveal>
 
           <div className="grid lg:grid-cols-5 gap-12">
             <div className="lg:col-span-2 space-y-6">
               <Reveal delay={0.1}>
+                <h3 className="text-xl font-bold mb-4" style={{ color: colors.text }}>What I build</h3>
                 <p
                   className="text-lg leading-relaxed"
                   style={{ color: colors.textSecondary }}
                 >
-                  I studied medicine and completed my Step 1 Krok Medical
-                  Certificate. That training shaped my approach to precision,
-                  systems thinking, and user empathy.
+                  I specialize in building <strong style={{ color: colors.text }}>responsive, performant web applications</strong> with modern JavaScript frameworks. My code is clean, maintainable, and optimized for real-world usage.
                 </p>
               </Reveal>
 
@@ -769,25 +767,26 @@ const Portfolio = () => {
                   className="text-lg leading-relaxed"
                   style={{ color: colors.textSecondary }}
                 >
-                  I then spent{" "}
-                  <strong style={{ color: colors.text }}>
-                    8 years in FinTech and Crypto sales
-                  </strong>
-                  , managing a €20M+ portfolio and driving 13 percent revenue
-                  growth. That experience taught me execution, incentives, and
-                  how to deliver measurable results.
+                  With a background in medicine and 8 years in FinTech, I bring <strong style={{ color: colors.text }}>systems thinking, user empathy, and execution focus</strong> to every project. I understand both the technical and business sides of product development.
                 </p>
               </Reveal>
 
-              <Reveal delay={0.25}>
-                <div className="flex flex-wrap gap-2 pt-4">
+              <Reveal delay={0.2}>
+                <h3 className="text-xl font-bold mb-3 mt-6" style={{ color: colors.text }}>Tech Stack</h3>
+                <div className="flex flex-wrap gap-2">
                   {[
                     "React.js",
                     "Next.js",
                     "TypeScript",
+                    "JavaScript (ES6+)",
                     "Tailwind CSS",
+                    "Framer Motion",
                     "REST APIs",
-                    "Git",
+                    "Git & GitHub",
+                    "Responsive Design",
+                    "Web Performance",
+                    "Accessibility (a11y)",
+                    "Figma to Code",
                   ].map((skill) => (
                     <span
                       key={skill}
@@ -807,32 +806,32 @@ const Portfolio = () => {
             <div className="lg:col-span-3 space-y-4">
               {[
                 {
-                  icon: Stethoscope,
-                  title: "Medical Background",
-                  sub: "Lviv National Medical University",
-                  desc: "Step 1 Medical krok Certificate. Systems thinking, precision, user empathy.",
-                  color: "#10b981",
-                },
-                {
-                  icon: TrendingUp,
-                  title: "8 Years in Finance",
-                  sub: "FinTech & Crypto Sales",
-                  desc: "€20M+ portfolio managed. 13% revenue increase. Execution focused.",
-                  color: "#3b82f6",
-                },
-                {
                   icon: Code2,
-                  title: "Frontend Engineer",
+                  title: "Frontend Development",
                   sub: "React · Next.js · TypeScript",
-                  desc: " Building performant, accessible web applications.",
+                  desc: "Building performant, accessible web applications. Reduced load times by 35%, improved dev efficiency by 30%.",
                   color: colors.accent,
                 },
                 {
                   icon: Building2,
-                  title: "Co-founder",
+                  title: "Co-founder & Tech Lead",
                   sub: "Zemio Labs",
-                  desc: "Leading frontend architecture and product development.",
+                  desc: "Leading frontend architecture and product development. Designed reusable component libraries and design systems.",
                   color: colors.accentAlt,
+                },
+                {
+                  icon: Sparkles,
+                  title: "UI/UX Implementation",
+                  sub: "Design to Production",
+                  desc: "Pixel-perfect Figma implementations. Creating smooth animations and micro-interactions with Framer Motion.",
+                  color: "#ec4899",
+                },
+                {
+                  icon: Pen,
+                  title: "Technical Writing",
+                  sub: "X (Twitter) & Medium",
+                  desc: "Sharing insights on AI, technology, psychology, and systems. Making complexity simple for builders and thinkers.",
+                  color: "#10b981",
                 },
               ].map((item, i) => (
                 <Reveal key={item.title} delay={0.1 + i * 0.08}>
@@ -895,9 +894,9 @@ const Portfolio = () => {
               {
                 title: "Frontend Developer",
                 company: "Zemio Labs",
-                type: "Freelance",
+                type: "Freelance · Co-founder",
                 period: "Jun 2025 – Present",
-                desc: "Designed reusable UI libraries, reduced dev time by 30%. Implementing 35% faster load times. Building frontend architecture with React, Next.js, TypeScript.",
+                desc: "Architecting frontend infrastructure for scalable web platform. Engineered component library that reduced development time 30% across teams. Optimized build pipeline, achieving 35% faster page loads. Leading technical decisions on React, Next.js, and TypeScript architecture.",
                 current: true,
               },
               {
@@ -905,28 +904,28 @@ const Portfolio = () => {
                 company: "ROY",
                 type: "Contract",
                 period: "Mar 2025 – Jun 2025",
-                desc: "Built user dashboards, secure login, interactive forms. Improved performance by 30%. Integrated REST APIs for real-time data. Pixel-perfect Figma implementations.",
+                desc: "Shipped complete user authentication system and interactive dashboards serving 1000+ users. Drove 30% performance improvement through code optimization and lazy loading. Integrated REST APIs for real-time data sync. Delivered pixel-perfect implementations from Figma designs.",
               },
               {
-                title: "Junior Frontend Developer",
+                title: "Frontend Developer",
                 company: "Jether Tech",
                 type: "Full-time",
                 period: "Dec 2022 – Mar 2025",
-                desc: "Developed responsive UIs, improved cross-browser compatibility by 25%. Reduced bug rate by 40%. Created reusable React components.",
+                desc: "Led development of responsive web applications with React and TypeScript. Improved cross-browser compatibility by 25%, expanding user reach. Reduced production bugs by 40% through component testing and code reviews. Built reusable component library adopted across 5+ projects.",
               },
               {
                 title: "Frontend Developer Intern",
                 company: "Jether Tech",
                 type: "Internship",
                 period: "Jun 2022 – Nov 2022",
-                desc: "Built feature-rich applications with HTML5, CSS3, JavaScript. Mobile-first interfaces improved engagement by 20%.",
+                desc: "Shipped production features using HTML5, CSS3, and JavaScript (ES6+). Implemented mobile-first responsive designs that increased mobile engagement 20%. Collaborated with senior developers on component architecture and best practices.",
               },
               {
                 title: "Financial Sales Manager",
                 company: "Golden Markets & Ashford",
                 type: "Previous Career",
                 period: "Jan 2016 – Jan 2022",
-                desc: "Managed €20M+ client portfolio. 13% sales increase. Advised on crypto investments, blockchain, compliance, digital asset security.",
+                desc: "Managed €20M+ client portfolio with 13% YoY revenue growth. Specialized in crypto/blockchain advisory during market expansion. Developed deep understanding of fintech products, user needs, and regulatory compliance. Skills in client communication and high-stakes decision-making now applied to product development.",
               },
             ].map((job, i) => (
               <Reveal key={job.title + job.company} delay={i * 0.08}>
@@ -1081,12 +1080,20 @@ const Portfolio = () => {
                   badgeColor: "#22c55e",
                 },
                 {
-                  title: "JaneezyBeats",
-                  desc: "Beat store with integrated licensing and audio streaming.",
-                  href: "https://janeezy.beatstars.com",
-                  tags: ["E-commerce", "Audio"],
-                  badge: "CREATIVE",
-                  badgeColor: colors.accentAlt,
+                  title: "React Portfolio",
+                  desc: "Modern portfolio site with theme system, animations, and responsive design.",
+                  href: "https://www.janeduru.site",
+                  tags: ["React", "Framer Motion", "Tailwind"],
+                  badge: "LIVE",
+                  badgeColor: "#22c55e",
+                },
+                {
+                  title: "GitHub Profile",
+                  desc: "Explore my open source contributions and personal projects.",
+                  href: "https://github.com/janeezy",
+                  tags: ["JavaScript", "React", "TypeScript"],
+                  badge: "REPOSITORIES",
+                  badgeColor: "#8b5cf6",
                 },
               ].map((p, i) => (
                 <Reveal key={p.title} delay={0.15 + i * 0.08}>
@@ -1166,9 +1173,7 @@ const Portfolio = () => {
                   className="text-lg leading-relaxed mb-6"
                   style={{ color: colors.textSecondary }}
                 >
-                  I write about AI, tech, psychology, and systems making
-                  complexity simple so people can think better and build with
-                  intention.
+                  I write about AI, technology, psychology, and systems. I focus on how people think, decide, and build.
                 </p>
               </Reveal>
               <Reveal delay={0.15}>
@@ -1190,7 +1195,7 @@ const Portfolio = () => {
                       Note:
                     </span>{" "}
                     My psychology content is non-clinical and
-                    educational—focused on behavior, incentives, and systems.
+                    educational. Focused on behavior, incentives, and systems.
                     Not diagnosis or therapy.
                   </p>
                 </div>
@@ -1223,7 +1228,7 @@ const Portfolio = () => {
             <div className="space-y-3">
               {[
                 {
-                  icon: "🤖",
+                  icon: "💻",
                   topic: "AI & Technology",
                   title: "How AI systems work and where they're headed",
                 },
@@ -1243,7 +1248,7 @@ const Portfolio = () => {
                   title: "Africa's rise and shifting global dynamics",
                 },
                 {
-                  icon: "✨",
+                  icon: "🌟",
                   topic: "Consciousness",
                   title: "Inner clarity and intentional living",
                 },
@@ -1301,11 +1306,12 @@ const Portfolio = () => {
           <Reveal delay={0.15}>
             <div className="flex flex-wrap gap-4 mb-10">
               <MagneticBtn
-                href="mailto:janeezyofficial@gmail.com"
+                href="https://calendly.com/janeezyofficial/30min"
+                target="_blank"
                 className={`group px-6 py-3.5 bg-gradient-to-r ${colors.gradient} text-white rounded-2xl font-semibold flex items-center gap-2`}
                 style={{ boxShadow: `0 8px 30px ${colors.glow}` }}
               >
-                <Mail size={18} /> janeezyofficial@gmail.com
+                <Calendar size={18} /> Schedule a 30-min call
               </MagneticBtn>
               <div
                 className="px-5 py-3.5 rounded-2xl flex items-center gap-2 font-medium"
