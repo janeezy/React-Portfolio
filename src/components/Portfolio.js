@@ -610,7 +610,7 @@ const Portfolio = () => {
                 className="text-lg leading-relaxed max-w-xl mb-8"
                 style={{ color: colors.textSecondary }}
               >
-                I build fast, accessible, user-centered web applications.
+                I build fast, accessible, user centered web applications.
                 Currently co-founding{" "}
                 <a
                   href="https://zemiolabs.com"
@@ -621,7 +621,7 @@ const Portfolio = () => {
                 >
                   Zemio Labs
                 </a>
-                . I also decode tech, psychology & culture—turning complexity
+                . I also decode tech, psychology & culture turning complexity
                 into clarity.
               </motion.p>
 
@@ -760,7 +760,7 @@ const Portfolio = () => {
                   <strong style={{ color: colors.text }}>
                     Danylo Halytsky Lviv National Medical University
                   </strong>
-                  , completing my Step 1 Medical Certificate. That taught me
+                  , completing my Step 1 Krok Medical Certificate. That taught me
                   precision, systems thinking, and empathy.
                 </p>
               </Reveal>
@@ -787,7 +787,7 @@ const Portfolio = () => {
                   <strong style={{ color: colors.text }}>
                     React, Next.js & TypeScript
                   </strong>
-                  —bringing that unique background to every line of code.
+                  bringing that unique background to every line of code.
                 </p>
               </Reveal>
 
