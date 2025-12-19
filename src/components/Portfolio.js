@@ -999,7 +999,7 @@ const Portfolio = () => {
             <Reveal delay={0.1}>
               <GlowCard colors={colors} glow>
                 <motion.a
-                  href="https://zemiolabs.com"
+                  href="https://mybicho.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group block rounded-[26px] overflow-hidden"
@@ -1028,14 +1028,20 @@ const Portfolio = () => {
                       </span>
                     </div>
                     <h3 className="text-3xl sm:text-4xl font-extrabold mb-3">
-                      Zemio Labs
+                      MyBicho
                     </h3>
+                    <p
+                      className="text-sm font-medium mb-3"
+                      style={{ color: colors.accent }}
+                    >
+                      Zemio Labs
+                    </p>
                     <p
                       className="text-lg mb-6 max-w-2xl"
                       style={{ color: colors.textSecondary }}
                     >
                       Leading frontend development for an innovative platform.
-                      Building with React, Next.js, and TypeScript. Designed
+                      Building with React, Next.js, and TypeScript. Architected
                       reusable UI libraries reducing development time by 30%.
                     </p>
                     <div className="flex flex-wrap gap-2 mb-6">
