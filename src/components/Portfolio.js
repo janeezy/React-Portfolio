@@ -576,7 +576,9 @@ const Portfolio = () => {
                       style={{ background: "#22c55e" }}
                     />
                   </span>
-                  <span style={{ color: colors.textSecondary }}>Open to opportunities</span>
+                  <span style={{ color: colors.textSecondary }}>
+                    Open to opportunities
+                  </span>
                 </span>
               </motion.div>
 
@@ -738,13 +740,13 @@ const Portfolio = () => {
               01 / ABOUT
             </span>
             <h2 className="text-4xl sm:text-5xl font-extrabold mt-3 tracking-tight">
-              Medicine → Finance → <span className="text-gradient">Code</span>
+              Medicine, Finance, and <span className="text-gradient">Code</span>
             </h2>
             <p
               className="text-xl mt-4 max-w-2xl"
               style={{ color: colors.textSecondary }}
             >
-              A non traditional path that gives me a unique perspective on
+              A non-traditional path that gives me a unique perspective on
               building products people actually use.
             </p>
           </Reveal>
@@ -756,38 +758,24 @@ const Portfolio = () => {
                   className="text-lg leading-relaxed"
                   style={{ color: colors.textSecondary }}
                 >
-                  I studied medicine at{" "}
-                  <strong style={{ color: colors.text }}>
-                    Danylo Halytsky Lviv National Medical University
-                  </strong>
-                  , completing my Step 1 Krok Medical Certificate. That taught me
-                  precision, systems thinking, and empathy.
+                  I studied medicine and completed my Step 1 Krok Medical
+                  Certificate. That training shaped my approach to precision,
+                  systems thinking, and user empathy.
                 </p>
               </Reveal>
+
               <Reveal delay={0.15}>
                 <p
                   className="text-lg leading-relaxed"
                   style={{ color: colors.textSecondary }}
                 >
-                  Then I spent{" "}
+                  I then spent{" "}
                   <strong style={{ color: colors.text }}>
-                    8 years in FinTech & Crypto sales
+                    8 years in FinTech and Crypto sales
                   </strong>
-                  , managing a €20M+ portfolio and driving 13% revenue growth.
-                  That taught me execution, incentives, and how to deliver
-                  results.
-                </p>
-              </Reveal>
-              <Reveal delay={0.2}>
-                <p
-                  className="text-lg leading-relaxed"
-                  style={{ color: colors.textSecondary }}
-                >
-                  Now I build with{" "}
-                  <strong style={{ color: colors.text }}>
-                    React, Next.js & TypeScript
-                  </strong>
-                  bringing that unique background to every line of code.
+                  , managing a €20M+ portfolio and driving 13 percent revenue
+                  growth. That experience taught me execution, incentives, and
+                  how to deliver measurable results.
                 </p>
               </Reveal>
 
