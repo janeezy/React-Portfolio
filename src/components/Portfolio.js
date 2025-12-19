@@ -337,7 +337,7 @@ const ThemePicker = ({ currentTheme, setCurrentTheme, mode, colors }) => {
               initial={{ opacity: 0, y: 8, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 8, scale: 0.95 }}
-              className="absolute top-full right-0 mt-3 p-2 rounded-2xl backdrop-blur-2xl z-[70] min-w-[170px]"
+              className="absolute bottom-full right-0 mb-3 p-2 rounded-2xl backdrop-blur-2xl z-[70] min-w-[170px]"
               style={{
                 background: `${colors.bgCard}f8`,
                 border: `1px solid ${colors.border}`,
@@ -527,27 +527,29 @@ const Portfolio = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 pt-20 md:hidden flex flex-col items-center justify-center gap-6"
+            className="fixed inset-0 z-40 pt-20 pb-8 md:hidden flex flex-col items-center justify-between"
             style={{ background: colors.bg }}
           >
-            {nav.map((item, i) => (
-              <motion.button
-                key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                onClick={() => scrollTo(item.id)}
-                className="text-3xl font-bold"
-              >
-                {item.label}
-              </motion.button>
-            ))}
+            <div className="flex-1 flex flex-col items-center justify-center gap-6">
+              {nav.map((item, i) => (
+                <motion.button
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  onClick={() => scrollTo(item.id)}
+                  className="text-3xl font-bold"
+                >
+                  {item.label}
+                </motion.button>
+              ))}
+            </div>
             
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: nav.length * 0.1 }}
-              className="flex items-center gap-3 mt-8"
+              className="flex items-center gap-3"
             >
               <ThemePicker
                 currentTheme={theme}
