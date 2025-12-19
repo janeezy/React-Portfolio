@@ -1113,7 +1113,7 @@ const Portfolio = () => {
                   href: "https://gym-rho-one.vercel.app",
                   tags: ["React", "PWA"],
                   badge: "LIVE",
-                  badgeColor: "#22c55e",
+                  badgeColor: "#22c55e", 
                 },
                 {
                   title: "Zemio Labs Website",
