@@ -771,7 +771,7 @@ const Portfolio = () => {
                 >
                   Then I spent{" "}
                   <strong style={{ color: colors.text }}>
-                    6 years in FinTech & Crypto sales
+                    8 years in FinTech & Crypto sales
                   </strong>
                   , managing a €20M+ portfolio and driving 13% revenue growth.
                   That taught me execution, incentives, and how to deliver
