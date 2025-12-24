@@ -31,7 +31,7 @@ import {
   Briefcase,
 } from "lucide-react";
 
-// helper (place above your component)
+// Helper function to calculate professional experience years
 const getProfessionalExperienceYears = (startDate) => {
   const start = new Date(startDate);
   const now = new Date();
@@ -218,7 +218,7 @@ const themes = {
   },
 };
 
-// Background
+// Background component
 const Background = ({ colors }) => (
   <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
     <div
@@ -246,7 +246,7 @@ const Background = ({ colors }) => (
   </div>
 );
 
-// Magnetic button
+// Magnetic button component
 const MagneticBtn = ({ children, className, onClick, href, target, style }) => {
   const ref = useRef(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
@@ -281,7 +281,7 @@ const MagneticBtn = ({ children, className, onClick, href, target, style }) => {
   );
 };
 
-// Reveal animation
+// Reveal animation component
 const Reveal = ({ children, delay = 0, className }) => (
   <motion.div
     initial={{ opacity: 0, y: 50 }}
@@ -294,7 +294,7 @@ const Reveal = ({ children, delay = 0, className }) => (
   </motion.div>
 );
 
-// Glow card
+// Glow card component
 const GlowCard = ({ children, className, colors, glow = false }) => (
   <div className={`relative group ${className}`}>
     {glow && (
@@ -306,9 +306,22 @@ const GlowCard = ({ children, className, colors, glow = false }) => (
   </div>
 );
 
-// Theme picker
-const ThemePicker = ({ currentTheme, setCurrentTheme, mode, colors }) => {
+// Theme picker component with smarter positioning
+const ThemePicker = ({
+  currentTheme,
+  setCurrentTheme,
+  mode,
+  colors,
+  position = "below",
+}) => {
   const [open, setOpen] = useState(false);
+  const isAbove = position === "above";
+
+  const handleThemeSelect = (key) => {
+    setCurrentTheme(key);
+    setOpen(false);
+  };
+
   return (
     <div className="relative">
       <motion.button
@@ -320,24 +333,33 @@ const ThemePicker = ({ currentTheme, setCurrentTheme, mode, colors }) => {
         }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
+        aria-label="Change theme"
+        aria-expanded={open}
       >
         <Palette size={18} style={{ color: colors.accent }} />
       </motion.button>
       <AnimatePresence>
         {open && (
           <>
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[60]"
+              className="fixed inset-0 z-[80]"
               onClick={() => setOpen(false)}
             />
+            {/* Dropdown */}
             <motion.div
-              initial={{ opacity: 0, y: 8, scale: 0.95 }}
+              initial={{ opacity: 0, y: isAbove ? 8 : -8, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 8, scale: 0.95 }}
-              className="absolute bottom-full right-0 mb-3 p-2 rounded-2xl backdrop-blur-2xl z-[70] min-w-[170px]"
+              exit={{ opacity: 0, y: isAbove ? 8 : -8, scale: 0.95 }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
+              className={`absolute ${
+                isAbove 
+                  ? "bottom-full mb-3 right-0" 
+                  : "top-full mt-3 left-0"  // Changed: left-0 instead of right-0
+              } p-2 rounded-2xl backdrop-blur-2xl z-[90] min-w-[170px]`}
               style={{
                 background: `${colors.bgCard}f8`,
                 border: `1px solid ${colors.border}`,
@@ -347,10 +369,7 @@ const ThemePicker = ({ currentTheme, setCurrentTheme, mode, colors }) => {
               {Object.entries(themes).map(([key, theme]) => (
                 <button
                   key={key}
-                  onClick={() => {
-                    setCurrentTheme(key);
-                    setOpen(false);
-                  }}
+                  onClick={() => handleThemeSelect(key)}
                   className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors"
                   style={{
                     background:
@@ -379,8 +398,7 @@ const ThemePicker = ({ currentTheme, setCurrentTheme, mode, colors }) => {
     </div>
   );
 };
-
-// Main
+// Main Portfolio component
 const Portfolio = () => {
   const [mode, setMode] = useState("dark");
   const [theme, setTheme] = useState("violet");
@@ -393,11 +411,22 @@ const Portfolio = () => {
   });
   const colors = themes[theme][mode];
 
-  // 👇 PUT IT HERE
   const PROFESSIONAL_START_DATE = "2022-06-01";
   const experienceYears = getProfessionalExperienceYears(
     PROFESSIONAL_START_DATE
   );
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
     document.body.style.background = colors.bg;
@@ -405,8 +434,11 @@ const Portfolio = () => {
   }, [colors]);
 
   const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setMenuOpen(false);
+    // Small delay to allow menu to close before scrolling
+    setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
   };
 
   const nav = [
@@ -423,27 +455,28 @@ const Portfolio = () => {
       style={{ background: colors.bg, color: colors.text }}
     >
       <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
-                
-                * { font-family: 'Outfit', -apple-system, sans-serif; }
-                .font-mono { font-family: 'JetBrains Mono', monospace; }
-                
-                ::selection { background: ${colors.accent}30; }
-                
-                .text-gradient {
-                    background: linear-gradient(135deg, ${colors.accent}, ${colors.accentAlt});
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                }
-                
-                ::-webkit-scrollbar { width: 5px; }
-                ::-webkit-scrollbar-track { background: transparent; }
-                ::-webkit-scrollbar-thumb { background: ${colors.accent}25; border-radius: 10px; }
-            `}</style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+        
+        * { font-family: 'Outfit', -apple-system, sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        ::selection { background: ${colors.accent}30; }
+        
+        .text-gradient {
+          background: linear-gradient(135deg, ${colors.accent}, ${colors.accentAlt});
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: ${colors.accent}25; border-radius: 10px; }
+      `}</style>
 
       <Background colors={colors} />
 
-      {/* Progress */}
+      {/* Progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[2px] z-[100] origin-left"
         style={{
@@ -469,6 +502,7 @@ const Portfolio = () => {
             J<span style={{ color: colors.accent }}>D</span>
           </motion.button>
 
+          {/* Desktop navigation */}
           <nav className="hidden md:flex items-center gap-1">
             {nav.map((item) => (
               <motion.button
@@ -493,6 +527,7 @@ const Portfolio = () => {
               setCurrentTheme={setTheme}
               mode={mode}
               colors={colors}
+              position="below"
             />
             <motion.button
               onClick={() => setMode(mode === "dark" ? "light" : "dark")}
@@ -502,6 +537,7 @@ const Portfolio = () => {
                 border: `1px solid ${colors.border}`,
               }}
               whileHover={{ scale: 1.05 }}
+              aria-label={`Switch to ${mode === "dark" ? "light" : "dark"} mode`}
             >
               {mode === "dark" ? (
                 <Sun size={18} style={{ color: colors.accent }} />
@@ -511,69 +547,95 @@ const Portfolio = () => {
             </motion.button>
           </nav>
 
+          {/* Mobile menu button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden p-2"
+            className="md:hidden p-2 rounded-xl transition-colors"
+            style={{ background: menuOpen ? `${colors.accent}10` : "transparent" }}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </header>
 
-      {/* Mobile menu */}
+      {/* Mobile menu - FIXED */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 pt-20 pb-8 md:hidden flex flex-col items-center justify-between"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 md:hidden flex flex-col"
             style={{ background: colors.bg }}
           >
-            <div className="flex-1 flex flex-col items-center justify-center gap-6">
+            {/* Header spacer */}
+            <div className="h-[72px] flex-shrink-0" />
+
+            {/* Navigation links */}
+            <nav className="flex-1 flex flex-col items-center justify-center gap-6 px-6">
               {nav.map((item, i) => (
                 <motion.button
                   key={item.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ delay: i * 0.05, duration: 0.2 }}
                   onClick={() => scrollTo(item.id)}
-                  className="text-3xl font-bold"
+                  className="text-2xl sm:text-3xl font-bold transition-colors"
+                  style={{ color: colors.text }}
                 >
                   {item.label}
                 </motion.button>
               ))}
-            </div>
-            
+            </nav>
+
+            {/* Bottom controls */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: nav.length * 0.1 }}
-              className="flex items-center gap-3"
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ delay: 0.25, duration: 0.2 }}
+              className="flex-shrink-0 px-6 py-8 flex flex-col items-center gap-4"
+              style={{ borderTop: `1px solid ${colors.border}` }}
             >
-              <ThemePicker
-                currentTheme={theme}
-                setCurrentTheme={setTheme}
-                mode={mode}
-                colors={colors}
-              />
-              <motion.button
-                onClick={() => setMode(mode === "dark" ? "light" : "dark")}
-                className="p-2.5 rounded-xl"
-                style={{
-                  background: `${colors.accent}10`,
-                  border: `1px solid ${colors.border}`,
-                }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <div className="flex items-center gap-4">
+                <ThemePicker
+                  currentTheme={theme}
+                  setCurrentTheme={setTheme}
+                  mode={mode}
+                  colors={colors}
+                  position="above"
+                />
+                <motion.button
+                  onClick={() => setMode(mode === "dark" ? "light" : "dark")}
+                  className="p-2.5 rounded-xl"
+                  style={{
+                    background: `${colors.accent}10`,
+                    border: `1px solid ${colors.border}`,
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label={`Switch to ${mode === "dark" ? "light" : "dark"} mode`}
+                >
+                  {mode === "dark" ? (
+                    <Sun size={18} style={{ color: colors.accent }} />
+                  ) : (
+                    <Moon size={18} style={{ color: colors.accent }} />
+                  )}
+                </motion.button>
+              </div>
+              <p
+                className="text-sm font-medium"
+                style={{ color: colors.textMuted }}
               >
-                {mode === "dark" ? (
-                  <Sun size={18} style={{ color: colors.accent }} />
-                ) : (
-                  <Moon size={18} style={{ color: colors.accent }} />
-                )}
-              </motion.button>
+                Choose your vibe ✨
+              </p>
             </motion.div>
+
+            {/* Safe area for devices with home indicator */}
+            <div className="h-safe-area-inset-bottom flex-shrink-0" />
           </motion.div>
         )}
       </AnimatePresence>
@@ -655,7 +717,8 @@ const Portfolio = () => {
                 >
                   Zemio Labs
                 </a>
-                . I also write about AI, technology, and human behavior on X and Medium.
+                . I also write about AI, technology, and human behavior on X and
+                Medium.
               </motion.p>
 
               <motion.div
@@ -686,7 +749,7 @@ const Portfolio = () => {
               </motion.div>
             </div>
 
-            {/* Image - FIXED: object-position top, better aspect ratio */}
+            {/* Hero image */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -772,25 +835,37 @@ const Portfolio = () => {
               01 / ABOUT
             </span>
             <h2 className="text-4xl sm:text-5xl font-extrabold mt-3 tracking-tight">
-              Building <span className="text-gradient">fast, scalable</span> web experiences
+              Building <span className="text-gradient">fast, scalable</span> web
+              experiences
             </h2>
             <p
               className="text-xl mt-4 max-w-2xl"
               style={{ color: colors.textSecondary }}
             >
-              Frontend engineer specializing in React, Next.js, and TypeScript. I ship performant, accessible applications that users love.
+              Frontend engineer specializing in React, Next.js, and TypeScript.
+              I ship performant, accessible applications that users love.
             </p>
           </Reveal>
 
           <div className="grid lg:grid-cols-5 gap-12">
             <div className="lg:col-span-2 space-y-6">
               <Reveal delay={0.1}>
-                <h3 className="text-xl font-bold mb-4" style={{ color: colors.text }}>What I build</h3>
+                <h3
+                  className="text-xl font-bold mb-4"
+                  style={{ color: colors.text }}
+                >
+                  What I build
+                </h3>
                 <p
                   className="text-lg leading-relaxed"
                   style={{ color: colors.textSecondary }}
                 >
-                  I specialize in building <strong style={{ color: colors.text }}>responsive, performant web applications</strong> with modern JavaScript frameworks. My code is clean, maintainable, and optimized for real-world usage.
+                  I specialize in building{" "}
+                  <strong style={{ color: colors.text }}>
+                    responsive, performant web applications
+                  </strong>{" "}
+                  with modern JavaScript frameworks. My code is clean,
+                  maintainable, and optimized for real-world usage.
                 </p>
               </Reveal>
 
@@ -799,12 +874,22 @@ const Portfolio = () => {
                   className="text-lg leading-relaxed"
                   style={{ color: colors.textSecondary }}
                 >
-                  With a background in medicine and 8 years in FinTech, I bring <strong style={{ color: colors.text }}>systems thinking, user empathy, and execution focus</strong> to every project. I understand both the technical and business sides of product development.
+                  With a background in medicine and 8 years in FinTech, I bring{" "}
+                  <strong style={{ color: colors.text }}>
+                    systems thinking, user empathy, and execution focus
+                  </strong>{" "}
+                  to every project. I understand both the technical and business
+                  sides of product development.
                 </p>
               </Reveal>
 
               <Reveal delay={0.2}>
-                <h3 className="text-xl font-bold mb-3 mt-6" style={{ color: colors.text }}>Tech Stack</h3>
+                <h3
+                  className="text-xl font-bold mb-3 mt-6"
+                  style={{ color: colors.text }}
+                >
+                  Tech Stack
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {[
                     "React.js",
@@ -877,7 +962,7 @@ const Portfolio = () => {
                       }}
                     >
                       <div
-                        className="p-3 rounded-xl"
+                        className="p-3 rounded-xl flex-shrink-0"
                         style={{ background: `${item.color}12` }}
                       >
                         <item.icon size={22} style={{ color: item.color }} />
@@ -1115,7 +1200,7 @@ const Portfolio = () => {
                   href: "https://gym-rho-one.vercel.app",
                   tags: ["React", "PWA"],
                   badge: "LIVE",
-                  badgeColor: "#22c55e", 
+                  badgeColor: "#22c55e",
                 },
                 {
                   title: "Zemio Labs Website",
@@ -1211,7 +1296,8 @@ const Portfolio = () => {
                   className="text-lg leading-relaxed mb-6"
                   style={{ color: colors.textSecondary }}
                 >
-                  I write about AI, technology, psychology, and systems. I focus on how people think, decide, and build.
+                  I write about AI, technology, psychology, and systems. I focus
+                  on how people think, decide, and build.
                 </p>
               </Reveal>
               <Reveal delay={0.15}>
@@ -1232,9 +1318,9 @@ const Portfolio = () => {
                     >
                       Note:
                     </span>{" "}
-                    My psychology content is non-clinical and
-                    educational. Focused on behavior, incentives, and systems.
-                    Not diagnosis or therapy.
+                    My psychology content is non-clinical and educational.
+                    Focused on behavior, incentives, and systems. Not diagnosis
+                    or therapy.
                   </p>
                 </div>
               </Reveal>
@@ -1372,7 +1458,7 @@ const Portfolio = () => {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                   <div
-                    className="p-2.5 rounded-xl"
+                    className="p-2.5 rounded-xl flex-shrink-0"
                     style={{ background: `${colors.accent}12` }}
                   >
                     <Heart size={20} style={{ color: colors.accent }} />
