@@ -991,7 +991,7 @@ const Portfolio = () => {
                   className="text-lg leading-relaxed"
                   style={{ color: colors.textSecondary }}
                 >
-                  My unconventional path — medicine in Ukraine, then 6 years in fintech managing €20M+ portfolios — 
+                  My unconventional path from medicine to fintech and tech
                   gives me{" "}
                   <strong style={{ color: colors.text }}>
                     a systems-thinking approach
@@ -1270,7 +1270,7 @@ const Portfolio = () => {
               Where I've worked
             </h2>
             <p className="text-lg mt-3" style={{ color: colors.textSecondary }}>
-              3+ years in frontend · 6 years in fintech ·{" "}
+              3+ years in frontend · 8 years in fintech ·{" "}
               <a
                 href="https://www.linkedin.com/in/janeezy/"
                 target="_blank"
