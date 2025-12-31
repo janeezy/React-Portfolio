@@ -18,6 +18,7 @@ import {
   Linkedin,
   Twitter,
   ChevronDown,
+  ChevronUp,
   Coffee,
   Heart,
   Stethoscope,
@@ -392,6 +393,8 @@ const Portfolio = () => {
   const [mode, setMode] = useState("dark");
   const [theme, setTheme] = useState("violet");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [showStickyCTA, setShowStickyCTA] = useState(false);
 
   const { scrollYProgress } = useScroll();
   const smoothProgress = useSpring(scrollYProgress, {
@@ -416,6 +419,20 @@ const Portfolio = () => {
     document.body.style.color = colors.text;
   }, [colors]);
 
+  // Scroll listener for back to top button and sticky CTA
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 500);
+      setShowStickyCTA(window.scrollY > 800 && window.scrollY < document.body.scrollHeight - 1500);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const scrollTo = (id) => {
     setMenuOpen(false);
     setTimeout(() => {
@@ -428,7 +445,6 @@ const Portfolio = () => {
     { id: "products", label: "Books" },
     { id: "experience", label: "Experience" },
     { id: "work", label: "Projects" },
-    { id: "tools", label: "Tools" },
     { id: "writing", label: "Writing" },
     { id: "contact", label: "Contact" },
   ];
@@ -441,6 +457,7 @@ const Portfolio = () => {
       description: "Explores why humans, media, and societies don't feel equally for all suffering. Deep analysis of bias, psychology, and how we're trained to care selectively.",
       price: "€22.99",
       href: "https://iamjaneezystore.gumroad.com/l/ikgpou",
+      cover: "/book-selective-empathy.png",
       features: [
         "Psychology of selective compassion",
         "Media framing & bias analysis",
@@ -458,6 +475,7 @@ const Portfolio = () => {
       description: "Copy-and-paste prompts that actually work. For freelancing, content creation, and digital products.",
       price: "€9.99",
       href: "https://iamjaneezystore.gumroad.com/l/iskap",
+      cover: "/book-ai-prompts.png",
       features: [
         "50 proven, copy-and-paste prompts",
         "Works with ChatGPT, Claude, Gemini",
@@ -468,6 +486,26 @@ const Portfolio = () => {
       badgeColor: "#f59e0b",
       icon: Zap,
       featured: true,
+    },
+  ];
+
+  // FAQ data
+  const faqs = [
+    {
+      q: "Are you available for freelance or contract work?",
+      a: "Yes! I'm open to frontend projects, especially React/Next.js/TypeScript work. Book a free call to discuss your project.",
+    },
+    {
+      q: "Do the AI prompts work with ChatGPT, Claude, and other tools?",
+      a: "Absolutely. All prompts are designed for any major AI tool — ChatGPT, Claude, Gemini, and more. No specific tool required.",
+    },
+    {
+      q: "What's included in consultation calls?",
+      a: "The free 15-min call is a quick intro. For deeper dives — code reviews, architecture discussions, or career advice — I offer paid 1-hour sessions.",
+    },
+    {
+      q: "Can I get a refund on digital products?",
+      a: "Yes, Gumroad offers a 30-day refund policy. If you're not satisfied, request a refund — no questions asked.",
     },
   ];
 
@@ -709,7 +747,7 @@ const Portfolio = () => {
                 <br />
                 <span className="text-gradient">Frontend Engineer</span>
                 <br />
-                <span className="text-gradient">& Digital Creator</span>
+                <span className="text-gradient">& Creator</span>
               </motion.h1>
 
               <motion.p
@@ -729,7 +767,8 @@ const Portfolio = () => {
                 className="text-lg leading-relaxed max-w-xl mb-8"
                 style={{ color: colors.textSecondary }}
               >
-                I build apps, ship products, and share what I learn. Co-founding{" "}
+                I develop web apps, write about AI & psychology, and publish digital products. 
+                Co-founding{" "}
                 <a
                   href="https://zemiolabs.com"
                   target="_blank"
@@ -739,49 +778,38 @@ const Portfolio = () => {
                 >
                   Zemio Labs
                 </a>
-                I build daily. Apps, AI tools, digital products and I help others ship theirs too.
+                {" "}from Lisbon.
               </motion.p>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="flex flex-wrap gap-3 mb-8"
+                className="flex flex-wrap gap-3 mb-6"
               >
                 <MagneticBtn
-                  href="https://cal.com/jane-duru/discovery-call"
-                  target="_blank"
-                  className={`group px-6 py-3 bg-gradient-to-r ${colors.gradient} text-white rounded-2xl font-semibold flex items-center gap-2`}
+                  onClick={() => scrollTo("work")}
+                  className={`group px-7 py-3.5 bg-gradient-to-r ${colors.gradient} text-white rounded-2xl font-semibold flex items-center gap-2`}
                   style={{ boxShadow: `0 8px 30px ${colors.glow}` }}
                 >
-                  Free 15min call{" "}
-                  <Calendar
-                    size={16}
-                    className="group-hover:scale-110 transition-transform"
+                  See my work{" "}
+                  <ArrowRight
+                    size={18}
+                    className="group-hover:translate-x-1 transition-transform"
                   />
                 </MagneticBtn>
                 <MagneticBtn
-                  href="https://cal.com/jane-duru/1-hour-consultation"
+                  href="https://cal.com/jane-duru/discovery-call"
                   target="_blank"
-                  className="px-6 py-3 rounded-2xl font-semibold flex items-center gap-2"
-                  style={{ 
-                    border: `2px solid ${colors.accent}`,
-                    background: `${colors.accent}10`,
-                  }}
-                >
-                  1hr Consult · €75{" "}
-                  <ArrowUpRight size={16} />
-                </MagneticBtn>
-                <MagneticBtn
-                  onClick={() => scrollTo("work")}
-                  className="px-6 py-3 rounded-2xl font-semibold"
+                  className="px-7 py-3.5 rounded-2xl font-semibold flex items-center gap-2"
                   style={{ border: `2px solid ${colors.border}` }}
                 >
-                  View work
+                  Book a call{" "}
+                  <Calendar size={16} />
                 </MagneticBtn>
               </motion.div>
 
-              {/* Featured Books Banner in Hero */}
+              {/* Books Banner */}
               <motion.a
                 href="https://linktr.ee/Janeezy"
                 target="_blank"
@@ -789,42 +817,16 @@ const Portfolio = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="group block p-4 rounded-2xl pulse-glow"
+                className="group inline-flex items-center gap-3 px-4 py-2.5 rounded-xl"
                 style={{
-                  background: `linear-gradient(135deg, ${colors.accent}15, ${colors.accentAlt}10)`,
-                  border: `1px solid ${colors.borderHover}`,
+                  background: `${colors.accent}10`,
+                  border: `1px solid ${colors.border}`,
                 }}
                 whileHover={{ scale: 1.02 }}
               >
-                <div className="flex items-center gap-4">
-                  <div
-                    className="p-2.5 rounded-xl flex-shrink-0"
-                    style={{ background: `${colors.accent}20` }}
-                  >
-                    <BookOpen size={24} style={{ color: colors.accent }} />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span
-                        className="px-2 py-0.5 rounded-full text-xs font-bold"
-                        style={{ background: "#22c55e20", color: "#22c55e" }}
-                      >
-                        NEW RELEASES
-                      </span>
-                    </div>
-                    <p className="font-bold text-sm sm:text-base truncate">
-                      Browse my books & guides
-                    </p>
-                    <p className="text-xs sm:text-sm" style={{ color: colors.textSecondary }}>
-                      AI prompts, psychology, and more →
-                    </p>
-                  </div>
-                  <ArrowUpRight
-                    size={20}
-                    style={{ color: colors.accent }}
-                    className="flex-shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
-                  />
-                </div>
+                <BookOpen size={18} style={{ color: colors.accent }} />
+                <span className="text-sm font-medium">Check out my books & guides</span>
+                <ArrowUpRight size={14} style={{ color: colors.accent }} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </motion.a>
             </div>
 
@@ -859,7 +861,7 @@ const Portfolio = () => {
                   />
                 </div>
 
-                {/* Updated floating card - no years, focus on what you do */}
+                {/* Floating card - dev focused */}
                 <motion.div
                   className="absolute -bottom-4 left-4 right-4 px-5 py-4 rounded-2xl backdrop-blur-xl"
                   style={{
@@ -872,20 +874,20 @@ const Portfolio = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="flex items-center gap-1">
-                        <Rocket size={14} style={{ color: colors.accent }} />
-                        <Bot size={14} style={{ color: colors.accentAlt }} />
+                        <Code2 size={14} style={{ color: colors.accent }} />
+                        <Pen size={14} style={{ color: colors.accentAlt }} />
                       </div>
                       <div>
                         <p className="font-semibold text-sm">
-                          Building apps & AI tools daily
+                          Engineer + Creator
                         </p>
                         <p className="text-xs" style={{ color: colors.textMuted }}>
-                          Shipping products, sharing what works
+                          Code by day, content by night
                         </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Building2 size={16} style={{ color: colors.accentAlt }} />
+                      <Building2 size={14} style={{ color: colors.accentAlt }} />
                       <span
                         className="text-xs font-medium"
                         style={{ color: colors.textSecondary }}
@@ -901,6 +903,45 @@ const Portfolio = () => {
         </div>
       </section>
 
+      {/* ===== NEWSLETTER ===== */}
+      <section className="py-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <Reveal>
+            <div
+              className="relative overflow-hidden rounded-[28px] p-8 sm:p-10"
+              style={{
+                background: `linear-gradient(135deg, ${colors.accent}12, ${colors.accentAlt}08)`,
+                border: `1px solid ${colors.borderHover}`,
+              }}
+            >
+              <div className="relative z-10 flex flex-col lg:flex-row lg:items-center gap-6">
+                <div className="flex-1">
+                  <span
+                    className="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3"
+                    style={{ background: "#22c55e20", color: "#22c55e" }}
+                  >
+                    FREE GUIDE INSIDE
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold mb-2">
+                    Weekly insights on AI & tech
+                  </h3>
+                  <p className="text-sm" style={{ color: colors.textSecondary }}>
+                    Join 500+ readers. Get actionable tips, no fluff.
+                  </p>
+                </div>
+                <MagneticBtn
+                  href="https://janeduru.beehiiv.com/subscribe"
+                  target="_blank"
+                  className={`px-6 py-3.5 bg-gradient-to-r ${colors.gradient} text-white rounded-xl font-bold flex items-center gap-2`}
+                >
+                  <Mail size={18} /> Subscribe free
+                </MagneticBtn>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ===== ABOUT ===== */}
       <section id="about" className="py-28 px-6">
         <div className="max-w-6xl mx-auto">
@@ -912,14 +953,14 @@ const Portfolio = () => {
               01 / ABOUT
             </span>
             <h2 className="text-4xl sm:text-5xl font-extrabold mt-3 tracking-tight">
-              I build <span className="text-gradient">apps</span> and teach what I learn
+              Code meets <span className="text-gradient">creativity</span>
             </h2>
             <p
               className="text-xl mt-4 max-w-2xl"
               style={{ color: colors.textSecondary }}
             >
-              Frontend engineer specializing in React, Next.js, and TypeScript. 
-              I ship products, experiment with AI daily, and create guides to help others earn online.
+              Frontend engineer by trade, content creator by passion. My path through medicine 
+              and finance shaped how I approach problems and communicate ideas.
             </p>
           </Reveal>
 
@@ -936,12 +977,12 @@ const Portfolio = () => {
                   className="text-lg leading-relaxed"
                   style={{ color: colors.textSecondary }}
                 >
-                  I build{" "}
+                  I develop{" "}
                   <strong style={{ color: colors.text }}>
                     responsive, performant web applications
                   </strong>{" "}
-                  with modern JavaScript frameworks. As co-founder of Zemio Labs, 
-                  I'm shipping real products used by real people.
+                  with modern JavaScript frameworks. Currently leading frontend at Zemio Labs, 
+                  where we're launching products used by real people.
                 </p>
               </Reveal>
 
@@ -950,12 +991,12 @@ const Portfolio = () => {
                   className="text-lg leading-relaxed"
                   style={{ color: colors.textSecondary }}
                 >
-                  With a background in medicine and 8 years in FinTech, I bring{" "}
+                  My unconventional path — medicine in Ukraine, then 6 years in fintech managing €20M+ portfolios — 
+                  gives me{" "}
                   <strong style={{ color: colors.text }}>
-                    systems thinking and execution focus
+                    a systems-thinking approach
                   </strong>{" "}
-                  to everything I build. I also create digital products that help 
-                  beginners use AI to earn online.
+                  to complex problems.
                 </p>
               </Reveal>
 
@@ -976,8 +1017,8 @@ const Portfolio = () => {
                     "Framer Motion",
                     "REST APIs",
                     "Git & GitHub",
-                    "AI Tools",
                     "React Native",
+                    "NestJS",
                   ].map((skill) => (
                     <span
                       key={skill}
@@ -1000,28 +1041,28 @@ const Portfolio = () => {
                   icon: Code2,
                   title: "Frontend Development",
                   sub: "React · Next.js · TypeScript",
-                  desc: "Building performant, accessible web applications. Reduced load times by 35%, improved dev efficiency by 30%.",
+                  desc: "Delivering accessible, performant UIs. Achieved 35% faster load times and 30% better team velocity.",
                   color: colors.accent,
                 },
                 {
                   icon: Building2,
                   title: "Co-founder & Tech Lead",
                   sub: "Zemio Labs",
-                  desc: "Leading frontend architecture and shipping products. Building MyBicho and other apps from idea to launch.",
+                  desc: "Leading architecture and product development. Currently launching MyBicho and wellness apps.",
                   color: colors.accentAlt,
                 },
                 {
                   icon: Bot,
-                  title: "AI Builder & Educator",
+                  title: "AI Educator & Writer",
                   sub: "Digital Products",
-                  desc: "Mastering AI daily and helping others do the same. Creating guides that turn AI confusion into income.",
+                  desc: "Creating guides that help beginners use AI to earn online. Translating complexity into clarity.",
                   color: "#f59e0b",
                 },
                 {
                   icon: Pen,
-                  title: "Technical Writing",
+                  title: "Content Creator",
                   sub: "X (Twitter) & Medium",
-                  desc: "Sharing insights on AI, technology, psychology, and systems. Making complexity simple for builders.",
+                  desc: "Writing about technology, psychology, and systems thinking. Making ideas accessible.",
                   color: "#10b981",
                 },
               ].map((item, i) => (
@@ -1076,189 +1117,142 @@ const Portfolio = () => {
               02 / BOOKS & GUIDES
             </span>
             <h2 className="text-4xl sm:text-5xl font-extrabold mt-3 tracking-tight">
-              New <span className="text-gradient">releases</span>
+              Digital <span className="text-gradient">products</span>
             </h2>
             <p
               className="text-xl mt-4 max-w-2xl"
               style={{ color: colors.textSecondary }}
             >
-              I write about AI, psychology, and making money online. 
-              Practical guides based on real experience.
+              Practical guides on AI, psychology, and making money online. 
+              Real strategies from real experience.
             </p>
           </Reveal>
 
-          {/* Featured Product - Large Card */}
-          {digitalProducts.filter(p => p.featured).map((product, i) => (
-            <Reveal key={product.title} delay={0.1}>
-              <GlowCard colors={colors} glow>
-                <motion.a
-                  href={product.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block rounded-[26px] overflow-hidden"
-                  style={{
-                    background: `linear-gradient(135deg, ${colors.accent}10, ${colors.accentAlt}08)`,
-                    border: `2px solid ${colors.borderHover}`,
-                  }}
-                  whileHover={{ scale: 1.005 }}
-                >
-                  <div className="p-8 sm:p-10">
-                    <div className="grid lg:grid-cols-2 gap-8 items-center">
-                      <div>
-                        {/* Badges */}
-                        <div className="flex items-center gap-3 mb-6">
-                          <span
-                            className="px-3 py-1.5 rounded-full text-xs font-bold"
-                            style={{
-                              background: `${product.badgeColor}20`,
-                              color: product.badgeColor,
-                            }}
-                          >
-                            🔥 {product.badge}
-                          </span>
-                          <span
-                            className="text-2xl font-extrabold"
-                            style={{ color: colors.accent }}
-                          >
-                            {product.price}
-                          </span>
-                        </div>
-
-                        {/* Title */}
-                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-2 leading-tight">
-                          {product.title}
-                        </h3>
-                        <p
-                          className="text-lg font-medium mb-4"
-                          style={{ color: colors.accentAlt }}
-                        >
-                          {product.subtitle}
-                        </p>
-
-                        {/* Description */}
-                        <p
-                          className="text-base sm:text-lg mb-6 leading-relaxed"
-                          style={{ color: colors.textSecondary }}
-                        >
-                          {product.description}
-                        </p>
-
-                        {/* CTA Button */}
-                        <div
-                          className={`inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${colors.gradient} text-white rounded-xl font-bold`}
-                          style={{ boxShadow: `0 8px 30px ${colors.glow}` }}
-                        >
-                          Get it now
-                          <ArrowUpRight
-                            size={18}
-                            className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
-                          />
-                        </div>
+          {/* Books Grid - Side by Side with Covers */}
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            {digitalProducts.filter(p => p.featured).map((product, i) => (
+              <Reveal key={product.title} delay={0.1 * i}>
+                <GlowCard colors={colors} glow>
+                  <motion.a
+                    href={product.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block h-full rounded-[22px] overflow-hidden"
+                    style={{
+                      background: colors.bgCard,
+                      border: `2px solid ${colors.borderHover}`,
+                    }}
+                    whileHover={{ y: -4 }}
+                  >
+                    {/* Book Cover */}
+                    <div 
+                      className="relative h-48 sm:h-56 overflow-hidden"
+                      style={{ 
+                        background: `linear-gradient(135deg, ${colors.accent}20, ${colors.accentAlt}15)`,
+                      }}
+                    >
+                      <img
+                        src={product.cover}
+                        alt={product.title}
+                        className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      {/* Fallback if no image */}
+                      <div 
+                        className="absolute inset-0 items-center justify-center hidden"
+                        style={{ background: `linear-gradient(135deg, ${colors.accent}20, ${colors.accentAlt}15)` }}
+                      >
+                        <product.icon size={64} style={{ color: colors.accent, opacity: 0.5 }} />
                       </div>
-
-                      {/* Features */}
-                      <div
-                        className="p-6 rounded-2xl"
+                      {/* Badge */}
+                      <span
+                        className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold"
                         style={{
-                          background: `${colors.bgCard}`,
-                          border: `1px solid ${colors.border}`,
+                          background: `${product.badgeColor}`,
+                          color: "#fff",
                         }}
                       >
-                        <h4 className="font-bold mb-4 flex items-center gap-2">
-                          <Package size={18} style={{ color: colors.accent }} />
-                          What's inside
-                        </h4>
-                        <div className="space-y-3">
-                          {product.features.map((feature, idx) => (
-                            <div key={idx} className="flex items-start gap-3">
-                              <Check
-                                size={18}
-                                style={{ color: "#22c55e" }}
-                                className="flex-shrink-0 mt-0.5"
-                              />
-                              <span style={{ color: colors.textSecondary }}>
-                                {feature}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                        
-                        <div
-                          className="mt-6 p-4 rounded-xl"
-                          style={{ background: `${colors.accent}08` }}
+                        {product.badge === "NEW" ? "✨" : "🔥"} {product.badge}
+                      </span>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6">
+                      {/* Price */}
+                      <div className="flex items-center justify-between mb-3">
+                        <span
+                          className="text-2xl font-extrabold"
+                          style={{ color: colors.accent }}
                         >
-                          <p className="text-sm" style={{ color: colors.textSecondary }}>
-                            <strong style={{ color: colors.text }}>Perfect for:</strong> Beginners who want extra income, location freedom, or new side hustles using AI.
-                          </p>
-                        </div>
+                          {product.price}
+                        </span>
+                        <span className="text-xs font-mono px-2 py-1 rounded-md" style={{ background: `${colors.accent}10` }}>
+                          Instant download
+                        </span>
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="text-xl font-extrabold mb-1">{product.title}</h3>
+                      <p
+                        className="text-sm font-medium mb-3"
+                        style={{ color: colors.accentAlt }}
+                      >
+                        {product.subtitle}
+                      </p>
+
+                      {/* Description */}
+                      <p
+                        className="text-sm mb-4 line-clamp-2"
+                        style={{ color: colors.textSecondary }}
+                      >
+                        {product.description}
+                      </p>
+
+                      {/* Features Preview */}
+                      <div className="space-y-1.5 mb-5">
+                        {product.features.slice(0, 2).map((feature, idx) => (
+                          <div key={idx} className="flex items-center gap-2 text-sm">
+                            <Check size={14} style={{ color: "#22c55e" }} />
+                            <span style={{ color: colors.textSecondary }}>{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* CTA */}
+                      <div
+                        className={`flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r ${colors.gradient} text-white rounded-xl font-bold text-sm`}
+                      >
+                        Get the book
+                        <ArrowUpRight
+                          size={16}
+                          className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+                        />
                       </div>
                     </div>
-                  </div>
-                </motion.a>
-              </GlowCard>
-            </Reveal>
-          ))}
-
-          {/* More Products Coming + Store Link */}
-          <div className="grid md:grid-cols-2 gap-6 mt-8">
-            <Reveal delay={0.2}>
-              <div
-                className="h-full p-8 rounded-[22px] flex flex-col items-center justify-center text-center"
-                style={{
-                  background: colors.bgCard,
-                  border: `1px dashed ${colors.border}`,
-                }}
-              >
-                <div
-                  className="p-4 rounded-2xl mb-4"
-                  style={{ background: `${colors.accent}10` }}
-                >
-                  <Sparkles size={32} style={{ color: colors.accent }} />
-                </div>
-                <h3 className="text-xl font-bold mb-2">More coming soon</h3>
-                <p className="text-sm" style={{ color: colors.textSecondary }}>
-                  I'm always building new guides and tools. Follow me to get notified.
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.25}>
-              <GlowCard colors={colors} glow>
-                <motion.a
-                  href="https://linktr.ee/Janeezy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col items-center justify-center h-full min-h-[200px] rounded-[22px] p-8 text-center"
-                  style={{
-                    background: colors.bgCard,
-                    border: `1px solid ${colors.border}`,
-                  }}
-                  whileHover={{ y: -4 }}
-                >
-                  <div
-                    className="p-4 rounded-2xl mb-4"
-                    style={{ background: `${colors.accent}10` }}
-                  >
-                    <ShoppingBag size={32} style={{ color: colors.accent }} />
-                  </div>
-                  <h3 className="text-xl font-bold mb-2">Browse All Books</h3>
-                  <p className="text-sm mb-4" style={{ color: colors.textSecondary }}>
-                    All my books & resources in one place
-                  </p>
-                  <div
-                    className="flex items-center gap-2 font-semibold"
-                    style={{ color: colors.accent }}
-                  >
-                    View bookstore
-                    <ArrowUpRight
-                      size={18}
-                      className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
-                    />
-                  </div>
-                </motion.a>
-              </GlowCard>
-            </Reveal>
+                  </motion.a>
+                </GlowCard>
+              </Reveal>
+            ))}
           </div>
+
+          {/* Browse All Link */}
+          <Reveal delay={0.3}>
+            <motion.a
+              href="https://linktr.ee/Janeezy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-center gap-3 p-4 rounded-2xl"
+              style={{ background: `${colors.accent}08`, border: `1px solid ${colors.border}` }}
+              whileHover={{ scale: 1.01 }}
+            >
+              <ShoppingBag size={20} style={{ color: colors.accent }} />
+              <span className="font-semibold">View all on Linktree</span>
+              <ArrowUpRight size={18} style={{ color: colors.accent }} className="group-hover:translate-x-1 transition-transform" />
+            </motion.a>
+          </Reveal>
         </div>
       </section>
 
@@ -1273,95 +1267,78 @@ const Portfolio = () => {
               03 / EXPERIENCE
             </span>
             <h2 className="text-4xl sm:text-5xl font-extrabold mt-3 tracking-tight">
-              Work history
+              Where I've worked
             </h2>
+            <p className="text-lg mt-3" style={{ color: colors.textSecondary }}>
+              3+ years in frontend · 6 years in fintech ·{" "}
+              <a
+                href="https://www.linkedin.com/in/janeezy/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-4"
+                style={{ color: colors.accent }}
+              >
+                Full history on LinkedIn →
+              </a>
+            </p>
           </Reveal>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             {[
               {
                 title: "Frontend Developer & Co-founder",
                 company: "Zemio Labs",
-                type: "Co-founder",
-                period: "Jun 2025 – Present",
-                desc: "Architecting frontend infrastructure for scalable web platform. Engineered component library that reduced development time 30% across teams. Optimized build pipeline, achieving 35% faster page loads. Leading technical decisions on React, Next.js, and TypeScript architecture.",
+                period: "2025 – Present",
+                desc: "Leading frontend architecture. React, Next.js, TypeScript. Launching MyBicho and wellness apps.",
                 current: true,
               },
               {
                 title: "Frontend Developer",
-                company: "ROY",
-                type: "Contract",
-                period: "Mar 2025 – Jun 2025",
-                desc: "Shipped complete user authentication system and interactive dashboards serving 1000+ users. Drove 30% performance improvement through code optimization and lazy loading. Integrated REST APIs for real-time data sync. Delivered pixel-perfect implementations from Figma designs.",
-              },
-              {
-                title: "Frontend Developer",
                 company: "Jether Tech",
-                type: "Full-time",
-                period: "Dec 2022 – Mar 2025",
-                desc: "Led development of responsive web applications with React and TypeScript. Improved cross-browser compatibility by 25%, expanding user reach. Reduced production bugs by 40% through component testing and code reviews. Built reusable component library adopted across 5+ projects.",
-              },
-              {
-                title: "Frontend Developer Intern",
-                company: "Jether Tech",
-                type: "Internship",
-                period: "Jun 2022 – Nov 2022",
-                desc: "Shipped production features using HTML5, CSS3, and JavaScript (ES6+). Implemented mobile-first responsive designs that increased mobile engagement 20%. Collaborated with senior developers on component architecture and best practices.",
+                period: "2022 – 2025",
+                desc: "Delivered responsive web apps with React/TypeScript. Reduced bugs 40%, improved cross-browser compatibility 25%.",
               },
               {
                 title: "Financial Sales Manager",
                 company: "Golden Markets & Ashford",
-                type: "Previous Career",
-                period: "Jan 2016 – Jan 2022",
-                desc: "Managed €20M+ client portfolio with 13% YoY revenue growth. Specialized in crypto/blockchain advisory during market expansion. Developed deep understanding of fintech products, user needs, and regulatory compliance. Skills in client communication and high-stakes decision-making now applied to product development.",
+                period: "2016 – 2022",
+                desc: "Managed €20M+ portfolio in crypto/fintech. Skills in high-stakes decisions now applied to product work.",
               },
             ].map((job, i) => (
-              <Reveal key={job.title + job.company} delay={i * 0.08}>
-                <GlowCard colors={colors} glow={job.current}>
-                  <div
-                    className="p-6 rounded-[22px]"
-                    style={{
-                      background: colors.bgCard,
-                      border: `1px solid ${
-                        job.current ? colors.borderHover : colors.border
-                      }`,
-                    }}
-                  >
-                    <div className="flex flex-wrap items-start justify-between gap-4 mb-3">
-                      <div>
-                        <h3 className="text-xl font-bold">{job.title}</h3>
-                        <p
-                          className="font-medium"
-                          style={{ color: colors.accent }}
-                        >
-                          {job.company}{" "}
-                          <span style={{ color: colors.textMuted }}>
-                            · {job.type}
-                          </span>
-                        </p>
-                      </div>
-                      <div
-                        className="flex items-center gap-2 text-sm font-mono"
-                        style={{ color: colors.textMuted }}
-                      >
-                        <Calendar size={14} />
-                        {job.period}
-                        {job.current && (
-                          <span
-                            className="ml-2 px-2 py-0.5 rounded-full text-xs font-medium"
-                            style={{
-                              background: "#22c55e20",
-                              color: "#22c55e",
-                            }}
-                          >
-                            CURRENT
-                          </span>
-                        )}
-                      </div>
+              <Reveal key={job.company} delay={i * 0.08}>
+                <motion.div
+                  whileHover={{ x: 6 }}
+                  className="p-5 rounded-[22px]"
+                  style={{
+                    background: colors.bgCard,
+                    border: `1px solid ${job.current ? colors.borderHover : colors.border}`,
+                  }}
+                >
+                  <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
+                    <div>
+                      <h3 className="text-lg font-bold">{job.title}</h3>
+                      <p className="text-sm font-medium" style={{ color: colors.accent }}>
+                        {job.company}
+                      </p>
                     </div>
-                    <p style={{ color: colors.textSecondary }}>{job.desc}</p>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-mono" style={{ color: colors.textMuted }}>
+                        {job.period}
+                      </span>
+                      {job.current && (
+                        <span
+                          className="px-2 py-0.5 rounded-full text-xs font-bold"
+                          style={{ background: "#22c55e20", color: "#22c55e" }}
+                        >
+                          NOW
+                        </span>
+                      )}
+                    </div>
                   </div>
-                </GlowCard>
+                  <p className="text-sm" style={{ color: colors.textSecondary }}>
+                    {job.desc}
+                  </p>
+                </motion.div>
               </Reveal>
             ))}
           </div>
@@ -1379,7 +1356,7 @@ const Portfolio = () => {
               04 / PROJECTS
             </span>
             <h2 className="text-4xl sm:text-5xl font-extrabold mt-3 tracking-tight">
-              What I'm shipping
+              Featured work
             </h2>
           </Reveal>
 
@@ -1429,7 +1406,7 @@ const Portfolio = () => {
                       style={{ color: colors.textSecondary }}
                     >
                       Leading frontend development for an innovative plant & pet care platform.
-                      Building with React Native and Expo. Architected reusable UI libraries 
+                      React Native and Expo. Architected reusable UI libraries 
                       and integrating AI-powered features.
                     </p>
                     <div className="flex flex-wrap gap-2 mb-6">
@@ -1546,159 +1523,6 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* ===== TOOLS I USE (Affiliate Section) ===== */}
-      <section id="tools" className="py-28 px-6">
-        <div className="max-w-6xl mx-auto">
-          <Reveal className="mb-14">
-            <span
-              className="font-mono text-sm tracking-wider"
-              style={{ color: colors.accent }}
-            >
-              05 / TOOLS
-            </span>
-            <h2 className="text-4xl sm:text-5xl font-extrabold mt-3 tracking-tight">
-              Tools I <span className="text-gradient">recommend</span>
-            </h2>
-            <p
-              className="text-xl mt-4 max-w-2xl"
-              style={{ color: colors.textSecondary }}
-            >
-              My daily toolkit for building, creating, and shipping.
-            </p>
-          </Reveal>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                category: "AI Tools",
-                tools: [
-                  { name: "ChatGPT Plus", desc: "My go-to AI assistant", href: "#", price: "$20/mo" },
-                  { name: "Claude Pro", desc: "Best for coding & writing", href: "#", price: "$20/mo" },
-                  { name: "Cursor", desc: "AI-powered code editor", href: "#", price: "$20/mo" },
-                ],
-                icon: Bot,
-                color: "#8b5cf6",
-              },
-              {
-                category: "Development",
-                tools: [
-                  { name: "Vercel", desc: "Deploy in seconds", href: "#", price: "Free tier" },
-                  { name: "GitHub", desc: "Code hosting & collaboration", href: "#", price: "Free tier" },
-                  { name: "VS Code", desc: "Code editor", href: "#", price: "Free" },
-                ],
-                icon: Code2,
-                color: colors.accent,
-              },
-              {
-                category: "Design",
-                tools: [
-                  { name: "Figma", desc: "UI/UX design", href: "#", price: "Free tier" },
-                  { name: "Element Pack", desc: "Elementor addons", href: "https://elementpackpro.sjv.io/9LmeNe", price: "From $39/yr" },
-                  { name: "Canva", desc: "Quick graphics", href: "#", price: "Free tier" },
-                ],
-                icon: Palette,
-                color: "#ec4899",
-              },
-              {
-                category: "Business",
-                tools: [
-                  { name: "Shopify", desc: "Start an online store", href: "https://shopify.pxf.io/QjaKZz", price: "From $29/mo" },
-                  { name: "Gumroad", desc: "Sell digital products", href: "#", price: "Free + fees" },
-                  { name: "Notion", desc: "Notes & planning", href: "#", price: "Free tier" },
-                ],
-                icon: Briefcase,
-                color: "#f59e0b",
-              },
-              {
-                category: "Hosting & Domains",
-                tools: [
-                  { name: "10Web", desc: "AI website builder", href: "https://10web.sjv.io/gOmo0B", price: "From $10/mo" },
-                  { name: "Namecheap", desc: "Domain registration", href: "#", price: "From $6/yr" },
-                  { name: "Cloudflare", desc: "CDN & security", href: "#", price: "Free tier" },
-                ],
-                icon: Building2,
-                color: "#06b6d4",
-              },
-              {
-                category: "Productivity",
-                tools: [
-                  { name: "Raycast", desc: "Mac productivity", href: "#", price: "Free tier" },
-                  { name: "Arc Browser", desc: "Modern browser", href: "#", price: "Free" },
-                  { name: "Loom", desc: "Quick video recording", href: "#", price: "Free tier" },
-                ],
-                icon: Zap,
-                color: "#22c55e",
-              },
-            ].map((category, i) => (
-              <Reveal key={category.category} delay={0.05 * i}>
-                <div
-                  className="h-full p-5 rounded-[22px]"
-                  style={{
-                    background: colors.bgCard,
-                    border: `1px solid ${colors.border}`,
-                  }}
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div
-                      className="p-2 rounded-lg"
-                      style={{ background: `${category.color}15` }}
-                    >
-                      <category.icon size={18} style={{ color: category.color }} />
-                    </div>
-                    <h3 className="font-bold">{category.category}</h3>
-                  </div>
-                  <div className="space-y-3">
-                    {category.tools.map((tool) => (
-                      <a
-                        key={tool.name}
-                        href={tool.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center justify-between p-3 rounded-xl transition-all hover:scale-[1.02]"
-                        style={{
-                          background: `${colors.accent}05`,
-                          border: `1px solid transparent`,
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.borderColor = colors.border}
-                        onMouseLeave={(e) => e.currentTarget.style.borderColor = 'transparent'}
-                      >
-                        <div>
-                          <p className="font-semibold text-sm flex items-center gap-1">
-                            {tool.name}
-                            <ArrowUpRight
-                              size={12}
-                              style={{ color: colors.textMuted }}
-                              className="opacity-0 group-hover:opacity-100 transition-opacity"
-                            />
-                          </p>
-                          <p className="text-xs" style={{ color: colors.textMuted }}>
-                            {tool.desc}
-                          </p>
-                        </div>
-                        <span
-                          className="text-xs font-mono px-2 py-1 rounded-md"
-                          style={{ background: `${colors.accent}10`, color: colors.textSecondary }}
-                        >
-                          {tool.price}
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.3}>
-            <p
-              className="text-center text-sm mt-8"
-              style={{ color: colors.textMuted }}
-            >
-              * Some links are affiliate links. I only recommend tools I actually use.
-            </p>
-          </Reveal>
-        </div>
-      </section>
 
       {/* ===== WRITING ===== */}
       <section id="writing" className="py-28 px-6">
@@ -1710,10 +1534,10 @@ const Portfolio = () => {
                   className="font-mono text-sm tracking-wider"
                   style={{ color: colors.accent }}
                 >
-                  06 / WRITING
+                  05 / WRITING
                 </span>
                 <h2 className="text-4xl sm:text-5xl font-extrabold mt-3 tracking-tight mb-5">
-                  Clarity over noise
+                  Ideas worth <span className="text-gradient">sharing</span>
                 </h2>
               </Reveal>
               <Reveal delay={0.1}>
@@ -1721,33 +1545,9 @@ const Portfolio = () => {
                   className="text-lg leading-relaxed mb-6"
                   style={{ color: colors.textSecondary }}
                 >
-                  I write about AI, technology, psychology, and systems. I focus
-                  on how people think, decide, and build.
+                  I explore how technology shapes thinking, how systems influence behavior, 
+                  and how to navigate an AI-driven world.
                 </p>
-              </Reveal>
-              <Reveal delay={0.15}>
-                <div
-                  className="p-4 rounded-xl mb-8"
-                  style={{
-                    background: `${colors.accent}06`,
-                    border: `1px solid ${colors.border}`,
-                  }}
-                >
-                  <p
-                    className="text-sm"
-                    style={{ color: colors.textSecondary }}
-                  >
-                    <span
-                      className="font-semibold"
-                      style={{ color: colors.text }}
-                    >
-                      Note:
-                    </span>{" "}
-                    My psychology content is non-clinical and educational.
-                    Focused on behavior, incentives, and systems. Not diagnosis
-                    or therapy.
-                  </p>
-                </div>
               </Reveal>
               <Reveal delay={0.2}>
                 <div className="flex flex-wrap gap-3">
@@ -1756,11 +1556,8 @@ const Portfolio = () => {
                     target="_blank"
                     className={`group px-5 py-2.5 bg-gradient-to-r ${colors.gradient} text-white rounded-xl font-semibold text-sm flex items-center gap-2`}
                   >
-                    <Twitter size={16} /> Follow on X{" "}
-                    <ArrowUpRight
-                      size={14}
-                      className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                    />
+                    <Twitter size={16} /> Follow on X
+                    <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </MagneticBtn>
                   <MagneticBtn
                     href="https://medium.com/@janeezy"
@@ -1776,36 +1573,16 @@ const Portfolio = () => {
 
             <div className="space-y-3">
               {[
-                {
-                  icon: "💻",
-                  topic: "AI & Technology",
-                  title: "How AI systems work and where they're headed",
-                },
-                {
-                  icon: "🧠",
-                  topic: "Psychology",
-                  title: "Behavior, incentives, decision-making patterns",
-                },
-                {
-                  icon: "⛓️",
-                  topic: "Web3 & Crypto",
-                  title: "Digital empowerment and decentralized systems",
-                },
-                {
-                  icon: "🌍",
-                  topic: "Geopolitics",
-                  title: "Africa's rise and shifting global dynamics",
-                },
-                {
-                  icon: "🌟",
-                  topic: "Consciousness",
-                  title: "Inner clarity and intentional living",
-                },
+                { icon: "💻", topic: "AI & Technology", title: "How AI systems work and where they're headed" },
+                { icon: "🧠", topic: "Psychology", title: "Behavior, incentives, decision-making patterns" },
+                { icon: "⛓️", topic: "Web3 & Crypto", title: "Digital empowerment and decentralized systems" },
+                { icon: "🌍", topic: "Geopolitics", title: "Africa's rise and shifting global dynamics" },
+                { icon: "🌟", topic: "Consciousness", title: "Inner clarity and intentional living" },
               ].map((item, i) => (
                 <Reveal key={item.topic} delay={0.08 + i * 0.05}>
                   <motion.div
                     whileHover={{ x: 6 }}
-                    className="p-4 rounded-2xl flex items-center gap-4 cursor-pointer"
+                    className="p-4 rounded-2xl flex items-center gap-4"
                     style={{
                       background: colors.bgCard,
                       border: `1px solid ${colors.border}`,
@@ -1829,6 +1606,50 @@ const Portfolio = () => {
         </div>
       </section>
 
+      {/* ===== FAQ ===== */}
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
+          <Reveal className="text-center mb-12">
+            <span
+              className="font-mono text-sm tracking-wider"
+              style={{ color: colors.accent }}
+            >
+              FAQ
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold mt-3 tracking-tight">
+              Common <span className="text-gradient">questions</span>
+            </h2>
+          </Reveal>
+
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <Reveal key={i} delay={0.08 * i}>
+                <div
+                  className="p-6 rounded-[22px]"
+                  style={{
+                    background: colors.bgCard,
+                    border: `1px solid ${colors.border}`,
+                  }}
+                >
+                  <h3 className="font-bold text-lg mb-3 flex items-start gap-3">
+                    <span
+                      className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
+                      style={{ background: `${colors.accent}20`, color: colors.accent }}
+                    >
+                      ?
+                    </span>
+                    {faq.q}
+                  </h3>
+                  <p className="text-sm leading-relaxed pl-9" style={{ color: colors.textSecondary }}>
+                    {faq.a}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ===== CONTACT ===== */}
       <section id="contact" className="py-28 px-6">
         <div className="max-w-4xl mx-auto">
@@ -1837,10 +1658,10 @@ const Portfolio = () => {
               className="font-mono text-sm tracking-wider"
               style={{ color: colors.accent }}
             >
-              07 / CONTACT
+              06 / CONTACT
             </span>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mt-3 tracking-tight mb-5">
-              Let's build <span className="text-gradient">together</span>
+              Let's <span className="text-gradient">connect</span>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
@@ -1848,106 +1669,50 @@ const Portfolio = () => {
               className="text-xl mb-10"
               style={{ color: colors.textSecondary }}
             >
-              Looking for a frontend engineer? Have a project? Want to collaborate? Let's talk.
+              Looking for a frontend engineer? Want to collaborate? Or just say hi — I'd love to hear from you.
             </p>
           </Reveal>
 
           <Reveal delay={0.15}>
-            <div className="flex flex-wrap gap-4 mb-10">
+            <div className="flex flex-wrap gap-4 mb-8">
               <MagneticBtn
                 href="https://cal.com/jane-duru/discovery-call"
                 target="_blank"
-                className={`group px-6 py-3.5 bg-gradient-to-r ${colors.gradient} text-white rounded-2xl font-semibold flex items-center gap-2`}
+                className={`group px-7 py-4 bg-gradient-to-r ${colors.gradient} text-white rounded-2xl font-semibold flex items-center gap-2`}
                 style={{ boxShadow: `0 8px 30px ${colors.glow}` }}
               >
                 <Calendar size={18} /> Free 15min call
+                <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </MagneticBtn>
               <MagneticBtn
                 href="https://cal.com/jane-duru/1-hour-consultation"
                 target="_blank"
-                className="px-6 py-3.5 rounded-2xl font-semibold flex items-center gap-2"
-                style={{ 
-                  border: `2px solid ${colors.accent}`,
-                  background: `${colors.accent}10`,
-                }}
+                className="px-7 py-4 rounded-2xl font-semibold flex items-center gap-2"
+                style={{ border: `2px solid ${colors.accent}`, background: `${colors.accent}10` }}
               >
-                <Calendar size={18} /> 1hr Consult · €75
+                <Calendar size={18} /> 1hr Deep Dive · €75
               </MagneticBtn>
-              <div
-                className="px-5 py-3.5 rounded-2xl flex items-center gap-2 font-medium"
-                style={{ background: `${colors.accent}10` }}
-              >
-                <MapPin size={18} style={{ color: colors.accent }} /> Lisbon,
-                Portugal
-              </div>
             </div>
           </Reveal>
 
           <Reveal delay={0.2}>
             <div
-              className="p-6 rounded-3xl mb-10"
-              style={{
-                background: `linear-gradient(135deg, ${colors.accent}08, ${colors.accentAlt}05)`,
-                border: `1px solid ${colors.border}`,
-              }}
+              className="flex items-center gap-2 mb-10 px-4 py-2 rounded-xl w-fit"
+              style={{ background: `${colors.accent}08` }}
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <div
-                    className="p-2.5 rounded-xl flex-shrink-0"
-                    style={{ background: `${colors.accent}12` }}
-                  >
-                    <Heart size={20} style={{ color: colors.accent }} />
-                  </div>
-                  <div>
-                    <h3 className="font-bold">Support my work</h3>
-                    <p
-                      className="text-sm"
-                      style={{ color: colors.textSecondary }}
-                    >
-                      If my content helped you, buy me a coffee.
-                    </p>
-                  </div>
-                </div>
-                <MagneticBtn
-                  href="https://buymeacoffee.com/janeezyoffb"
-                  target="_blank"
-                  className="px-5 py-2.5 bg-[#FFDD00] text-black rounded-xl font-bold text-sm flex items-center gap-2 whitespace-nowrap"
-                >
-                  <Coffee size={16} /> Buy me a coffee
-                </MagneticBtn>
-              </div>
+              <MapPin size={16} style={{ color: colors.accent }} />
+              <span className="text-sm font-medium">Lisbon, Portugal · Remote worldwide</span>
             </div>
           </Reveal>
 
           <Reveal delay={0.25}>
             <div className="flex flex-wrap gap-3">
               {[
-                {
-                  icon: Twitter,
-                  label: "X / Twitter",
-                  href: "https://x.com/Iamjaneezy",
-                },
-                {
-                  icon: Linkedin,
-                  label: "LinkedIn",
-                  href: "https://www.linkedin.com/in/janeezy/",
-                },
-                {
-                  icon: Github,
-                  label: "GitHub",
-                  href: "https://github.com/janeezy",
-                },
-                {
-                  icon: Pen,
-                  label: "Medium",
-                  href: "https://medium.com/@janeezy",
-                },
-                {
-                  icon: BookOpen,
-                  label: "Books",
-                  href: "https://linktr.ee/Janeezy",
-                },
+                { icon: Github, label: "GitHub", href: "https://github.com/janeezy" },
+                { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/janeezy/" },
+                { icon: Twitter, label: "X / Twitter", href: "https://x.com/Iamjaneezy" },
+                { icon: Pen, label: "Medium", href: "https://medium.com/@janeezy" },
+                { icon: BookOpen, label: "Books", href: "https://linktr.ee/Janeezy" },
               ].map((s) => (
                 <MagneticBtn
                   key={s.label}
@@ -1971,6 +1736,67 @@ const Portfolio = () => {
         </div>
       </section>
 
+      {/* Back to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            onClick={scrollToTop}
+            className="fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-lg"
+            style={{
+              background: `linear-gradient(135deg, ${colors.accent}, ${colors.accentAlt})`,
+              boxShadow: `0 4px 20px ${colors.glow}`,
+            }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Back to top"
+          >
+            <ChevronUp size={24} color="#fff" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      {/* Sticky Mobile CTA */}
+      <AnimatePresence>
+        {showStickyCTA && (
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            className="fixed bottom-0 left-0 right-0 z-40 p-4 md:hidden"
+            style={{
+              background: `${colors.bg}f5`,
+              backdropFilter: "blur(20px)",
+              borderTop: `1px solid ${colors.border}`,
+            }}
+          >
+            <div className="flex gap-2">
+              <a
+                href="https://linktr.ee/Janeezy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm"
+                style={{ background: `${colors.accent}15`, border: `1px solid ${colors.border}` }}
+              >
+                <BookOpen size={16} />
+                Books
+              </a>
+              <a
+                href="https://cal.com/jane-duru/discovery-call"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex-1 flex items-center justify-center gap-2 py-3 bg-gradient-to-r ${colors.gradient} text-white rounded-xl font-bold text-sm`}
+              >
+                <Calendar size={16} />
+                Book a call
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Footer */}
       <footer
         className="py-10 px-6"
@@ -1983,11 +1809,11 @@ const Portfolio = () => {
             </span>
             <span style={{ color: colors.border }}>·</span>
             <span className="text-sm" style={{ color: colors.textMuted }}>
-              Frontend Engineer & Digital Creator
+              Frontend Engineer & Creator
             </span>
           </div>
           <p className="text-sm" style={{ color: colors.textMuted }}>
-            \u00a9 {new Date().getFullYear()} Jane Duru
+            © {new Date().getFullYear()} Jane Duru
           </p>
         </div>
       </footer>
