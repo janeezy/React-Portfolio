@@ -693,7 +693,7 @@ const Portfolio = () => {
 
           <div className="grid lg:grid-cols-2 gap-12">
             <div className="space-y-6">
-              <Reveal delay={0.1}><p className="text-lg leading-relaxed" style={{ color: colors.textSecondary }}>I'm Jane, founder of <strong style={{ color: colors.text }}>Zemio Labs</strong>. We ship apps that actually help people live better.</p></Reveal>
+              <Reveal delay={0.1}><p className="text-lg leading-relaxed" style={{ color: colors.textSecondary }}>I'm Jane, co-founder of <strong style={{ color: colors.text }}>Zemio Labs</strong>. We ship apps that actually help people live better.</p></Reveal>
               <Reveal delay={0.15}><p className="text-lg leading-relaxed" style={{ color: colors.textSecondary }}>My path took me from medicine in Ukraine to managing €20M+ in crypto and fintech over 8 years, then teaching myself to code. Now I ship mobile apps with React Native and have 3+ years in tech.</p></Reveal>
               <Reveal delay={0.2}><p className="text-lg leading-relaxed" style={{ color: colors.textSecondary }}>I also teach people how to use AI tools to earn online. I write about what I learn on X and Medium, covering AI, psychology, and systems thinking.</p></Reveal>
               <Reveal delay={0.25}><div className="flex flex-wrap gap-2 pt-4">{["React Native", "Expo", "TypeScript", "Next.js", "NestJS", "Tailwind"].map((s) => <motion.span key={s} whileHover={{ scale: 1.05, y: -2 }} className="px-4 py-2 rounded-xl text-sm font-medium cursor-default" style={{ background: `${colors.accent}10`, border: `1px solid ${colors.border}` }}>{s}</motion.span>)}</div></Reveal>
