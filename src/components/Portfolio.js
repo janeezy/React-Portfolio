@@ -305,7 +305,7 @@ const Portfolio = () => {
     { q: "Do the AI prompts work with ChatGPT, Claude, etc?", a: "Yes! All prompts work with any major AI tool." },
     { q: "I'm not technical. Can I use these guides?", a: "Absolutely. Written for beginners. Copy and paste ready." },
     { q: "Can I get a refund?", a: "Yes, Gumroad offers 30-day refunds. No questions asked." },
-    { q: "When is Ohh launching?", a: "Soon! Join the waitlist at zemiolabs.com." },
+    { q: "When are your apps launching?", a: "Follow updates at zemiolabs.com." },
   ];
 
   return (
@@ -375,7 +375,7 @@ const Portfolio = () => {
 
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg leading-relaxed max-w-xl mb-8" style={{ color: colors.textSecondary }}>
                 Founder of <a href="https://zemiolabs.com" target="_blank" rel="noopener noreferrer" className="font-semibold hover:underline underline-offset-4" style={{ color: colors.accent }}>Zemio Labs</a>. 
-                Currently building <strong style={{ color: colors.text }}>Ohh</strong>, an app helping women build deeper friendships. 
+                Currently building mobile apps that help people connect better. 
                 I write about AI, psychology, and share my journey on X.
               </motion.p>
 
@@ -402,22 +402,7 @@ const Portfolio = () => {
                   >
                     <Smartphone size={16} style={{ color: colors.accent }} />
                   </motion.div>
-                  <div><p className="font-bold">5+ apps</p><p style={{ color: colors.textMuted }} className="text-xs">in development</p></div>
-                </motion.div>
-                <motion.div 
-                  className="flex items-center gap-2"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  <motion.div 
-                    className="w-8 h-8 rounded-lg flex items-center justify-center" 
-                    style={{ background: `${colors.accentAlt}15` }}
-                    animate={{ rotate: [0, -5, 5, 0] }}
-                    transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
-                  >
-                    <BookOpen size={16} style={{ color: colors.accentAlt }} />
-                  </motion.div>
-                  <div><p className="font-bold">2 books</p><p style={{ color: colors.textMuted }} className="text-xs">published</p></div>
+                  <div><p className="font-bold">Multiple</p><p style={{ color: colors.textMuted }} className="text-xs">products in production</p></div>
                 </motion.div>
                 <motion.div 
                   className="flex items-center gap-2"
@@ -461,7 +446,7 @@ const Portfolio = () => {
                       </motion.div>
                       <MessageCircle size={14} style={{ color: colors.accent }} />
                     </div>
-                    <div className="flex-1"><p className="font-semibold text-sm">Building Ohh</p><p className="text-xs" style={{ color: colors.textMuted }}>Deeper friendships through meaningful questions</p></div>
+                    <div className="flex-1"><p className="font-semibold text-sm">Shipping Products</p><p className="text-xs" style={{ color: colors.textMuted }}>Mobile & web applications</p></div>
                     <motion.span 
                       className="px-2 py-1 rounded-full text-xs font-bold" 
                       style={{ background: "#22c55e20", color: "#22c55e" }}
@@ -519,7 +504,7 @@ const Portfolio = () => {
                   </div>
                   <h3 className="text-3xl sm:text-4xl font-extrabold mb-2">Ohh</h3>
                   <p className="text-lg font-medium mb-3" style={{ color: colors.accentAlt }}>Connection, reimagined.</p>
-                  <p className="text-base mb-4" style={{ color: colors.textSecondary }}>Helping women build deeper friendships through meaningful questions.<br /><span className="font-medium" style={{ color: colors.text }}>Beyond "how are you?"</span></p>
+                  <p className="text-base mb-4" style={{ color: colors.textSecondary }}>A social app focused on meaningful human connection.<br /><span className="font-medium" style={{ color: colors.text }}>Coming soon.</span></p>
                   <motion.div 
                     className="inline-flex items-center gap-2 font-semibold" 
                     style={{ color: colors.accent }}
@@ -566,10 +551,10 @@ const Portfolio = () => {
 
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { title: "Ohh", desc: "Helping women build deeper friendships through meaningful questions.", href: "https://zemiolabs.com", tags: ["React Native", "NestJS"], badge: "FLAGSHIP", badgeColor: "#ec4899" },
-              { title: "MyBicho", desc: "AI-powered plant and pet care. Identification, schedules, reminders.", href: "https://mybicho.com", tags: ["React Native", "AI Vision"], badge: "65% DONE", badgeColor: colors.accent, progress: 65 },
-              { title: "Wellness Suite", desc: "Affirmation, Motivation, Prayer, Book Logger. All launching 2026.", href: "https://zemiolabs.com", tags: ["React Native", "Expo"], badge: "PIPELINE", badgeColor: "#f59e0b" },
-              { title: "Zemio Labs", desc: "Our app studio. Shipping tools that matter.", href: "https://zemiolabs.com", tags: ["Next.js", "React"], badge: "LIVE", badgeColor: "#22c55e" },
+              { title: "Ohh", desc: "Mobile application for social connection.", href: "https://zemiolabs.com", tags: ["React Native", "NestJS"], badge: "FLAGSHIP", badgeColor: "#ec4899" },
+              { title: "MyBicho", desc: "Lifestyle application with AI integration.", href: "https://mybicho.com", tags: ["React Native", "AI Vision"], badge: "65% DONE", badgeColor: colors.accent, progress: 65 },
+              { title: "Wellness Suite", desc: "Mobile wellness and productivity tools.", href: "https://zemiolabs.com", tags: ["React Native", "Expo"], badge: "PIPELINE", badgeColor: "#f59e0b" },
+              { title: "Zemio Labs", desc: "App development studio.", href: "https://zemiolabs.com", tags: ["Next.js", "React"], badge: "LIVE", badgeColor: "#22c55e" },
             ].map((p, i) => (
               <Reveal key={p.title} delay={0.1 + i * 0.08}>
                 <GlowCard colors={colors} glow>
@@ -676,8 +661,8 @@ const Portfolio = () => {
           </div>
 
           <Reveal delay={0.3}>
-            <motion.a href="https://linktr.ee/Janeezy" target="_blank" className="group flex items-center justify-center gap-3 p-4 rounded-2xl" style={{ background: `${colors.accent}08`, border: `1px solid ${colors.border}` }} whileHover={{ scale: 1.01 }}>
-              <ShoppingBag size={20} style={{ color: colors.accent }} /><span className="font-semibold">Browse all on Linktree</span><ArrowUpRight size={18} style={{ color: colors.accent }} className="group-hover:translate-x-1 transition-transform" />
+            <motion.a href="https://iamjaneezystore.gumroad.com/" target="_blank" className="group flex items-center justify-center gap-3 p-4 rounded-2xl" style={{ background: `${colors.accent}08`, border: `1px solid ${colors.border}` }} whileHover={{ scale: 1.01 }}>
+              <ShoppingBag size={20} style={{ color: colors.accent }} /><span className="font-semibold">Browse all books</span><ArrowUpRight size={18} style={{ color: colors.accent }} className="group-hover:translate-x-1 transition-transform" />
             </motion.a>
           </Reveal>
         </div>
@@ -693,18 +678,18 @@ const Portfolio = () => {
 
           <div className="grid lg:grid-cols-2 gap-12">
             <div className="space-y-6">
-              <Reveal delay={0.1}><p className="text-lg leading-relaxed" style={{ color: colors.textSecondary }}>I'm Jane, co-founder of <strong style={{ color: colors.text }}>Zemio Labs</strong>. We ship apps that actually help people live better.</p></Reveal>
-              <Reveal delay={0.15}><p className="text-lg leading-relaxed" style={{ color: colors.textSecondary }}>My path took me from medicine in Ukraine to managing €20M+ in crypto and fintech over 8 years, then teaching myself to code. Now I ship mobile apps with React Native and have 3+ years in tech.</p></Reveal>
+              <Reveal delay={0.1}><p className="text-lg leading-relaxed" style={{ color: colors.textSecondary }}>I'm Jane, a founder and developer. I ship apps that actually help people live better.</p></Reveal>
+              <Reveal delay={0.15}><p className="text-lg leading-relaxed" style={{ color: colors.textSecondary }}>My path took me from medicine to managing significant crypto and fintech portfolios over 8 years. Now I focus on building web and mobile apps that solve real problems.</p></Reveal>
               <Reveal delay={0.2}><p className="text-lg leading-relaxed" style={{ color: colors.textSecondary }}>I also teach people how to use AI tools to earn online. I write about what I learn on X and Medium, covering AI, psychology, and systems thinking.</p></Reveal>
               <Reveal delay={0.25}><div className="flex flex-wrap gap-2 pt-4">{["React Native", "Expo", "TypeScript", "Next.js", "NestJS", "Tailwind"].map((s) => <motion.span key={s} whileHover={{ scale: 1.05, y: -2 }} className="px-4 py-2 rounded-xl text-sm font-medium cursor-default" style={{ background: `${colors.accent}10`, border: `1px solid ${colors.border}` }}>{s}</motion.span>)}</div></Reveal>
             </div>
 
             <div className="space-y-4">
               {[
-                { icon: Building2, title: "Founder", sub: "Zemio Labs", desc: "App studio shipping 5+ products in 2026. Human first, always.", color: colors.accent },
-                { icon: Smartphone, title: "Mobile Developer", sub: "3+ years in tech", desc: "iOS and Android apps with React Native. From idea to App Store.", color: colors.accentAlt },
+                { icon: Building2, title: "Founder", sub: "App Studio", desc: "Building products that help people live better. Human first, always.", color: colors.accent },
+                { icon: Smartphone, title: "Mobile Developer", sub: "iOS & Android", desc: "React Native apps from concept to App Store. Currently shipping.", color: colors.accentAlt },
                 { icon: Bot, title: "AI Educator", sub: "Books and guides", desc: "Teaching people how to use AI tools to earn online.", color: "#f59e0b" },
-                { icon: TrendingUp, title: "Finance Background", sub: "8 years in fintech", desc: "Managed €20M+ in crypto. High stakes decisions now applied to products.", color: "#10b981" },
+                { icon: TrendingUp, title: "Finance Background", sub: "8 years in fintech", desc: "Enterprise-level crypto and fintech experience. High stakes decisions now applied to products.", color: "#10b981" },
               ].map((item, i) => (
                 <Reveal key={item.title} delay={0.1 + i * 0.08}>
                   <motion.div whileHover={{ x: 8, scale: 1.01 }} whileTap={{ scale: 0.99 }} className="p-5 rounded-[22px] flex items-start gap-4 cursor-pointer" style={{ background: colors.bgCard, border: `1px solid ${colors.border}` }}>
@@ -735,7 +720,7 @@ const Portfolio = () => {
             </div>
             <div className="space-y-3">
               {[
-                { icon: "🚀", topic: "Building in Public", title: "Daily updates on shipping Ohh and other apps" },
+                { icon: "🚀", topic: "Building in Public", title: "Daily updates on shipping products and learning" },
                 { icon: "🤖", topic: "AI and Technology", title: "How to use AI tools to earn and create" },
                 { icon: "🧠", topic: "Psychology", title: "Why we think and behave the way we do" },
                 { icon: "💡", topic: "Lessons Learned", title: "Mistakes, wins, and everything in between" },
