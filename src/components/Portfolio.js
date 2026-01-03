@@ -374,7 +374,7 @@ const Portfolio = () => {
               </motion.h1>
 
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg leading-relaxed max-w-xl mb-8" style={{ color: colors.textSecondary }}>
-                Founder of <a href="https://zemiolabs.com" target="_blank" rel="noopener noreferrer" className="font-semibold hover:underline underline-offset-4" style={{ color: colors.accent }}>Zemio Labs</a>. 
+                Co-Founder of <a href="https://zemiolabs.com" target="_blank" rel="noopener noreferrer" className="font-semibold hover:underline underline-offset-4" style={{ color: colors.accent }}>Zemio Labs</a>. 
                 Currently building mobile apps that help people connect better. 
                 I write about AI, psychology, and share my journey on X.
               </motion.p>
