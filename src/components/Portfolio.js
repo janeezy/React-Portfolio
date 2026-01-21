@@ -305,7 +305,7 @@ const Portfolio = () => {
     { q: "Do the AI prompts work with ChatGPT, Claude, etc?", a: "Yes! All prompts work with any major AI tool." },
     { q: "I'm not technical. Can I use these guides?", a: "Absolutely. Written for beginners. Copy and paste ready." },
     { q: "Can I get a refund?", a: "Yes, Gumroad offers 30-day refunds. No questions asked." },
-    { q: "When are your apps launching?", a: "Follow updates at zemiolabs.com." },
+    { q: "When are your apps launching?", a: "In coming weeks. I post launch updates." },
   ];
 
   return (
@@ -468,7 +468,7 @@ const Portfolio = () => {
         <div className="max-w-4xl mx-auto">
           <Reveal>
             <motion.a 
-              href="https://zemiolabs.com" 
+              href="https://www.ohh.world" 
               target="_blank" 
               className="group block relative overflow-hidden rounded-[28px] p-8 sm:p-10" 
               style={{ background: `linear-gradient(135deg, ${colors.accentAlt}15, ${colors.accent}08)`, border: `2px solid ${colors.borderHover}` }} 
@@ -503,8 +503,8 @@ const Portfolio = () => {
                     <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ background: `${colors.accent}20`, color: colors.accent }}>iOS and Android</span>
                   </div>
                   <h3 className="text-3xl sm:text-4xl font-extrabold mb-2">Ohh</h3>
-                  <p className="text-lg font-medium mb-3" style={{ color: colors.accentAlt }}>Connection, reimagined.</p>
-                  <p className="text-base mb-4" style={{ color: colors.textSecondary }}>A social app focused on meaningful human connection.<br /><span className="font-medium" style={{ color: colors.text }}>Coming soon.</span></p>
+                  <p className="text-lg font-medium mb-3" style={{ color: colors.accentAlt }}>Beyond "how are you"</p>
+                  <p className="text-base mb-4" style={{ color: colors.textSecondary }}>Launching soon.<br /><span className="font-medium" style={{ color: colors.text }}>Join the waitlist.</span></p>
                   <motion.div 
                     className="inline-flex items-center gap-2 font-semibold" 
                     style={{ color: colors.accent }}
@@ -551,7 +551,7 @@ const Portfolio = () => {
 
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { title: "Ohh", desc: "Mobile application for social connection.", href: "https://zemiolabs.com", tags: ["React Native", "NestJS"], badge: "FLAGSHIP", badgeColor: "#ec4899" },
+              { title: "Ohh", desc: "Beyond \"how are you\" — launching soon.", href: "https://www.ohh.world", tags: ["React Native", "NestJS"], badge: "FLAGSHIP", badgeColor: "#ec4899" },
               { title: "MyBicho", desc: "Lifestyle application with AI integration.", href: "https://mybicho.com", tags: ["React Native", "AI Vision"], badge: "65% DONE", badgeColor: colors.accent, progress: 65 },
               { title: "Wellness Suite", desc: "Mobile wellness and productivity tools.", href: "https://zemiolabs.com", tags: ["React Native", "Expo"], badge: "PIPELINE", badgeColor: "#f59e0b" },
               { title: "Zemio Labs", desc: "App development studio.", href: "https://zemiolabs.com", tags: ["Next.js", "React"], badge: "LIVE", badgeColor: "#22c55e" },
@@ -713,8 +713,9 @@ const Portfolio = () => {
               <Reveal delay={0.2}>
                 <div className="flex flex-wrap gap-3">
                   <MagneticBtn href="https://x.com/Iamjaneezy" target="_blank" className={`group px-5 py-2.5 bg-gradient-to-r ${colors.gradient} text-white rounded-xl font-semibold text-sm flex items-center gap-2`}><Twitter size={16} />Follow on X<ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" /></MagneticBtn>
+                  <MagneticBtn href="https://x.com/Iamjaneezy/articles" target="_blank" className="px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2" style={{ border: `2px solid ${colors.border}` }}><FileText size={16} />X Articles</MagneticBtn>
                   <MagneticBtn href="https://medium.com/@janeezy" target="_blank" className="px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2" style={{ border: `2px solid ${colors.border}` }}><BookOpen size={16} />Medium</MagneticBtn>
-                  <MagneticBtn href="https://janeduru.beehiiv.com/subscribe" target="_blank" className="px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2" style={{ border: `2px solid ${colors.border}` }}><Mail size={16} />Newsletter</MagneticBtn>
+                  <MagneticBtn href="https://janeezyofficial.substack.com/?utm_campaign=pub&utm_medium=web" target="_blank" className="px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2" style={{ border: `2px solid ${colors.border}` }}><Mail size={16} />Substack</MagneticBtn>
                 </div>
               </Reveal>
             </div>
@@ -784,15 +785,18 @@ const Portfolio = () => {
           <Reveal delay={0.2}><div className="flex items-center gap-2 mb-8 px-4 py-2 rounded-xl w-fit" style={{ background: `${colors.accent}08` }}><MapPin size={16} style={{ color: colors.accent }} /><span className="text-sm font-medium">Lisbon, Portugal</span></div></Reveal>
           <Reveal delay={0.22}>
             <div className="flex flex-wrap gap-4 mb-10">
-              <MagneticBtn href="https://janeduru.beehiiv.com/subscribe" target="_blank" className="px-6 py-3 rounded-2xl font-semibold flex items-center gap-2" style={{ border: `2px solid ${colors.border}` }}><Mail size={18} />Join newsletter</MagneticBtn>
+              <MagneticBtn href="https://janeezyofficial.substack.com/?utm_campaign=pub&utm_medium=web" target="_blank" className="px-6 py-3 rounded-2xl font-semibold flex items-center gap-2" style={{ border: `2px solid ${colors.border}` }}><Mail size={18} />Join Substack</MagneticBtn>
             </div>
           </Reveal>
           <Reveal delay={0.25}>
             <div className="flex flex-wrap gap-3">
               {[
                 { icon: Twitter, label: "X Twitter", href: "https://x.com/Iamjaneezy" },
+                { icon: FileText, label: "X Articles", href: "https://x.com/Iamjaneezy/articles" },
+                { icon: Mail, label: "Substack", href: "https://janeezyofficial.substack.com/?utm_campaign=pub&utm_medium=web" },
                 { icon: ShoppingBag, label: "Gumroad", href: "https://iamjaneezystore.gumroad.com" },
                 { icon: Building2, label: "Zemio Labs", href: "https://zemiolabs.com" },
+                { icon: Heart, label: "Ohh World", href: "https://www.ohh.world" },
                 { icon: Github, label: "GitHub", href: "https://github.com/janeezy" },
                 { icon: Pen, label: "Medium", href: "https://medium.com/@janeezy" },
               ].map((s, i) => (
