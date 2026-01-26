@@ -822,7 +822,7 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Back to Top */}
+       
       <AnimatePresence>
         {showScrollTop && (
           <motion.button initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} onClick={scrollToTop} className="fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-lg" style={{ background: `linear-gradient(135deg, ${colors.accent}, ${colors.accentAlt})`, boxShadow: `0 4px 20px ${colors.glow}` }} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}><ChevronUp size={24} color="#fff" /></motion.button>
