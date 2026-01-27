@@ -361,10 +361,10 @@ const Portfolio = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
-                <span className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-sm font-medium font-mono" style={{ background: `${colors.accent}10`, border: `1px solid ${colors.border}` }}>
+                <a href="https://www.ohh.world" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-sm font-medium font-mono hover:underline focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 transition" style={{ background: `${colors.accent}10`, border: `1px solid ${colors.border}` }}>
                   <Rocket size={14} style={{ color: colors.accent }} />
-                  <span style={{ color: colors.textSecondary }}>Currently building <span style={{ color: colors.accent, fontWeight: 600 }}>Ohh</span></span>
-                </span>
+                  <span style={{ color: colors.textSecondary }}>Currently building <span style={{ color: colors.accent, fontWeight: 600 }}>Ohh</span> — join the waitlist</span>
+                </a>
               </motion.div>
 
               <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-[2.5rem] sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight mb-6">
