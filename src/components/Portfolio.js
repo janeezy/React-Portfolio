@@ -1,851 +1,666 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import {
-  ArrowUpRight,
-  ArrowRight,
-  Menu,
-  X,
-  Sun,
-  Moon,
-  Brain,
-  Code2,
-  Building2,
-  Pen,
-  Mail,
-  MapPin,
-  ExternalLink,
-  Github,
-  Linkedin,
-  Twitter,
-  ChevronDown,
-  ChevronUp,
-  Coffee,
-  Heart,
-  Stethoscope,
-  TrendingUp,
-  Palette,
-  Check,
-  Sparkles,
-  BookOpen,
-  Download,
-  Calendar,
-  Briefcase,
-  ShoppingBag,
-  Zap,
-  DollarSign,
-  FileText,
-  Package,
-  Star,
-  Bot,
-  Rocket,
-  Smartphone,
-  Users,
-  MessageCircle,
+  Menu, X, Sun, Moon, ArrowUpRight, Heart,
+  Pen, Mail, MapPin, ExternalLink, Github,
+  Twitter, ChevronUp, ShoppingBag, Zap,
+  BookOpen, FileText, Building2, Calendar,
+  Sparkles, Check,
 } from "lucide-react";
 
-// Theme configurations
-const themes = {
-  violet: {
-    name: "Violet",
-    dark: {
-      bg: "#07040d",
-      bgCard: "#0f0a18",
-      bgCardHover: "#150f22",
-      accent: "#a855f7",
-      accentAlt: "#ec4899",
-      accentMuted: "#7c3aed",
-      gradient: "from-violet-500 via-fuchsia-500 to-pink-500",
-      text: "#faf9fc",
-      textSecondary: "rgba(250,249,252,0.7)",
-      textMuted: "rgba(250,249,252,0.45)",
-      border: "rgba(168,85,247,0.12)",
-      borderHover: "rgba(168,85,247,0.25)",
-      glow: "rgba(168,85,247,0.35)",
-    },
-    light: {
-      bg: "#fefbff",
-      bgCard: "#f8f4ff",
-      bgCardHover: "#f0eaff",
-      accent: "#9333ea",
-      accentAlt: "#db2777",
-      accentMuted: "#7c3aed",
-      gradient: "from-violet-600 via-fuchsia-600 to-pink-600",
-      text: "#1a1025",
-      textSecondary: "rgba(26,16,37,0.75)",
-      textMuted: "rgba(26,16,37,0.5)",
-      border: "rgba(147,51,234,0.1)",
-      borderHover: "rgba(147,51,234,0.2)",
-      glow: "rgba(147,51,234,0.15)",
-    },
-  },
-  blue: {
-    name: "Ocean",
-    dark: {
-      bg: "#030810",
-      bgCard: "#081020",
-      bgCardHover: "#0c1830",
-      accent: "#3b82f6",
-      accentAlt: "#06b6d4",
-      accentMuted: "#6366f1",
-      gradient: "from-blue-500 via-cyan-500 to-teal-500",
-      text: "#f0f9ff",
-      textSecondary: "rgba(240,249,255,0.7)",
-      textMuted: "rgba(240,249,255,0.45)",
-      border: "rgba(59,130,246,0.12)",
-      borderHover: "rgba(59,130,246,0.25)",
-      glow: "rgba(59,130,246,0.35)",
-    },
-    light: {
-      bg: "#f8fbff",
-      bgCard: "#eff6ff",
-      bgCardHover: "#dbeafe",
-      accent: "#2563eb",
-      accentAlt: "#0891b2",
-      accentMuted: "#4f46e5",
-      gradient: "from-blue-600 via-cyan-600 to-teal-600",
-      text: "#0c1929",
-      textSecondary: "rgba(12,25,41,0.75)",
-      textMuted: "rgba(12,25,41,0.5)",
-      border: "rgba(37,99,235,0.1)",
-      borderHover: "rgba(37,99,235,0.2)",
-      glow: "rgba(37,99,235,0.15)",
-    },
-  },
-  orange: {
-    name: "Ember",
-    dark: {
-      bg: "#0a0604",
-      bgCard: "#151008",
-      bgCardHover: "#20180c",
-      accent: "#f97316",
-      accentAlt: "#ef4444",
-      accentMuted: "#eab308",
-      gradient: "from-orange-500 via-amber-500 to-yellow-500",
-      text: "#fffbf5",
-      textSecondary: "rgba(255,251,245,0.7)",
-      textMuted: "rgba(255,251,245,0.45)",
-      border: "rgba(249,115,22,0.12)",
-      borderHover: "rgba(249,115,22,0.25)",
-      glow: "rgba(249,115,22,0.35)",
-    },
-    light: {
-      bg: "#fffdf8",
-      bgCard: "#fff7ed",
-      bgCardHover: "#ffedd5",
-      accent: "#ea580c",
-      accentAlt: "#dc2626",
-      accentMuted: "#ca8a04",
-      gradient: "from-orange-600 via-amber-600 to-yellow-600",
-      text: "#1c1008",
-      textSecondary: "rgba(28,16,8,0.75)",
-      textMuted: "rgba(28,16,8,0.5)",
-      border: "rgba(234,88,12,0.1)",
-      borderHover: "rgba(234,88,12,0.2)",
-      glow: "rgba(234,88,12,0.15)",
-    },
-  },
-  green: {
-    name: "Forest",
-    dark: {
-      bg: "#040a06",
-      bgCard: "#081510",
-      bgCardHover: "#0c2018",
-      accent: "#22c55e",
-      accentAlt: "#14b8a6",
-      accentMuted: "#10b981",
-      gradient: "from-green-500 via-emerald-500 to-teal-500",
-      text: "#f0fdf4",
-      textSecondary: "rgba(240,253,244,0.7)",
-      textMuted: "rgba(240,253,244,0.45)",
-      border: "rgba(34,197,94,0.12)",
-      borderHover: "rgba(34,197,94,0.25)",
-      glow: "rgba(34,197,94,0.35)",
-    },
-    light: {
-      bg: "#f8fdf9",
-      bgCard: "#ecfdf5",
-      bgCardHover: "#d1fae5",
-      accent: "#16a34a",
-      accentAlt: "#0d9488",
-      accentMuted: "#059669",
-      gradient: "from-green-600 via-emerald-600 to-teal-600",
-      text: "#052e16",
-      textSecondary: "rgba(5,46,22,0.75)",
-      textMuted: "rgba(5,46,22,0.5)",
-      border: "rgba(22,163,74,0.1)",
-      borderHover: "rgba(22,163,74,0.2)",
-      glow: "rgba(22,163,74,0.15)",
-    },
-  },
-  mono: {
-    name: "Mono",
-    dark: {
-      bg: "#000000",
-      bgCard: "#0a0a0a",
-      bgCardHover: "#141414",
-      accent: "#ffffff",
-      accentAlt: "#a1a1aa",
-      accentMuted: "#71717a",
-      gradient: "from-white via-zinc-300 to-zinc-500",
-      text: "#fafafa",
-      textSecondary: "rgba(250,250,250,0.7)",
-      textMuted: "rgba(250,250,250,0.4)",
-      border: "rgba(255,255,255,0.08)",
-      borderHover: "rgba(255,255,255,0.15)",
-      glow: "rgba(255,255,255,0.15)",
-    },
-    light: {
-      bg: "#ffffff",
-      bgCard: "#fafafa",
-      bgCardHover: "#f4f4f5",
-      accent: "#18181b",
-      accentAlt: "#52525b",
-      accentMuted: "#71717a",
-      gradient: "from-zinc-800 via-zinc-600 to-zinc-500",
-      text: "#09090b",
-      textSecondary: "rgba(9,9,11,0.75)",
-      textMuted: "rgba(9,9,11,0.5)",
-      border: "rgba(0,0,0,0.06)",
-      borderHover: "rgba(0,0,0,0.12)",
-      glow: "rgba(0,0,0,0.08)",
-    },
-  },
+// ─── palette ────────────────────────────────────────────────────────────────
+const DARK = {
+  bg:      "#0c0a08",
+  surface: "#141210",
+  accent:  "#d4845a",
+  gold:    "#c9973f",
+  text:    "#f2ede8",
+  sub:     "rgba(242,237,232,0.55)",
+  muted:   "rgba(242,237,232,0.3)",
+  border:  "rgba(212,132,90,0.14)",
+  bHover:  "rgba(212,132,90,0.3)",
+  glow:    "rgba(212,132,90,0.22)",
+};
+const LIGHT = {
+  bg:      "#faf8f5",
+  surface: "#f2ede6",
+  accent:  "#b85c30",
+  gold:    "#a07820",
+  text:    "#18120a",
+  sub:     "rgba(24,18,10,0.6)",
+  muted:   "rgba(24,18,10,0.38)",
+  border:  "rgba(184,92,48,0.13)",
+  bHover:  "rgba(184,92,48,0.28)",
+  glow:    "rgba(184,92,48,0.18)",
 };
 
-const Background = ({ colors }) => (
-  <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 100% 80% at 50% -30%, ${colors.accent}12, transparent)` }} />
-    <motion.div className="absolute -top-1/4 -right-1/4 w-[60vw] h-[60vw] rounded-full" style={{ background: `radial-gradient(circle, ${colors.accent}08, transparent 70%)` }} animate={{ scale: [1, 1.1, 1], rotate: [0, 90, 0] }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} />
-    <motion.div className="absolute -bottom-1/4 -left-1/4 w-[50vw] h-[50vw] rounded-full" style={{ background: `radial-gradient(circle, ${colors.accentAlt}06, transparent 70%)` }} animate={{ scale: [1, 0.9, 1] }} transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }} />
-  </div>
+// ─── micro helpers ───────────────────────────────────────────────────────────
+const Fade = ({ children, delay = 0, y = 28, once = true, className = "" }) => (
+  <motion.div
+    initial={{ opacity: 0, y }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once, margin: "-50px" }}
+    transition={{ duration: 0.72, delay, ease: [0.22, 1, 0.36, 1] }}
+    className={className}
+  >{children}</motion.div>
 );
 
-const MagneticBtn = ({ children, className, onClick, href, target, style }) => {
-  const ref = useRef(null);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  const move = (e) => { const rect = ref.current?.getBoundingClientRect(); if (rect) setPos({ x: (e.clientX - rect.left - rect.width / 2) * 0.2, y: (e.clientY - rect.top - rect.height / 2) * 0.2 }); };
-  const reset = () => setPos({ x: 0, y: 0 });
-  const Tag = href ? motion.a : motion.button;
-  return <Tag ref={ref} href={href} target={target} rel={target === "_blank" ? "noopener noreferrer" : undefined} onClick={onClick} onMouseMove={move} onMouseLeave={reset} animate={{ x: pos.x, y: pos.y }} transition={{ type: "spring", stiffness: 200, damping: 20 }} className={className} style={style}>{children}</Tag>;
-};
-
-const Reveal = ({ children, delay = 0, className }) => (
-  <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }} className={className}>{children}</motion.div>
-);
-const GlowCard = ({ children, className, colors, glow = false }) => (
-  <div className={`relative group ${className}`}>
-    {glow && <div className={`absolute -inset-px bg-gradient-to-r ${colors.gradient} rounded-[26px] blur opacity-0 group-hover:opacity-25 transition-opacity duration-700`} />}
-    <div className="relative h-full">{children}</div>
-  </div>
+const Pill = ({ children, color, bg }) => (
+  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
+    style={{ background: bg, color }}>{children}</span>
 );
 
-const ThemePicker = ({ currentTheme, setCurrentTheme, mode, colors, position = "below" }) => {
-  const [open, setOpen] = useState(false);
-  const isAbove = position === "above";
+const Btn = ({ href, target, onClick, children, variant = "ghost", c }) => {
+  const base = "inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all";
+  const styles = variant === "primary"
+    ? { background: c.accent, color: "#fff", boxShadow: `0 4px 18px ${c.glow}` }
+    : { border: `1.5px solid ${c.bHover}`, color: c.text };
+  const Tag = href ? "a" : "button";
   return (
-    <div className="relative">
-      <motion.button onClick={() => setOpen(!open)} className="p-2.5 rounded-xl" style={{ background: `${colors.accent}10`, border: `1px solid ${colors.border}` }} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}><Palette size={18} style={{ color: colors.accent }} /></motion.button>
-      <AnimatePresence>
-        {open && (
-          <>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[80]" onClick={() => setOpen(false)} />
-            <motion.div initial={{ opacity: 0, y: isAbove ? 8 : -8, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: isAbove ? 8 : -8, scale: 0.95 }} className={`absolute ${isAbove ? "bottom-full mb-3 right-0" : "top-full mt-3 left-0"} p-2 rounded-2xl backdrop-blur-2xl z-[90] min-w-[170px]`} style={{ background: `${colors.bgCard}f8`, border: `1px solid ${colors.border}`, boxShadow: `0 25px 50px -12px ${colors.glow}` }}>
-              {Object.entries(themes).map(([key, theme]) => (
-                <button key={key} onClick={() => { setCurrentTheme(key); setOpen(false); }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors" style={{ background: currentTheme === key ? `${colors.accent}12` : "transparent" }}>
-                  <div className={`w-5 h-5 rounded-full bg-gradient-to-br ${theme.dark.gradient}`} />
-                  <span className="text-sm font-medium">{theme.name}</span>
-                  {currentTheme === key && <Check size={14} style={{ color: colors.accent }} className="ml-auto" />}
-                </button>
-              ))}
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </div>
+    <motion.a
+      href={href} target={target}
+      rel={target === "_blank" ? "noopener noreferrer" : undefined}
+      onClick={onClick}
+      className={base}
+      style={styles}
+      whileHover={{ scale: 1.03, y: -1 }}
+      whileTap={{ scale: 0.97 }}
+    >{children}</motion.a>
   );
 };
 
-const Portfolio = () => {
-  const [mode, setMode] = useState("dark");
-  const [theme, setTheme] = useState("violet");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [showScrollTop, setShowScrollTop] = useState(false);
-  const [showStickyCTA, setShowStickyCTA] = useState(false);
+// ─── Main ────────────────────────────────────────────────────────────────────
+export default function Portfolio() {
+  const [dark, setDark] = useState(true);
+  const [menu, setMenu] = useState(false);
+  const [top,  setTop]  = useState(false);
+  const c = dark ? DARK : LIGHT;
 
   const { scrollYProgress } = useScroll();
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-  const colors = themes[theme][mode];
+  const bar = useSpring(scrollYProgress, { stiffness: 90, damping: 28 });
 
-  useEffect(() => { document.body.style.overflow = menuOpen ? "hidden" : ""; return () => { document.body.style.overflow = ""; }; }, [menuOpen]);
-  useEffect(() => { document.body.style.background = colors.bg; document.body.style.color = colors.text; }, [colors]);
+  useEffect(() => { document.body.style.overflow = menu ? "hidden" : ""; }, [menu]);
+  useEffect(() => { document.body.style.background = c.bg; document.body.style.color = c.text; }, [c]);
   useEffect(() => {
-    const handleScroll = () => { setShowScrollTop(window.scrollY > 500); setShowStickyCTA(window.scrollY > 800 && window.scrollY < document.body.scrollHeight - 1500); };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const fn = () => setTop(window.scrollY > 500);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
-  const scrollTo = (id) => { setMenuOpen(false); setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 100); };
+  const go = id => {
+    setMenu(false);
+    setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 80);
+  };
 
-  const nav = [
+  const navLinks = [
     { id: "building", label: "Building" },
-    { id: "products", label: "Books" },
-    { id: "about", label: "About" },
-    { id: "writing", label: "Writing" },
-    { id: "contact", label: "Contact" },
+    { id: "books",    label: "Books"    },
+    { id: "writing",  label: "Writing"  },
+    { id: "contact",  label: "Contact"  },
   ];
 
-  const digitalProducts = [
-    { title: "Selective Empathy", subtitle: "Why we cry for some and stay silent for others", description: "Deep dive into the psychology of selective compassion.", price: "€22.99", href: "https://iamjaneezystore.gumroad.com/l/ikgpou", cover: "/book-selective-empathy.png", features: ["Psychology of selective compassion", "Media framing and bias analysis", "Practical exercises included"], badge: "NEW", badgeColor: "#22c55e", icon: BookOpen, featured: true },
-    { title: "50 AI Prompts To Make Money", subtitle: "Even as a complete beginner", description: "Copy-paste prompts that actually work.", price: "€9.99", href: "https://iamjaneezystore.gumroad.com/l/iskap", cover: "/book-ai-prompts.png", features: ["50 proven prompts ready to use", "Works with ChatGPT, Claude, Gemini", "No tech experience needed"], badge: "BESTSELLER", badgeColor: "#f59e0b", icon: Zap, featured: true },
-  ];
-
-  const faqs = [
-    { q: "Do the AI prompts work with ChatGPT, Claude, etc?", a: "Yes! All prompts work with any major AI tool." },
-    { q: "I'm not technical. Can I use these guides?", a: "Absolutely. Written for beginners. Copy and paste ready." },
-    { q: "Can I get a refund?", a: "Yes, Gumroad offers 30-day refunds. No questions asked." },
-    { q: "When are your apps launching?", a: "2026. Join my Substack for launch updates." },
+  const BOOKS = [
+    {
+      title:    "Quiet the Noise",
+      sub:      "A Woman's Guide to Stopping Overthinking, Setting Boundaries, and Finally Feel Free",
+      price:    "€21",
+      badge:    "★ 5.0",
+      badgeClr: "#c9973f",
+      cover:    "/quiet-the-noise.png",
+      href:     "https://www.amazon.es/stores/Jane-Duru/author/B0GPLWY7ML/allbooks",
+      bullets:  ["Stop the mental spiral for good", "Set boundaries without guilt", "Kindle & Paperback"],
+    },
+    {
+      title:    "Selective Empathy",
+      sub:      "Why the world cries for some lives and stays silent for others",
+      price:    "€23",
+      badge:    "NEW",
+      badgeClr: "#5fad7e",
+      cover:    "/book-selective-empathy.png",
+      href:     "https://www.amazon.es/stores/Jane-Duru/author/B0GPLWY7ML/allbooks",
+      bullets:  ["Psychology of compassion bias", "Media & selective outrage", "Practical empathy exercises"],
+    },
+    {
+      title:    "50 AI Prompts To Make Money",
+      sub:      "Copy-paste prompts that work — even as a complete beginner",
+      price:    "€9.99",
+      badge:    "POPULAR",
+      badgeClr: "#5a90d4",
+      cover:    "/book-ai-prompts.png",
+      href:     "https://iamjaneezystore.gumroad.com/l/iskap",
+      bullets:  ["50 ready-to-use prompts", "Works with any AI tool", "No tech experience needed"],
+    },
   ];
 
   return (
-    <div className="min-h-screen" style={{ background: colors.bg, color: colors.text }}>
+    <div style={{ background: c.bg, color: c.text, minHeight: "100vh" }}>
+
+      {/* ── fonts + globals ── */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
-        * { font-family: 'Outfit', -apple-system, sans-serif; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-        ::selection { background: ${colors.accent}30; }
-        .text-gradient { background: linear-gradient(135deg, ${colors.accent}, ${colors.accentAlt}); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: ${colors.accent}25; border-radius: 10px; }
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=DM+Sans:opsz,wght@9..40,300..700&family=DM+Mono:wght@400;500&display=swap');
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'DM Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+        .serif { font-family: 'Lora', Georgia, serif; }
+        .mono  { font-family: 'DM Mono', monospace; }
+        ::selection { background: ${c.accent}28; }
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-thumb { background: ${c.accent}25; border-radius: 6px; }
+        a { text-decoration: none; color: inherit; }
       `}</style>
 
-      <Background colors={colors} />
+      {/* progress */}
+      <motion.div className="fixed top-0 left-0 right-0 z-[100] h-[2px] origin-left"
+        style={{ scaleX: bar, background: `linear-gradient(90deg, ${c.accent}, ${c.gold})` }} />
 
-      <motion.div className="fixed top-0 left-0 right-0 h-[2px] z-[100] origin-left" style={{ scaleX: smoothProgress, background: `linear-gradient(90deg, ${colors.accent}, ${colors.accentAlt})` }} />
+      {/* ══ NAV ══════════════════════════════════════════════════════════════ */}
+      <header className="fixed top-0 left-0 right-0 z-50"
+        style={{ background: `${c.bg}ec`, backdropFilter: "blur(18px)", borderBottom: `1px solid ${c.border}` }}>
+        <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
+          <motion.button onClick={() => go("hero")} whileHover={{ scale: 1.02 }}
+            className="serif font-bold text-lg tracking-tight">
+            Jane <span style={{ color: c.accent }}>Duru</span>
+          </motion.button>
 
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-2xl" style={{ background: `${colors.bg}95`, borderBottom: `1px solid ${colors.border}` }}>
-        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <motion.button onClick={() => scrollTo("hero")} className="text-xl font-bold tracking-tight" whileHover={{ scale: 1.02 }}>J<span style={{ color: colors.accent }}>D</span></motion.button>
+          {/* desktop */}
           <nav className="hidden md:flex items-center gap-1">
-            {nav.map((item) => <motion.button key={item.id} onClick={() => scrollTo(item.id)} className="px-4 py-2 rounded-xl text-sm font-medium" style={{ color: colors.textSecondary }} whileHover={{ color: colors.text, background: `${colors.accent}08` }}>{item.label}</motion.button>)}
-            <div className="w-px h-5 mx-2" style={{ background: colors.border }} />
-            <ThemePicker currentTheme={theme} setCurrentTheme={setTheme} mode={mode} colors={colors} position="below" />
-            <motion.button onClick={() => setMode(mode === "dark" ? "light" : "dark")} className="p-2.5 rounded-xl ml-1" style={{ background: `${colors.accent}10`, border: `1px solid ${colors.border}` }} whileHover={{ scale: 1.05 }}>{mode === "dark" ? <Sun size={18} style={{ color: colors.accent }} /> : <Moon size={18} style={{ color: colors.accent }} />}</motion.button>
+            {navLinks.map(n => (
+              <motion.button key={n.id} onClick={() => go(n.id)}
+                className="px-4 py-1.5 rounded-lg text-sm font-medium"
+                style={{ color: c.sub }}
+                whileHover={{ color: c.text, background: `${c.accent}0c` }}>
+                {n.label}
+              </motion.button>
+            ))}
+            <div className="w-px h-4 mx-3" style={{ background: c.border }} />
+            <motion.button onClick={() => setDark(!dark)}
+              className="p-2 rounded-lg" style={{ background: `${c.accent}12`, border: `1px solid ${c.border}` }}
+              whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              {dark ? <Sun size={15} style={{ color: c.accent }} /> : <Moon size={15} style={{ color: c.accent }} />}
+            </motion.button>
           </nav>
-          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden p-2 rounded-xl" style={{ background: menuOpen ? `${colors.accent}10` : "transparent" }}>{menuOpen ? <X size={24} /> : <Menu size={24} />}</button>
+
+          {/* mobile burger */}
+          <button onClick={() => setMenu(!menu)} className="md:hidden p-2 rounded-lg"
+            style={{ background: menu ? `${c.accent}12` : "transparent" }}>
+            {menu ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
       </header>
 
-      {/* Mobile menu */}
+      {/* mobile menu */}
       <AnimatePresence>
-        {menuOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-40 md:hidden flex flex-col" style={{ background: colors.bg }}>
-            <div className="h-[72px]" />
-            <nav className="flex-1 flex flex-col items-center justify-center gap-6 px-6">
-              {nav.map((item, i) => <motion.button key={item.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} onClick={() => scrollTo(item.id)} className="text-2xl font-bold">{item.label}</motion.button>)}
+        {menu && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 md:hidden flex flex-col" style={{ background: c.bg }}>
+            <div className="h-14" />
+            <nav className="flex-1 flex flex-col items-center justify-center gap-8">
+              {navLinks.map((n, i) => (
+                <motion.button key={n.id}
+                  initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}
+                  onClick={() => go(n.id)} className="serif text-3xl font-bold">{n.label}</motion.button>
+              ))}
             </nav>
-            <div className="px-6 py-8 flex justify-center gap-4" style={{ borderTop: `1px solid ${colors.border}` }}>
-              <ThemePicker currentTheme={theme} setCurrentTheme={setTheme} mode={mode} colors={colors} position="above" />
-              <motion.button onClick={() => setMode(mode === "dark" ? "light" : "dark")} className="p-2.5 rounded-xl" style={{ background: `${colors.accent}10`, border: `1px solid ${colors.border}` }}>{mode === "dark" ? <Sun size={18} style={{ color: colors.accent }} /> : <Moon size={18} style={{ color: colors.accent }} />}</motion.button>
+            <div className="px-6 py-8 flex justify-center" style={{ borderTop: `1px solid ${c.border}` }}>
+              <motion.button onClick={() => setDark(!dark)} className="p-2.5 rounded-xl"
+                style={{ background: `${c.accent}12`, border: `1px solid ${c.border}` }}>
+                {dark ? <Sun size={16} style={{ color: c.accent }} /> : <Moon size={16} style={{ color: c.accent }} />}
+              </motion.button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ===== HERO ===== */}
-      <section id="hero" className="min-h-screen flex items-center px-6 pt-24 pb-12">
-        <div className="max-w-6xl mx-auto w-full">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="order-2 lg:order-1">
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
-                <a href="https://www.ohh.world" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-sm font-medium font-mono hover:underline focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 transition" style={{ background: `${colors.accent}10`, border: `1px solid ${colors.border}` }}>
-                  <Rocket size={14} style={{ color: colors.accent }} />
-                  <span style={{ color: colors.textSecondary }}>Currently building <span style={{ color: colors.accent, fontWeight: 600 }}>Ohh</span> — join the waitlist</span>
-                </a>
-              </motion.div>
-
-              <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-[2.5rem] sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight mb-6">
-                <span style={{ color: colors.textSecondary }}>I'm Jane.</span><br />
-                <span className="text-gradient">I ship apps.</span><br />
-                <span className="text-gradient">I write things.</span>
-              </motion.h1>
-
-              <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg leading-relaxed max-w-xl mb-8" style={{ color: colors.textSecondary }}>
-                Co-Founder of <a href="https://zemiolabs.com" target="_blank" rel="noopener noreferrer" className="font-semibold hover:underline underline-offset-4" style={{ color: colors.accent }}>Zemio Labs</a>. 
-                Building <a href="https://www.ohh.world" target="_blank" rel="noopener noreferrer" className="font-semibold hover:underline underline-offset-4" style={{ color: colors.accentAlt }}>Ohh</a> — an app that matters. 
-                Writing about AI, psychology, and the messy process of making things.
-              </motion.p>
-
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-wrap gap-3 mb-8">
-                <MagneticBtn href="https://iamjaneezystore.gumroad.com" target="_blank" className={`group px-6 py-3.5 bg-gradient-to-r ${colors.gradient} text-white rounded-2xl font-semibold flex items-center gap-2`} style={{ boxShadow: `0 8px 30px ${colors.glow}` }}>
-                  <ShoppingBag size={18} />Get my books<ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </MagneticBtn>
-                <MagneticBtn href="https://x.com/Iamjaneezy" target="_blank" className="px-6 py-3.5 rounded-2xl font-semibold flex items-center gap-2" style={{ border: `2px solid ${colors.border}` }}>
-                  <Twitter size={16} />Follow my journey
-                </MagneticBtn>
-              </motion.div>
-
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="flex flex-wrap gap-6 text-sm">
-                <motion.div 
-                  className="flex items-center gap-2"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  <motion.div 
-                    className="w-8 h-8 rounded-lg flex items-center justify-center" 
-                    style={{ background: `${colors.accent}15` }}
-                    animate={{ rotate: [0, 5, -5, 0] }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                  >
-                    <Heart size={16} style={{ color: colors.accent }} />
-                  </motion.div>
-                  <div><p className="font-bold">Building Ohh</p><p style={{ color: colors.textMuted }} className="text-xs">launching soon</p></div>
-                </motion.div>
-                <motion.div 
-                  className="flex items-center gap-2"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  <motion.div 
-                    className="w-8 h-8 rounded-lg flex items-center justify-center" 
-                    style={{ background: "#22c55e15" }}
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    <Pen size={16} style={{ color: "#22c55e" }} />
-                  </motion.div>
-                  <div><p className="font-bold">Writing daily</p><p style={{ color: colors.textMuted }} className="text-xs">X, Substack, Medium</p></div>
-                </motion.div>
-              </motion.div>
-            </div>
-
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} className="order-1 lg:order-2">
-              <div className="relative max-w-md mx-auto lg:max-w-none">
-                <motion.div className={`absolute -inset-6 bg-gradient-to-br ${colors.gradient} rounded-[36px] opacity-15 blur-3xl`} animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 8, repeat: Infinity }} />
-                <div className="relative rounded-[28px] overflow-hidden" style={{ border: `1px solid ${colors.border}` }}>
-                  <img src="/IMG.png" alt="Jane Duru" className="w-full aspect-[4/5] object-cover object-top" />
-                  <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${colors.bg}, transparent 40%)` }} />
-                </div>
-                <motion.div 
-                  className="absolute -bottom-4 left-4 right-4 px-5 py-4 rounded-2xl backdrop-blur-xl" 
-                  style={{ background: `${colors.bgCard}f5`, border: `1px solid ${colors.border}` }} 
-                  animate={{ 
-                    y: [0, -6, 0],
-                    rotate: [0, 0.5, -0.5, 0]
-                  }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-1">
-                      <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.5, repeat: Infinity }}>
-                        <Heart size={14} style={{ color: colors.accentAlt }} />
-                      </motion.div>
-                      <Pen size={14} style={{ color: colors.accent }} />
-                    </div>
-                    <div className="flex-1"><p className="font-semibold text-sm">Builder & Writer</p><p className="text-xs" style={{ color: colors.textMuted }}>Shipping in public</p></div>
-                    <motion.span 
-                      className="px-2 py-1 rounded-full text-xs font-bold" 
-                      style={{ background: "#ec489920", color: "#ec4899" }}
-                      animate={{ opacity: [1, 0.6, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      BUILDING
-                    </motion.span>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== OHH FEATURED ===== */}
-      <section className="py-16 px-6">
+      {/* ══ HERO ═════════════════════════════════════════════════════════════ */}
+      <section id="hero" className="pt-28 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
-          <Reveal>
-            <motion.a 
-              href="https://www.ohh.world" 
-              target="_blank" 
-              className="group block relative overflow-hidden rounded-[28px] p-8 sm:p-10" 
-              style={{ background: `linear-gradient(135deg, ${colors.accentAlt}15, ${colors.accent}08)`, border: `2px solid ${colors.borderHover}` }} 
-              whileHover={{ scale: 1.02, y: -4 }}
-              whileTap={{ scale: 0.99 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            >
-              {/* Animated background gradient */}
-              <motion.div 
-                className="absolute inset-0 opacity-30"
-                style={{ background: `radial-gradient(circle at 80% 20%, ${colors.accentAlt}40, transparent 50%)` }}
-                animate={{ 
-                  background: [
-                    `radial-gradient(circle at 80% 20%, ${colors.accentAlt}40, transparent 50%)`,
-                    `radial-gradient(circle at 20% 80%, ${colors.accent}40, transparent 50%)`,
-                    `radial-gradient(circle at 80% 20%, ${colors.accentAlt}40, transparent 50%)`
-                  ]
-                }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <div className="relative flex flex-col lg:flex-row lg:items-center gap-6">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-4">
-                    <motion.span 
-                      className="px-3 py-1 rounded-full text-xs font-bold" 
-                      style={{ background: "#ec489920", color: "#ec4899" }}
-                      animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      🚀 COMING SOON
-                    </motion.span>
-                    <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ background: `${colors.accent}20`, color: colors.accent }}>iOS and Android</span>
-                  </div>
-                  <h3 className="text-3xl sm:text-4xl font-extrabold mb-2">Ohh</h3>
-                  <p className="text-lg font-medium mb-3" style={{ color: colors.accentAlt }}>Beyond "how are you"</p>
-                  <p className="text-base mb-4" style={{ color: colors.textSecondary }}>Currently building.<br /><span className="font-medium" style={{ color: colors.text }}>Launching soon.</span></p>
-                  <motion.div 
-                    className="inline-flex items-center gap-2 font-semibold" 
-                    style={{ color: colors.accent }}
-                    whileHover={{ x: 5 }}
-                  >
-                    Join the waitlist
-                    <motion.div
-                      animate={{ x: [0, 4, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      <ArrowUpRight size={18} />
-                    </motion.div>
-                  </motion.div>
+
+          {/* live badge */}
+          <Fade>
+            <a href="https://ohh.world" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full mono text-xs mb-10"
+              style={{ background: `${c.accent}0f`, border: `1px solid ${c.border}` }}>
+              <motion.span className="w-1.5 h-1.5 rounded-full"
+                style={{ background: "#5fad7e" }}
+                animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.6, repeat: Infinity }} />
+              <span style={{ color: c.sub }}>
+                Ohh is <span style={{ color: c.accent, fontWeight: 600 }}>live</span> on iOS & Android
+              </span>
+            </a>
+          </Fade>
+
+          <Fade delay={0.06}>
+            <h1 className="serif font-bold leading-[1.08] tracking-tight"
+              style={{ fontSize: "clamp(3rem, 8vw, 5.5rem)" }}>
+              I'm Jane.<br />
+              <span style={{ color: c.accent }}>I build apps.</span><br />
+              <span style={{ color: c.sub }}>I write things.</span>
+            </h1>
+          </Fade>
+
+          <Fade delay={0.14}>
+            <p className="mt-7 text-lg leading-relaxed max-w-xl" style={{ color: c.sub }}>
+              Co-founder of{" "}
+              <a href="https://zemiolabs.com" target="_blank" rel="noopener noreferrer"
+                className="font-semibold" style={{ color: c.accent }}>Zemio Labs</a>.
+              {" "}Currently shipping{" "}
+              <a href="https://ohh.world" target="_blank" rel="noopener noreferrer"
+                className="font-semibold" style={{ color: c.accent }}>Ohh</a>
+              {" "}— conversation cards for the connections you actually want.
+              Writing books on psychology and AI. Based in Lisbon.
+            </p>
+          </Fade>
+
+          <Fade delay={0.2} className="mt-8 flex flex-wrap gap-3">
+            <Btn href="https://ohh.world" target="_blank" variant="primary" c={c}>
+              <Heart size={15} /> Download Ohh <ArrowUpRight size={14} />
+            </Btn>
+            <Btn href="https://iamjaneezystore.gumroad.com" target="_blank" c={c}>
+              <ShoppingBag size={15} /> Get my books
+            </Btn>
+          </Fade>
+
+          {/* quick facts */}
+          <Fade delay={0.28}>
+            <div className="mt-14 pt-8 grid grid-cols-2 sm:grid-cols-4 gap-6"
+              style={{ borderTop: `1px solid ${c.border}` }}>
+              {[
+                { n: "4",    l: "books published"    },
+                { n: "2",    l: "apps live"           },
+                { n: "8yr",  l: "fintech background"  },
+                { n: "1",    l: "studio, Zemio Labs"  },
+                { n: "4",    l: "years of experince building"  },
+              ].map(s => (
+                <div key={s.n}>
+                  <p className="serif text-3xl font-bold" style={{ color: c.accent }}>{s.n}</p>
+                  <p className="mono text-xs mt-1" style={{ color: c.muted }}>{s.l}</p>
                 </div>
-                <motion.div 
-                  className="w-20 h-20 rounded-2xl flex items-center justify-center" 
-                  style={{ background: `linear-gradient(135deg, #ec4899, #a855f7)` }}
-                  whileHover={{ rotate: 10, scale: 1.1 }}
-                  animate={{ 
-                    boxShadow: [
-                      `0 0 20px ${colors.accentAlt}40`,
-                      `0 0 40px ${colors.accentAlt}60`,
-                      `0 0 20px ${colors.accentAlt}40`
-                    ]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <Heart size={36} color="#fff" />
-                </motion.div>
-              </div>
-            </motion.a>
-          </Reveal>
+              ))}
+            </div>
+          </Fade>
         </div>
       </section>
 
-      {/* ===== BUILDING ===== */}
-      <section id="building" className="py-28 px-6">
-        <div className="max-w-6xl mx-auto">
-          <Reveal className="mb-14">
-            <span className="font-mono text-sm tracking-wider" style={{ color: colors.accent }}>01 / BUILDING</span>
-            <h2 className="text-4xl sm:text-5xl font-extrabold mt-3 tracking-tight">What I'm <span className="text-gradient">making</span></h2>
-            <p className="text-xl mt-4 max-w-2xl" style={{ color: colors.textSecondary }}>Apps that matter. Built with intention.</p>
-          </Reveal>
+      {/* ══ BUILDING ═════════════════════════════════════════════════════════ */}
+      <section id="building" className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              { title: "Ohh", desc: "Beyond \"how are you\"", href: "https://www.ohh.world", tags: ["React Native", "NestJS"], badge: "BUILDING", badgeColor: "#ec4899" },
-              { title: "MyBicho", desc: "Lifestyle application with AI integration.", href: "https://mybicho.com", tags: ["React Native", "AI Vision"], badge: "65% DONE", badgeColor: colors.accent, progress: 65 },
-              { title: "Wellness Suite", desc: "Mobile wellness and productivity tools.", href: "https://zemiolabs.com", tags: ["React Native", "Expo"], badge: "PIPELINE", badgeColor: "#f59e0b" },
-              { title: "Zemio Labs", desc: "App development studio.", href: "https://zemiolabs.com", tags: ["Next.js", "React"], badge: "LIVE", badgeColor: "#22c55e" },
-            ].map((p, i) => (
-              <Reveal key={p.title} delay={0.1 + i * 0.08}>
-                <GlowCard colors={colors} glow>
-                  <motion.a 
-                    href={p.href} 
-                    target="_blank" 
-                    className="group block h-full p-6 rounded-[22px]" 
-                    style={{ background: colors.bgCard, border: `1px solid ${colors.border}` }} 
-                    whileHover={{ y: -6, scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  >
-                    <div className="flex justify-between items-start mb-4">
-                      <motion.span 
-                        className="px-3 py-1 rounded-full text-xs font-mono font-semibold" 
-                        style={{ background: `${p.badgeColor}15`, color: p.badgeColor }}
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        {p.badge}
-                      </motion.span>
-                      <motion.div
-                        whileHover={{ x: 3, y: -3 }}
-                        transition={{ type: "spring", stiffness: 400 }}
-                      >
-                        <ArrowUpRight size={18} style={{ color: colors.textMuted }} />
-                      </motion.div>
+          <Fade><p className="mono text-xs tracking-widest mb-3" style={{ color: c.muted }}>01 — BUILDING</p></Fade>
+          <Fade delay={0.05}>
+            <h2 className="serif font-bold mb-12" style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)" }}>
+              What I'm shipping
+            </h2>
+          </Fade>
+
+          {/* ── OHH hero card ── */}
+          <Fade delay={0.08}>
+            <div className="relative overflow-hidden rounded-3xl mb-6"
+              style={{ background: `linear-gradient(135deg, ${c.accent}16 0%, ${c.surface} 60%)`, border: `1.5px solid ${c.bHover}` }}>
+              <motion.div className="absolute inset-0 pointer-events-none"
+                style={{ background: `radial-gradient(ellipse at 90% 10%, ${c.accent}22, transparent 55%)` }}
+                animate={{ opacity: [0.6, 1, 0.6] }} transition={{ duration: 6, repeat: Infinity }} />
+              <div className="relative p-8 sm:p-10">
+                <div className="flex flex-wrap items-start justify-between gap-6">
+                  <div className="flex-1 min-w-[200px]">
+                    <div className="flex flex-wrap items-center gap-2 mb-4">
+                      <span className="mono text-xs px-3 py-1 rounded-full flex items-center gap-1.5"
+                        style={{ background: "#5fad7e20", color: "#5fad7e" }}>
+                        <motion.span className="w-1.5 h-1.5 rounded-full bg-green-400"
+                          animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
+                        LIVE
+                      </span>
+                      <span className="mono text-xs px-3 py-1 rounded-full"
+                        style={{ background: `${c.accent}14`, color: c.accent }}>iOS & Android</span>
                     </div>
-                    <h3 className="text-xl font-bold mb-2">{p.title}</h3>
-                    <p className="text-sm mb-4" style={{ color: colors.textSecondary }}>{p.desc}</p>
-                    {p.progress && (
-                      <div className="mb-4">
-                        <motion.div 
-                          className="h-1.5 rounded-full overflow-hidden" 
-                          style={{ background: `${colors.accent}20` }}
-                        >
-                          <motion.div 
-                            className="h-full rounded-full" 
-                            style={{ background: `linear-gradient(90deg, ${colors.accent}, ${colors.accentAlt})` }}
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${p.progress}%` }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
-                          />
-                        </motion.div>
-                      </div>
-                    )}
-                    <div className="flex gap-2">
-                      {p.tags.map((t, idx) => (
-                        <motion.span 
-                          key={t} 
-                          className="px-3 py-1 rounded-lg text-xs font-medium" 
-                          style={{ background: `${colors.accent}10` }}
-                          whileHover={{ scale: 1.05 }}
-                          initial={{ opacity: 0, y: 10 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.1 * idx }}
-                        >
-                          {t}
-                        </motion.span>
+
+                    <h3 className="serif font-bold mb-1" style={{ fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.1 }}>
+                      Ohh
+                    </h3>
+                    <p className="font-semibold mb-2" style={{ color: c.accent }}>
+                      Date nights, girls' nights, family nights — made unforgettable.
+                    </p>
+                    <p className="mb-6 max-w-lg" style={{ color: c.sub }}>
+                      Conversation cards for the connections you actually want.
+                      58 decks, 3,000+ cards. Real questions that go beyond "how are you."
+                    </p>
+
+                    {/* store badges */}
+                    <div className="flex flex-wrap gap-3">
+                      <motion.a
+                        href="https://apps.apple.com/us/app/ohh-deep-conversation-cards/id6759226145"
+                        target="_blank" rel="noopener noreferrer"
+                        whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}
+                        className="flex items-center gap-2.5 px-5 py-3 rounded-xl text-sm font-semibold"
+                        style={{ background: c.text, color: c.bg, boxShadow: `0 4px 16px ${c.glow}` }}>
+                        {/* Apple icon */}
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                        </svg>
+                        <div className="text-left leading-tight">
+                          <p className="text-[10px] opacity-60 font-normal">Download on the</p>
+                          <p className="font-bold text-sm leading-none">App Store</p>
+                        </div>
+                      </motion.a>
+
+                      <motion.a
+                        href="https://play.google.com/store/apps/details?id=app.ohh.world"
+                        target="_blank" rel="noopener noreferrer"
+                        whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}
+                        className="flex items-center gap-2.5 px-5 py-3 rounded-xl text-sm font-semibold"
+                        style={{ background: `${c.accent}14`, border: `1.5px solid ${c.bHover}`, color: c.text }}>
+                        {/* Play icon */}
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style={{ color: c.accent }}>
+                          <path d="M3.18 23.76c.34.19.74.18 1.08-.01l11.3-6.53-2.6-2.6-9.78 9.14zm-1.14-20.2C1.74 3.9 1.5 4.3 1.5 4.8v14.4c0 .5.24.9.54 1.24l.08.07 8.07-8.07v-.19L2.04 3.56zm17.04 7.27L16.6 8.7l-2.78 2.78 2.78 2.78 2.5-1.44c.71-.41.71-1.08-.02-1.49zM4.26.24C3.92.04 3.52.06 3.18.25L13.04 10.1l-2.6 2.6L3.18.24z" />
+                        </svg>
+                        <div className="text-left leading-tight">
+                          <p className="text-[10px] opacity-60 font-normal">Get it on</p>
+                          <p className="font-bold text-sm leading-none">Google Play</p>
+                        </div>
+                      </motion.a>
+                    </div>
+                  </div>
+
+                  {/* icon */}
+                  <motion.div
+                    className="w-20 h-20 rounded-3xl flex items-center justify-center flex-shrink-0 self-start"
+                    style={{ background: `linear-gradient(135deg, ${c.accent}, ${c.gold})` }}
+                    whileHover={{ rotate: 6, scale: 1.08 }}
+                    animate={{ boxShadow: [`0 0 0 0 ${c.glow}`, `0 0 0 10px transparent`] }}
+                    transition={{ duration: 2.5, repeat: Infinity }}>
+                    <Heart size={32} color="#fff" />
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </Fade>
+
+          {/* Zemio Labs — secondary card */}
+          <Fade delay={0.14}>
+            <motion.a href="https://zemiolabs.com" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-5 p-6 rounded-2xl"
+              style={{ background: c.surface, border: `1px solid ${c.border}` }}
+              whileHover={{ x: 4, borderColor: c.bHover }}>
+              <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+                style={{ background: `${c.accent}14` }}>
+                <Building2 size={22} style={{ color: c.accent }} />
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <p className="font-semibold">Zemio Labs</p>
+                  <span className="mono text-xs px-2 py-0.5 rounded-full"
+                    style={{ background: "#5fad7e18", color: "#5fad7e" }}>LIVE</span>
+                </div>
+                <p className="text-sm" style={{ color: c.sub }}>App studio — building Ohh and more</p>
+              </div>
+              <ArrowUpRight size={16} style={{ color: c.muted }} />
+            </motion.a>
+          </Fade>
+        </div>
+      </section>
+
+      {/* ══ BOOKS LIBRARY ════════════════════════════════════════════════════ */}
+      <section id="books" className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
+
+          <Fade><p className="mono text-xs tracking-widest mb-3" style={{ color: c.muted }}>02 — BOOKS</p></Fade>
+          <Fade delay={0.05} className="mb-2">
+            <h2 className="serif font-bold" style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)" }}>
+              Books library
+            </h2>
+          </Fade>
+          <Fade delay={0.08} className="mb-12">
+            <p className="text-base mt-2" style={{ color: c.sub }}>
+              Psychology, AI, and getting out of your own head.
+            </p>
+          </Fade>
+
+          {/* 3-column book shelf */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {BOOKS.map((book, i) => (
+              <Fade key={book.title} delay={0.07 * i}>
+                <motion.a href={book.href} target="_blank" rel="noopener noreferrer"
+                  className="group flex flex-col rounded-2xl overflow-hidden h-full"
+                  style={{ background: c.surface, border: `1px solid ${c.border}` }}
+                  whileHover={{ y: -5, borderColor: c.bHover, boxShadow: `0 16px 40px -8px ${c.glow}` }}
+                  transition={{ type: "spring", stiffness: 360, damping: 22 }}>
+
+                  {/* cover */}
+                  <div className="relative overflow-hidden" style={{ height: 200, background: `${c.accent}10` }}>
+                    <img
+                      src={book.cover} alt={book.title}
+                      className="w-full h-full object-contain p-5 group-hover:scale-[1.04] transition-transform duration-500"
+                      onError={e => { e.target.style.display = "none"; }}
+                    />
+                    <span className="absolute top-3 right-3 mono text-xs px-2.5 py-1 rounded-full font-bold text-white"
+                      style={{ background: book.badgeClr }}>
+                      {book.badge}
+                    </span>
+                  </div>
+
+                  {/* info */}
+                  <div className="p-5 flex flex-col flex-1">
+                    <p className="serif font-bold text-lg leading-tight mb-1">{book.title}</p>
+                    <p className="text-xs leading-relaxed mb-4" style={{ color: c.sub }}>{book.sub}</p>
+
+                    <ul className="space-y-1.5 mb-5 flex-1">
+                      {book.bullets.map(b => (
+                        <li key={b} className="flex items-start gap-2 text-xs" style={{ color: c.sub }}>
+                          <span style={{ color: c.accent, flexShrink: 0, marginTop: 1 }}>—</span>{b}
+                        </li>
                       ))}
-                    </div>
-                  </motion.a>
-                </GlowCard>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+                    </ul>
 
-      {/* ===== BOOKS ===== */}
-      <section id="products" className="py-28 px-6">
-        <div className="max-w-6xl mx-auto">
-          <Reveal className="mb-14">
-            <span className="font-mono text-sm tracking-wider" style={{ color: colors.accent }}>02 / BOOKS</span>
-            <h2 className="text-4xl sm:text-5xl font-extrabold mt-3 tracking-tight">Learn from my <span className="text-gradient">experience</span></h2>
-            <p className="text-xl mt-4 max-w-2xl" style={{ color: colors.textSecondary }}>Practical guides on AI and psychology. No fluff, just actionable insights.</p>
-          </Reveal>
-
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            {digitalProducts.map((product, i) => (
-              <Reveal key={product.title} delay={0.1 * i}>
-                <GlowCard colors={colors} glow>
-                  <motion.a href={product.href} target="_blank" className="group block h-full rounded-[22px] overflow-hidden" style={{ background: colors.bgCard, border: `2px solid ${colors.borderHover}` }} whileHover={{ y: -4 }}>
-                    <div className="relative h-48 sm:h-56 overflow-hidden" style={{ background: `linear-gradient(135deg, ${colors.accent}20, ${colors.accentAlt}15)` }}>
-                      <img src={product.cover} alt={product.title} className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
-                      <div className="absolute inset-0 items-center justify-center hidden"><product.icon size={64} style={{ color: colors.accent, opacity: 0.5 }} /></div>
-                      <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold" style={{ background: product.badgeColor, color: "#fff" }}>{product.badge}</span>
+                    <div className="flex items-center justify-between pt-4"
+                      style={{ borderTop: `1px solid ${c.border}` }}>
+                      <span className="serif font-bold text-xl" style={{ color: c.accent }}>{book.price}</span>
+                      <span className="flex items-center gap-1 mono text-xs" style={{ color: c.muted }}>
+                        Get it <ArrowUpRight size={12} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </span>
                     </div>
-                    <div className="p-6">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-2xl font-extrabold" style={{ color: colors.accent }}>{product.price}</span>
-                        <span className="text-xs font-mono px-2 py-1 rounded-md" style={{ background: `${colors.accent}10` }}>Instant download</span>
-                      </div>
-                      <h3 className="text-xl font-extrabold mb-1">{product.title}</h3>
-                      <p className="text-sm font-medium mb-3" style={{ color: colors.accentAlt }}>{product.subtitle}</p>
-                      <div className="space-y-1.5 mb-5">{product.features.map((f, idx) => <div key={idx} className="flex items-center gap-2 text-sm"><Check size={14} style={{ color: "#22c55e" }} /><span style={{ color: colors.textSecondary }}>{f}</span></div>)}</div>
-                      <div className={`flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r ${colors.gradient} text-white rounded-xl font-bold text-sm`}>Get the book<ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /></div>
-                    </div>
-                  </motion.a>
-                </GlowCard>
-              </Reveal>
+                  </div>
+                </motion.a>
+              </Fade>
             ))}
           </div>
 
-          <Reveal delay={0.3}>
-            <motion.a href="https://iamjaneezystore.gumroad.com/" target="_blank" className="group flex items-center justify-center gap-3 p-4 rounded-2xl" style={{ background: `${colors.accent}08`, border: `1px solid ${colors.border}` }} whileHover={{ scale: 1.01 }}>
-              <ShoppingBag size={20} style={{ color: colors.accent }} /><span className="font-semibold">Browse all books</span><ArrowUpRight size={18} style={{ color: colors.accent }} className="group-hover:translate-x-1 transition-transform" />
+          {/* all books CTA */}
+          <Fade delay={0.24} className="mt-5">
+            <motion.a href="https://www.amazon.es/stores/Jane-Duru/author/B0GPLWY7ML/allbooks"
+              target="_blank" rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 py-3.5 rounded-2xl text-sm font-medium mono"
+              style={{ background: `${c.accent}09`, border: `1px solid ${c.border}` }}
+              whileHover={{ scale: 1.01, borderColor: c.bHover }}>
+              <BookOpen size={15} style={{ color: c.accent }} />
+              <span style={{ color: c.sub }}>All books on Amazon</span>
+              <ArrowUpRight size={13} style={{ color: c.accent }} />
             </motion.a>
-          </Reveal>
+          </Fade>
         </div>
       </section>
 
-      {/* ===== ABOUT ===== */}
-      <section id="about" className="py-28 px-6">
-        <div className="max-w-6xl mx-auto">
-          <Reveal className="mb-14">
-            <span className="font-mono text-sm tracking-wider" style={{ color: colors.accent }}>03 / ABOUT</span>
-            <h2 className="text-4xl sm:text-5xl font-extrabold mt-3 tracking-tight">The <span className="text-gradient">builder</span></h2>
-          </Reveal>
+      {/* ══ WRITING ══════════════════════════════════════════════════════════ */}
+      <section id="writing" className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div className="space-y-6">
-              <Reveal delay={0.1}><p className="text-lg leading-relaxed" style={{ color: colors.textSecondary }}>I'm Jane. I ship apps and write about the process. No fluff, no theory — just building.</p></Reveal>
-              <Reveal delay={0.15}><p className="text-lg leading-relaxed" style={{ color: colors.textSecondary }}>My path: medicine → 8 years managing crypto and fintech portfolios → now building products at <a href="https://zemiolabs.com" target="_blank" rel="noopener noreferrer" className="font-semibold hover:underline underline-offset-4" style={{ color: colors.accent }}>Zemio Labs</a>.</p></Reveal>
-              <Reveal delay={0.2}><p className="text-lg leading-relaxed" style={{ color: colors.textSecondary }}>Currently building <a href="https://www.ohh.world" target="_blank" rel="noopener noreferrer" className="font-semibold hover:underline underline-offset-4" style={{ color: colors.accentAlt }}>Ohh</a>. Writing about AI, psychology, and what I learn along the way.</p></Reveal>
-              <Reveal delay={0.25}><div className="flex flex-wrap gap-2 pt-4">{["React Native", "Expo", "TypeScript", "Next.js", "NestJS", "Tailwind"].map((s) => <motion.span key={s} whileHover={{ scale: 1.05, y: -2 }} className="px-4 py-2 rounded-xl text-sm font-medium cursor-default" style={{ background: `${colors.accent}10`, border: `1px solid ${colors.border}` }}>{s}</motion.span>)}</div></Reveal>
-            </div>
+          <Fade><p className="mono text-xs tracking-widest mb-3" style={{ color: c.muted }}>03 — WRITING</p></Fade>
+          <Fade delay={0.05} className="mb-3">
+            <h2 className="serif font-bold" style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)" }}>
+              Building in public.
+            </h2>
+          </Fade>
+          <Fade delay={0.08} className="mb-10">
+            <p className="text-base leading-relaxed max-w-lg" style={{ color: c.sub }}>
+              I write about shipping Ohh, converting curious people into daily users,
+              and the psychology behind why people connect — or don't.
+              No polished takes. Just what I'm actually learning.
+            </p>
+          </Fade>
 
-            <div className="space-y-4">
+          {/* topics */}
+          <Fade delay={0.12}>
+            <div className="grid sm:grid-cols-2 gap-3 mb-10">
               {[
-                { icon: Building2, title: "Founder", sub: "App Studio", desc: "Building products that help people live better. Human first, always.", color: colors.accent },
-                { icon: Smartphone, title: "Mobile Developer", sub: "iOS & Android", desc: "React Native apps from concept to App Store. Currently shipping.", color: colors.accentAlt },
-                { icon: Bot, title: "AI Educator", sub: "Books and guides", desc: "Teaching people how to use AI tools to earn online.", color: "#f59e0b" },
-                { icon: TrendingUp, title: "Finance Background", sub: "8 years in fintech", desc: "Enterprise-level crypto and fintech experience. High stakes decisions now applied to products.", color: "#10b981" },
-              ].map((item, i) => (
-                <Reveal key={item.title} delay={0.1 + i * 0.08}>
-                  <motion.div whileHover={{ x: 8, scale: 1.01 }} whileTap={{ scale: 0.99 }} className="p-5 rounded-[22px] flex items-start gap-4 cursor-pointer" style={{ background: colors.bgCard, border: `1px solid ${colors.border}` }}>
-                    <motion.div className="p-3 rounded-xl flex-shrink-0" style={{ background: `${item.color}12` }} whileHover={{ rotate: [0, -10, 10, 0] }} transition={{ duration: 0.5 }}><item.icon size={22} style={{ color: item.color }} /></motion.div>
-                    <div><h3 className="text-lg font-bold">{item.title}</h3><p className="text-sm font-medium mb-1" style={{ color: colors.accent }}>{item.sub}</p><p className="text-sm" style={{ color: colors.textSecondary }}>{item.desc}</p></div>
-                  </motion.div>
-                </Reveal>
+                { e: "💬", t: "Ohh & user conversion",  d: "How to get people off social media and into real conversation" },
+                { e: "🤖", t: "AI & prompting",          d: "What actually works — tools, prompts, the real stuff" },
+                { e: "🧠", t: "Psychology of connection", d: "Why we connect deeply with some and stay shallow with others" },
+                { e: "🚀", t: "Building a mobile app",    d: "Shipping React Native to App Store — the unfiltered version" },
+              ].map(item => (
+                <motion.div key={item.t}
+                  className="flex items-start gap-4 p-5 rounded-2xl"
+                  style={{ background: c.surface, border: `1px solid ${c.border}` }}
+                  whileHover={{ x: 4, borderColor: c.bHover }}
+                  transition={{ type: "spring", stiffness: 380 }}>
+                  <span className="text-xl leading-none flex-shrink-0 mt-0.5">{item.e}</span>
+                  <div>
+                    <p className="font-semibold text-sm mb-1">{item.t}</p>
+                    <p className="text-xs leading-relaxed" style={{ color: c.sub }}>{item.d}</p>
+                  </div>
+                </motion.div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
+          </Fade>
 
-      {/* ===== WRITING ===== */}
-      <section id="writing" className="py-28 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-14">
-            <div>
-              <Reveal><span className="font-mono text-sm tracking-wider" style={{ color: colors.accent }}>04 / WRITING</span><h2 className="text-4xl sm:text-5xl font-extrabold mt-3 tracking-tight mb-5">I write <span className="text-gradient">things</span></h2></Reveal>
-              <Reveal delay={0.1}><p className="text-lg leading-relaxed mb-6" style={{ color: colors.textSecondary }}>Building in public. AI, psychology, the messy reality of shipping. No polished takes — just what I'm learning.</p></Reveal>
-              <Reveal delay={0.2}>
-                <div className="flex flex-wrap gap-3">
-                  <MagneticBtn href="https://x.com/Iamjaneezy" target="_blank" className={`group px-5 py-2.5 bg-gradient-to-r ${colors.gradient} text-white rounded-xl font-semibold text-sm flex items-center gap-2`}><Twitter size={16} />Follow on X<ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" /></MagneticBtn>
-                  <MagneticBtn href="https://x.com/Iamjaneezy/articles" target="_blank" className="px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2" style={{ border: `2px solid ${colors.border}` }}><FileText size={16} />X Articles</MagneticBtn>
-                  <MagneticBtn href="https://medium.com/@janeezy" target="_blank" className="px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2" style={{ border: `2px solid ${colors.border}` }}><BookOpen size={16} />Medium</MagneticBtn>
-                  <MagneticBtn href="https://janeezyofficial.substack.com/?utm_campaign=pub&utm_medium=web" target="_blank" className="px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2" style={{ border: `2px solid ${colors.border}` }}><Mail size={16} />Substack</MagneticBtn>
-                </div>
-              </Reveal>
-            </div>
-            <div className="space-y-3">
-              {[
-                { icon: "🚀", topic: "Building in Public", title: "Daily updates on shipping products and learning" },
-                { icon: "🤖", topic: "AI and Technology", title: "How to use AI tools to earn and create" },
-                { icon: "🧠", topic: "Psychology", title: "Why we think and behave the way we do" },
-                { icon: "💡", topic: "Lessons Learned", title: "Mistakes, wins, and everything in between" },
-              ].map((item, i) => (
-                <Reveal key={item.topic} delay={0.08 + i * 0.05}>
-                  <motion.div 
-                    whileHover={{ x: 8, scale: 1.02 }} 
-                    whileTap={{ scale: 0.98 }}
-                    className="p-4 rounded-2xl flex items-center gap-4 cursor-pointer" 
-                    style={{ background: colors.bgCard, border: `1px solid ${colors.border}` }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  >
-                    <motion.span 
-                      className="text-2xl"
-                      animate={{ rotate: [0, 10, -10, 0] }}
-                      transition={{ duration: 3, repeat: Infinity, delay: i * 0.5 }}
-                    >
-                      {item.icon}
-                    </motion.span>
-                    <div>
-                      <span className="text-xs font-mono font-semibold" style={{ color: colors.accent }}>{item.topic}</span>
-                      <p className="font-medium">{item.title}</p>
-                    </div>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== FAQ ===== */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          <Reveal className="text-center mb-12"><span className="font-mono text-sm tracking-wider" style={{ color: colors.accent }}>FAQ</span><h2 className="text-3xl sm:text-4xl font-extrabold mt-3 tracking-tight">Common <span className="text-gradient">questions</span></h2></Reveal>
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <Reveal key={i} delay={0.08 * i}>
-                <div className="p-6 rounded-[22px]" style={{ background: colors.bgCard, border: `1px solid ${colors.border}` }}>
-                  <h3 className="font-bold text-lg mb-3 flex items-start gap-3"><span className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: `${colors.accent}20`, color: colors.accent }}>?</span>{faq.q}</h3>
-                  <p className="text-sm leading-relaxed pl-9" style={{ color: colors.textSecondary }}>{faq.a}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== CONTACT ===== */}
-      <section id="contact" className="py-28 px-6">
-        <div className="max-w-4xl mx-auto">
-          <Reveal><span className="font-mono text-sm tracking-wider" style={{ color: colors.accent }}>05 / CONTACT</span><h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mt-3 tracking-tight mb-5">Let's <span className="text-gradient">connect</span></h2></Reveal>
-          <Reveal delay={0.1}><p className="text-xl mb-10" style={{ color: colors.textSecondary }}>Want to collaborate, chat about apps, or just say hi? Find me online.</p></Reveal>
-          <Reveal delay={0.15}>
-            <div className="flex flex-wrap gap-4 mb-8">
-              <MagneticBtn href="https://iamjaneezystore.gumroad.com" target="_blank" className={`group px-7 py-4 bg-gradient-to-r ${colors.gradient} text-white rounded-2xl font-semibold flex items-center gap-2`} style={{ boxShadow: `0 8px 30px ${colors.glow}` }}><ShoppingBag size={18} />Get my books<ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" /></MagneticBtn>
-              <MagneticBtn href="https://cal.com/jane-duru/discovery-call" target="_blank" className="px-7 py-4 rounded-2xl font-semibold flex items-center gap-2" style={{ border: `2px solid ${colors.border}` }}><Calendar size={18} />Free 15min call</MagneticBtn>
-              <MagneticBtn href="https://cal.com/jane-duru/1-hour-consultation" target="_blank" className="px-7 py-4 rounded-2xl font-semibold flex items-center gap-2" style={{ border: `2px solid ${colors.accent}`, background: `${colors.accent}10` }}><Calendar size={18} />1hr Consult €75</MagneticBtn>
-            </div>
-          </Reveal>
-          <Reveal delay={0.2}><div className="flex items-center gap-2 mb-8 px-4 py-2 rounded-xl w-fit" style={{ background: `${colors.accent}08` }}><MapPin size={16} style={{ color: colors.accent }} /><span className="text-sm font-medium">Lisbon, Portugal</span></div></Reveal>
-          <Reveal delay={0.22}>
-            <div className="flex flex-wrap gap-4 mb-10">
-              <MagneticBtn href="https://janeezyofficial.substack.com/?utm_campaign=pub&utm_medium=web" target="_blank" className="px-6 py-3 rounded-2xl font-semibold flex items-center gap-2" style={{ border: `2px solid ${colors.border}` }}><Mail size={18} />Join Substack</MagneticBtn>
-            </div>
-          </Reveal>
-          <Reveal delay={0.25}>
+          {/* platforms */}
+          <Fade delay={0.18}>
             <div className="flex flex-wrap gap-3">
               {[
-                { icon: Twitter, label: "X Twitter", href: "https://x.com/Iamjaneezy" },
-                { icon: FileText, label: "X Articles", href: "https://x.com/Iamjaneezy/articles" },
-                { icon: Mail, label: "Substack", href: "https://janeezyofficial.substack.com/?utm_campaign=pub&utm_medium=web" },
-                { icon: ShoppingBag, label: "Gumroad", href: "https://iamjaneezystore.gumroad.com" },
-                { icon: Building2, label: "Zemio Labs", href: "https://zemiolabs.com" },
-                { icon: Heart, label: "Ohh World", href: "https://www.ohh.world" },
-                { icon: Github, label: "GitHub", href: "https://github.com/janeezy" },
-                { icon: Pen, label: "Medium", href: "https://medium.com/@janeezy" },
-              ].map((s, i) => (
-                <MagneticBtn 
-                  key={s.label} 
-                  href={s.href} 
-                  target="_blank" 
-                  className="group px-5 py-2.5 rounded-xl flex items-center gap-2.5 text-sm font-medium" 
-                  style={{ background: `${colors.accent}08`, border: `1px solid ${colors.border}` }}
-                >
-                  <motion.div
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <s.icon size={16} />
-                  </motion.div>
-                  {s.label}
-                  <ExternalLink size={12} className="opacity-0 group-hover:opacity-60 transition-opacity" />
-                </MagneticBtn>
+                { label: "X / Twitter",   href: "https://x.com/Iamjaneezy",                            icon: Twitter    },
+                { label: "Substack",      href: "https://janeezyofficial.substack.com/",               icon: Mail       },
+                { label: "X Articles",    href: "https://x.com/Iamjaneezy/articles",                   icon: FileText   },
+                { label: "Medium",        href: "https://medium.com/@janeezy",                          icon: BookOpen   },
+              ].map(l => (
+                <motion.a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium"
+                  style={{ background: c.surface, border: `1px solid ${c.border}`, color: c.sub }}
+                  whileHover={{ scale: 1.03, y: -1, borderColor: c.bHover }}>
+                  <l.icon size={14} style={{ color: c.accent }} />
+                  {l.label}
+                  <ExternalLink size={11} className="opacity-0 group-hover:opacity-40 transition-opacity" />
+                </motion.a>
               ))}
             </div>
-          </Reveal>
+          </Fade>
         </div>
       </section>
 
-       
-      <AnimatePresence>
-        {showScrollTop && (
-          <motion.button initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} onClick={scrollToTop} className="fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-lg" style={{ background: `linear-gradient(135deg, ${colors.accent}, ${colors.accentAlt})`, boxShadow: `0 4px 20px ${colors.glow}` }} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}><ChevronUp size={24} color="#fff" /></motion.button>
-        )}
-      </AnimatePresence>
+      {/* ══ ABOUT (brief) ════════════════════════════════════════════════════ */}
+      <section className="py-20 px-6" style={{ borderTop: `1px solid ${c.border}` }}>
+        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <Fade>
+            <h2 className="serif font-bold mb-5" style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.2rem)" }}>
+              Medicine → fintech → apps.
+            </h2>
+            <p className="text-base leading-relaxed mb-4" style={{ color: c.sub }}>
+              I spent years in crypto and fintech managing big portfolios. Then decided to build the products myself.
+            </p>
+            <p className="text-base leading-relaxed mb-6" style={{ color: c.sub }}>
+              Now I run Zemio Labs with my co-founder. Ohh is live. More coming.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {["React Native", "TypeScript", "NestJS", "Next.js", "Expo"].map(s => (
+                <span key={s} className="mono text-xs px-3 py-1.5 rounded-lg"
+                  style={{ background: `${c.accent}0e`, border: `1px solid ${c.border}`, color: c.sub }}>{s}</span>
+              ))}
+            </div>
+          </Fade>
+          <Fade delay={0.1}>
+            <div className="relative rounded-3xl overflow-hidden"
+              style={{ border: `1px solid ${c.border}` }}>
+              <img src="/IMG.png" alt="Jane Duru"
+                className="w-full aspect-[4/5] object-cover object-top" />
+              <div className="absolute inset-0"
+                style={{ background: `linear-gradient(to top, ${c.bg}cc, transparent 40%)` }} />
+              <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 px-4 py-3 rounded-2xl"
+                style={{ background: `${c.surface}f0`, border: `1px solid ${c.border}`, backdropFilter: "blur(12px)" }}>
+                <motion.span className="w-2 h-2 rounded-full flex-shrink-0"
+                  style={{ background: "#5fad7e" }}
+                  animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
+                <span className="text-sm font-medium">Shipping in Lisbon</span>
+                <span className="ml-auto mono text-xs" style={{ color: c.muted }}>2026</span>
+              </div>
+            </div>
+          </Fade>
+        </div>
+      </section>
 
-      {/* Sticky Mobile CTA */}
-      <AnimatePresence>
-        {showStickyCTA && (
-          <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 100, opacity: 0 }} className="fixed bottom-0 left-0 right-0 z-40 p-4 md:hidden" style={{ background: `${colors.bg}f5`, backdropFilter: "blur(20px)", borderTop: `1px solid ${colors.border}` }}>
-            <a href="https://iamjaneezystore.gumroad.com" target="_blank" rel="noopener noreferrer" className={`flex items-center justify-center gap-2 w-full py-3.5 bg-gradient-to-r ${colors.gradient} text-white rounded-xl font-bold`} style={{ boxShadow: `0 4px 20px ${colors.glow}` }}><ShoppingBag size={18} />Get my books<ArrowUpRight size={16} /></a>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* ══ CONTACT ══════════════════════════════════════════════════════════ */}
+      <section id="contact" className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
 
-      {/* Footer */}
-      <footer className="py-10 px-6" style={{ borderTop: `1px solid ${colors.border}` }}>
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-3"><span className="font-bold">jane<span style={{ color: colors.accent }}>duru</span></span><span className="text-sm" style={{ color: colors.textMuted }}>Builder and Writer</span></div>
-          <p className="text-sm" style={{ color: colors.textMuted }}>© {new Date().getFullYear()} Jane Duru</p>
+          <Fade><p className="mono text-xs tracking-widest mb-3" style={{ color: c.muted }}>04 — CONTACT</p></Fade>
+          <Fade delay={0.05} className="mb-3">
+            <h2 className="serif font-bold" style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)" }}>
+              Let's talk.
+            </h2>
+          </Fade>
+          <Fade delay={0.08} className="mb-8">
+            <p className="text-base" style={{ color: c.sub }}>
+              Collaboration, apps, or just want to say hi.
+            </p>
+          </Fade>
+
+          <Fade delay={0.1} className="flex flex-wrap gap-3 mb-8">
+            <Btn href="https://cal.com/jane-duru/discovery-call" target="_blank" variant="primary" c={c}>
+              <Calendar size={14} /> Free 15-min call
+            </Btn>
+            <Btn href="https://cal.com/jane-duru/1-hour-consultation" target="_blank" c={c}>
+              <Calendar size={14} /> 1hr Consult — €75
+            </Btn>
+          </Fade>
+
+          <Fade delay={0.14} className="flex items-center gap-2 mb-8">
+            <MapPin size={13} style={{ color: c.accent }} />
+            <span className="text-sm" style={{ color: c.muted }}>Lisbon, Portugal</span>
+          </Fade>
+
+          <Fade delay={0.16}>
+            <div className="flex flex-wrap gap-2.5">
+              {[
+                { label: "X / Twitter",  href: "https://x.com/Iamjaneezy",                                            icon: Twitter    },
+                { label: "Substack",     href: "https://janeezyofficial.substack.com/",                               icon: Mail       },
+                { label: "Gumroad",      href: "https://iamjaneezystore.gumroad.com",                                  icon: ShoppingBag },
+                { label: "Amazon",       href: "https://www.amazon.es/stores/Jane-Duru/author/B0GPLWY7ML/allbooks",   icon: BookOpen   },
+                { label: "Zemio Labs",   href: "https://zemiolabs.com",                                                icon: Building2  },
+                { label: "Ohh",          href: "https://ohh.world",                                                    icon: Heart      },
+                { label: "GitHub",       href: "https://github.com/janeezy",                                           icon: Github     },
+                { label: "Medium",       href: "https://medium.com/@janeezy",                                          icon: Pen        },
+              ].map(s => (
+                <motion.a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium"
+                  style={{ background: `${c.accent}0a`, border: `1px solid ${c.border}`, color: c.sub }}
+                  whileHover={{ scale: 1.04, y: -1, borderColor: c.bHover }}>
+                  <s.icon size={13} style={{ color: c.accent }} />
+                  {s.label}
+                </motion.a>
+              ))}
+            </div>
+          </Fade>
+        </div>
+      </section>
+
+      {/* ── Footer ── */}
+      <footer className="py-8 px-6" style={{ borderTop: `1px solid ${c.border}` }}>
+        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+          <p className="serif font-bold" style={{ color: c.accent }}>Jane Duru</p>
+          <p className="mono text-xs" style={{ color: c.muted }}>
+            © {new Date().getFullYear()} — Builder & Writer, Lisbon
+          </p>
         </div>
       </footer>
+
+      {/* scroll to top */}
+      <AnimatePresence>
+        {top && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="fixed bottom-6 right-6 z-50 p-3 rounded-full"
+            style={{ background: `linear-gradient(135deg, ${c.accent}, ${c.gold})`, boxShadow: `0 4px 16px ${c.glow}` }}
+            whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <ChevronUp size={18} color="#fff" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
     </div>
   );
-};
-
-export default Portfolio;
+}
