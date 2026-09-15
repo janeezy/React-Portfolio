@@ -157,6 +157,9 @@ export default function Portfolio() {
         .journey-step small { color:var(--muted); }
         .github-card { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px; margin-top:18px; border-radius:22px; background:#17151b; color:white; }
         .github-card p { margin:4px 0 0; color:rgba(255,255,255,.62); font-size:14px; }
+        .creator-links { margin-top:18px; }
+        .creator-links .github-card { margin-top:0; }
+        .coffee-link { display:inline-flex; align-items:center; gap:7px; margin-top:12px; padding:10px 14px; border:1px solid var(--line); border-radius:999px; background:white; font-size:13px; font-weight:800; }
         .experience { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:30px; }
         .experience article { padding:22px; border-radius:20px; background:white; border:1px solid var(--line); }
         .experience strong { display:block; font-family:'Manrope'; }
@@ -295,7 +298,10 @@ export default function Portfolio() {
             <motion.div className={`journey-step ${index === 2 ? 'active' : ''}`} key={title} whileHover={{y:-4}}><span>{number}</span><strong>{title}</strong><small>{label}</small></motion.div>
           ))}
         </div>
-        <a className="github-card" href="https://github.com/janeezy" target="_blank" rel="noreferrer"><div><strong>Follow the build on GitHub</strong><p>See the work, experiments and products behind the journey.</p></div><Github size={28}/></a>
+        <div className="creator-links">
+          <a className="github-card" href="https://github.com/janeezy" target="_blank" rel="noreferrer"><div><strong>Follow the build on GitHub</strong><p>See the work, experiments and products behind the journey.</p></div><Github size={28}/></a>
+          <a className="coffee-link" href="https://buymeacoffee.com/janeezyoffb" target="_blank" rel="noreferrer">☕ Buy me a coffee</a>
+        </div>
       </section>
 
       <section className="section wrap" id="books">
