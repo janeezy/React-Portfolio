@@ -155,11 +155,6 @@ export default function Portfolio() {
         .journey-step.active span { background:var(--coral); color:white; }
         .journey-step strong { display:block; margin-top:20px; }
         .journey-step small { color:var(--muted); }
-        .support { display:grid; grid-template-columns:1.1fr .9fr; gap:22px; padding:34px; margin-top:22px; border-radius:28px; background:linear-gradient(135deg,#fff0e8,#f0eaff); border:1px solid #eadff1; }
-        .support h3 { font-size:32px; }
-        .support p { color:var(--muted); line-height:1.6; }
-        .support-card { padding:24px; border-radius:20px; background:white; box-shadow:0 15px 45px rgba(52,38,66,.09); }
-        .support-card strong { font:800 24px 'Manrope'; }
         .github-card { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px; margin-top:18px; border-radius:22px; background:#17151b; color:white; }
         .github-card p { margin:4px 0 0; color:rgba(255,255,255,.62); font-size:14px; }
         .experience { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:30px; }
@@ -197,7 +192,6 @@ export default function Portfolio() {
           .portrait-card { width:min(520px,100%); margin:0 auto; }
           .afterfight { padding:40px; }
           .journey,.experience { grid-template-columns:repeat(2,1fr); }
-          .support { grid-template-columns:1fr; }
           .book-grid { grid-template-columns:repeat(2,1fr); }
         }
         @media (max-width:600px) {
@@ -301,10 +295,6 @@ export default function Portfolio() {
             <motion.div className={`journey-step ${index === 2 ? 'active' : ''}`} key={title} whileHover={{y:-4}}><span>{number}</span><strong>{title}</strong><small>{label}</small></motion.div>
           ))}
         </div>
-        <div className="support">
-          <div><div className="kicker">Support the build</div><h3>Help bring AfterFight to life.</h3><p>Support the independent work behind a more thoughtful way to move forward after conflict.</p></div>
-          <div className="support-card"><strong>Back the build</strong><p>Your support helps fund design, development and the first private beta.</p><a className="primary coral" href="mailto:janeezyofficial@gmail.com?subject=I%20want%20to%20support%20AfterFight">Support AfterFight <ArrowRight size={16}/></a></div>
-        </div>
         <a className="github-card" href="https://github.com/janeezy" target="_blank" rel="noreferrer"><div><strong>Follow the build on GitHub</strong><p>See the work, experiments and products behind the journey.</p></div><Github size={28}/></a>
       </section>
 
@@ -350,8 +340,9 @@ export default function Portfolio() {
         <div className="kicker">Experience behind the products</div>
         <div className="experience">
           <article><strong>Zemio Labs</strong><small>Co-founder & product builder · Apps, SaaS and AI tools.</small></article>
-          <article><strong>Optty</strong><small>Customer Support & Enablement Specialist · Contract.</small></article>
-          <article><strong>Product engineering</strong><small>React, React Native, Expo, TypeScript and startup execution.</small></article>
+          <article><strong>Finance & business</strong><small>Customer-facing financial experience, commercial judgment and business operations.</small></article>
+          <article><strong>Customer experience</strong><small>Customer service, support and enablement built around clear, human communication.</small></article>
+          <article><strong>Sales & product</strong><small>Sales experience combined with product building, research and startup execution.</small></article>
         </div>
       </section>
 
