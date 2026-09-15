@@ -1,1514 +1,356 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import {
-  AnimatePresence,
-  motion,
-  useScroll,
-  useSpring,
-} from "framer-motion";
-import {
+  ArrowRight,
   ArrowUpRight,
   BookOpen,
-  Building2,
-  Calendar,
   Check,
-  ChevronUp,
-  Code2,
-  Cpu,
-  ExternalLink,
   Github,
-  Heart,
-  Layers,
+  Instagram,
   Mail,
-  MapPin,
   Menu,
-  Moon,
-  Pen,
-  ShieldCheck,
-  ShoppingBag,
   Sparkles,
-  Sun,
-  Target,
   Twitter,
   X,
 } from "lucide-react";
 
-const BRAND_ORANGE = "#ff7a1a";
-const STATUS_OLIVE = "#7d8a63";
+const AMAZON = "https://amazon.com/author/janeduru";
+const GUMROAD = "https://iamjaneezystore.gumroad.com";
 
-const DARK = {
-  bg: "#0f1115",
-  surface: "#171a20",
-  accent: "#f28c38",
-  gold: "#d7b56d",
-  text: "#f6f1ea",
-  sub: "rgba(246,241,234,0.68)",
-  muted: "rgba(246,241,234,0.42)",
-  border: "rgba(242,140,56,0.18)",
-  bHover: "rgba(242,140,56,0.36)",
-  glow: "rgba(242,140,56,0.20)",
-  primaryText: "#171717",
-};
+const products = [
+  {
+    name: "AfterFight",
+    stage: "Building now",
+    mark: "AF",
+    color: "#ff6b77",
+    text: "A playful way for couples to cool down, reconnect and repair—together.",
+    focus: true,
+  },
+  {
+    name: "Usward",
+    stage: "Later",
+    mark: "US",
+    color: "#9b87f5",
+    text: "Shared rituals that help two people keep moving toward each other.",
+  },
+  {
+    name: "Vowra",
+    stage: "Later",
+    mark: "VO",
+    color: "#f0ae47",
+    text: "A new relationship product currently taking shape inside Zemio Labs.",
+  },
+];
 
-const LIGHT = {
-  bg: "#fbf8f4",
-  surface: "#ffffff",
-  accent: "#b85f20",
-  gold: "#8f6b2f",
-  text: "#171717",
-  sub: "rgba(23,23,23,0.66)",
-  muted: "rgba(23,23,23,0.42)",
-  border: "rgba(184,95,32,0.18)",
-  bHover: "rgba(184,95,32,0.34)",
-  glow: "rgba(184,95,32,0.16)",
-  primaryText: "#ffffff",
-};
+const books = [
+  {
+    title: "Nobody Pays You for Working Hard Anymore",
+    subtitle: "Create value. Build leverage. Make money in the age of AI.",
+    cover: "/new-book.jpg",
+    latest: true,
+  },
+  {
+    title: "Quiet the Noise",
+    subtitle: "Stop overthinking, set boundaries and finally feel free.",
+    cover: "/quiet-the-noise.png",
+  },
+  {
+    title: "Selective Empathy",
+    subtitle: "Why the world cries for some lives and stays silent for others.",
+    cover: "/book-selective-empathy.png",
+  },
+  {
+    title: "50 AI Prompts to Make Money",
+    subtitle: "Practical prompts for turning AI into useful income ideas.",
+    cover: "/book-ai-prompts.png",
+  },
+];
 
-const Fade = ({ children, delay = 0, y = 28, once = true, className = "" }) => (
-  <motion.div
-    initial={{ opacity: 0, y }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once, margin: "-50px" }}
-    transition={{ duration: 0.72, delay, ease: [0.22, 1, 0.36, 1] }}
-    className={className}
-  >
-    {children}
-  </motion.div>
-);
-
-const Btn = ({ href, target, onClick, children, variant = "ghost", c }) => {
-  const styles =
-    variant === "primary"
-      ? {
-          background: c.accent,
-          color: c.primaryText,
-          boxShadow: `0 4px 18px ${c.glow}`,
-        }
-      : {
-          border: `1.5px solid ${c.bHover}`,
-          color: c.text,
-        };
-
-  return (
-    <motion.a
-      href={href}
-      target={target}
-      rel={target === "_blank" ? "noopener noreferrer" : undefined}
-      onClick={onClick}
-      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all"
-      style={styles}
-      whileHover={{ scale: 1.05, y: -2, boxShadow: `0 8px 24px ${c.glow}` }}
-      whileTap={{ scale: 0.97 }}
-    >
-      {children}
-    </motion.a>
-  );
+const fade = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
 };
 
 export default function Portfolio() {
-  const [dark, setDark] = useState(true);
-  const [menu, setMenu] = useState(false);
-  const [top, setTop] = useState(false);
-  const c = dark ? DARK : LIGHT;
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("idle");
 
-  const { scrollYProgress } = useScroll();
-  const bar = useSpring(scrollYProgress, { stiffness: 90, damping: 28 });
-
-  useEffect(() => {
-    document.body.style.overflow = menu ? "hidden" : "";
-  }, [menu]);
-
-  useEffect(() => {
-    document.body.style.background = c.bg;
-    document.body.style.color = c.text;
-  }, [c]);
-
-  useEffect(() => {
-    const fn = () => setTop(window.scrollY > 500);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
-
-  const go = (id) => {
-    setMenu(false);
-    setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    }, 80);
+  const scrollTo = (id) => {
+    setMenuOpen(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const navLinks = [
-    { id: "expertise", label: "Expertise" },
-    { id: "skills", label: "Skills" },
-    { id: "experience", label: "Experience" },
-    { id: "work-with-me", label: "Hire me" },
-    { id: "building", label: "Building" },
-    { id: "contact", label: "Contact" },
-    { id: "code", label: "Code" },
-    { id: "books", label: "Books" },
-    { id: "writing", label: "Writing" },
-  ];
+  const joinWaitlist = async (event) => {
+    event.preventDefault();
+    setStatus("loading");
 
-  const expertise = [
-    {
-      icon: Cpu,
-      title: "Frontend engineering",
-      copy: "Building fast, responsive, accessible web applications with React, Next.js, TypeScript, JavaScript, and Tailwind CSS.",
-    },
-    {
-      icon: Code2,
-      title: "Mobile development",
-      copy: "Shipping polished iOS and Android experiences with React Native, Expo, clean component architecture, and mobile-first UI.",
-    },
-    {
-      icon: Layers,
-      title: "UI systems",
-      copy: "Creating reusable components, consistent layouts, smooth interactions, and interfaces that stay maintainable as products grow.",
-    },
-    {
-      icon: ShieldCheck,
-      title: "Quality & performance",
-      copy: "Working with testing, accessibility, performance optimization, REST APIs, Git workflows, and production-ready implementation.",
-    },
-    {
-      icon: Target,
-      title: "Product-minded delivery",
-      copy: "Using UX judgment, MVP thinking, user research, and startup execution to build products people understand and adopt quickly.",
-    },
-  ];
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/zemiolabs@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          email,
+          product: "AfterFight",
+          _subject: "New AfterFight waitlist signup",
+          _captcha: "false",
+        }),
+      });
 
-  const services = [
-    {
-      icon: Cpu,
-      title: "Frontend roles",
-      copy: "React, Next.js, TypeScript, Tailwind CSS, dashboards, landing pages, design systems, and production UI ownership.",
-    },
-    {
-      icon: Code2,
-      title: "Mobile roles",
-      copy: "React Native and Expo app experiences across iOS and Android, with clean flows and polished mobile interaction.",
-    },
-    {
-      icon: Layers,
-      title: "Product UI builds",
-      copy: "Turning product ideas, wireframes, and MVPs into responsive interfaces that feel modern and ready to ship.",
-    },
-    {
-      icon: Target,
-      title: "Startup teams",
-      copy: "Joining early-stage teams that need a product-minded frontend/mobile developer who can move fast without losing quality.",
-    },
-    {
-      icon: Building2,
-      title: "Selected collaborations",
-      copy: "Supporting founders and product studios with frontend delivery, mobile screens, UX judgment, and implementation support.",
-    },
-  ];
-
-  const pipeline = [
-    {
-      phase: "Building",
-      title: "AfterFight",
-      copy: "A playful relationship app helping couples cool down, reconnect through shared rituals, and grow something meaningful together.",
-      icon: Heart,
-    },
-    {
-      phase: "Exploring",
-      title: "SaaS & AI tools",
-      copy: "Turning real problems in work, communication, and everyday life into focused products people can use and pay for.",
-      icon: Cpu,
-    },
-    {
-      phase: "Published",
-      title: "Books & ideas",
-      copy: "Writing practical books about life, money, technology, empathy, and the lessons that come from building in public.",
-      icon: BookOpen,
-    },
-  ];
-
-  const experience = [
-    {
-      role: "Co-founder, Product Builder & Frontend/Mobile Developer",
-      company: "Zemio Labs",
-      period: "2025 - Present",
-      copy: "Co-building a product studio that turns real problems into consumer apps, SaaS products, digital tools, and AI-enabled workflows.",
-      proof: ["Building and shipping products end to end", "Turning user problems into product opportunities", "React Native, Expo, and AI-assisted delivery"],
-    },
-    {
-      role: "Frontend Developer",
-      company: "ROY",
-      period: "2025",
-      copy: "Built product UI including dashboards, authentication screens, interactive forms, API-driven interfaces, and responsive frontend flows.",
-      proof: ["React/Next.js implementation", "REST API integration", "Performance-focused component structure"],
-    },
-    {
-      role: "Frontend Developer",
-      company: "Jether Tech",
-      period: "2022 - 2025",
-      copy: "Developed responsive interfaces, reusable React components, and mobile-first web experiences across client and product projects.",
-      proof: ["Cross-browser UI work", "Reusable components", "Mobile-first delivery"],
-    },
-    {
-      role: "Fintech & Crypto Operations",
-      company: "Previous career",
-      period: "2014 - 2022",
-      copy: "Worked across financial markets, client portfolios, crypto products, and high-trust customer communication before moving deeper into product engineering.",
-      proof: ["Fintech domain knowledge", "Customer trust and operations", "Commercial product context"],
-    },
-  ];
-
-  const coreStack = [
-    "React",
-    "Next.js",
-    "TypeScript",
-    "JavaScript",
-    "HTML5",
-    "CSS3",
-    "Tailwind CSS",
-    "React Native",
-    "Expo",
-    "REST APIs",
-    "Git",
-    "Responsive UI",
-  ];
-
-  const skillGroups = [
-    {
-      title: "Frontend",
-      skills: ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS"],
-    },
-    {
-      title: "Mobile",
-      skills: ["React Native", "Expo", "Mobile-first UI", "iOS/Android app thinking"],
-    },
-    {
-      title: "Engineering",
-      skills: ["REST APIs", "Reusable components", "Responsive UI", "Git", "Accessibility"],
-    },
-    {
-      title: "Testing & QA",
-      skills: ["Jest unit tests", "Component testing", "E2E workflows", "Accessibility audits", "Performance optimization"],
-    },
-    {
-      title: "Product",
-      skills: ["UX judgment", "MVP planning", "Startup execution", "Metrics & analytics", "User research"],
-    },
-  ];
-
-  const books = [
-    {
-      title: "Quiet the Noise",
-      sub: "A Woman's Guide to Stopping Overthinking, Setting Boundaries, and Finally Feel Free",
-      price: "€21",
-      badge: "★ 5.0",
-      badgeClr: "#b88934",
-      cover: "/quiet-the-noise.png",
-      href: "https://www.amazon.es/stores/Jane-Duru/author/B0GPLWY7ML/allbooks",
-      bullets: ["Stop the mental spiral for good", "Set boundaries without guilt", "Kindle & Paperback"],
-    },
-    {
-      title: "Selective Empathy",
-      sub: "Why the world cries for some lives and stays silent for others",
-      price: "€23",
-      badge: "NEW",
-      badgeClr: "#6f7d5a",
-      cover: "/book-selective-empathy.png",
-      href: "https://www.amazon.es/stores/Jane-Duru/author/B0GPLWY7ML/allbooks",
-      bullets: ["Psychology of compassion bias", "Media & selective outrage", "Practical empathy exercises"],
-    },
-    {
-      title: "50 AI Prompts To Make Money",
-      sub: "Copy-paste prompts that work — even as a complete beginner",
-      price: "€9.99",
-      badge: "POPULAR",
-      badgeClr: "#526b86",
-      cover: "/book-ai-prompts.png",
-      href: "https://iamjaneezystore.gumroad.com/l/iskap",
-      bullets: ["50 ready-to-use prompts", "Works with any AI tool", "No tech experience needed"],
-    },
-  ];
+      if (!response.ok) throw new Error("Unable to join");
+      setEmail("");
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
+  };
 
   return (
-    <div style={{ background: c.bg, color: c.text, minHeight: "100vh" }}>
+    <main className="site-shell">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=DM+Sans:opsz,wght@9..40,300..700&family=DM+Mono:wght@400;500&display=swap');
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'DM Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-        .serif { font-family: 'Lora', Georgia, serif; }
-        .mono  { font-family: 'DM Mono', monospace; }
-        ::selection { background: ${c.accent}28; }
-        ::-webkit-scrollbar { width: 3px; }
-        ::-webkit-scrollbar-thumb { background: ${c.accent}25; border-radius: 6px; }
-        a { text-decoration: none; color: inherit; }
-
-        .ambient-grid {
-          position: fixed;
-          inset: 0;
-          z-index: 0;
-          pointer-events: none;
-          background:
-            linear-gradient(${c.border} 1px, transparent 1px),
-            linear-gradient(90deg, ${c.border} 1px, transparent 1px);
-          background-size: 56px 56px;
-          mask-image: radial-gradient(circle at 50% 0%, black, transparent 70%);
-          opacity: ${dark ? 0.18 : 0.2};
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+        :root { --ink:#16151a; --muted:#716d78; --cream:#fffaf5; --line:#e9e2dc; --coral:#ff6978; --violet:#7462e8; }
+        * { box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { margin:0; background:var(--cream); color:var(--ink); font-family:'DM Sans',sans-serif; }
+        button,input { font:inherit; }
+        a { color:inherit; text-decoration:none; }
+        .site-shell { min-height:100vh; overflow:hidden; background:radial-gradient(circle at 90% 4%,#f2eaff 0,transparent 28%),radial-gradient(circle at 3% 27%,#ffe8e6 0,transparent 25%),var(--cream); }
+        .wrap { width:min(1160px,calc(100% - 40px)); margin:0 auto; }
+        .nav { height:76px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(22,21,26,.08); }
+        .logo { font:800 20px 'Manrope'; letter-spacing:-.7px; }
+        .logo span { color:var(--coral); }
+        .nav-links { display:flex; align-items:center; gap:28px; color:var(--muted); font-size:14px; font-weight:600; }
+        .nav-links button { border:0; background:none; cursor:pointer; color:inherit; }
+        .nav-links button:hover { color:var(--ink); }
+        .nav-cta,.primary,.secondary { display:inline-flex; align-items:center; justify-content:center; gap:8px; border-radius:999px; font-weight:700; transition:.2s ease; cursor:pointer; }
+        .nav-cta { padding:11px 18px; color:white; background:var(--ink); }
+        .nav-cta:hover,.primary:hover { transform:translateY(-2px); }
+        .menu-button { display:none; background:none; border:0; }
+        .hero { padding:88px 0 96px; display:grid; grid-template-columns:1.1fr .9fr; gap:70px; align-items:center; }
+        .eyebrow { display:inline-flex; align-items:center; gap:8px; color:#7564db; background:#eeeafe; border:1px solid #ded7ff; border-radius:999px; padding:8px 12px; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+        h1,h2,h3 { font-family:'Manrope',sans-serif; margin:0; letter-spacing:-.045em; }
+        h1 { margin-top:24px; font-size:clamp(50px,7vw,88px); line-height:.98; max-width:760px; }
+        h1 em { font-style:normal; color:var(--coral); }
+        .hero-copy { margin:28px 0 0; max-width:610px; color:var(--muted); font-size:19px; line-height:1.65; }
+        .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:34px; }
+        .primary { border:0; padding:15px 22px; background:var(--ink); color:white; }
+        .secondary { padding:14px 21px; border:1px solid var(--line); background:rgba(255,255,255,.65); }
+        .primary.coral { background:var(--coral); }
+        .portrait-card { position:relative; padding:14px; border-radius:34px; background:rgba(255,255,255,.68); border:1px solid rgba(255,255,255,.9); box-shadow:0 30px 90px rgba(55,39,86,.14); transform:rotate(1.5deg); }
+        .portrait-card img { display:block; width:100%; height:590px; object-fit:cover; object-position:top; border-radius:24px; }
+        .float-card { position:absolute; left:-42px; bottom:32px; width:220px; padding:16px; border-radius:18px; background:#fff; box-shadow:0 18px 50px rgba(31,25,40,.18); transform:rotate(-3deg); }
+        .float-card strong { display:block; font:800 15px 'Manrope'; }
+        .float-card span { color:var(--muted); font-size:12px; }
+        .section { padding:100px 0; }
+        .section-head { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-bottom:42px; }
+        .kicker { color:var(--coral); font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; margin-bottom:12px; }
+        h2 { font-size:clamp(38px,5vw,62px); line-height:1.04; }
+        .section-note { max-width:410px; color:var(--muted); line-height:1.6; }
+        .afterfight { position:relative; border-radius:34px; overflow:hidden; padding:64px; color:white; background:linear-gradient(135deg,#211d2b 0%,#352445 55%,#622f51 100%); box-shadow:0 30px 80px rgba(53,36,69,.2); }
+        .afterfight:after { content:''; position:absolute; width:420px; height:420px; border-radius:50%; right:-100px; top:-160px; background:radial-gradient(circle,#ff7f8f 0,rgba(255,127,143,0) 68%); opacity:.5; }
+        .after-grid { position:relative; z-index:1; display:grid; grid-template-columns:1fr .9fr; gap:70px; align-items:center; }
+        .product-mark { width:70px; height:70px; display:grid; place-items:center; border-radius:22px; background:var(--coral); font:800 22px 'Manrope'; transform:rotate(-6deg); }
+        .afterfight h2 { margin-top:28px; max-width:620px; }
+        .afterfight p { color:rgba(255,255,255,.72); line-height:1.65; font-size:17px; max-width:570px; }
+        .points { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+        .point { padding:9px 12px; border-radius:999px; background:rgba(255,255,255,.09); font-size:13px; }
+        .waitlist { padding:28px; border-radius:24px; background:white; color:var(--ink); box-shadow:0 18px 70px rgba(0,0,0,.18); }
+        .waitlist h3 { font-size:27px; }
+        .waitlist p { color:var(--muted); font-size:14px; margin:10px 0 18px; }
+        .input-row { display:flex; gap:8px; }
+        .input-row input { min-width:0; flex:1; border:1px solid var(--line); border-radius:14px; padding:14px 15px; outline:none; }
+        .input-row input:focus { border-color:var(--coral); box-shadow:0 0 0 3px rgba(255,105,120,.12); }
+        .input-row button { border:0; border-radius:14px; padding:0 18px; color:white; background:var(--coral); font-weight:800; cursor:pointer; }
+        .form-status { min-height:20px; margin:12px 0 0!important; font-size:12px!important; }
+        .success { color:#16804d!important; }
+        .error { color:#b83f49!important; }
+        .product-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+        .product-card { min-height:290px; padding:26px; border:1px solid var(--line); border-radius:26px; background:rgba(255,255,255,.64); display:flex; flex-direction:column; }
+        .product-card.focus { border-color:#ffb0b8; background:#fff3f3; }
+        .card-top { display:flex; justify-content:space-between; align-items:center; }
+        .mini-mark { width:48px; height:48px; display:grid; place-items:center; border-radius:15px; color:white; font:800 14px 'Manrope'; }
+        .stage { padding:7px 10px; border:1px solid var(--line); border-radius:999px; color:var(--muted); font-size:11px; font-weight:800; text-transform:uppercase; }
+        .product-card h3 { margin-top:42px; font-size:28px; }
+        .product-card p { color:var(--muted); line-height:1.6; }
+        .card-link { margin-top:auto; display:flex; align-items:center; gap:7px; font-weight:800; font-size:14px; }
+        .book-feature { display:grid; grid-template-columns:.78fr 1.22fr; gap:70px; align-items:center; padding:50px; border-radius:34px; background:#efe9ff; }
+        .book-feature img { display:block; width:100%; max-height:520px; object-fit:contain; filter:drop-shadow(0 24px 26px rgba(41,30,71,.24)); }
+        .book-feature h2 { font-size:clamp(38px,5vw,64px); }
+        .book-feature p { color:var(--muted); font-size:17px; line-height:1.65; }
+        .book-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:22px; }
+        .book-card { border:1px solid var(--line); border-radius:24px; background:white; overflow:hidden; }
+        .book-cover { height:290px; padding:22px; background:#f4f0ea; }
+        .book-cover img { width:100%; height:100%; object-fit:contain; }
+        .book-copy { padding:20px; }
+        .book-copy h3 { font-size:19px; letter-spacing:-.03em; }
+        .book-copy p { min-height:42px; color:var(--muted); font-size:13px; line-height:1.5; }
+        .buy-links { display:flex; gap:14px; font-size:13px; font-weight:800; }
+        .about { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+        .about p { color:var(--muted); font-size:18px; line-height:1.75; }
+        .about-list { display:grid; gap:12px; }
+        .about-item { display:flex; align-items:center; gap:12px; padding:16px; border-radius:17px; background:white; border:1px solid var(--line); font-weight:700; }
+        .about-item svg { color:var(--coral); }
+        footer { border-top:1px solid var(--line); padding:42px 0; }
+        .footer-inner { display:flex; justify-content:space-between; align-items:center; gap:24px; }
+        .socials { display:flex; gap:10px; }
+        .socials a { width:40px; height:40px; display:grid; place-items:center; border:1px solid var(--line); border-radius:50%; background:white; }
+        @media (max-width:900px) {
+          .nav-links { display:none; }
+          .menu-button { display:block; }
+          .mobile-menu { position:absolute; z-index:20; left:20px; right:20px; top:68px; padding:18px; border-radius:18px; background:white; box-shadow:0 20px 50px rgba(0,0,0,.13); display:grid; gap:8px; }
+          .mobile-menu button { border:0; background:#faf7f4; border-radius:12px; padding:13px; text-align:left; font-weight:700; }
+          .hero,.after-grid,.book-feature,.about { grid-template-columns:1fr; }
+          .hero { padding-top:55px; }
+          .portrait-card { width:min(520px,100%); margin:0 auto; }
+          .afterfight { padding:40px; }
+          .product-grid { grid-template-columns:1fr; }
+          .book-grid { grid-template-columns:repeat(2,1fr); }
         }
-
-        .ambient-wash {
-          position: fixed;
-          inset: -20%;
-          z-index: 0;
-          pointer-events: none;
-          background:
-            linear-gradient(180deg, ${c.accent}12 0%, transparent 38%),
-            linear-gradient(90deg, transparent 0%, ${c.gold}08 50%, transparent 100%);
-          opacity: ${dark ? 0.7 : 0.5};
-        }
-
-        .scanline {
-          background: linear-gradient(90deg, transparent, ${c.accent}55, ${c.gold}55, transparent);
-          background-size: 220% 100%;
-          animation: scan 6s ease-in-out infinite;
-        }
-
-        @keyframes scan {
-          0%, 100% { background-position: 140% 0; opacity: 0.2; }
-          50% { background-position: -40% 0; opacity: 0.65; }
-        }
-
-        .marquee {
-          overflow: hidden;
-          mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
-        }
-
-        .marquee-track {
-          display: flex;
-          width: max-content;
-          animation: marquee 28s linear infinite;
-        }
-
-        @keyframes marquee {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .scanline, .marquee-track { animation: none; }
+        @media (max-width:600px) {
+          .wrap { width:min(100% - 28px,1160px); }
+          .hero { gap:45px; padding-bottom:65px; }
+          .hero-copy { font-size:17px; }
+          .portrait-card img { height:430px; }
+          .float-card { left:-5px; bottom:18px; }
+          .section { padding:70px 0; }
+          .section-head { display:block; }
+          .section-note { margin-top:14px; }
+          .afterfight { padding:30px 22px; border-radius:26px; }
+          .after-grid { gap:36px; }
+          .waitlist { padding:22px; }
+          .input-row { display:grid; }
+          .input-row button { padding:14px; }
+          .book-feature { padding:28px 20px; gap:30px; border-radius:26px; }
+          .book-grid { grid-template-columns:1fr; }
+          .book-cover { height:340px; }
+          .footer-inner { align-items:flex-start; flex-direction:column; }
         }
       `}</style>
 
-      <div className="ambient-grid" />
-      <div className="ambient-wash" />
-
-      <motion.div
-        className="fixed top-0 left-0 right-0 z-[100] h-[2px] origin-left"
-        style={{
-          scaleX: bar,
-          background: `linear-gradient(90deg, ${c.accent}, ${c.gold})`,
-        }}
-      />
-
-      <header
-        className="fixed top-0 left-0 right-0 z-50"
-        style={{
-          background: `${c.bg}f2`,
-          backdropFilter: "blur(20px)",
-          borderBottom: `1px solid ${c.border}`,
-        }}
-      >
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <motion.button
-            onClick={() => go("hero")}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-2"
-          >
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center"
-              style={{ background: `linear-gradient(135deg, ${c.accent}, ${c.gold})` }}
-            >
-              <span className="serif font-bold text-sm" style={{ color: c.primaryText }}>
-                JD
-              </span>
-            </div>
-            <span className="serif font-bold text-base hidden sm:inline" style={{ color: c.text }}>
-              Jane
-            </span>
-          </motion.button>
-
-          <nav className="hidden lg:flex items-center gap-6">
-            {navLinks.slice(0, 6).map((n) => (
-              <motion.button
-                key={n.id}
-                onClick={() => go(n.id)}
-                className="text-sm font-medium transition-colors"
-                style={{ color: c.sub }}
-                whileHover={{ color: c.text }}
-              >
-                {n.label}
-              </motion.button>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <div className="relative group hidden sm:block">
-              <motion.button
-                className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium"
-                style={{
-                  background: `${c.accent}18`,
-                  border: `1.5px solid ${c.bHover}`,
-                  color: c.accent,
-                }}
-                whileHover={{ scale: 1.05, background: `${c.accent}25` }}
-              >
-                <ShoppingBag size={15} />
-                <span>Shop</span>
-              </motion.button>
-
-              <div
-                className="absolute right-0 mt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 rounded-lg"
-                style={{
-                  background: c.surface,
-                  border: `1px solid ${c.border}`,
-                  zIndex: 50,
-                }}
-              >
-                <a
-                  href="https://iamjaneezystore.gumroad.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block px-4 py-3 text-sm rounded-t-lg transition-colors"
-                  style={{ color: c.text, background: `${c.accent}08` }}
-                >
-                  📚 Gumroad Store
-                </a>
-                <a
-                  href="https://www.amazon.es/stores/Jane-Duru/author/B0GPLWY7ML/allbooks"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block px-4 py-3 text-sm rounded-b-lg transition-colors border-t"
-                  style={{ color: c.text, borderColor: c.border }}
-                >
-                  📖 Amazon Books
-                </a>
-              </div>
-            </div>
-
-            <motion.button
-              onClick={() => setDark(!dark)}
-              className="p-2.5 rounded-lg"
-              style={{
-                background: `${c.accent}15`,
-                border: `1px solid ${c.accent}30`,
-              }}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {dark ? (
-                <Sun size={16} style={{ color: c.accent }} />
-              ) : (
-                <Moon size={16} style={{ color: c.accent }} />
-              )}
-            </motion.button>
-
-            <button
-              onClick={() => setMenu(!menu)}
-              className="lg:hidden p-2.5 rounded-lg"
-              style={{ background: menu ? `${c.accent}15` : "transparent" }}
-            >
-              {menu ? <X size={20} /> : <Menu size={20} />}
-            </button>
+      <header className="wrap">
+        <nav className="nav">
+          <button className="logo" onClick={() => scrollTo("top")}>Jane<span>.</span></button>
+          <div className="nav-links">
+            <button onClick={() => scrollTo("products")}>Products</button>
+            <button onClick={() => scrollTo("books")}>Books</button>
+            <button onClick={() => scrollTo("about")}>About</button>
+            <a className="nav-cta" href="#waitlist">Join AfterFight</a>
           </div>
-        </div>
+          <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Open menu">
+            {menuOpen ? <X /> : <Menu />}
+          </button>
+          {menuOpen && (
+            <div className="mobile-menu">
+              <button onClick={() => scrollTo("products")}>Products</button>
+              <button onClick={() => scrollTo("books")}>Books</button>
+              <button onClick={() => scrollTo("about")}>About Jane</button>
+              <button onClick={() => scrollTo("waitlist")}>Join AfterFight</button>
+            </div>
+          )}
+        </nav>
       </header>
 
-      <AnimatePresence>
-        {menu && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 lg:hidden flex flex-col"
-            style={{ background: c.bg }}
-          >
-            <div className="h-16" />
-            <nav className="flex-1 flex flex-col items-center justify-center gap-6">
-              {navLinks.map((n, i) => (
-                <motion.button
-                  key={n.id}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  onClick={() => go(n.id)}
-                  className="serif text-2xl font-bold"
-                  style={{ color: c.text }}
-                >
-                  {n.label}
-                </motion.button>
-              ))}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <section id="hero" className="relative z-10 pt-20 pb-8 px-6">
-        <div className="max-w-6xl mx-auto">
-          <Fade>
-            <div
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full mono text-xs mb-4"
-              style={{
-                background: `${c.accent}0f`,
-                border: `1px solid ${c.border}`,
-              }}
-            >
-              <motion.span
-                className="w-1.5 h-1.5 rounded-full"
-                style={{ background: STATUS_OLIVE }}
-                animate={{ opacity: [1, 0.3, 1] }}
-                transition={{ duration: 1.6, repeat: Infinity }}
-              />
-              <span style={{ color: c.sub }}>
-                Founder · builder · writer · <span style={{ color: c.accent, fontWeight: 600 }}>building what matters</span>
-              </span>
-            </div>
-          </Fade>
-
-          <Fade delay={0.06}>
-            <div className="grid lg:grid-cols-[1.08fr_0.92fr] gap-6 items-start">
-              <div>
-                <motion.h1
-                  className="serif font-bold leading-[0.98] tracking-tight"
-                  style={{ fontSize: "clamp(3rem, 7vw, 5.9rem)" }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  Jane Duru
-                  <br />
-                  <span style={{ color: c.accent }}>Founder & builder</span>
-                  <br />
-                  <span style={{ color: c.sub }}>turning problems into products.</span>
-                </motion.h1>
-
-                <motion.p
-                  className="mt-6 text-lg leading-relaxed max-w-2xl"
-                  style={{ color: c.sub }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  I build apps, SaaS products, and AI tools from real problems.
-                  As co-founder of Zemio Labs, I combine engineering, product
-                  judgment, startup execution, and lived experience to take ideas
-                  from insight to shipped product—and write about the journey.
-                </motion.p>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {coreStack.slice(0, 7).map((skill) => (
-                    <span
-                      key={skill}
-                      className="mono text-xs px-3 py-1.5 rounded-lg"
-                      style={{
-                        background: `${c.accent}0e`,
-                        border: `1px solid ${c.border}`,
-                        color: c.sub,
-                      }}
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <motion.div
-                className="relative overflow-hidden rounded-[24px] p-4 lg:max-w-[520px] lg:justify-self-end"
-                style={{
-                  background: `${c.surface}d8`,
-                  border: `1px solid ${c.border}`,
-                  boxShadow: `0 24px 90px -50px ${c.gold}`,
-                }}
-                whileHover={{ y: -4, borderColor: c.bHover }}
-              >
-                <div className="absolute left-0 right-0 top-0 h-px scanline" />
-
-                <div
-                  className="relative overflow-hidden rounded-2xl mb-4"
-                  style={{
-                    border: `1px solid ${c.border}`,
-                    background: `${c.accent}08`,
-                  }}
-                >
-                  <img
-                    src="/Img2.png"
-                    alt="Jane Duru"
-                    className="w-full h-[340px] sm:h-[420px] lg:h-[460px] object-cover object-top"
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: `linear-gradient(to top, ${c.bg}ba, transparent 45%)`,
-                    }}
-                  />
-                  <div
-                    className="absolute bottom-3 left-3 right-3 flex items-center gap-2 px-3 py-2 rounded-xl"
-                    style={{
-                      background: `${c.surface}e8`,
-                      border: `1px solid ${c.border}`,
-                      backdropFilter: "blur(12px)",
-                    }}
-                  >
-                    <motion.span
-                      className="w-2 h-2 rounded-full flex-shrink-0"
-                      style={{ background: STATUS_OLIVE }}
-                      animate={{ opacity: [1, 0.3, 1] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    />
-                    <span className="text-sm font-medium">
-                      Open to the right opportunities
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between mb-4">
-                  <span className="mono text-xs" style={{ color: c.muted }}>
-                    PROFILE SNAPSHOT
-                  </span>
-                  <span
-                    className="mono text-xs px-2.5 py-1 rounded-full"
-                    style={{
-                      background: `${c.accent}14`,
-                      color: c.accent,
-                    }}
-                  >
-                    LISBON
-                  </span>
-                </div>
-
-                <div className="space-y-3">
-                  {[
-                    ["Founder & product builder", "Building and running Zemio Labs"],
-                    ["Apps, SaaS & AI", "Turning real problems into useful products"],
-                    ["Frontend/mobile expert", "React, React Native, Expo, TypeScript"],
-                    ["Writer", "Founder lessons, opportunities, life and technology"],
-                  ].map(([title, sub], i) => (
-                    <motion.div
-                      key={title}
-                      className="flex items-start gap-3 p-3 rounded-2xl"
-                      style={{
-                        background: `${c.accent}${dark ? "08" : "0c"}`,
-                        border: `1px solid ${c.border}`,
-                      }}
-                      initial={{ opacity: 0, x: 18 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.35 + i * 0.08 }}
-                    >
-                      <Check size={16} style={{ color: c.accent, marginTop: 2 }} />
-                      <div>
-                        <p className="text-sm font-semibold">{title}</p>
-                        <p className="text-xs mt-0.5" style={{ color: c.sub }}>
-                          {sub}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-          </Fade>
-
-          <Fade delay={0.2} className="mt-7 flex flex-wrap gap-3">
-            <Btn href="https://zemiolabs.com" target="_blank" variant="primary" c={c}>
-              <Building2 size={15} /> Explore Zemio Labs <ArrowUpRight size={14} />
-            </Btn>
-            <Btn href="https://cal.com/jane-duru/discovery-call" target="_blank" c={c}>
-              <Calendar size={15} /> Discuss an opportunity
-            </Btn>
-            <Btn href="https://iamjaneezystore.gumroad.com" target="_blank" c={c}>
-              <ShoppingBag size={15} /> Digital products
-            </Btn>
-          </Fade>
-
-          <Fade delay={0.28}>
-            <div
-              className="mt-8 pt-4 grid grid-cols-2 sm:grid-cols-5 gap-6"
-              style={{ borderTop: `1px solid ${c.border}` }}
-            >
-              {[
-                { n: "2019", l: "TypeScript since" },
-                { n: "React", l: "frontend focus" },
-                { n: "RN", l: "mobile apps" },
-                { n: "3", l: "products shipped" },
-                { n: "12+", l: "years fintech context" },
-              ].map((s) => (
-                <div key={s.l}>
-                  <p className="serif text-3xl font-bold" style={{ color: c.accent }}>
-                    {s.n}
-                  </p>
-                  <p className="mono text-xs mt-1" style={{ color: c.muted }}>
-                    {s.l}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </Fade>
-        </div>
+      <section className="wrap hero" id="top">
+        <motion.div {...fade}>
+          <span className="eyebrow"><Sparkles size={14} /> Founder · Builder · Writer</span>
+          <h1>I turn real problems into <em>products.</em></h1>
+          <p className="hero-copy">Building apps, SaaS and AI tools at Zemio Labs—and writing what I learn along the way.</p>
+          <div className="actions">
+            <button className="primary" onClick={() => scrollTo("waitlist")}>Join the AfterFight waitlist <ArrowRight size={17} /></button>
+            <button className="secondary" onClick={() => scrollTo("books")}>Explore my books <BookOpen size={17} /></button>
+          </div>
+        </motion.div>
+        <motion.div className="portrait-card" {...fade} transition={{ ...fade.transition, delay:.12 }}>
+          <img src="/Img2.png" alt="Jane Duru, founder and writer" />
+          <div className="float-card"><strong>Currently building</strong><span>AfterFight · relationship repair, made playful</span></div>
+        </motion.div>
       </section>
 
-      <div
-        className="relative z-10 marquee py-4"
-        style={{
-          borderTop: `1px solid ${c.border}`,
-          borderBottom: `1px solid ${c.border}`,
-        }}
-      >
-        <div className="marquee-track">
-          {[...Array(2)].map((_, loop) => (
-            <div key={loop} className="flex items-center gap-6 pr-6">
-              {[
-                "Frontend Developer",
-                "Mobile Developer",
-                "React",
-                "React Native",
-                "Expo",
-                "TypeScript",
-                "Zemio Labs",
-                "SaaS & AI",
-                "Writer",
-                "Lisbon",
-              ].map((item) => (
-                <span
-                  key={`${loop}-${item}`}
-                  className="mono text-xs uppercase tracking-widest whitespace-nowrap"
-                  style={{ color: c.muted }}
-                >
-                  {item}
-                </span>
-              ))}
+      <section className="section wrap" id="products">
+        <motion.div className="afterfight" {...fade}>
+          <div className="after-grid">
+            <div>
+              <div className="product-mark">AF</div>
+              <h2>Love after the hard moment.</h2>
+              <p>AfterFight helps couples cool down, understand each other and reconnect through small shared rituals—without making love feel like therapy homework.</p>
+              <div className="points">
+                <span className="point">Couple rituals</span><span className="point">Shared garden</span><span className="point">One subscription</span><span className="point">For every kind of love</span>
+              </div>
             </div>
+            <form className="waitlist" id="waitlist" onSubmit={joinWaitlist}>
+              <span className="kicker">Early access</span>
+              <h3>Be first into the garden.</h3>
+              <p>Join the waitlist for product updates, beta access and launch news.</p>
+              <div className="input-row">
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your email address" aria-label="Email address" required />
+                <button disabled={status === "loading"}>{status === "loading" ? "Joining…" : "Join"}</button>
+              </div>
+              <p className={`form-status ${status}`} aria-live="polite">
+                {status === "success" && "You’re on the list. Welcome early."}
+                {status === "error" && "That didn’t work. Please try again."}
+                {status === "idle" && "No noise. Only meaningful updates."}
+              </p>
+            </form>
+          </div>
+        </motion.div>
+
+        <div className="section-head" style={{ marginTop:90 }}>
+          <div><div className="kicker">Product pipeline</div><h2>Now. Next. Later.</h2></div>
+          <p className="section-note">One clear focus now, with more relationship products growing behind it.</p>
+        </div>
+        <div className="product-grid">
+          {products.map((product, index) => (
+            <motion.article className={`product-card ${product.focus ? "focus" : ""}`} key={product.name} {...fade} transition={{ ...fade.transition, delay:index*.07 }}>
+              <div className="card-top"><span className="mini-mark" style={{background:product.color}}>{product.mark}</span><span className="stage">{product.stage}</span></div>
+              <h3>{product.name}</h3><p>{product.text}</p>
+              {product.focus && <button className="card-link" onClick={() => scrollTo("waitlist")}>Join waitlist <ArrowRight size={15}/></button>}
+            </motion.article>
           ))}
         </div>
-      </div>
-
-      <section id="expertise" className="relative z-10 py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader
-            c={c}
-            eyebrow="01 — EXPERTISE"
-            title="Engineering with founder-level ownership."
-            copy="Building with clean code, product judgment, commercial sense, and real responsibility."
-          />
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {expertise.map((item, i) => (
-              <Fade key={item.title} delay={0.06 * i}>
-                <Card c={c}>
-                  <item.icon size={22} style={{ color: c.accent }} />
-                  <p className="font-semibold mt-5 mb-2">{item.title}</p>
-                  <p className="text-sm leading-relaxed" style={{ color: c.sub }}>
-                    {item.copy}
-                  </p>
-                </Card>
-              </Fade>
-            ))}
-          </div>
-        </div>
       </section>
 
-      <section id="skills" className="relative z-10 py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader
-            c={c}
-            eyebrow="02 — SKILLS"
-            title="Production-ready engineering across web & mobile."
-            copy="Strong where it matters: responsive design, clean components, real performance, and code that scales with users."
-          />
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
-            {skillGroups.map((group, i) => (
-              <Fade key={group.title} delay={0.06 * i}>
-                <Card c={c}>
-                  <p className="font-semibold mb-4">{group.title}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {group.skills.map((skill) => (
-                      <Pill key={skill} c={c}>
-                        {skill}
-                      </Pill>
-                    ))}
-                  </div>
-                </Card>
-              </Fade>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="experience" className="relative z-10 py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader
-            c={c}
-            eyebrow="03 — EXPERIENCE"
-            title="A frontend/mobile developer with startup and fintech depth."
-            copy="My background combines React delivery, mobile-first UI, API integration, reusable components, startup execution, and commercial experience from fintech."
-          />
-
-          <div className="grid md:grid-cols-2 gap-4">
-            {experience.map((item, i) => (
-              <Fade key={`${item.company}-${item.role}`} delay={0.06 * i}>
-                <Card c={c} large>
-                  <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
-                    <div>
-                      <p className="font-semibold">{item.role}</p>
-                      <p className="text-sm mt-1" style={{ color: c.sub }}>
-                        {item.company}
-                      </p>
-                    </div>
-                    <span
-                      className="mono text-xs px-2.5 py-1 rounded-full"
-                      style={{
-                        background: `${c.accent}10`,
-                        color: c.muted,
-                        border: `1px solid ${c.border}`,
-                      }}
-                    >
-                      {item.period}
-                    </span>
-                  </div>
-                  <p className="text-sm leading-relaxed mb-5" style={{ color: c.sub }}>
-                    {item.copy}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {item.proof.map((point) => (
-                      <Pill key={point} c={c}>
-                        {point}
-                      </Pill>
-                    ))}
-                  </div>
-                </Card>
-              </Fade>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="work-with-me" className="relative z-10 py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <Fade>
-            <p className="mono text-xs tracking-widest mb-3" style={{ color: c.muted }}>
-              04 — OPPORTUNITIES
-            </p>
-          </Fade>
-
-          <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
-            <Fade delay={0.05}>
-              <div>
-                <h2
-                  className="serif font-bold mb-5"
-                  style={{ fontSize: "clamp(1.9rem, 4.4vw, 3.2rem)" }}
-                >
-                  Open to frontend, mobile, product, and startup opportunities.
-                </h2>
-                <p className="text-base leading-relaxed mb-7" style={{ color: c.sub }}>
-                  I am actively building through Zemio Labs, but I still want the
-                  right opportunities to find me: frontend/mobile roles, product
-                  collaborations, startup partnerships, and selected client work.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <Btn
-                    href="https://cal.com/jane-duru/discovery-call"
-                    target="_blank"
-                    variant="primary"
-                    c={c}
-                  >
-                    <Calendar size={14} /> Discuss an opportunity
-                  </Btn>
-                  <Btn
-                    href="https://cal.com/jane-duru/1-hour-consultation"
-                    target="_blank"
-                    c={c}
-                  >
-                    <Calendar size={14} /> Book a 1hr consult
-                  </Btn>
-                </div>
-              </div>
-            </Fade>
-
-            <div className="grid sm:grid-cols-2 gap-4">
-              {services.map((item, i) => (
-                <Fade key={item.title} delay={0.06 * i}>
-                  <Card c={c}>
-                    <item.icon size={20} style={{ color: c.accent }} />
-                    <p className="font-semibold mt-5 mb-2">{item.title}</p>
-                    <p className="text-sm leading-relaxed" style={{ color: c.sub }}>
-                      {item.copy}
-                    </p>
-                  </Card>
-                </Fade>
-              ))}
+      <section className="section wrap" id="books">
+        <motion.div className="book-feature" {...fade}>
+          <img src="/new-book.jpg" alt="Nobody Pays You for Working Hard Anymore book cover" />
+          <div>
+            <div className="kicker">Newest book</div>
+            <h2>Nobody Pays You for Working Hard Anymore</h2>
+            <p>How to create value, build leverage and make money in the age of AI.</p>
+            <div className="actions">
+              <a className="primary" href={AMAZON} target="_blank" rel="noreferrer">Find it on Amazon <ArrowUpRight size={16}/></a>
+              <a className="secondary" href={GUMROAD} target="_blank" rel="noreferrer">Shop on Gumroad <ArrowUpRight size={16}/></a>
             </div>
           </div>
+        </motion.div>
+        <div className="section-head" style={{ marginTop:90 }}>
+          <div><div className="kicker">Books by Jane Duru</div><h2>Ideas you can use.</h2></div>
+          <p className="section-note">On work, leverage, technology, empathy and a quieter life.</p>
+        </div>
+        <div className="book-grid">
+          {books.filter((book) => !book.latest).map((book, index) => (
+            <motion.article className="book-card" key={book.title} {...fade} transition={{ ...fade.transition, delay:index*.07 }}>
+              <div className="book-cover"><img src={book.cover} alt={`${book.title} book cover`} /></div>
+              <div className="book-copy"><h3>{book.title}</h3><p>{book.subtitle}</p><div className="buy-links"><a href={AMAZON} target="_blank" rel="noreferrer">Amazon ↗</a><a href={GUMROAD} target="_blank" rel="noreferrer">Gumroad ↗</a></div></div>
+            </motion.article>
+          ))}
         </div>
       </section>
 
-      <section id="building" className="relative z-10 py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <Fade>
-            <p className="mono text-xs tracking-widest mb-3" style={{ color: c.muted }}>
-              05 — BUILDING
-            </p>
-          </Fade>
-
-          <Fade delay={0.05}>
-            <h2
-              className="serif font-bold mb-12"
-              style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)" }}
-            >
-              Building from real problems.
-            </h2>
-          </Fade>
-
-          <Fade delay={0.08}>
-            <div
-              className="relative overflow-hidden rounded-3xl mb-6"
-              style={{
-                background: `linear-gradient(135deg, ${c.accent}16 0%, ${c.surface} 60%)`,
-                border: `1.5px solid ${c.bHover}`,
-              }}
-            >
-              <motion.div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: `radial-gradient(ellipse at 90% 10%, ${c.accent}22, transparent 55%)`,
-                }}
-                animate={{ opacity: [0.6, 1, 0.6] }}
-                transition={{ duration: 6, repeat: Infinity }}
-              />
-
-              <div className="relative p-8 sm:p-10">
-                <div className="flex flex-wrap items-start justify-between gap-6">
-                  <div className="flex-1 min-w-[200px]">
-                    <div className="flex flex-wrap items-center gap-2 mb-4">
-                      <span
-                        className="mono text-xs px-3 py-1 rounded-full flex items-center gap-1.5"
-                        style={{ background: `${STATUS_OLIVE}20`, color: STATUS_OLIVE }}
-                      >
-                        <motion.span
-                          className="w-1.5 h-1.5 rounded-full"
-                          style={{ background: STATUS_OLIVE }}
-                          animate={{ opacity: [1, 0.3, 1] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                        />
-                        FOUNDER-LED
-                      </span>
-                      <span
-                        className="mono text-xs px-3 py-1 rounded-full"
-                        style={{ background: `${c.accent}14`, color: c.accent }}
-                      >
-                        APPS · SAAS · AI
-                      </span>
-                    </div>
-
-                    <h3
-                      className="font-bold mb-1 tracking-tight"
-                      style={{
-                        fontSize: "clamp(2.3rem, 5vw, 3.6rem)",
-                        lineHeight: 1,
-                        color: BRAND_ORANGE,
-                      }}
-                    >
-                      Zemio Labs
-                    </h3>
-
-                    <p className="font-semibold mb-2" style={{ color: BRAND_ORANGE }}>
-                      Real problems. Focused products. Useful outcomes.
-                    </p>
-
-                    <p className="mb-6 max-w-lg" style={{ color: c.sub }}>
-                      I identify problems worth solving, validate the opportunity,
-                      shape the product, and build the experience. My work spans
-                      consumer apps, SaaS, AI tools, digital products, and writing—
-                      always grounded in what people actually need.
-                    </p>
-
-                    <div className="flex flex-wrap gap-3">
-                      <Btn href="https://zemiolabs.com" target="_blank" variant="primary" c={c}>
-                        Visit Zemio Labs <ArrowUpRight size={14} />
-                      </Btn>
-                      <Btn href="https://amazon.com/author/janeduru" target="_blank" c={c}>
-                        Read my books <BookOpen size={14} />
-                      </Btn>
-                    </div>
-                  </div>
-
-                  <motion.div
-                    className="w-20 h-20 rounded-3xl flex-shrink-0 self-start flex items-center justify-center"
-                    style={{ background: `${c.accent}18`, border: `1px solid ${c.border}` }}
-                    whileHover={{ rotate: 4, scale: 1.08 }}
-                  >
-                    <Sparkles size={34} style={{ color: c.accent }} />
-                  </motion.div>
-                </div>
-              </div>
-            </div>
-          </Fade>
-
-          <div className="grid md:grid-cols-3 gap-4 mt-6">
-            {pipeline.map((item, i) => (
-              <Fade key={item.title} delay={0.08 * i}>
-                <Card c={c}>
-                  <div className="flex items-center justify-between mb-8">
-                    <span
-                      className="mono text-xs px-2.5 py-1 rounded-full"
-                      style={{ background: `${c.accent}12`, color: c.accent }}
-                    >
-                      {item.phase}
-                    </span>
-                    <item.icon size={18} style={{ color: c.gold }} />
-                  </div>
-                  <p className="serif text-xl font-bold mb-2">{item.title}</p>
-                  <p className="text-sm leading-relaxed" style={{ color: c.sub }}>
-                    {item.copy}
-                  </p>
-                </Card>
-              </Fade>
-            ))}
-          </div>
-
-          <Fade delay={0.2}>
-            <a
-              href="https://zemiolabs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 flex items-center gap-5 p-6 rounded-2xl"
-              style={{
-                background: c.surface,
-                border: `1px solid ${c.border}`,
-              }}
-            >
-              <div
-                className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
-                style={{ background: `${c.accent}14` }}
-              >
-                <Building2 size={22} style={{ color: c.accent }} />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-0.5">
-                  <p className="font-semibold">Zemio Labs</p>
-                  <span
-                    className="mono text-xs px-2 py-0.5 rounded-full"
-                    style={{ background: `${STATUS_OLIVE}18`, color: STATUS_OLIVE }}
-                  >
-                    LIVE
-                  </span>
-                </div>
-                <p className="text-sm" style={{ color: c.sub }}>
-                  App studio — shipping consumer products & AI workflows
-                </p>
-              </div>
-              <ArrowUpRight size={16} style={{ color: c.muted }} />
-            </a>
-          </Fade>
-        </div>
+      <section className="section wrap about" id="about">
+        <motion.div {...fade}>
+          <div className="kicker">About Jane</div><h2>Builder’s mind. Founder’s ownership.</h2>
+          <p>I’m Jane Duru, co-founder of Zemio Labs. I blend product judgment, frontend and mobile engineering, fintech experience and storytelling to build things people can understand—and want to use.</p>
+          <div className="actions"><a className="primary" href="https://zemiolabs.com" target="_blank" rel="noreferrer">Zemio Labs <ArrowUpRight size={16}/></a><a className="secondary" href="mailto:zemiolabs@gmail.com">Work with me <Mail size={16}/></a></div>
+        </motion.div>
+        <motion.div className="about-list" {...fade} transition={{ ...fade.transition, delay:.1 }}>
+          {["Co-founder at Zemio Labs","Apps, SaaS & AI tools","React, React Native & TypeScript","Author and builder in public"].map((item) => <div className="about-item" key={item}><Check size={18}/>{item}</div>)}
+        </motion.div>
       </section>
 
-      <section id="contact" className="relative z-10 py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader
-            c={c}
-            eyebrow="06 — CONTACT"
-            title="Let's work together"
-            copy="I'm actively available for frontend engineering, mobile development, React/Next.js roles, React Native/Expo roles, product UI work, and selected startup collaborations."
-          />
-
-          <Fade delay={0.1} className="mb-10">
-            <p className="text-sm font-semibold mb-4" style={{ color: c.text }}>
-              Role-specific opportunities:
-            </p>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {[
-                { label: "Frontend/Mobile Engineer", href: "https://cal.com/jane-duru/frontend-mobile-chat", emoji: "💻" },
-                { label: "React / Next.js Frontend", href: "https://cal.com/jane-duru/frontend-mobile-chat", emoji: "⚛️" },
-                { label: "React Native / Expo Mobile", href: "https://cal.com/jane-duru/frontend-mobile-chat", emoji: "📱" },
-                { label: "Product UI Collaboration", href: "https://cal.com/jane-duru/discovery-call", emoji: "🎨" },
-                { label: "Startup Collaboration", href: "https://cal.com/jane-duru/founder-chat", emoji: "🚀" },
-              ].map((r) => (
-                <motion.a
-                  key={r.label}
-                  href={r.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm"
-                  style={{
-                    background: c.surface,
-                    border: `1px solid ${c.border}`,
-                  }}
-                  whileHover={{ scale: 1.02, borderColor: c.bHover }}
-                >
-                  <span className="text-lg">{r.emoji}</span>
-                  <span style={{ color: c.text }}>{r.label}</span>
-                </motion.a>
-              ))}
-            </div>
-          </Fade>
-
-          <Fade delay={0.15} className="flex flex-wrap gap-3 mb-8">
-            <Btn
-              href="https://cal.com/jane-duru/discovery-call"
-              target="_blank"
-              variant="primary"
-              c={c}
-            >
-              <Calendar size={14} /> 30min Discovery Call
-            </Btn>
-            <Btn href="https://cal.com/jane-duru/1-hour-consultation" target="_blank" c={c}>
-              <Calendar size={14} /> 1hr Consultation — €75
-            </Btn>
-          </Fade>
-
-          <Fade delay={0.14} className="flex items-center gap-2 mb-8">
-            <MapPin size={13} style={{ color: c.accent }} />
-            <span className="text-sm" style={{ color: c.muted }}>
-              Lisbon, Portugal
-            </span>
-          </Fade>
-
-          <Fade delay={0.2}>
-            <p className="text-sm mb-4" style={{ color: c.muted }}>
-              Connect with me across platforms:
-            </p>
-            <div className="flex flex-wrap gap-2.5">
-              {[
-                { label: "GitHub", href: "https://github.com/janeezy", icon: Github },
-                { label: "LinkedIn", href: "https://www.linkedin.com/in/janeezy/", icon: Twitter },
-                { label: "X / Twitter", href: "https://x.com/Iamjaneezy", icon: Twitter },
-                { label: "Medium", href: "https://medium.com/@janeezy", icon: Pen },
-                { label: "Substack", href: "https://janeezyofficial.substack.com/", icon: Mail },
-                { label: "Zemio Labs", href: "https://zemiolabs.com", icon: Building2 },
-                { label: "Gumroad", href: "https://iamjaneezystore.gumroad.com", icon: ShoppingBag },
-              ].map((s) => (
-                <motion.a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium"
-                  style={{
-                    background: `${c.accent}0a`,
-                    border: `1px solid ${c.border}`,
-                    color: c.sub,
-                  }}
-                  whileHover={{ scale: 1.04, y: -1, borderColor: c.bHover }}
-                >
-                  <s.icon size={13} style={{ color: c.accent }} />
-                  {s.label}
-                </motion.a>
-              ))}
-            </div>
-          </Fade>
-        </div>
-      </section>
-
-      <section id="code" className="relative z-10 py-20 px-6" style={{ borderTop: `1px solid ${c.border}` }}>
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader
-            c={c}
-            eyebrow="07 — CODE & GITHUB"
-            title="Open source & shipped code."
-            copy="Production React, React Native, Next.js, and TypeScript work across web and mobile products. Reusable components, REST API integration, responsive UI, testing, accessibility, and performance optimization."
-          />
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              {
-                repo: "Portfolio",
-                desc: "This portfolio — Framer Motion, Tailwind, responsive design.",
-                tech: ["React", "Framer Motion", "Tailwind", "CRA"],
-                href: "https://github.com/janeezy/React-Portfolio",
-              },
-            ].map((p, i) => (
-              <Fade key={p.repo} delay={0.06 * i}>
-                <motion.a
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="h-full p-8 rounded-2xl group flex flex-col"
-                  style={{
-                    background: c.surface,
-                    border: `1px solid ${c.border}`,
-                  }}
-                  whileHover={{
-                    y: -6,
-                    borderColor: c.bHover,
-                    boxShadow: `0 16px 48px ${c.glow}`,
-                  }}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <p className="font-semibold text-lg">{p.repo}</p>
-                      <p className="text-xs mt-1.5" style={{ color: c.muted }}>
-                        github.com/janeezy
-                      </p>
-                    </div>
-                    <Github size={20} style={{ color: c.accent }} />
-                  </div>
-                  <p className="text-sm leading-relaxed mb-6 flex-grow" style={{ color: c.sub }}>
-                    {p.desc}
-                  </p>
-                  <div className="flex flex-wrap gap-2.5">
-                    {p.tech.map((t) => (
-                      <Pill key={t} c={c}>
-                        {t}
-                      </Pill>
-                    ))}
-                  </div>
-                </motion.a>
-              </Fade>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="books" className="relative z-10 py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader
-            c={c}
-            eyebrow="08 — BOOKS"
-            title="Books library"
-            copy="Psychology, AI, and getting out of your own head."
-          />
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {books.map((book, i) => (
-              <Fade key={book.title} delay={0.07 * i}>
-                <motion.a
-                  href={book.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col rounded-2xl overflow-hidden h-full"
-                  style={{
-                    background: c.surface,
-                    border: `1px solid ${c.border}`,
-                  }}
-                  whileHover={{
-                    y: -5,
-                    borderColor: c.bHover,
-                    boxShadow: `0 16px 40px -8px ${c.glow}`,
-                  }}
-                >
-                  <div
-                    className="relative overflow-hidden"
-                    style={{ height: 200, background: `${c.accent}10` }}
-                  >
-                    <img
-                      src={book.cover}
-                      alt={book.title}
-                      className="w-full h-full object-contain p-5 group-hover:scale-[1.04] transition-transform duration-500"
-                      onError={(e) => {
-                        e.currentTarget.style.display = "none";
-                      }}
-                    />
-                    <span
-                      className="absolute top-3 right-3 mono text-xs px-2.5 py-1 rounded-full font-bold text-white"
-                      style={{ background: book.badgeClr }}
-                    >
-                      {book.badge}
-                    </span>
-                  </div>
-
-                  <div className="p-5 flex flex-col flex-1">
-                    <p className="serif font-bold text-lg leading-tight mb-1">
-                      {book.title}
-                    </p>
-                    <p className="text-xs leading-relaxed mb-4" style={{ color: c.sub }}>
-                      {book.sub}
-                    </p>
-
-                    <ul className="space-y-1.5 mb-5 flex-1">
-                      {book.bullets.map((b) => (
-                        <li key={b} className="flex items-start gap-2 text-xs" style={{ color: c.sub }}>
-                          <span style={{ color: c.accent, flexShrink: 0, marginTop: 1 }}>
-                            —
-                          </span>
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div
-                      className="flex items-center justify-between pt-4"
-                      style={{ borderTop: `1px solid ${c.border}` }}
-                    >
-                      <span className="serif font-bold text-xl" style={{ color: c.accent }}>
-                        {book.price}
-                      </span>
-                      <span className="flex items-center gap-1 mono text-xs" style={{ color: c.muted }}>
-                        Get it <ArrowUpRight size={12} />
-                      </span>
-                    </div>
-                  </div>
-                </motion.a>
-              </Fade>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="writing" className="relative z-10 py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader
-            c={c}
-            eyebrow="09 — WRITING"
-            title="Building in public."
-            copy="I write about product building, AI workflows, user conversion, psychology, and the process of taking ideas from concept to launch."
-          />
-
-          <div className="grid sm:grid-cols-2 gap-3 mb-10">
-            {[
-              ["01", "Product and conversion", "Notes on moving people from curiosity to consistent use"],
-              ["02", "AI workflows", "Practical systems, prompts, and tools for creators and operators"],
-              ["03", "Psychology of connection", "Behavioral insight behind communication, trust, and relationships"],
-              ["04", "Mobile product building", "Lessons from shipping consumer apps across iOS and Android"],
-            ].map(([e, t, d]) => (
-              <motion.div
-                key={t}
-                className="flex items-start gap-4 p-5 rounded-2xl"
-                style={{
-                  background: c.surface,
-                  border: `1px solid ${c.border}`,
-                }}
-                whileHover={{ x: 4, borderColor: c.bHover }}
-              >
-                <span className="mono text-xs leading-none flex-shrink-0 mt-1" style={{ color: c.accent }}>
-                  {e}
-                </span>
-                <div>
-                  <p className="font-semibold text-sm mb-1">{t}</p>
-                  <p className="text-xs leading-relaxed" style={{ color: c.sub }}>
-                    {d}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            {[
-              { label: "Medium", href: "https://medium.com/@janeezy", icon: BookOpen },
-              { label: "X / Twitter", href: "https://x.com/Iamjaneezy", icon: Twitter },
-              { label: "LinkedIn", href: "https://www.linkedin.com/in/janeezy/", icon: Github },
-              { label: "Substack", href: "https://janeezyofficial.substack.com/", icon: Mail },
-            ].map((l) => (
-              <motion.a
-                key={l.label}
-                href={l.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium"
-                style={{
-                  background: c.surface,
-                  border: `1px solid ${c.border}`,
-                  color: c.sub,
-                }}
-                whileHover={{ scale: 1.03, y: -1, borderColor: c.bHover }}
-              >
-                <l.icon size={14} style={{ color: c.accent }} />
-                {l.label}
-                <ExternalLink size={11} className="opacity-0 group-hover:opacity-40 transition-opacity" />
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <footer className="relative z-10 py-8 px-6" style={{ borderTop: `1px solid ${c.border}` }}>
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="serif font-bold" style={{ color: c.accent }}>
-            Jane Duru
-          </p>
-          <p className="mono text-xs" style={{ color: c.muted }}>
-            © {new Date().getFullYear()} — Frontend & Mobile Developer, Lisbon
-          </p>
-        </div>
-      </footer>
-
-      <AnimatePresence>
-        {top && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="fixed bottom-6 right-6 z-50 p-3 rounded-full"
-            style={{
-              background: `linear-gradient(135deg, ${c.accent}, ${c.gold})`,
-              boxShadow: `0 4px 16px ${c.glow}`,
-            }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <ChevronUp size={18} color="#fff" />
-          </motion.button>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
-function SectionHeader({ c, eyebrow, title, copy }) {
-  return (
-    <>
-      <Fade>
-        <p className="mono text-xs tracking-widest mb-3" style={{ color: c.muted }}>
-          {eyebrow}
-        </p>
-      </Fade>
-      <Fade delay={0.05}>
-        <h2
-          className="serif font-bold mb-5 max-w-3xl"
-          style={{ fontSize: "clamp(1.9rem, 4.4vw, 3.2rem)" }}
-        >
-          {title}
-        </h2>
-      </Fade>
-      {copy && (
-        <Fade delay={0.08}>
-          <p className="text-base leading-relaxed max-w-2xl mb-10" style={{ color: c.sub }}>
-            {copy}
-          </p>
-        </Fade>
-      )}
-    </>
-  );
-}
-
-function Card({ c, children, large = false }) {
-  return (
-    <motion.div
-      className={`h-full rounded-2xl ${large ? "p-6" : "p-5"}`}
-      style={{
-        background: c.surface,
-        border: `1px solid ${c.border}`,
-      }}
-      whileHover={{
-        y: -5,
-        borderColor: c.bHover,
-        boxShadow: `0 18px 60px -42px ${c.gold}`,
-      }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-function Pill({ c, children }) {
-  return (
-    <span
-      className="mono text-xs px-2.5 py-1 rounded-lg"
-      style={{
-        background: `${c.accent}0a`,
-        border: `1px solid ${c.border}`,
-        color: c.sub,
-      }}
-    >
-      {children}
-    </span>
+      <footer><div className="wrap footer-inner"><div><div className="logo">Jane<span>.</span></div><small>Building useful things from real problems.</small></div><div className="socials"><a href="https://x.com/Iamjaneezy" target="_blank" rel="noreferrer" aria-label="X"><Twitter size={17}/></a><a href="https://github.com/janeezy" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17}/></a><a href="https://www.instagram.com/iamjaneezy" target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={17}/></a><a href="mailto:zemiolabs@gmail.com" aria-label="Email"><Mail size={17}/></a></div></div></footer>
+    </main>
   );
 }
