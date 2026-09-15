@@ -334,7 +334,7 @@ export default function Portfolio() {
       <section className="section wrap about" id="about">
         <motion.div {...fade}>
           <div className="kicker">About Jane</div><h2>Builder’s mind. Founder’s ownership.</h2>
-          <p>I’m Jane Duru, co-founder of Zemio Labs. I blend product judgment, frontend and mobile engineering, fintech experience and storytelling to build things people can understand—and want to use.</p>
+          <p>I’m Jane Duru, co-founder of Zemio Labs. My journey started in finance, sales and customer-facing work before leading me into frontend and mobile engineering. Today, I bring those worlds together—combining product judgment, technology and storytelling to build useful things people understand and want to use.</p>
           <div className="actions"><a className="primary" href="https://zemiolabs.com" target="_blank" rel="noreferrer">Zemio Labs <ArrowUpRight size={16}/></a><a className="secondary" href="mailto:zemiolabs@gmail.com">Work with me <Mail size={16}/></a></div>
         </motion.div>
         <motion.div className="about-list" {...fade} transition={{ ...fade.transition, delay:.1 }}>
