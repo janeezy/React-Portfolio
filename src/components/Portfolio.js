@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
-  BookOpen,
   Check,
   Github,
   Instagram,
@@ -16,31 +15,6 @@ import {
 
 const AMAZON = "https://amazon.com/author/janeduru";
 const GUMROAD = "https://iamjaneezystore.gumroad.com";
-
-const products = [
-  {
-    name: "AfterFight",
-    stage: "Building now",
-    mark: "AF",
-    color: "#ff6b77",
-    text: "A playful way for couples to cool down, reconnect and repair—together.",
-    focus: true,
-  },
-  {
-    name: "Usward",
-    stage: "Later",
-    mark: "US",
-    color: "#9b87f5",
-    text: "Shared rituals that help two people keep moving toward each other.",
-  },
-  {
-    name: "Vowra",
-    stage: "Later",
-    mark: "VO",
-    color: "#f0ae47",
-    text: "A new relationship product currently taking shape inside Zemio Labs.",
-  },
-];
 
 const books = [
   {
@@ -67,7 +41,7 @@ const books = [
 ];
 
 const fade = {
-  initial: { opacity: 0, y: 24 },
+  initial: { opacity: 1, y: 0 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-60px" },
   transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
@@ -167,15 +141,31 @@ export default function Portfolio() {
         .form-status { min-height:20px; margin:12px 0 0!important; font-size:12px!important; }
         .success { color:#16804d!important; }
         .error { color:#b83f49!important; }
-        .product-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-        .product-card { min-height:290px; padding:26px; border:1px solid var(--line); border-radius:26px; background:rgba(255,255,255,.64); display:flex; flex-direction:column; }
-        .product-card.focus { border-color:#ffb0b8; background:#fff3f3; }
-        .card-top { display:flex; justify-content:space-between; align-items:center; }
-        .mini-mark { width:48px; height:48px; display:grid; place-items:center; border-radius:15px; color:white; font:800 14px 'Manrope'; }
-        .stage { padding:7px 10px; border:1px solid var(--line); border-radius:999px; color:var(--muted); font-size:11px; font-weight:800; text-transform:uppercase; }
-        .product-card h3 { margin-top:42px; font-size:28px; }
-        .product-card p { color:var(--muted); line-height:1.6; }
-        .card-link { margin-top:auto; display:flex; align-items:center; gap:7px; font-weight:800; font-size:14px; }
+        .garden { height:150px; position:relative; margin-top:24px; border-radius:24px; overflow:hidden; background:linear-gradient(#2f2941 0 57%,#253d31 57%); border:1px solid rgba(255,255,255,.12); }
+        .garden:after { content:''; position:absolute; inset:auto 0 0; height:30px; background:linear-gradient(90deg,#294734,#375940,#294734); }
+        .moon { position:absolute; width:44px; height:44px; border-radius:50%; right:20px; top:18px; background:#fff3c9; box-shadow:0 0 35px #fff1bd; }
+        .flower { position:absolute; bottom:22px; z-index:1; font-size:42px; transform-origin:bottom; animation:bloom 3.5s ease-in-out infinite alternate; }
+        .flower.two { left:38%; font-size:34px; animation-delay:.7s; }
+        .flower.three { left:68%; font-size:46px; animation-delay:1.2s; }
+        @keyframes bloom { from { transform:rotate(-4deg) scale(.92); } to { transform:rotate(5deg) scale(1.06); } }
+        .journey { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:34px; }
+        .journey-step { position:relative; padding:20px; min-height:134px; border-radius:20px; background:white; border:1px solid var(--line); }
+        .journey-step.active { background:#fff0f2; border-color:#ffb4bc; }
+        .journey-step span { display:grid; place-items:center; width:28px; height:28px; border-radius:50%; background:#f1edf7; font-size:12px; font-weight:800; }
+        .journey-step.active span { background:var(--coral); color:white; }
+        .journey-step strong { display:block; margin-top:20px; }
+        .journey-step small { color:var(--muted); }
+        .support { display:grid; grid-template-columns:1.1fr .9fr; gap:22px; padding:34px; margin-top:22px; border-radius:28px; background:linear-gradient(135deg,#fff0e8,#f0eaff); border:1px solid #eadff1; }
+        .support h3 { font-size:32px; }
+        .support p { color:var(--muted); line-height:1.6; }
+        .support-card { padding:24px; border-radius:20px; background:white; box-shadow:0 15px 45px rgba(52,38,66,.09); }
+        .support-card strong { font:800 24px 'Manrope'; }
+        .github-card { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px; margin-top:18px; border-radius:22px; background:#17151b; color:white; }
+        .github-card p { margin:4px 0 0; color:rgba(255,255,255,.62); font-size:14px; }
+        .experience { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:30px; }
+        .experience article { padding:22px; border-radius:20px; background:white; border:1px solid var(--line); }
+        .experience strong { display:block; font-family:'Manrope'; }
+        .experience small { display:block; margin-top:6px; color:var(--muted); line-height:1.5; }
         .book-feature { display:grid; grid-template-columns:.78fr 1.22fr; gap:70px; align-items:center; padding:50px; border-radius:34px; background:#efe9ff; }
         .book-feature img { display:block; width:100%; max-height:520px; object-fit:contain; filter:drop-shadow(0 24px 26px rgba(41,30,71,.24)); }
         .book-feature h2 { font-size:clamp(38px,5vw,64px); }
@@ -206,7 +196,8 @@ export default function Portfolio() {
           .hero { padding-top:55px; }
           .portrait-card { width:min(520px,100%); margin:0 auto; }
           .afterfight { padding:40px; }
-          .product-grid { grid-template-columns:1fr; }
+          .journey,.experience { grid-template-columns:repeat(2,1fr); }
+          .support { grid-template-columns:1fr; }
           .book-grid { grid-template-columns:repeat(2,1fr); }
         }
         @media (max-width:600px) {
@@ -223,6 +214,7 @@ export default function Portfolio() {
           .waitlist { padding:22px; }
           .input-row { display:grid; }
           .input-row button { padding:14px; }
+          .journey,.experience { grid-template-columns:1fr; }
           .book-feature { padding:28px 20px; gap:30px; border-radius:26px; }
           .book-grid { grid-template-columns:1fr; }
           .book-cover { height:340px; }
@@ -234,7 +226,7 @@ export default function Portfolio() {
         <nav className="nav">
           <button className="logo" onClick={() => scrollTo("top")}>Jane<span>.</span></button>
           <div className="nav-links">
-            <button onClick={() => scrollTo("products")}>Products</button>
+            <button onClick={() => scrollTo("products")}>Building</button>
             <button onClick={() => scrollTo("books")}>Books</button>
             <button onClick={() => scrollTo("about")}>About</button>
             <a className="nav-cta" href="#waitlist">Join AfterFight</a>
@@ -244,7 +236,7 @@ export default function Portfolio() {
           </button>
           {menuOpen && (
             <div className="mobile-menu">
-              <button onClick={() => scrollTo("products")}>Products</button>
+              <button onClick={() => scrollTo("products")}>Building</button>
               <button onClick={() => scrollTo("books")}>Books</button>
               <button onClick={() => scrollTo("about")}>About Jane</button>
               <button onClick={() => scrollTo("waitlist")}>Join AfterFight</button>
@@ -257,10 +249,10 @@ export default function Portfolio() {
         <motion.div {...fade}>
           <span className="eyebrow"><Sparkles size={14} /> Founder · Builder · Writer</span>
           <h1>I turn real problems into <em>products.</em></h1>
-          <p className="hero-copy">Building apps, SaaS and AI tools at Zemio Labs—and writing what I learn along the way.</p>
+          <p className="hero-copy">Building AfterFight at Zemio Labs—and sharing the honest journey from problem to product.</p>
           <div className="actions">
             <button className="primary" onClick={() => scrollTo("waitlist")}>Join the AfterFight waitlist <ArrowRight size={17} /></button>
-            <button className="secondary" onClick={() => scrollTo("books")}>Explore my books <BookOpen size={17} /></button>
+            <a className="secondary" href="https://github.com/janeezy" target="_blank" rel="noreferrer">Watch me build <Github size={17} /></a>
           </div>
         </motion.div>
         <motion.div className="portrait-card" {...fade} transition={{ ...fade.transition, delay:.12 }}>
@@ -278,6 +270,9 @@ export default function Portfolio() {
               <p>AfterFight helps couples cool down, understand each other and reconnect through small shared rituals—without making love feel like therapy homework.</p>
               <div className="points">
                 <span className="point">Couple rituals</span><span className="point">Shared garden</span><span className="point">One subscription</span><span className="point">For every kind of love</span>
+              </div>
+              <div className="garden" aria-label="An animated couple garden growing flowers">
+                <span className="moon"/><span className="flower" style={{left:"10%"}}>🌷</span><span className="flower two">🌼</span><span className="flower three">🌸</span>
               </div>
             </div>
             <form className="waitlist" id="waitlist" onSubmit={joinWaitlist}>
@@ -297,19 +292,20 @@ export default function Portfolio() {
           </div>
         </motion.div>
 
-        <div className="section-head" style={{ marginTop:90 }}>
-          <div><div className="kicker">Product pipeline</div><h2>Now. Next. Later.</h2></div>
-          <p className="section-note">One clear focus now, with more relationship products growing behind it.</p>
+        <div className="section-head" style={{ marginTop:72 }}>
+          <div><div className="kicker">Building in public</div><h2>One product. Full focus.</h2></div>
+          <p className="section-note">AfterFight is moving from a lived problem to a warm, playful product for every kind of love.</p>
         </div>
-        <div className="product-grid">
-          {products.map((product, index) => (
-            <motion.article className={`product-card ${product.focus ? "focus" : ""}`} key={product.name} {...fade} transition={{ ...fade.transition, delay:index*.07 }}>
-              <div className="card-top"><span className="mini-mark" style={{background:product.color}}>{product.mark}</span><span className="stage">{product.stage}</span></div>
-              <h3>{product.name}</h3><p>{product.text}</p>
-              {product.focus && <button className="card-link" onClick={() => scrollTo("waitlist")}>Join waitlist <ArrowRight size={15}/></button>}
-            </motion.article>
+        <div className="journey">
+          {[['01','Problem','Understood'],['02','Experience','Designed'],['03','MVP','Building now'],['04','Beta','Up next']].map(([number,title,label], index) => (
+            <motion.div className={`journey-step ${index === 2 ? 'active' : ''}`} key={title} whileHover={{y:-4}}><span>{number}</span><strong>{title}</strong><small>{label}</small></motion.div>
           ))}
         </div>
+        <div className="support">
+          <div><div className="kicker">Support the build</div><h3>Want to help AfterFight grow?</h3><p>Founding supporters will get private build notes, early beta access and a place in the first community shaping the product.</p></div>
+          <div className="support-card"><strong>Founding supporter</strong><p>Payments open after the working demo. For now, register your interest directly with Jane.</p><a className="primary coral" href="mailto:janeezyofficial@gmail.com?subject=I%20want%20to%20support%20AfterFight">I want to support AfterFight <ArrowRight size={16}/></a></div>
+        </div>
+        <a className="github-card" href="https://github.com/janeezy" target="_blank" rel="noreferrer"><div><strong>Follow the build on GitHub</strong><p>See the work, experiments and products behind the journey.</p></div><Github size={28}/></a>
       </section>
 
       <section className="section wrap" id="books">
@@ -348,6 +344,15 @@ export default function Portfolio() {
         <motion.div className="about-list" {...fade} transition={{ ...fade.transition, delay:.1 }}>
           {["Co-founder at Zemio Labs","Apps, SaaS & AI tools","React, React Native & TypeScript","Author and builder in public"].map((item) => <div className="about-item" key={item}><Check size={18}/>{item}</div>)}
         </motion.div>
+      </section>
+
+      <section className="wrap" style={{paddingBottom:90}}>
+        <div className="kicker">Experience behind the products</div>
+        <div className="experience">
+          <article><strong>Zemio Labs</strong><small>Co-founder & product builder · Apps, SaaS and AI tools.</small></article>
+          <article><strong>Optty</strong><small>Customer Support & Enablement Specialist · Contract.</small></article>
+          <article><strong>Product engineering</strong><small>React, React Native, Expo, TypeScript and startup execution.</small></article>
+        </div>
       </section>
 
       <footer><div className="wrap footer-inner"><div><div className="logo">Jane<span>.</span></div><small>Building useful things from real problems.</small></div><div className="socials"><a href="https://x.com/Iamjaneezy" target="_blank" rel="noreferrer" aria-label="X"><Twitter size={17}/></a><a href="https://github.com/janeezy" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17}/></a><a href="https://www.instagram.com/iamjaneezy" target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={17}/></a><a href="mailto:zemiolabs@gmail.com" aria-label="Email"><Mail size={17}/></a></div></div></footer>
