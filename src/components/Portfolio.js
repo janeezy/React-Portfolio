@@ -257,7 +257,7 @@ export default function Portfolio() {
         </motion.div>
         <motion.div className="portrait-card" {...fade} transition={{ ...fade.transition, delay:.12 }}>
           <img src="/Img2.png" alt="Jane Duru, founder and writer" />
-          <div className="float-card"><strong>Currently building</strong><span>AfterFight · relationship repair, made playful</span></div>
+          <div className="float-card"><strong>Currently building</strong><span>AfterFight · for what comes after conflict</span></div>
         </motion.div>
       </section>
 
@@ -267,9 +267,9 @@ export default function Portfolio() {
             <div>
               <div className="product-mark">AF</div>
               <h2>Love after the hard moment.</h2>
-              <p>AfterFight helps couples cool down, understand each other and reconnect through small shared rituals—without making love feel like therapy homework.</p>
+              <p>A private, thoughtful experience for couples who want a better way forward after difficult moments.</p>
               <div className="points">
-                <span className="point">Couple rituals</span><span className="point">Shared garden</span><span className="point">One subscription</span><span className="point">For every kind of love</span>
+                <span className="point">Private by design</span><span className="point">Built with care</span><span className="point">For every kind of love</span>
               </div>
               <div className="garden" aria-label="An animated couple garden growing flowers">
                 <span className="moon"/><span className="flower" style={{left:"10%"}}>🌷</span><span className="flower two">🌼</span><span className="flower three">🌸</span>
@@ -294,7 +294,7 @@ export default function Portfolio() {
 
         <div className="section-head" style={{ marginTop:72 }}>
           <div><div className="kicker">Building in public</div><h2>One product. Full focus.</h2></div>
-          <p className="section-note">AfterFight is moving from a lived problem to a warm, playful product for every kind of love.</p>
+          <p className="section-note">Turning a deeply human problem into a thoughtful product—without sharing the secret sauce.</p>
         </div>
         <div className="journey">
           {[['01','Problem','Understood'],['02','Experience','Designed'],['03','MVP','Building now'],['04','Beta','Up next']].map(([number,title,label], index) => (
@@ -302,8 +302,8 @@ export default function Portfolio() {
           ))}
         </div>
         <div className="support">
-          <div><div className="kicker">Support the build</div><h3>Want to help AfterFight grow?</h3><p>Founding supporters will get private build notes, early beta access and a place in the first community shaping the product.</p></div>
-          <div className="support-card"><strong>Founding supporter</strong><p>Payments open after the working demo. For now, register your interest directly with Jane.</p><a className="primary coral" href="mailto:janeezyofficial@gmail.com?subject=I%20want%20to%20support%20AfterFight">I want to support AfterFight <ArrowRight size={16}/></a></div>
+          <div><div className="kicker">Support the build</div><h3>Help bring AfterFight to life.</h3><p>Support the independent work behind a more thoughtful way to move forward after conflict.</p></div>
+          <div className="support-card"><strong>Back the build</strong><p>Your support helps fund design, development and the first private beta.</p><a className="primary coral" href="mailto:janeezyofficial@gmail.com?subject=I%20want%20to%20support%20AfterFight">Support AfterFight <ArrowRight size={16}/></a></div>
         </div>
         <a className="github-card" href="https://github.com/janeezy" target="_blank" rel="noreferrer"><div><strong>Follow the build on GitHub</strong><p>See the work, experiments and products behind the journey.</p></div><Github size={28}/></a>
       </section>
