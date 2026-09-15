@@ -32,7 +32,7 @@ import {
   X,
 } from "lucide-react";
 
-const OHH_ORANGE = "#ff7a1a";
+const BRAND_ORANGE = "#ff7a1a";
 const STATUS_OLIVE = "#7d8a63";
 
 const DARK = {
@@ -205,32 +205,32 @@ export default function Portfolio() {
 
   const pipeline = [
     {
-      phase: "Live",
-      title: "Ohh",
-      copy: "An async conversation card app for couples, friends, families, groups, and solo reflection — designed and shipped for iOS and Android.",
+      phase: "Building",
+      title: "AfterFight",
+      copy: "A playful relationship app helping couples cool down, reconnect through shared rituals, and grow something meaningful together.",
       icon: Heart,
     },
     {
-      phase: "Active",
-      title: "Usward",
-      copy: "A relationship-focused mobile app currently in active development, with emphasis on emotional UX, polished UI, and product-led flows.",
-      icon: Layers,
+      phase: "Exploring",
+      title: "SaaS & AI tools",
+      copy: "Turning real problems in work, communication, and everyday life into focused products people can use and pay for.",
+      icon: Cpu,
     },
     {
-      phase: "Planned",
-      title: "More apps",
-      copy: "Continuing to build and ship focused consumer products through Zemio Labs with strong design, mobile execution, and AI-assisted workflows.",
-      icon: Sparkles,
+      phase: "Published",
+      title: "Books & ideas",
+      copy: "Writing practical books about life, money, technology, empathy, and the lessons that come from building in public.",
+      icon: BookOpen,
     },
   ];
 
   const experience = [
     {
-      role: "Co-founder & Frontend/Mobile Developer",
+      role: "Co-founder, Product Builder & Frontend/Mobile Developer",
       company: "Zemio Labs",
       period: "2025 - Present",
-      copy: "Co-building a product studio focused on consumer apps, mobile experiences, digital products, and AI-enabled workflows.",
-      proof: ["Shipping Ohh on iOS and Android", "Building Usward", "React Native and Expo delivery"],
+      copy: "Co-building a product studio that turns real problems into consumer apps, SaaS products, digital tools, and AI-enabled workflows.",
+      proof: ["Building and shipping products end to end", "Turning user problems into product opportunities", "React Native, Expo, and AI-assisted delivery"],
     },
     {
       role: "Frontend Developer",
@@ -553,10 +553,7 @@ export default function Portfolio() {
       <section id="hero" className="relative z-10 pt-20 pb-8 px-6">
         <div className="max-w-6xl mx-auto">
           <Fade>
-            <a
-              href="https://ohh.world"
-              target="_blank"
-              rel="noopener noreferrer"
+            <div
               className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full mono text-xs mb-4"
               style={{
                 background: `${c.accent}0f`,
@@ -570,11 +567,9 @@ export default function Portfolio() {
                 transition={{ duration: 1.6, repeat: Infinity }}
               />
               <span style={{ color: c.sub }}>
-                <span style={{ color: OHH_ORANGE, fontWeight: 800 }}>ohh</span>{" "}
-                is <span style={{ color: c.accent, fontWeight: 600 }}>live</span>{" "}
-                on iOS & Android
+                Founder · builder · writer · <span style={{ color: c.accent, fontWeight: 600 }}>building what matters</span>
               </span>
-            </a>
+            </div>
           </Fade>
 
           <Fade delay={0.06}>
@@ -589,9 +584,9 @@ export default function Portfolio() {
                 >
                   Jane Duru
                   <br />
-                  <span style={{ color: c.accent }}>Frontend & mobile</span>
+                  <span style={{ color: c.accent }}>Founder & builder</span>
                   <br />
-                  <span style={{ color: c.sub }}>building web & mobile.</span>
+                  <span style={{ color: c.sub }}>turning problems into products.</span>
                 </motion.h1>
 
                 <motion.p
@@ -601,20 +596,10 @@ export default function Portfolio() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  {/* Co-founder at{" "}
-                  <a
-                    href="https://zemiolabs.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold"
-                    style={{ color: c.accent }}
-                  >
-                    Zemio Labs
-                  </a> */}
-                  Building frontend and mobile products with React, Next.js,
-                  TypeScript, React Native, and Expo. I combine clean UI
-                  implementation, product judgment, and startup-level ownership
-                  into every project.
+                  I build apps, SaaS products, and AI tools from real problems.
+                  As co-founder of Zemio Labs, I combine engineering, product
+                  judgment, startup execution, and lived experience to take ideas
+                  from insight to shipped product—and write about the journey.
                 </motion.p>
 
                 <div className="mt-5 flex flex-wrap gap-2">
@@ -700,10 +685,10 @@ export default function Portfolio() {
 
                 <div className="space-y-3">
                   {[
-                    ["Frontend/mobile engineer", "React, React Native, Expo, TypeScript"],
-                    ["Co-founder", "Building and running Zemio Labs"],
-                    ["Product-minded builder", "UX judgment, MVPs, startup execution"],
-                    ["Fintech background", "Customer trust, crypto, product context"],
+                    ["Founder & product builder", "Building and running Zemio Labs"],
+                    ["Apps, SaaS & AI", "Turning real problems into useful products"],
+                    ["Frontend/mobile expert", "React, React Native, Expo, TypeScript"],
+                    ["Writer", "Founder lessons, opportunities, life and technology"],
                   ].map(([title, sub], i) => (
                     <motion.div
                       key={title}
@@ -731,8 +716,8 @@ export default function Portfolio() {
           </Fade>
 
           <Fade delay={0.2} className="mt-7 flex flex-wrap gap-3">
-            <Btn href="https://ohh.world" target="_blank" variant="primary" c={c}>
-              <Heart size={15} /> View Ohh <ArrowUpRight size={14} />
+            <Btn href="https://zemiolabs.com" target="_blank" variant="primary" c={c}>
+              <Building2 size={15} /> Explore Zemio Labs <ArrowUpRight size={14} />
             </Btn>
             <Btn href="https://cal.com/jane-duru/discovery-call" target="_blank" c={c}>
               <Calendar size={15} /> Discuss an opportunity
@@ -786,8 +771,8 @@ export default function Portfolio() {
                 "Expo",
                 "TypeScript",
                 "Zemio Labs",
-                "Ohh Live",
-                "Usward",
+                "SaaS & AI",
+                "Writer",
                 "Lisbon",
               ].map((item) => (
                 <span
@@ -976,7 +961,7 @@ export default function Portfolio() {
               className="serif font-bold mb-12"
               style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)" }}
             >
-              Live now, building next.
+              Building from real problems.
             </h2>
           </Fade>
 
@@ -1011,13 +996,13 @@ export default function Portfolio() {
                           animate={{ opacity: [1, 0.3, 1] }}
                           transition={{ duration: 1.5, repeat: Infinity }}
                         />
-                        LIVE
+                        FOUNDER-LED
                       </span>
                       <span
                         className="mono text-xs px-3 py-1 rounded-full"
                         style={{ background: `${c.accent}14`, color: c.accent }}
                       >
-                        iOS & Android
+                        APPS · SAAS · AI
                       </span>
                     </div>
 
@@ -1026,50 +1011,40 @@ export default function Portfolio() {
                       style={{
                         fontSize: "clamp(2.3rem, 5vw, 3.6rem)",
                         lineHeight: 1,
-                        color: OHH_ORANGE,
+                        color: BRAND_ORANGE,
                       }}
                     >
-                      ohh
+                      Zemio Labs
                     </h3>
 
-                    <p className="font-semibold mb-2" style={{ color: OHH_ORANGE }}>
-                      Skip the small talk. Exchange questions that matter.
+                    <p className="font-semibold mb-2" style={{ color: BRAND_ORANGE }}>
+                      Real problems. Focused products. Useful outcomes.
                     </p>
 
                     <p className="mb-6 max-w-lg" style={{ color: c.sub }}>
-                      My newest live product. Ohh is an async conversation card app
-                      for couples, friends, families, groups, and solo reflection.
-                      Built with a strong focus on mobile UX, emotional product
-                      design, and polished implementation.
+                      I identify problems worth solving, validate the opportunity,
+                      shape the product, and build the experience. My work spans
+                      consumer apps, SaaS, AI tools, digital products, and writing—
+                      always grounded in what people actually need.
                     </p>
 
                     <div className="flex flex-wrap gap-3">
-                      <StoreButton
-                        href="https://apps.apple.com/us/app/ohh-deep-conversation-cards/id6759226145"
-                        label="App Store"
-                        small="Download on the"
-                        c={c}
-                      />
-                      <StoreButton
-                        href="https://play.google.com/store/apps/details?id=app.ohh.world"
-                        label="Google Play"
-                        small="Get it on"
-                        c={c}
-                        orange
-                      />
+                      <Btn href="https://zemiolabs.com" target="_blank" variant="primary" c={c}>
+                        Visit Zemio Labs <ArrowUpRight size={14} />
+                      </Btn>
+                      <Btn href="https://amazon.com/author/janeduru" target="_blank" c={c}>
+                        Read my books <BookOpen size={14} />
+                      </Btn>
                     </div>
                   </div>
 
-                  <motion.img
-                    src="/ohh.png"
-                    alt="Ohh App"
-                    className="w-20 h-20 rounded-3xl flex-shrink-0 self-start object-cover"
-                    whileHover={{ rotate: 6, scale: 1.08 }}
-                    animate={{
-                      boxShadow: [`0 0 0 0 ${c.glow}`, `0 0 0 10px transparent`],
-                    }}
-                    transition={{ duration: 2.5, repeat: Infinity }}
-                  />
+                  <motion.div
+                    className="w-20 h-20 rounded-3xl flex-shrink-0 self-start flex items-center justify-center"
+                    style={{ background: `${c.accent}18`, border: `1px solid ${c.border}` }}
+                    whileHover={{ rotate: 4, scale: 1.08 }}
+                  >
+                    <Sparkles size={34} style={{ color: c.accent }} />
+                  </motion.div>
                 </div>
               </div>
             </div>
@@ -1206,7 +1181,6 @@ export default function Portfolio() {
                 { label: "X / Twitter", href: "https://x.com/Iamjaneezy", icon: Twitter },
                 { label: "Medium", href: "https://medium.com/@janeezy", icon: Pen },
                 { label: "Substack", href: "https://janeezyofficial.substack.com/", icon: Mail },
-                { label: "Ohh", href: "https://ohh.world", icon: Heart },
                 { label: "Zemio Labs", href: "https://zemiolabs.com", icon: Building2 },
                 { label: "Gumroad", href: "https://iamjaneezystore.gumroad.com", icon: ShoppingBag },
               ].map((s) => (
@@ -1243,12 +1217,6 @@ export default function Portfolio() {
 
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              {
-                repo: "Ohh App",
-                desc: "React Native + Expo iOS/Android app with async conversation flows, product-led UX, and polished mobile UI.",
-                tech: ["React Native", "Expo", "Firebase", "Recoil"],
-                href: "https://github.com/janeezy/ohh",
-              },
               {
                 repo: "Portfolio",
                 desc: "This portfolio — Framer Motion, Tailwind, responsive design.",
@@ -1542,37 +1510,5 @@ function Pill({ c, children }) {
     >
       {children}
     </span>
-  );
-}
-
-function StoreButton({ href, label, small, c, orange = false }) {
-  return (
-    <motion.a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      whileHover={{ scale: 1.04, y: -2 }}
-      whileTap={{ scale: 0.97 }}
-      className="flex items-center gap-2.5 px-5 py-3 rounded-xl text-sm font-semibold"
-      style={
-        orange
-          ? {
-              background: `${OHH_ORANGE}14`,
-              border: `1.5px solid ${OHH_ORANGE}55`,
-              color: c.text,
-            }
-          : {
-              background: c.text,
-              color: c.bg,
-              boxShadow: `0 4px 16px ${c.glow}`,
-            }
-      }
-    >
-      <Sparkles size={16} style={{ color: orange ? OHH_ORANGE : "currentColor" }} />
-      <div className="text-left leading-tight">
-        <p className="text-[10px] opacity-60 font-normal">{small}</p>
-        <p className="font-bold text-sm leading-none">{label}</p>
-      </div>
-    </motion.a>
   );
 }
