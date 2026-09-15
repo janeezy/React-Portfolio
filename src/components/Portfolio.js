@@ -150,6 +150,8 @@ export default function Portfolio() {
         @keyframes bloom { from { transform:rotate(-4deg) scale(.92); } to { transform:rotate(5deg) scale(1.06); } }
         .journey { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:34px; }
         .journey-step { position:relative; padding:20px; min-height:134px; border-radius:20px; background:white; border:1px solid var(--line); }
+        .journey-step { transition:transform .25s ease, box-shadow .25s ease; }
+        .journey-step:hover { transform:translateY(-6px) rotate(-1deg); box-shadow:0 18px 38px rgba(52,38,66,.11); }
         .journey-step.active { background:#fff0f2; border-color:#ffb4bc; }
         .journey-step span { display:grid; place-items:center; width:28px; height:28px; border-radius:50%; background:#f1edf7; font-size:12px; font-weight:800; }
         .journey-step.active span { background:var(--coral); color:white; }
@@ -160,6 +162,7 @@ export default function Portfolio() {
         .creator-links { margin-top:18px; }
         .creator-links .github-card { margin-top:0; }
         .coffee-link { display:inline-flex; align-items:center; gap:7px; margin-top:12px; padding:10px 14px; border:1px solid var(--line); border-radius:999px; background:white; font-size:13px; font-weight:800; }
+        .coffee-link:hover { background:#fff0e8; border-color:#ffb4bc; transform:translateY(-2px); }
         .experience { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:30px; }
         .experience article { padding:22px; border-radius:20px; background:white; border:1px solid var(--line); }
         .experience strong { display:block; font-family:'Manrope'; }
@@ -299,8 +302,8 @@ export default function Portfolio() {
           ))}
         </div>
         <div className="creator-links">
+          <a className="coffee-link" href="https://buymeacoffee.com/janeezyoffb" target="_blank" rel="noreferrer">☕ Support my build · Buy me a coffee</a>
           <a className="github-card" href="https://github.com/janeezy" target="_blank" rel="noreferrer"><div><strong>Follow the build on GitHub</strong><p>See the work, experiments and products behind the journey.</p></div><Github size={28}/></a>
-          <a className="coffee-link" href="https://buymeacoffee.com/janeezyoffb" target="_blank" rel="noreferrer">☕ Buy me a coffee</a>
         </div>
       </section>
 
@@ -347,8 +350,9 @@ export default function Portfolio() {
         <div className="experience">
           <article><strong>Zemio Labs</strong><small>Co-founder & product builder · Apps, SaaS and AI tools.</small></article>
           <article><strong>Finance & business</strong><small>Customer-facing financial experience, commercial judgment and business operations.</small></article>
-          <article><strong>Customer experience</strong><small>Customer service, support and enablement built around clear, human communication.</small></article>
-          <article><strong>Sales & product</strong><small>Sales experience combined with product building, research and startup execution.</small></article>
+          <article><strong>Technical toolkit</strong><small>React, React Native, Expo, TypeScript, JavaScript, Tailwind, APIs and testing.</small></article>
+          <article><strong>Built before</strong><small>Ohh — a relationship app I launched, learned from and later closed.</small></article>
+          <article><strong>Sales & product</strong><small>Commercial experience combined with product research and startup execution.</small></article>
         </div>
       </section>
 
