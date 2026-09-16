@@ -3,18 +3,24 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
+  Bot,
   Check,
   Github,
   Instagram,
   Mail,
   Menu,
+  PanelsTopLeft,
   Sparkles,
   Twitter,
+  WalletCards,
+  Workflow,
   X,
 } from "lucide-react";
 
 const AMAZON = "https://amazon.com/author/janeduru";
 const GUMROAD = "https://iamjaneezystore.gumroad.com";
+
+const toolkit = ["React", "React Native", "Expo", "TypeScript", "JavaScript", "Tailwind", "REST APIs", "Testing & QA", "Jira Automation", "AI Workflows"];
 
 const books = [
   {
@@ -91,7 +97,8 @@ export default function Portfolio() {
         body { margin:0; background:var(--cream); color:var(--ink); font-family:'DM Sans',sans-serif; }
         button,input { font:inherit; }
         a { color:inherit; text-decoration:none; }
-        .site-shell { min-height:100vh; overflow:hidden; background:radial-gradient(circle at 90% 4%,#f2eaff 0,transparent 28%),radial-gradient(circle at 3% 27%,#ffe8e6 0,transparent 25%),var(--cream); }
+        .site-shell { min-height:100vh; overflow:hidden; position:relative; background:radial-gradient(circle at 88% 5%,#e9e0ff 0,transparent 27%),radial-gradient(circle at 5% 25%,#ffe1df 0,transparent 24%),linear-gradient(180deg,#fffaf5 0%,#fff 52%,#faf7ff 100%); }
+        .site-shell:before { content:''; position:fixed; inset:0; pointer-events:none; opacity:.22; background-image:linear-gradient(rgba(34,28,41,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(34,28,41,.035) 1px,transparent 1px); background-size:48px 48px; mask-image:linear-gradient(to bottom,black,transparent 60%); }
         .wrap { width:min(1160px,calc(100% - 40px)); margin:0 auto; }
         .nav { height:76px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(22,21,26,.08); }
         .logo { width:46px; height:46px; display:grid; place-items:center; border:0; border-radius:15px; color:white; background:linear-gradient(135deg,var(--ink),#40324f); box-shadow:0 10px 24px rgba(22,21,26,.16); font:800 16px 'Manrope'; letter-spacing:-.5px; cursor:pointer; }
@@ -103,21 +110,28 @@ export default function Portfolio() {
         .nav-cta { padding:11px 18px; color:white; background:var(--ink); }
         .nav-cta:hover,.primary:hover { transform:translateY(-2px); }
         .menu-button { display:none; background:none; border:0; }
-        .hero { padding:88px 0 96px; display:grid; grid-template-columns:1.1fr .9fr; gap:70px; align-items:center; }
+        .hero { padding:88px 0 58px; display:grid; grid-template-columns:1.1fr .9fr; gap:70px; align-items:center; position:relative; }
         .eyebrow { display:inline-flex; align-items:center; gap:8px; color:#7564db; background:#eeeafe; border:1px solid #ded7ff; border-radius:999px; padding:8px 12px; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
         h1,h2,h3 { font-family:'Manrope',sans-serif; margin:0; letter-spacing:-.045em; }
         h1 { margin-top:24px; font-size:clamp(50px,7vw,88px); line-height:.98; max-width:760px; }
         h1 em { font-style:normal; color:var(--coral); }
         .hero-copy { margin:28px 0 0; max-width:610px; color:var(--muted); font-size:19px; line-height:1.65; }
+        .role-line { margin-top:18px; max-width:680px; color:#423b49; font-size:13px; font-weight:800; letter-spacing:.02em; line-height:1.8; }
         .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:34px; }
         .primary { border:0; padding:15px 22px; background:var(--ink); color:white; }
         .secondary { padding:14px 21px; border:1px solid var(--line); background:rgba(255,255,255,.65); }
         .primary.coral { background:var(--coral); }
-        .portrait-card { position:relative; padding:14px; border-radius:34px; background:rgba(255,255,255,.68); border:1px solid rgba(255,255,255,.9); box-shadow:0 30px 90px rgba(55,39,86,.14); transform:rotate(1.5deg); }
+        .portrait-card { position:relative; padding:14px; border-radius:34px; background:rgba(255,255,255,.68); border:1px solid rgba(255,255,255,.9); box-shadow:0 30px 90px rgba(55,39,86,.14); animation:portraitFloat 5s ease-in-out infinite alternate; }
         .portrait-card img { display:block; width:100%; height:590px; object-fit:cover; object-position:top; border-radius:24px; }
         .float-card { position:absolute; left:-42px; bottom:32px; width:220px; padding:16px; border-radius:18px; background:#fff; box-shadow:0 18px 50px rgba(31,25,40,.18); transform:rotate(-3deg); }
         .float-card strong { display:block; font:800 15px 'Manrope'; }
         .float-card span { color:var(--muted); font-size:12px; }
+        @keyframes portraitFloat { from { transform:translateY(4px) rotate(1deg); } to { transform:translateY(-8px) rotate(-.5deg); } }
+        .ticker { overflow:hidden; border-block:1px solid var(--line); background:rgba(255,255,255,.72); backdrop-filter:blur(12px); }
+        .ticker-track { width:max-content; display:flex; gap:38px; padding:16px 0; animation:ticker 28s linear infinite; }
+        .ticker-track span { display:flex; align-items:center; gap:38px; color:#4e4854; font-size:13px; font-weight:800; white-space:nowrap; }
+        .ticker-track span:after { content:'✦'; color:var(--coral); }
+        @keyframes ticker { to { transform:translateX(-50%); } }
         .section { padding:100px 0; }
         .section-head { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-bottom:42px; }
         .kicker { color:var(--coral); font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; margin-bottom:12px; }
@@ -141,12 +155,16 @@ export default function Portfolio() {
         .form-status { min-height:20px; margin:12px 0 0!important; font-size:12px!important; }
         .success { color:#16804d!important; }
         .error { color:#b83f49!important; }
-        .product-visual { height:150px; position:relative; margin-top:24px; border-radius:24px; overflow:hidden; background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,105,120,.16)); border:1px solid rgba(255,255,255,.12); }
-        .product-visual span { position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.32); animation:float 5s ease-in-out infinite alternate; }
-        .product-visual span:nth-child(1) { width:84px; height:84px; left:12%; top:32px; background:rgba(255,105,120,.2); }
-        .product-visual span:nth-child(2) { width:46px; height:46px; left:48%; top:54px; animation-delay:.7s; background:rgba(116,98,232,.28); }
-        .product-visual span:nth-child(3) { width:110px; height:110px; right:8%; top:20px; animation-delay:1.2s; background:rgba(255,255,255,.08); }
-        @keyframes float { from { transform:translateY(7px) rotate(-5deg); } to { transform:translateY(-8px) rotate(6deg); } }
+        .garden-visual { height:168px; position:relative; margin-top:24px; border-radius:24px; overflow:hidden; background:linear-gradient(#262037 0 60%,#283b31 60%); border:1px solid rgba(255,255,255,.13); }
+        .garden-visual:after { content:''; position:absolute; inset:auto 0 0; height:42px; background:linear-gradient(90deg,#20352a,#37523f,#20352a); }
+        .garden-moon { position:absolute; width:42px; height:42px; right:24px; top:22px; border-radius:50%; background:#fff3cb; box-shadow:0 0 36px rgba(255,239,183,.7); animation:moonGlow 3s ease-in-out infinite alternate; }
+        .plant { position:absolute; z-index:2; bottom:27px; display:grid; place-items:center; font-size:38px; transform-origin:bottom; animation:grow 3.4s ease-in-out infinite alternate; }
+        .plant.one { left:12%; } .plant.two { left:43%; font-size:31px; animation-delay:.7s; } .plant.three { left:70%; font-size:44px; animation-delay:1.2s; }
+        .firefly { position:absolute; width:5px; height:5px; border-radius:50%; background:#ffe999; box-shadow:0 0 12px #ffe999; animation:firefly 4s ease-in-out infinite alternate; }
+        .firefly.f1 { left:24%; top:30%; } .firefly.f2 { left:58%; top:22%; animation-delay:1s; } .firefly.f3 { left:80%; top:48%; animation-delay:2s; }
+        @keyframes grow { from { transform:rotate(-4deg) scale(.92); } to { transform:rotate(5deg) scale(1.06); } }
+        @keyframes moonGlow { to { box-shadow:0 0 58px rgba(255,239,183,.9); } }
+        @keyframes firefly { to { transform:translate(28px,-18px); opacity:.25; } }
         .journey { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:34px; }
         .journey-step { position:relative; padding:20px; min-height:134px; border-radius:20px; background:white; border:1px solid var(--line); }
         .journey-step { transition:transform .25s ease, box-shadow .25s ease; }
@@ -168,6 +186,16 @@ export default function Portfolio() {
         .experience article:hover { transform:translateY(-6px); border-color:#d9d0ff; box-shadow:0 18px 44px rgba(52,38,66,.1); }
         .experience strong { display:block; font-family:'Manrope'; }
         .experience small { display:block; margin-top:6px; color:var(--muted); line-height:1.5; }
+        .capabilities { padding:100px 0; }
+        .capability-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:34px; }
+        .capability { min-height:210px; display:flex; flex-direction:column; padding:24px; border-radius:24px; border:1px solid var(--line); background:rgba(255,255,255,.78); box-shadow:0 12px 34px rgba(39,31,48,.05); transition:.3s ease; }
+        .capability:hover { transform:translateY(-8px); box-shadow:0 24px 54px rgba(39,31,48,.12); border-color:#d9cdfd; }
+        .capability svg { color:var(--coral); }
+        .capability strong { margin-top:auto; font:800 19px 'Manrope'; }
+        .capability p { margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.55; }
+        .tool-cloud { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+        .tool-cloud span { padding:10px 14px; border-radius:999px; background:#1d1922; color:white; font-size:12px; font-weight:800; transition:.2s ease; }
+        .tool-cloud span:hover { color:var(--ink); background:#ffd9dd; transform:translateY(-3px) rotate(-1deg); }
         .book-feature { display:grid; grid-template-columns:.78fr 1.22fr; gap:70px; align-items:center; padding:50px; border-radius:34px; background:#efe9ff; }
         .book-feature img { display:block; width:100%; max-height:520px; object-fit:contain; filter:drop-shadow(0 24px 26px rgba(41,30,71,.24)); }
         .book-feature h2 { font-size:clamp(38px,5vw,64px); }
@@ -203,6 +231,7 @@ export default function Portfolio() {
           .portrait-card { width:min(520px,100%); margin:0 auto; }
           .afterfight { padding:40px; }
           .journey,.experience { grid-template-columns:repeat(2,1fr); }
+          .capability-grid { grid-template-columns:repeat(2,1fr); }
           .book-grid { grid-template-columns:repeat(2,1fr); }
         }
         @media (max-width:600px) {
@@ -220,17 +249,20 @@ export default function Portfolio() {
           .input-row { display:grid; }
           .input-row button { padding:14px; }
           .journey,.experience { grid-template-columns:1fr; }
+          .capability-grid { grid-template-columns:1fr; }
           .book-feature { padding:28px 20px; gap:30px; border-radius:26px; }
           .book-grid { grid-template-columns:1fr; }
           .book-cover { height:340px; }
           .footer-inner { align-items:flex-start; flex-direction:column; }
         }
+        @media (prefers-reduced-motion:reduce) { *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; } }
       `}</style>
 
       <header className="wrap">
         <nav className="nav">
           <button className="logo" onClick={() => scrollTo("top")} aria-label="Jane Duru home">J<span>D</span></button>
           <div className="nav-links">
+            <button onClick={() => scrollTo("capabilities")}>Skills</button>
             <button onClick={() => scrollTo("products")}>Building</button>
             <button onClick={() => scrollTo("books")}>Books</button>
             <button onClick={() => scrollTo("about")}>About</button>
@@ -241,6 +273,7 @@ export default function Portfolio() {
           </button>
           {menuOpen && (
             <div className="mobile-menu">
+              <button onClick={() => scrollTo("capabilities")}>Skills</button>
               <button onClick={() => scrollTo("products")}>Building</button>
               <button onClick={() => scrollTo("books")}>Books</button>
               <button onClick={() => scrollTo("about")}>About Jane</button>
@@ -254,7 +287,8 @@ export default function Portfolio() {
         <motion.div {...fade}>
           <span className="eyebrow"><Sparkles size={14} /> Founder · Builder · Writer</span>
           <h1>I turn real problems into <em>products.</em></h1>
-          <p className="hero-copy">Eight years across sales, customer service and financial services shaped how I understand people. Now I engineer apps, build software and turn real problems into products.</p>
+          <p className="hero-copy">Over eight years close to customers, money and business taught me where the real problems live. Now I engineer software, automate work and build products people can actually use.</p>
+          <p className="role-line">Technical Support & Customer Enablement · Fintech, Payments & SaaS · Frontend Engineering · Automation · Product</p>
           <div className="actions">
             <button className="primary" onClick={() => scrollTo("waitlist")}>Join the AfterFight waitlist <ArrowRight size={17} /></button>
             <a className="secondary" href="https://github.com/janeezy" target="_blank" rel="noreferrer">Watch me build <Github size={17} /></a>
@@ -264,6 +298,21 @@ export default function Portfolio() {
           <img src="/Img2.png" alt="Jane Duru, founder and writer" />
           <div className="float-card"><strong>Currently building</strong><span>AfterFight · for what comes after conflict</span></div>
         </motion.div>
+      </section>
+
+      <div className="ticker" aria-hidden="true"><div className="ticker-track">
+        {[...toolkit,...toolkit].map((tool,index) => <span key={`${tool}-${index}`}>{tool}</span>)}
+      </div></div>
+
+      <section className="wrap capabilities" id="capabilities">
+        <div className="section-head"><div><div className="kicker">How I work</div><h2>Technical skill.<br/>Commercial instinct.</h2></div><p className="section-note">I understand the customer, the workflow and the product—then use technology to make the experience better.</p></div>
+        <div className="capability-grid">
+          <motion.article className="capability" whileHover={{rotate:-1}}><WalletCards size={25}/><strong>Fintech & payments</strong><p>Eight years of commercial and financial-services context behind every product decision.</p></motion.article>
+          <motion.article className="capability" whileHover={{rotate:1}}><PanelsTopLeft size={25}/><strong>Frontend & mobile</strong><p>Interfaces and apps built with React, React Native, Expo and TypeScript.</p></motion.article>
+          <motion.article className="capability" whileHover={{rotate:-1}}><Workflow size={25}/><strong>Automation</strong><p>Workflows that remove repetitive work, improve support and help teams move faster.</p></motion.article>
+          <motion.article className="capability" whileHover={{rotate:1}}><Bot size={25}/><strong>Product & AI</strong><p>From real problem to useful tool—research, product judgment, testing and iteration.</p></motion.article>
+        </div>
+        <div className="tool-cloud">{toolkit.map((tool) => <span key={tool}>{tool}</span>)}</div>
       </section>
 
       <section className="section wrap" id="products">
@@ -276,8 +325,8 @@ export default function Portfolio() {
               <div className="points">
                 <span className="point">Private by design</span><span className="point">Built with care</span><span className="point">For every kind of love</span>
               </div>
-              <div className="product-visual" aria-hidden="true">
-                <span/><span/><span/>
+              <div className="garden-visual" aria-label="A playful animated night garden symbolizing growth">
+                <span className="garden-moon"/><span className="plant one">🌷</span><span className="plant two">🌼</span><span className="plant three">🌸</span><span className="firefly f1"/><span className="firefly f2"/><span className="firefly f3"/>
               </div>
             </div>
             <form className="waitlist" id="waitlist" onSubmit={joinWaitlist}>
@@ -346,7 +395,7 @@ export default function Portfolio() {
           <div className="actions"><a className="primary" href="https://zemiolabs.com" target="_blank" rel="noreferrer">Zemio Labs <ArrowUpRight size={16}/></a><a className="secondary" href="mailto:zemiolabs@gmail.com">Work with me <Mail size={16}/></a></div>
         </motion.div>
         <motion.div className="about-list" {...fade} transition={{ ...fade.transition, delay:.1 }}>
-          {["React, React Native & Expo","TypeScript, JavaScript & APIs","Tailwind, testing & QA","Product strategy & startup execution"].map((item) => <div className="about-item" key={item}><Check size={18}/>{item}</div>)}
+          {["Frontend & mobile engineering","Support systems & automation","Fintech, payments & SaaS","Product strategy & startup execution"].map((item) => <div className="about-item" key={item}><Check size={18}/>{item}</div>)}
         </motion.div>
       </section>
 
