@@ -1,421 +1,61 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Bot,
-  Check,
-  Github,
-  Instagram,
-  Mail,
-  Menu,
-  PanelsTopLeft,
-  Sparkles,
-  Twitter,
-  WalletCards,
-  Workflow,
-  X,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Github, Instagram, Mail, Menu, Twitter, X, Zap } from "lucide-react";
 
 const AMAZON = "https://amazon.com/author/janeduru";
 const GUMROAD = "https://iamjaneezystore.gumroad.com";
-
-const toolkit = ["React", "React Native", "Expo", "TypeScript", "JavaScript", "Tailwind", "REST APIs", "Testing & QA", "Jira Automation", "AI Workflows"];
-
+const COFFEE = "https://buymeacoffee.com/janeezyoffb";
+const tools = ["React", "React Native", "Expo", "TypeScript", "JavaScript", "Tailwind", "REST APIs", "Testing & QA", "Jira Automation", "AI Workflows"];
 const books = [
-  {
-    title: "Nobody Pays You for Working Hard Anymore",
-    subtitle: "Create value. Build leverage. Make money in the age of AI.",
-    cover: "/new-book.jpg",
-    latest: true,
-  },
-  {
-    title: "Quiet the Noise",
-    subtitle: "Stop overthinking, set boundaries and finally feel free.",
-    cover: "/quiet-the-noise.png",
-  },
-  {
-    title: "Selective Empathy",
-    subtitle: "Why the world cries for some lives and stays silent for others.",
-    cover: "/book-selective-empathy.png",
-  },
-  {
-    title: "50 AI Prompts to Make Money",
-    subtitle: "Practical prompts for turning AI into useful income ideas.",
-    cover: "/book-ai-prompts.png",
-  },
+  { title:"Quiet the Noise", cover:"/quiet-the-noise.png" },
+  { title:"Selective Empathy", cover:"/book-selective-empathy.png" },
+  { title:"50 AI Prompts to Make Money", cover:"/book-ai-prompts.png" },
 ];
 
-const fade = {
-  initial: { opacity: 1, y: 0 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-60px" },
-  transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
-};
-
 export default function Portfolio() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("idle");
-
-  const scrollTo = (id) => {
-    setMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
+  const [menuOpen,setMenuOpen] = useState(false);
+  const [email,setEmail] = useState("");
+  const [status,setStatus] = useState("idle");
+  const scrollTo = (id) => { setMenuOpen(false); document.getElementById(id)?.scrollIntoView({behavior:"smooth"}); };
   const joinWaitlist = async (event) => {
-    event.preventDefault();
-    setStatus("loading");
-
+    event.preventDefault(); setStatus("loading");
     try {
-      const response = await fetch("https://formsubmit.co/ajax/zemiolabs@gmail.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          email,
-          product: "AfterFight",
-          _subject: "New AfterFight waitlist signup",
-          _captcha: "false",
-        }),
-      });
-
-      if (!response.ok) throw new Error("Unable to join");
-      setEmail("");
-      setStatus("success");
-    } catch {
-      setStatus("error");
-    }
+      const response = await fetch("https://formsubmit.co/ajax/zemiolabs@gmail.com", { method:"POST", headers:{"Content-Type":"application/json",Accept:"application/json"}, body:JSON.stringify({email,product:"AfterFight",_subject:"New AfterFight waitlist signup",_captcha:"false"}) });
+      if (!response.ok) throw new Error(); setEmail(""); setStatus("success");
+    } catch { setStatus("error"); }
   };
 
-  return (
-    <main className="site-shell">
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
-        :root { --ink:#16151a; --muted:#716d78; --cream:#fffaf5; --line:#e9e2dc; --coral:#ff6978; --violet:#7462e8; }
-        * { box-sizing:border-box; }
-        html { scroll-behavior:smooth; }
-        body { margin:0; background:var(--cream); color:var(--ink); font-family:'DM Sans',sans-serif; }
-        button,input { font:inherit; }
-        a { color:inherit; text-decoration:none; }
-        .site-shell { min-height:100vh; overflow:hidden; position:relative; background:radial-gradient(circle at 88% 5%,#e9e0ff 0,transparent 27%),radial-gradient(circle at 5% 25%,#ffe1df 0,transparent 24%),linear-gradient(180deg,#fffaf5 0%,#fff 52%,#faf7ff 100%); }
-        .site-shell:before { content:''; position:fixed; inset:0; pointer-events:none; opacity:.22; background-image:linear-gradient(rgba(34,28,41,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(34,28,41,.035) 1px,transparent 1px); background-size:48px 48px; mask-image:linear-gradient(to bottom,black,transparent 60%); }
-        .wrap { width:min(1160px,calc(100% - 40px)); margin:0 auto; }
-        .nav { height:76px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(22,21,26,.08); }
-        .logo { width:46px; height:46px; display:grid; place-items:center; border:0; border-radius:15px; color:white; background:linear-gradient(135deg,var(--ink),#40324f); box-shadow:0 10px 24px rgba(22,21,26,.16); font:800 16px 'Manrope'; letter-spacing:-.5px; cursor:pointer; }
-        .logo span { color:#ff9ca6; }
-        .nav-links { display:flex; align-items:center; gap:28px; color:var(--muted); font-size:14px; font-weight:600; }
-        .nav-links button { border:0; background:none; cursor:pointer; color:inherit; }
-        .nav-links button:hover { color:var(--ink); }
-        .nav-cta,.primary,.secondary { display:inline-flex; align-items:center; justify-content:center; gap:8px; border-radius:999px; font-weight:700; transition:.2s ease; cursor:pointer; }
-        .nav-cta { padding:11px 18px; color:white; background:var(--ink); }
-        .nav-cta:hover,.primary:hover { transform:translateY(-2px); }
-        .menu-button { display:none; background:none; border:0; }
-        .hero { padding:88px 0 58px; display:grid; grid-template-columns:1.1fr .9fr; gap:70px; align-items:center; position:relative; }
-        .eyebrow { display:inline-flex; align-items:center; gap:8px; color:#7564db; background:#eeeafe; border:1px solid #ded7ff; border-radius:999px; padding:8px 12px; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
-        h1,h2,h3 { font-family:'Manrope',sans-serif; margin:0; letter-spacing:-.045em; }
-        h1 { margin-top:24px; font-size:clamp(50px,7vw,88px); line-height:.98; max-width:760px; }
-        h1 em { font-style:normal; color:var(--coral); }
-        .hero-copy { margin:28px 0 0; max-width:610px; color:var(--muted); font-size:19px; line-height:1.65; }
-        .role-line { margin-top:18px; max-width:680px; color:#423b49; font-size:13px; font-weight:800; letter-spacing:.02em; line-height:1.8; }
-        .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:34px; }
-        .primary { border:0; padding:15px 22px; background:var(--ink); color:white; }
-        .secondary { padding:14px 21px; border:1px solid var(--line); background:rgba(255,255,255,.65); }
-        .primary.coral { background:var(--coral); }
-        .portrait-card { position:relative; padding:14px; border-radius:34px; background:rgba(255,255,255,.68); border:1px solid rgba(255,255,255,.9); box-shadow:0 30px 90px rgba(55,39,86,.14); animation:portraitFloat 5s ease-in-out infinite alternate; }
-        .portrait-card img { display:block; width:100%; height:590px; object-fit:cover; object-position:top; border-radius:24px; }
-        .float-card { position:absolute; left:-42px; bottom:32px; width:220px; padding:16px; border-radius:18px; background:#fff; box-shadow:0 18px 50px rgba(31,25,40,.18); transform:rotate(-3deg); }
-        .float-card strong { display:block; font:800 15px 'Manrope'; }
-        .float-card span { color:var(--muted); font-size:12px; }
-        @keyframes portraitFloat { from { transform:translateY(4px) rotate(1deg); } to { transform:translateY(-8px) rotate(-.5deg); } }
-        .ticker { overflow:hidden; border-block:1px solid var(--line); background:rgba(255,255,255,.72); backdrop-filter:blur(12px); }
-        .ticker-track { width:max-content; display:flex; gap:38px; padding:16px 0; animation:ticker 28s linear infinite; }
-        .ticker-track span { display:flex; align-items:center; gap:38px; color:#4e4854; font-size:13px; font-weight:800; white-space:nowrap; }
-        .ticker-track span:after { content:'✦'; color:var(--coral); }
-        @keyframes ticker { to { transform:translateX(-50%); } }
-        .section { padding:100px 0; }
-        .section-head { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-bottom:42px; }
-        .kicker { color:var(--coral); font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; margin-bottom:12px; }
-        h2 { font-size:clamp(38px,5vw,62px); line-height:1.04; }
-        .section-note { max-width:410px; color:var(--muted); line-height:1.6; }
-        .afterfight { position:relative; border-radius:34px; overflow:hidden; padding:64px; color:white; background:linear-gradient(135deg,#211d2b 0%,#352445 55%,#622f51 100%); box-shadow:0 30px 80px rgba(53,36,69,.2); }
-        .afterfight:after { content:''; position:absolute; width:420px; height:420px; border-radius:50%; right:-100px; top:-160px; background:radial-gradient(circle,#ff7f8f 0,rgba(255,127,143,0) 68%); opacity:.5; }
-        .after-grid { position:relative; z-index:1; display:grid; grid-template-columns:1fr .9fr; gap:70px; align-items:center; }
-        .product-mark { width:70px; height:70px; display:grid; place-items:center; border-radius:22px; background:var(--coral); font:800 22px 'Manrope'; transform:rotate(-6deg); }
-        .afterfight h2 { margin-top:28px; max-width:620px; }
-        .afterfight p { color:rgba(255,255,255,.72); line-height:1.65; font-size:17px; max-width:570px; }
-        .points { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
-        .point { padding:9px 12px; border-radius:999px; background:rgba(255,255,255,.09); font-size:13px; }
-        .waitlist { padding:28px; border-radius:24px; background:white; color:var(--ink); box-shadow:0 18px 70px rgba(0,0,0,.18); }
-        .waitlist h3 { font-size:27px; }
-        .waitlist p { color:var(--muted); font-size:14px; margin:10px 0 18px; }
-        .input-row { display:flex; gap:8px; }
-        .input-row input { min-width:0; flex:1; border:1px solid var(--line); border-radius:14px; padding:14px 15px; outline:none; }
-        .input-row input:focus { border-color:var(--coral); box-shadow:0 0 0 3px rgba(255,105,120,.12); }
-        .input-row button { border:0; border-radius:14px; padding:0 18px; color:white; background:var(--coral); font-weight:800; cursor:pointer; }
-        .form-status { min-height:20px; margin:12px 0 0!important; font-size:12px!important; }
-        .success { color:#16804d!important; }
-        .error { color:#b83f49!important; }
-        .garden-visual { height:168px; position:relative; margin-top:24px; border-radius:24px; overflow:hidden; background:linear-gradient(#262037 0 60%,#283b31 60%); border:1px solid rgba(255,255,255,.13); }
-        .garden-visual:after { content:''; position:absolute; inset:auto 0 0; height:42px; background:linear-gradient(90deg,#20352a,#37523f,#20352a); }
-        .garden-moon { position:absolute; width:42px; height:42px; right:24px; top:22px; border-radius:50%; background:#fff3cb; box-shadow:0 0 36px rgba(255,239,183,.7); animation:moonGlow 3s ease-in-out infinite alternate; }
-        .plant { position:absolute; z-index:2; bottom:27px; display:grid; place-items:center; font-size:38px; transform-origin:bottom; animation:grow 3.4s ease-in-out infinite alternate; }
-        .plant.one { left:12%; } .plant.two { left:43%; font-size:31px; animation-delay:.7s; } .plant.three { left:70%; font-size:44px; animation-delay:1.2s; }
-        .firefly { position:absolute; width:5px; height:5px; border-radius:50%; background:#ffe999; box-shadow:0 0 12px #ffe999; animation:firefly 4s ease-in-out infinite alternate; }
-        .firefly.f1 { left:24%; top:30%; } .firefly.f2 { left:58%; top:22%; animation-delay:1s; } .firefly.f3 { left:80%; top:48%; animation-delay:2s; }
-        @keyframes grow { from { transform:rotate(-4deg) scale(.92); } to { transform:rotate(5deg) scale(1.06); } }
-        @keyframes moonGlow { to { box-shadow:0 0 58px rgba(255,239,183,.9); } }
-        @keyframes firefly { to { transform:translate(28px,-18px); opacity:.25; } }
-        .journey { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:34px; }
-        .journey-step { position:relative; padding:20px; min-height:134px; border-radius:20px; background:white; border:1px solid var(--line); }
-        .journey-step { transition:transform .25s ease, box-shadow .25s ease; }
-        .journey-step:hover { transform:translateY(-6px) rotate(-1deg); box-shadow:0 18px 38px rgba(52,38,66,.11); }
-        .journey-step.active { background:#fff0f2; border-color:#ffb4bc; }
-        .journey-step span { display:grid; place-items:center; width:28px; height:28px; border-radius:50%; background:#f1edf7; font-size:12px; font-weight:800; }
-        .journey-step.active span { background:var(--coral); color:white; }
-        .journey-step strong { display:block; margin-top:20px; }
-        .journey-step small { color:var(--muted); }
-        .github-card { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px; margin-top:18px; border-radius:22px; background:#17151b; color:white; }
-        .github-card p { margin:4px 0 0; color:rgba(255,255,255,.62); font-size:14px; }
-        .creator-links { margin-top:18px; }
-        .creator-links .github-card { margin-top:0; }
-        .coffee-link { display:inline-flex; align-items:center; gap:7px; margin-top:12px; padding:10px 14px; border:1px solid var(--line); border-radius:999px; background:white; font-size:13px; font-weight:800; }
-        .coffee-link:hover { background:#fff0e8; border-color:#ffb4bc; transform:translateY(-2px); }
-        .experience { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:30px; }
-        .experience article { padding:22px; border-radius:20px; background:white; border:1px solid var(--line); }
-        .experience article { transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
-        .experience article:hover { transform:translateY(-6px); border-color:#d9d0ff; box-shadow:0 18px 44px rgba(52,38,66,.1); }
-        .experience strong { display:block; font-family:'Manrope'; }
-        .experience small { display:block; margin-top:6px; color:var(--muted); line-height:1.5; }
-        .capabilities { padding:100px 0; }
-        .capability-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:34px; }
-        .capability { min-height:210px; display:flex; flex-direction:column; padding:24px; border-radius:24px; border:1px solid var(--line); background:rgba(255,255,255,.78); box-shadow:0 12px 34px rgba(39,31,48,.05); transition:.3s ease; }
-        .capability:hover { transform:translateY(-8px); box-shadow:0 24px 54px rgba(39,31,48,.12); border-color:#d9cdfd; }
-        .capability svg { color:var(--coral); }
-        .capability strong { margin-top:auto; font:800 19px 'Manrope'; }
-        .capability p { margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.55; }
-        .tool-cloud { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
-        .tool-cloud span { padding:10px 14px; border-radius:999px; background:#1d1922; color:white; font-size:12px; font-weight:800; transition:.2s ease; }
-        .tool-cloud span:hover { color:var(--ink); background:#ffd9dd; transform:translateY(-3px) rotate(-1deg); }
-        .book-feature { display:grid; grid-template-columns:.78fr 1.22fr; gap:70px; align-items:center; padding:50px; border-radius:34px; background:#efe9ff; }
-        .book-feature img { display:block; width:100%; max-height:520px; object-fit:contain; filter:drop-shadow(0 24px 26px rgba(41,30,71,.24)); }
-        .book-feature h2 { font-size:clamp(38px,5vw,64px); }
-        .book-feature p { color:var(--muted); font-size:17px; line-height:1.65; }
-        .book-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:22px; }
-        .book-card { border:1px solid var(--line); border-radius:24px; background:white; overflow:hidden; }
-        .book-cover { height:290px; padding:22px; background:#f4f0ea; }
-        .book-cover img { width:100%; height:100%; object-fit:contain; }
-        .book-copy { padding:20px; }
-        .book-copy h3 { font-size:19px; letter-spacing:-.03em; }
-        .book-copy p { min-height:42px; color:var(--muted); font-size:13px; line-height:1.5; }
-        .buy-links { display:flex; gap:14px; font-size:13px; font-weight:800; }
-        .about { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
-        .about p { color:var(--muted); font-size:18px; line-height:1.75; }
-        .about-list { display:grid; gap:12px; }
-        .about-item { display:flex; align-items:center; gap:12px; padding:16px; border-radius:17px; background:white; border:1px solid var(--line); font-weight:700; }
-        .about-item svg { color:var(--coral); }
-        .support-band { display:grid; grid-template-columns:1fr auto; gap:30px; align-items:center; margin-bottom:90px; padding:34px 38px; border-radius:28px; color:white; background:linear-gradient(120deg,#18151d,#40304f 55%,#6b344e); box-shadow:0 25px 70px rgba(45,31,55,.2); }
-        .support-band h3 { font-size:clamp(27px,4vw,42px); }
-        .support-band p { margin:8px 0 0; color:rgba(255,255,255,.66); }
-        .support-band .coffee-link { margin:0; color:var(--ink); background:white; border-color:white; padding:14px 20px; }
-        footer { border-top:1px solid var(--line); padding:42px 0; }
-        .footer-inner { display:flex; justify-content:space-between; align-items:center; gap:24px; }
-        .socials { display:flex; gap:10px; }
-        .socials a { width:40px; height:40px; display:grid; place-items:center; border:1px solid var(--line); border-radius:50%; background:white; }
-        @media (max-width:900px) {
-          .nav-links { display:none; }
-          .menu-button { display:block; }
-          .mobile-menu { position:absolute; z-index:20; left:20px; right:20px; top:68px; padding:18px; border-radius:18px; background:white; box-shadow:0 20px 50px rgba(0,0,0,.13); display:grid; gap:8px; }
-          .mobile-menu button { border:0; background:#faf7f4; border-radius:12px; padding:13px; text-align:left; font-weight:700; }
-          .hero,.after-grid,.book-feature,.about,.support-band { grid-template-columns:1fr; }
-          .hero { padding-top:55px; }
-          .portrait-card { width:min(520px,100%); margin:0 auto; }
-          .afterfight { padding:40px; }
-          .journey,.experience { grid-template-columns:repeat(2,1fr); }
-          .capability-grid { grid-template-columns:repeat(2,1fr); }
-          .book-grid { grid-template-columns:repeat(2,1fr); }
-        }
-        @media (max-width:600px) {
-          .wrap { width:min(100% - 28px,1160px); }
-          .hero { gap:45px; padding-bottom:65px; }
-          .hero-copy { font-size:17px; }
-          .portrait-card img { height:430px; }
-          .float-card { left:-5px; bottom:18px; }
-          .section { padding:70px 0; }
-          .section-head { display:block; }
-          .section-note { margin-top:14px; }
-          .afterfight { padding:30px 22px; border-radius:26px; }
-          .after-grid { gap:36px; }
-          .waitlist { padding:22px; }
-          .input-row { display:grid; }
-          .input-row button { padding:14px; }
-          .journey,.experience { grid-template-columns:1fr; }
-          .capability-grid { grid-template-columns:1fr; }
-          .book-feature { padding:28px 20px; gap:30px; border-radius:26px; }
-          .book-grid { grid-template-columns:1fr; }
-          .book-cover { height:340px; }
-          .footer-inner { align-items:flex-start; flex-direction:column; }
-        }
-        @media (prefers-reduced-motion:reduce) { *,*:before,*:after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; } }
-      `}</style>
-
-      <header className="wrap">
-        <nav className="nav">
-          <button className="logo" onClick={() => scrollTo("top")} aria-label="Jane Duru home">J<span>D</span></button>
-          <div className="nav-links">
-            <button onClick={() => scrollTo("capabilities")}>Skills</button>
-            <button onClick={() => scrollTo("products")}>Building</button>
-            <button onClick={() => scrollTo("books")}>Books</button>
-            <button onClick={() => scrollTo("about")}>About</button>
-            <a className="nav-cta" href="#waitlist">Join AfterFight</a>
-          </div>
-          <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Open menu">
-            {menuOpen ? <X /> : <Menu />}
-          </button>
-          {menuOpen && (
-            <div className="mobile-menu">
-              <button onClick={() => scrollTo("capabilities")}>Skills</button>
-              <button onClick={() => scrollTo("products")}>Building</button>
-              <button onClick={() => scrollTo("books")}>Books</button>
-              <button onClick={() => scrollTo("about")}>About Jane</button>
-              <button onClick={() => scrollTo("waitlist")}>Join AfterFight</button>
-            </div>
-          )}
-        </nav>
-      </header>
-
-      <section className="wrap hero" id="top">
-        <motion.div {...fade}>
-          <span className="eyebrow"><Sparkles size={14} /> Founder · Builder · Writer</span>
-          <h1>I turn real problems into <em>products.</em></h1>
-          <p className="hero-copy">Over eight years close to customers, money and business taught me where the real problems live. Now I engineer software, automate work and build products people can actually use.</p>
-          <p className="role-line">Technical Support & Customer Enablement · Fintech, Payments & SaaS · Frontend Engineering · Automation · Product</p>
-          <div className="actions">
-            <button className="primary" onClick={() => scrollTo("waitlist")}>Join the AfterFight waitlist <ArrowRight size={17} /></button>
-            <a className="secondary" href="https://github.com/janeezy" target="_blank" rel="noreferrer">Watch me build <Github size={17} /></a>
-          </div>
-        </motion.div>
-        <motion.div className="portrait-card" {...fade} transition={{ ...fade.transition, delay:.12 }}>
-          <img src="/Img2.png" alt="Jane Duru, founder and writer" />
-          <div className="float-card"><strong>Currently building</strong><span>AfterFight · for what comes after conflict</span></div>
-        </motion.div>
-      </section>
-
-      <div className="ticker" aria-hidden="true"><div className="ticker-track">
-        {[...toolkit,...toolkit].map((tool,index) => <span key={`${tool}-${index}`}>{tool}</span>)}
-      </div></div>
-
-      <section className="wrap capabilities" id="capabilities">
-        <div className="section-head"><div><div className="kicker">How I work</div><h2>Technical skill.<br/>Commercial instinct.</h2></div><p className="section-note">I understand the customer, the workflow and the product—then use technology to make the experience better.</p></div>
-        <div className="capability-grid">
-          <motion.article className="capability" whileHover={{rotate:-1}}><WalletCards size={25}/><strong>Fintech & payments</strong><p>Eight years of commercial and financial-services context behind every product decision.</p></motion.article>
-          <motion.article className="capability" whileHover={{rotate:1}}><PanelsTopLeft size={25}/><strong>Frontend & mobile</strong><p>Interfaces and apps built with React, React Native, Expo and TypeScript.</p></motion.article>
-          <motion.article className="capability" whileHover={{rotate:-1}}><Workflow size={25}/><strong>Automation</strong><p>Workflows that remove repetitive work, improve support and help teams move faster.</p></motion.article>
-          <motion.article className="capability" whileHover={{rotate:1}}><Bot size={25}/><strong>Product & AI</strong><p>From real problem to useful tool—research, product judgment, testing and iteration.</p></motion.article>
-        </div>
-        <div className="tool-cloud">{toolkit.map((tool) => <span key={tool}>{tool}</span>)}</div>
-      </section>
-
-      <section className="section wrap" id="products">
-        <motion.div className="afterfight" {...fade}>
-          <div className="after-grid">
-            <div>
-              <div className="product-mark">AF</div>
-              <h2>Love after the hard moment.</h2>
-              <p>A private, thoughtful experience for couples who want a better way forward after difficult moments.</p>
-              <div className="points">
-                <span className="point">Private by design</span><span className="point">Built with care</span><span className="point">For every kind of love</span>
-              </div>
-              <div className="garden-visual" aria-label="A playful animated night garden symbolizing growth">
-                <span className="garden-moon"/><span className="plant one">🌷</span><span className="plant two">🌼</span><span className="plant three">🌸</span><span className="firefly f1"/><span className="firefly f2"/><span className="firefly f3"/>
-              </div>
-            </div>
-            <form className="waitlist" id="waitlist" onSubmit={joinWaitlist}>
-              <span className="kicker">Early access</span>
-              <h3>Be first to try it.</h3>
-              <p>Join the waitlist for product updates, beta access and launch news.</p>
-              <div className="input-row">
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your email address" aria-label="Email address" required />
-                <button disabled={status === "loading"}>{status === "loading" ? "Joining…" : "Join"}</button>
-              </div>
-              <p className={`form-status ${status}`} aria-live="polite">
-                {status === "success" && "You’re on the list. Welcome early."}
-                {status === "error" && "That didn’t work. Please try again."}
-                {status === "idle" && "No noise. Only meaningful updates."}
-              </p>
-            </form>
-          </div>
-        </motion.div>
-
-        <div className="section-head" style={{ marginTop:72 }}>
-          <div><div className="kicker">Building in public</div><h2>One product. Full focus.</h2></div>
-          <p className="section-note">Turning a deeply human problem into a thoughtful product—without sharing the secret sauce.</p>
-        </div>
-        <div className="journey">
-          {[['01','Problem','Understood'],['02','Experience','Designed'],['03','MVP','Building now'],['04','Beta','Up next']].map(([number,title,label], index) => (
-            <motion.div className={`journey-step ${index === 2 ? 'active' : ''}`} key={title} whileHover={{y:-4}}><span>{number}</span><strong>{title}</strong><small>{label}</small></motion.div>
-          ))}
-        </div>
-        <div className="creator-links">
-          <a className="coffee-link" href="https://buymeacoffee.com/janeezyoffb" target="_blank" rel="noreferrer">☕ Support my build · Buy me a coffee</a>
-          <a className="github-card" href="https://github.com/janeezy" target="_blank" rel="noreferrer"><div><strong>Follow my selected work on GitHub</strong><p>Public experiments and code—private product ideas stay private.</p></div><Github size={28}/></a>
-        </div>
-      </section>
-
-      <section className="section wrap" id="books">
-        <motion.div className="book-feature" {...fade}>
-          <img src="/new-book.jpg" alt="Nobody Pays You for Working Hard Anymore book cover" />
-          <div>
-            <div className="kicker">Newest book</div>
-            <h2>Nobody Pays You for Working Hard Anymore</h2>
-            <p>How to create value, build leverage and make money in the age of AI.</p>
-            <div className="actions">
-              <a className="primary" href={AMAZON} target="_blank" rel="noreferrer">Find it on Amazon <ArrowUpRight size={16}/></a>
-              <a className="secondary" href={GUMROAD} target="_blank" rel="noreferrer">Shop on Gumroad <ArrowUpRight size={16}/></a>
-            </div>
-          </div>
-        </motion.div>
-        <div className="section-head" style={{ marginTop:90 }}>
-          <div><div className="kicker">Books by Jane Duru</div><h2>Ideas you can use.</h2></div>
-          <p className="section-note">On work, leverage, technology, empathy and a quieter life.</p>
-        </div>
-        <div className="book-grid">
-          {books.filter((book) => !book.latest).map((book, index) => (
-            <motion.article className="book-card" key={book.title} {...fade} transition={{ ...fade.transition, delay:index*.07 }}>
-              <div className="book-cover"><img src={book.cover} alt={`${book.title} book cover`} /></div>
-              <div className="book-copy"><h3>{book.title}</h3><p>{book.subtitle}</p><div className="buy-links"><a href={AMAZON} target="_blank" rel="noreferrer">Amazon ↗</a><a href={GUMROAD} target="_blank" rel="noreferrer">Gumroad ↗</a></div></div>
-            </motion.article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section wrap about" id="about">
-        <motion.div {...fade}>
-          <div className="kicker">About Jane</div><h2>Builder’s mind. Founder’s ownership.</h2>
-          <p>I’m Jane Duru, co-founder of Zemio Labs. After more than eight years across sales, customer service and financial services, I moved into software engineering. Today I build and consult on apps and digital products for people and businesses—while creating my own.</p>
-          <div className="actions"><a className="primary" href="https://zemiolabs.com" target="_blank" rel="noreferrer">Zemio Labs <ArrowUpRight size={16}/></a><a className="secondary" href="mailto:zemiolabs@gmail.com">Work with me <Mail size={16}/></a></div>
-        </motion.div>
-        <motion.div className="about-list" {...fade} transition={{ ...fade.transition, delay:.1 }}>
-          {["Frontend & mobile engineering","Support systems & automation","Fintech, payments & SaaS","Product strategy & startup execution"].map((item) => <div className="about-item" key={item}><Check size={18}/>{item}</div>)}
-        </motion.div>
-      </section>
-
-      <section className="wrap" style={{paddingBottom:90}}>
-        <div className="kicker">What I bring</div>
-        <div className="experience">
-          <article><strong>8+ years of people insight</strong><small>Sales, customer experience and financial services.</small></article>
-          <article><strong>Software engineering</strong><small>Frontend and mobile products built with modern JavaScript tools.</small></article>
-          <article><strong>Consulting & product</strong><small>I help shape, build and improve useful digital experiences.</small></article>
-          <article><strong>Built before: Ohh</strong><small>A relationship app I launched, learned from and later closed.</small></article>
-          <article><strong>Building now: AfterFight</strong><small>A new product in development. The concept is public; the mechanics stay private.</small></article>
-        </div>
-      </section>
-
-      <section className="wrap support-band">
-        <div><div className="kicker">Back an independent builder</div><h3>Support what I’m building next.</h3><p>Your support helps fund thoughtful products, experiments and the road to launch.</p></div>
-        <a className="coffee-link" href="https://buymeacoffee.com/janeezyoffb" target="_blank" rel="noreferrer">☕ Support my build</a>
-      </section>
-
-      <footer><div className="wrap footer-inner"><div><div className="logo">J<span>D</span></div><small>Building useful things from real problems.</small></div><div className="socials"><a href="https://x.com/Iamjaneezy" target="_blank" rel="noreferrer" aria-label="X"><Twitter size={17}/></a><a href="https://github.com/janeezy" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17}/></a><a href="https://www.instagram.com/iamjaneezy" target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={17}/></a><a href="mailto:zemiolabs@gmail.com" aria-label="Email"><Mail size={17}/></a></div></div></footer>
-    </main>
-  );
+  return <main className="site">
+    <style>{`
+      @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+      :root{--ink:#18151d;--muted:#716a77;--paper:#fffdf9;--line:#e9e2dc;--pink:#ff6475;--night:#211b2c}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}button,input{font:inherit}a{color:inherit;text-decoration:none}
+      .site{min-height:100vh;overflow:hidden;background:radial-gradient(circle at 8% 10%,#ffe9e5 0,transparent 25%),radial-gradient(circle at 92% 8%,#eee9ff 0,transparent 25%),var(--paper)}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+      .nav{height:80px;display:flex;align-items:center;justify-content:space-between}.brand{width:48px;height:48px;display:grid;place-items:center;border:0;border-radius:16px;background:var(--ink);color:#fff;font:800 16px Manrope;cursor:pointer;box-shadow:0 12px 30px #2e24372b}.brand i{font-style:normal;color:#ff99a5}.navlinks{display:flex;align-items:center;gap:28px}.navlinks button{border:0;background:none;color:var(--muted);font-weight:700;cursor:pointer}.navlinks button:hover{color:var(--ink)}.nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;font-weight:800;transition:.25s ease}.nav-cta{padding:11px 18px;background:var(--ink);color:#fff}.menu{display:none;border:0;background:none}.mobile{position:absolute;z-index:20;top:70px;left:20px;right:20px;padding:16px;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 20px 60px #2c22321f}.mobile button{width:100%;border:0;background:#faf7f4;padding:14px;text-align:left;border-radius:12px;margin:3px 0;font-weight:800}
+      .hero{min-height:760px;display:grid;grid-template-columns:1.14fr .86fr;gap:72px;align-items:center;padding:65px 0 90px}.overline{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #ded5ff;border-radius:999px;background:#f2efff;color:#6954cf;font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}.hero h1,.title,.about h2,.bookcopy h2,.aftercopy h2{font-family:Manrope;margin:0;letter-spacing:-.055em}.hero h1{margin-top:24px;font-size:clamp(58px,7.6vw,104px);line-height:.92}.hero h1 span{display:block;color:var(--pink)}.lead{max-width:650px;margin:28px 0 0;color:var(--muted);font-size:19px;line-height:1.65}.role{max-width:690px;margin-top:17px;font-size:12px;font-weight:800;line-height:1.8}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.btn{padding:15px 22px;border:1px solid var(--line);background:#fff}.btn.dark{border-color:var(--ink);background:var(--ink);color:#fff}.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px #3026371f}
+      .heroart{position:relative;height:610px}.portrait{position:absolute;inset:25px 12px 25px 42px;padding:12px;background:#fff;border-radius:42px;box-shadow:0 35px 100px #3d2c511f;animation:drift 5s ease-in-out infinite alternate}.portrait img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:32px}.orbit{position:absolute;border:1px solid #d7cffa;border-radius:50%;animation:spin 16s linear infinite}.orbit.one{width:180px;height:180px;right:-65px;top:-6px}.orbit.two{width:110px;height:110px;left:-10px;bottom:18px;animation-direction:reverse}.dot{position:absolute;width:18px;height:18px;border-radius:50%;background:var(--pink);top:14px;left:22px;box-shadow:0 0 0 8px #ff64752b}.mini{position:absolute;z-index:3;padding:14px 17px;border-radius:18px;background:#fff;box-shadow:0 18px 50px #251b302b;font-weight:800;animation:bob 3.5s ease-in-out infinite alternate}.mini small{display:block;margin-top:4px;color:var(--muted);font-weight:600}.mini.top{right:-12px;top:92px}.mini.bottom{left:-4px;bottom:72px;animation-delay:1s}@keyframes drift{to{transform:translateY(-10px) rotate(-.8deg)}}@keyframes bob{to{transform:translateY(-9px)}}@keyframes spin{to{transform:rotate(360deg)}}
+      .marquee{overflow:hidden;border-block:1px solid var(--line);background:#fff}.track{display:flex;width:max-content;gap:34px;padding:17px 0;animation:marquee 28s linear infinite}.track span{display:flex;align-items:center;gap:34px;white-space:nowrap;font-size:12px;font-weight:800}.track span:after{content:'✦';color:var(--pink)}@keyframes marquee{to{transform:translateX(-50%)}}
+      .section{padding:110px 0}.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-bottom:42px}.kicker{margin-bottom:12px;color:var(--pink);font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}.title{font-size:clamp(42px,5.2vw,68px);line-height:1}.note{max-width:390px;color:var(--muted);line-height:1.65}
+      .bento{display:grid;grid-template-columns:1.15fr .85fr .85fr;grid-template-rows:220px 220px;gap:16px}.tile{position:relative;overflow:hidden;padding:26px;border:1px solid var(--line);border-radius:28px;background:#fff;transition:.3s ease}.tile:hover{transform:translateY(-7px);box-shadow:0 25px 60px #30263717}.tile.big{grid-row:span 2;background:var(--night);color:#fff}.tile.wide{grid-column:span 2;background:#efeaff}.tile .number{font:800 58px Manrope;letter-spacing:-.07em}.tile strong{position:absolute;left:26px;bottom:52px;font:800 21px Manrope}.tile p{position:absolute;left:26px;right:24px;bottom:18px;margin:0;color:var(--muted);font-size:13px}.tile.big p{color:#bdb4c5}.tileicon{width:44px;height:44px;display:grid;place-items:center;border-radius:15px;background:#fff0f2;color:var(--pink)}.toolcloud{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.toolcloud span{padding:9px 12px;border-radius:999px;background:#201b26;color:#fff;font-size:11px;font-weight:800;transition:.2s}.toolcloud span:hover{background:var(--pink);transform:translateY(-3px)}
+      .after{padding:58px;border-radius:40px;background:linear-gradient(135deg,#1d1825,#332341 55%,#6d3555);color:#fff;box-shadow:0 34px 90px #3d28482e}.aftergrid{display:grid;grid-template-columns:1fr .92fr;gap:58px;align-items:center}.productmark{width:64px;height:64px;display:grid;place-items:center;border-radius:21px;background:var(--pink);font:800 20px Manrope;transform:rotate(-6deg)}.aftercopy h2{margin-top:26px;font-size:clamp(42px,5.2vw,70px);line-height:1}.aftercopy p{max-width:560px;color:#cfc7d4;font-size:17px;line-height:1.65}.privacy{display:inline-flex;padding:8px 11px;border-radius:999px;background:#ffffff12;color:#ddd4e1;font-size:12px}
+      .garden{position:relative;height:260px;margin-top:28px;overflow:hidden;border:1px solid #ffffff1f;border-radius:28px;background:linear-gradient(#25203a 0 62%,#2b4938 62%)}.garden:after{content:'';position:absolute;left:0;right:0;bottom:0;height:52px;background:linear-gradient(90deg,#233c2e,#42674d,#233c2e)}.moon{position:absolute;width:50px;height:50px;right:28px;top:22px;border-radius:50%;background:#fff2be;box-shadow:0 0 50px #ffe991a6;animation:glow 3s ease-in-out infinite alternate}.flower{position:absolute;z-index:2;bottom:38px;font-size:45px;transform-origin:bottom;animation:grow 3.2s ease-in-out infinite alternate}.flower.a{left:12%}.flower.b{left:43%;font-size:34px;animation-delay:.8s}.flower.c{left:70%;font-size:48px;animation-delay:1.3s}.star{position:absolute;width:5px;height:5px;border-radius:50%;background:#ffe68a;box-shadow:0 0 12px #ffe68a;animation:fly 4s ease-in-out infinite alternate}.s1{left:20%;top:26%}.s2{left:58%;top:19%;animation-delay:1s}.s3{left:76%;top:42%;animation-delay:2s}@keyframes grow{to{transform:rotate(5deg) scale(1.08)}}@keyframes glow{to{box-shadow:0 0 75px #ffe991}}@keyframes fly{to{transform:translate(30px,-18px);opacity:.25}}
+      .waitlist{padding:30px;border-radius:28px;background:#fff;color:var(--ink);box-shadow:0 22px 70px #0000002e}.waitlist h3{margin:0;font:800 28px Manrope}.waitlist p{color:var(--muted);line-height:1.55}.inputrow{display:flex;gap:8px}.inputrow input{min-width:0;flex:1;padding:15px;border:1px solid var(--line);border-radius:14px;outline:0}.inputrow input:focus{border-color:var(--pink);box-shadow:0 0 0 3px #ff64751c}.inputrow button{padding:0 18px;border:0;border-radius:14px;background:var(--pink);color:#fff;font-weight:800}.status{min-height:18px;margin:11px 0 0!important;font-size:12px!important}.success{color:#16804d!important}.error{color:#b83f49!important}
+      .history{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:start}.timeline{display:grid;gap:12px}.time{display:grid;grid-template-columns:80px 1fr;gap:18px;padding:22px;border:1px solid var(--line);border-radius:22px;background:#fff;transition:.25s}.time:hover{transform:translateX(7px);border-color:#d7cbff}.time b{font:800 13px Manrope;color:var(--pink)}.time strong{font:800 18px Manrope}.time p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.55}
+      .bookhero{display:grid;grid-template-columns:.7fr 1.3fr;gap:62px;align-items:center;padding:48px;border-radius:36px;background:#ede8ff}.bookhero img{width:100%;max-height:480px;object-fit:contain;filter:drop-shadow(0 24px 26px #382a5733);transition:.35s}.bookhero:hover img{transform:rotate(-2deg) scale(1.025)}.bookcopy h2{font-size:clamp(40px,5vw,65px);line-height:1}.bookcopy p{color:var(--muted);font-size:17px}.bookgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}.book{padding:18px;border:1px solid var(--line);border-radius:24px;background:#fff;transition:.3s}.book:hover{transform:translateY(-7px);box-shadow:0 24px 55px #30263717}.book img{width:100%;height:280px;object-fit:contain;background:#f7f3ef;border-radius:16px}.book h3{font:800 18px Manrope}.book a{color:var(--pink);font-size:13px;font-weight:800}
+      .about{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}.about h2{font-size:clamp(42px,5vw,66px);line-height:1}.about p{color:var(--muted);font-size:18px;line-height:1.75}.checks{display:grid;gap:10px}.check{display:flex;align-items:center;gap:12px;padding:16px;border:1px solid var(--line);border-radius:17px;background:#fff;font-weight:800}.check svg{color:var(--pink)}
+      .support{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;margin-bottom:100px;padding:38px 42px;border-radius:32px;background:var(--ink);color:#fff;box-shadow:0 28px 80px #2f25371f}.support h2{margin:0;font:800 clamp(30px,4vw,48px) Manrope;letter-spacing:-.04em}.support p{margin:8px 0 0;color:#bfb7c5}.support .btn{border-color:#fff;background:#fff;color:var(--ink)}footer{padding:42px 0;border-top:1px solid var(--line)}.footer{display:flex;align-items:center;justify-content:space-between;gap:20px}.socials{display:flex;gap:9px}.socials a{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:#fff}
+      @media(max-width:900px){.navlinks{display:none}.menu{display:block}.hero,.aftergrid,.history,.bookhero,.about,.support{grid-template-columns:1fr}.hero{padding-top:35px}.heroart{height:560px}.bento{grid-template-columns:1fr 1fr;grid-template-rows:auto}.tile,.tile.big,.tile.wide{grid-column:auto;grid-row:auto;min-height:230px}.sectionhead{display:block}.note{margin-top:15px}.bookgrid{grid-template-columns:1fr 1fr}}
+      @media(max-width:600px){.wrap{width:min(100% - 28px,1180px)}.hero{min-height:auto;gap:38px;padding-bottom:65px}.hero h1{font-size:54px}.lead{font-size:17px}.heroart{height:455px}.portrait{inset:12px 4px 18px 22px}.mini{font-size:12px}.mini.top{right:0}.mini.bottom{left:0}.section{padding:76px 0}.bento,.bookgrid{grid-template-columns:1fr}.after{padding:30px 20px;border-radius:28px}.garden{height:210px}.inputrow{display:grid}.inputrow button{padding:14px}.history{gap:28px}.time{grid-template-columns:58px 1fr}.bookhero{padding:28px 20px}.book img{height:330px}.support{padding:28px 24px}.footer{align-items:flex-start;flex-direction:column}}
+      @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+    `}</style>
+    <header className="wrap"><nav className="nav"><button className="brand" onClick={()=>scrollTo("top")} aria-label="Jane Duru home">J<i>D</i></button><div className="navlinks"><button onClick={()=>scrollTo("work")}>Work</button><button onClick={()=>scrollTo("build")}>Building</button><button onClick={()=>scrollTo("books")}>Books</button><button onClick={()=>scrollTo("about")}>About</button><a className="nav-cta" href="#waitlist">Join AfterFight</a></div><button className="menu" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Open menu">{menuOpen?<X/>:<Menu/>}</button>{menuOpen&&<div className="mobile"><button onClick={()=>scrollTo("work")}>Work</button><button onClick={()=>scrollTo("build")}>Building</button><button onClick={()=>scrollTo("books")}>Books</button><button onClick={()=>scrollTo("about")}>About</button></div>}</nav></header>
+    <section className="wrap hero" id="top"><motion.div initial={{opacity:0,y:24}} animate={{opacity:1,y:0}} transition={{duration:.7}}><span className="overline"><Zap size={13}/> Founder · Engineer · Operator · Writer</span><h1>I understand people.<span>I build for them.</span></h1><p className="lead">Over eight years across sales, customer service and financial services taught me where real problems live. Now I build software, automate work and create products people want to use.</p><p className="role">Technical Support & Customer Enablement · Fintech, Payments & SaaS · Frontend Engineering · Automation · Product</p><div className="actions"><button className="btn dark" onClick={()=>scrollTo("build")}>See what I’m building <ArrowRight size={17}/></button><a className="btn" href="mailto:zemiolabs@gmail.com">Work with me <Mail size={16}/></a></div></motion.div><div className="heroart"><div className="orbit one"><i className="dot"/></div><div className="orbit two"><i className="dot"/></div><div className="portrait"><img src="/Img2.png" alt="Jane Duru, founder and software engineer"/></div><div className="mini top">Automation-minded<small>Less repetition. Better systems.</small></div><div className="mini bottom">Currently building<small>AfterFight · private beta</small></div></div></section>
+    <div className="marquee"><div className="track">{[...tools,...tools].map((tool,i)=><span key={`${tool}-${i}`}>{tool}</span>)}</div></div>
+    <section className="wrap section" id="work"><div className="sectionhead"><div><div className="kicker">What I bring</div><h2 className="title">Not one lane.<br/>One advantage.</h2></div><p className="note">I connect customer reality, commercial thinking and engineering. That combination helps me spot better problems—and build better solutions.</p></div><div className="bento"><article className="tile big"><div className="number">8+</div><strong>Years understanding customers</strong><p>Sales · Service · Financial services · Fintech</p></article><article className="tile"><div className="tileicon">01</div><strong>Frontend & mobile</strong><p>React · React Native · Expo · TypeScript</p></article><article className="tile"><div className="tileicon">02</div><strong>Support systems</strong><p>Enablement · QA · Clear customer journeys</p></article><article className="tile wide"><div className="tileicon">03</div><strong>Automation & product</strong><p>Jira automation · AI workflows · APIs · Product execution</p></article></div><div className="toolcloud">{tools.map(tool=><span key={tool}>{tool}</span>)}</div></section>
+    <section className="wrap section" id="build"><div className="after"><div className="aftergrid"><div className="aftercopy"><div className="productmark">AF</div><h2>Love after the hard moment.</h2><p>AfterFight is a private, thoughtful experience for couples who want a better way forward after difficult moments.</p><span className="privacy">The outcome is public. The mechanics stay private.</span><div className="garden" aria-label="Animated night garden symbolizing growth"><i className="moon"/><span className="flower a">🌷</span><span className="flower b">🌼</span><span className="flower c">🌸</span><i className="star s1"/><i className="star s2"/><i className="star s3"/></div></div><form className="waitlist" id="waitlist" onSubmit={joinWaitlist}><div className="kicker">Private beta</div><h3>Be first to try it.</h3><p>Join for thoughtful updates and early access.</p><div className="inputrow"><input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="Your email address" required/><button disabled={status==="loading"}>{status==="loading"?"Joining…":"Join"}</button></div><p className={`status ${status}`}>{status==="success"&&"You’re on the list."}{status==="error"&&"Please try again."}{status==="idle"&&"No noise. Only meaningful updates."}</p></form></div></div></section>
+    <section className="wrap section history"><div><div className="kicker">The path here</div><h2 className="title">Built from real experience.</h2><p className="note">I didn’t start with code. I started with people, pressure, payments and problems worth solving.</p></div><div className="timeline"><article className="time"><b>01</b><div><strong>Sales & financial services</strong><p>Commercial judgment and years of direct customer insight.</p></div></article><article className="time"><b>02</b><div><strong>Support & enablement</strong><p>Improving systems, automating workflows and helping people succeed.</p></div></article><article className="time"><b>03</b><div><strong>Software engineering</strong><p>Building frontend and mobile products with modern tools.</p></div></article><article className="time"><b>04</b><div><strong>Founder & consultant</strong><p>Building for clients, businesses and my own product studio.</p></div></article><article className="time"><b>05</b><div><strong>Ohh → AfterFight</strong><p>Shipped, learned, closed a chapter—and kept building.</p></div></article></div></section>
+    <section className="wrap section" id="books"><div className="bookhero"><img src="/new-book.jpg" alt="Nobody Pays You for Working Hard Anymore book cover"/><div className="bookcopy"><div className="kicker">Newest book</div><h2>Nobody Pays You for Working Hard Anymore</h2><p>Create value. Build leverage. Make money in the age of AI.</p><div className="actions"><a className="btn dark" href={AMAZON} target="_blank" rel="noreferrer">Amazon <ArrowUpRight size={16}/></a><a className="btn" href={GUMROAD} target="_blank" rel="noreferrer">Gumroad <ArrowUpRight size={16}/></a></div></div></div><div className="bookgrid">{books.map(book=><article className="book" key={book.title}><img src={book.cover} alt={`${book.title} book cover`}/><h3>{book.title}</h3><a href={AMAZON} target="_blank" rel="noreferrer">View book ↗</a></article>)}</div></section>
+    <section className="wrap section about" id="about"><div><div className="kicker">About Jane</div><h2>Builder’s mind.<br/>Operator’s instinct.</h2><p>I’m Jane Duru, co-founder of Zemio Labs. I build and consult on apps, software and automation for people and businesses—while creating products of my own.</p><div className="actions"><a className="btn dark" href="https://zemiolabs.com" target="_blank" rel="noreferrer">Zemio Labs <ArrowUpRight size={16}/></a><a className="btn" href="https://github.com/janeezy" target="_blank" rel="noreferrer">GitHub <Github size={16}/></a></div></div><div className="checks">{["Frontend & mobile engineering","Technical support & enablement","Fintech, payments & SaaS","Automation & AI workflows","Product strategy & execution","Author and founder"].map(item=><div className="check" key={item}><Check size={18}/>{item}</div>)}</div></section>
+    <section className="wrap support"><div><h2>Support what I’m building next.</h2><p>Back an independent builder, writer and product experimenter.</p></div><a className="btn" href={COFFEE} target="_blank" rel="noreferrer">☕ Support my build</a></section>
+    <footer><div className="wrap footer"><div><div className="brand">J<i>D</i></div><small>Building useful things from real problems.</small></div><div className="socials"><a href="https://x.com/Iamjaneezy" target="_blank" rel="noreferrer" aria-label="X"><Twitter size={17}/></a><a href="https://github.com/janeezy" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17}/></a><a href="https://www.instagram.com/iamjaneezy" target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={17}/></a><a href="mailto:zemiolabs@gmail.com" aria-label="Email"><Mail size={17}/></a></div></div></footer>
+  </main>;
 }
