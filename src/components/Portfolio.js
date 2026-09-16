@@ -94,8 +94,8 @@ export default function Portfolio() {
         .site-shell { min-height:100vh; overflow:hidden; background:radial-gradient(circle at 90% 4%,#f2eaff 0,transparent 28%),radial-gradient(circle at 3% 27%,#ffe8e6 0,transparent 25%),var(--cream); }
         .wrap { width:min(1160px,calc(100% - 40px)); margin:0 auto; }
         .nav { height:76px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(22,21,26,.08); }
-        .logo { font:800 20px 'Manrope'; letter-spacing:-.7px; }
-        .logo span { color:var(--coral); }
+        .logo { width:46px; height:46px; display:grid; place-items:center; border:0; border-radius:15px; color:white; background:linear-gradient(135deg,var(--ink),#40324f); box-shadow:0 10px 24px rgba(22,21,26,.16); font:800 16px 'Manrope'; letter-spacing:-.5px; cursor:pointer; }
+        .logo span { color:#ff9ca6; }
         .nav-links { display:flex; align-items:center; gap:28px; color:var(--muted); font-size:14px; font-weight:600; }
         .nav-links button { border:0; background:none; cursor:pointer; color:inherit; }
         .nav-links button:hover { color:var(--ink); }
@@ -141,13 +141,12 @@ export default function Portfolio() {
         .form-status { min-height:20px; margin:12px 0 0!important; font-size:12px!important; }
         .success { color:#16804d!important; }
         .error { color:#b83f49!important; }
-        .garden { height:150px; position:relative; margin-top:24px; border-radius:24px; overflow:hidden; background:linear-gradient(#2f2941 0 57%,#253d31 57%); border:1px solid rgba(255,255,255,.12); }
-        .garden:after { content:''; position:absolute; inset:auto 0 0; height:30px; background:linear-gradient(90deg,#294734,#375940,#294734); }
-        .moon { position:absolute; width:44px; height:44px; border-radius:50%; right:20px; top:18px; background:#fff3c9; box-shadow:0 0 35px #fff1bd; }
-        .flower { position:absolute; bottom:22px; z-index:1; font-size:42px; transform-origin:bottom; animation:bloom 3.5s ease-in-out infinite alternate; }
-        .flower.two { left:38%; font-size:34px; animation-delay:.7s; }
-        .flower.three { left:68%; font-size:46px; animation-delay:1.2s; }
-        @keyframes bloom { from { transform:rotate(-4deg) scale(.92); } to { transform:rotate(5deg) scale(1.06); } }
+        .product-visual { height:150px; position:relative; margin-top:24px; border-radius:24px; overflow:hidden; background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,105,120,.16)); border:1px solid rgba(255,255,255,.12); }
+        .product-visual span { position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.32); animation:float 5s ease-in-out infinite alternate; }
+        .product-visual span:nth-child(1) { width:84px; height:84px; left:12%; top:32px; background:rgba(255,105,120,.2); }
+        .product-visual span:nth-child(2) { width:46px; height:46px; left:48%; top:54px; animation-delay:.7s; background:rgba(116,98,232,.28); }
+        .product-visual span:nth-child(3) { width:110px; height:110px; right:8%; top:20px; animation-delay:1.2s; background:rgba(255,255,255,.08); }
+        @keyframes float { from { transform:translateY(7px) rotate(-5deg); } to { transform:translateY(-8px) rotate(6deg); } }
         .journey { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:34px; }
         .journey-step { position:relative; padding:20px; min-height:134px; border-radius:20px; background:white; border:1px solid var(--line); }
         .journey-step { transition:transform .25s ease, box-shadow .25s ease; }
@@ -165,6 +164,8 @@ export default function Portfolio() {
         .coffee-link:hover { background:#fff0e8; border-color:#ffb4bc; transform:translateY(-2px); }
         .experience { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:30px; }
         .experience article { padding:22px; border-radius:20px; background:white; border:1px solid var(--line); }
+        .experience article { transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+        .experience article:hover { transform:translateY(-6px); border-color:#d9d0ff; box-shadow:0 18px 44px rgba(52,38,66,.1); }
         .experience strong { display:block; font-family:'Manrope'; }
         .experience small { display:block; margin-top:6px; color:var(--muted); line-height:1.5; }
         .book-feature { display:grid; grid-template-columns:.78fr 1.22fr; gap:70px; align-items:center; padding:50px; border-radius:34px; background:#efe9ff; }
@@ -184,6 +185,10 @@ export default function Portfolio() {
         .about-list { display:grid; gap:12px; }
         .about-item { display:flex; align-items:center; gap:12px; padding:16px; border-radius:17px; background:white; border:1px solid var(--line); font-weight:700; }
         .about-item svg { color:var(--coral); }
+        .support-band { display:grid; grid-template-columns:1fr auto; gap:30px; align-items:center; margin-bottom:90px; padding:34px 38px; border-radius:28px; color:white; background:linear-gradient(120deg,#18151d,#40304f 55%,#6b344e); box-shadow:0 25px 70px rgba(45,31,55,.2); }
+        .support-band h3 { font-size:clamp(27px,4vw,42px); }
+        .support-band p { margin:8px 0 0; color:rgba(255,255,255,.66); }
+        .support-band .coffee-link { margin:0; color:var(--ink); background:white; border-color:white; padding:14px 20px; }
         footer { border-top:1px solid var(--line); padding:42px 0; }
         .footer-inner { display:flex; justify-content:space-between; align-items:center; gap:24px; }
         .socials { display:flex; gap:10px; }
@@ -193,7 +198,7 @@ export default function Portfolio() {
           .menu-button { display:block; }
           .mobile-menu { position:absolute; z-index:20; left:20px; right:20px; top:68px; padding:18px; border-radius:18px; background:white; box-shadow:0 20px 50px rgba(0,0,0,.13); display:grid; gap:8px; }
           .mobile-menu button { border:0; background:#faf7f4; border-radius:12px; padding:13px; text-align:left; font-weight:700; }
-          .hero,.after-grid,.book-feature,.about { grid-template-columns:1fr; }
+          .hero,.after-grid,.book-feature,.about,.support-band { grid-template-columns:1fr; }
           .hero { padding-top:55px; }
           .portrait-card { width:min(520px,100%); margin:0 auto; }
           .afterfight { padding:40px; }
@@ -224,7 +229,7 @@ export default function Portfolio() {
 
       <header className="wrap">
         <nav className="nav">
-          <button className="logo" onClick={() => scrollTo("top")}>Jane<span>.</span></button>
+          <button className="logo" onClick={() => scrollTo("top")} aria-label="Jane Duru home">J<span>D</span></button>
           <div className="nav-links">
             <button onClick={() => scrollTo("products")}>Building</button>
             <button onClick={() => scrollTo("books")}>Books</button>
@@ -249,7 +254,7 @@ export default function Portfolio() {
         <motion.div {...fade}>
           <span className="eyebrow"><Sparkles size={14} /> Founder · Builder · Writer</span>
           <h1>I turn real problems into <em>products.</em></h1>
-          <p className="hero-copy">Building AfterFight at Zemio Labs—and sharing the honest journey from problem to product.</p>
+          <p className="hero-copy">Eight years across sales, customer service and financial services shaped how I understand people. Now I engineer apps, build software and turn real problems into products.</p>
           <div className="actions">
             <button className="primary" onClick={() => scrollTo("waitlist")}>Join the AfterFight waitlist <ArrowRight size={17} /></button>
             <a className="secondary" href="https://github.com/janeezy" target="_blank" rel="noreferrer">Watch me build <Github size={17} /></a>
@@ -271,13 +276,13 @@ export default function Portfolio() {
               <div className="points">
                 <span className="point">Private by design</span><span className="point">Built with care</span><span className="point">For every kind of love</span>
               </div>
-              <div className="garden" aria-label="An animated couple garden growing flowers">
-                <span className="moon"/><span className="flower" style={{left:"10%"}}>🌷</span><span className="flower two">🌼</span><span className="flower three">🌸</span>
+              <div className="product-visual" aria-hidden="true">
+                <span/><span/><span/>
               </div>
             </div>
             <form className="waitlist" id="waitlist" onSubmit={joinWaitlist}>
               <span className="kicker">Early access</span>
-              <h3>Be first into the garden.</h3>
+              <h3>Be first to try it.</h3>
               <p>Join the waitlist for product updates, beta access and launch news.</p>
               <div className="input-row">
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your email address" aria-label="Email address" required />
@@ -303,7 +308,7 @@ export default function Portfolio() {
         </div>
         <div className="creator-links">
           <a className="coffee-link" href="https://buymeacoffee.com/janeezyoffb" target="_blank" rel="noreferrer">☕ Support my build · Buy me a coffee</a>
-          <a className="github-card" href="https://github.com/janeezy" target="_blank" rel="noreferrer"><div><strong>Follow the build on GitHub</strong><p>See the work, experiments and products behind the journey.</p></div><Github size={28}/></a>
+          <a className="github-card" href="https://github.com/janeezy" target="_blank" rel="noreferrer"><div><strong>Follow my selected work on GitHub</strong><p>Public experiments and code—private product ideas stay private.</p></div><Github size={28}/></a>
         </div>
       </section>
 
@@ -337,26 +342,31 @@ export default function Portfolio() {
       <section className="section wrap about" id="about">
         <motion.div {...fade}>
           <div className="kicker">About Jane</div><h2>Builder’s mind. Founder’s ownership.</h2>
-          <p>I’m Jane Duru, co-founder of Zemio Labs. My journey started in finance, sales and customer-facing work before leading me into frontend and mobile engineering. Today, I bring those worlds together—combining product judgment, technology and storytelling to build useful things people understand and want to use.</p>
+          <p>I’m Jane Duru, co-founder of Zemio Labs. After more than eight years across sales, customer service and financial services, I moved into software engineering. Today I build and consult on apps and digital products for people and businesses—while creating my own.</p>
           <div className="actions"><a className="primary" href="https://zemiolabs.com" target="_blank" rel="noreferrer">Zemio Labs <ArrowUpRight size={16}/></a><a className="secondary" href="mailto:zemiolabs@gmail.com">Work with me <Mail size={16}/></a></div>
         </motion.div>
         <motion.div className="about-list" {...fade} transition={{ ...fade.transition, delay:.1 }}>
-          {["Co-founder at Zemio Labs","Apps, SaaS & AI tools","React, React Native & TypeScript","Author and builder in public"].map((item) => <div className="about-item" key={item}><Check size={18}/>{item}</div>)}
+          {["React, React Native & Expo","TypeScript, JavaScript & APIs","Tailwind, testing & QA","Product strategy & startup execution"].map((item) => <div className="about-item" key={item}><Check size={18}/>{item}</div>)}
         </motion.div>
       </section>
 
       <section className="wrap" style={{paddingBottom:90}}>
-        <div className="kicker">Experience behind the products</div>
+        <div className="kicker">What I bring</div>
         <div className="experience">
-          <article><strong>Zemio Labs</strong><small>Co-founder & product builder · Apps, SaaS and AI tools.</small></article>
-          <article><strong>Finance & business</strong><small>Customer-facing financial experience, commercial judgment and business operations.</small></article>
-          <article><strong>Technical toolkit</strong><small>React, React Native, Expo, TypeScript, JavaScript, Tailwind, APIs and testing.</small></article>
-          <article><strong>Built before</strong><small>Ohh — a relationship app I launched, learned from and later closed.</small></article>
-          <article><strong>Sales & product</strong><small>Commercial experience combined with product research and startup execution.</small></article>
+          <article><strong>8+ years of people insight</strong><small>Sales, customer experience and financial services.</small></article>
+          <article><strong>Software engineering</strong><small>Frontend and mobile products built with modern JavaScript tools.</small></article>
+          <article><strong>Consulting & product</strong><small>I help shape, build and improve useful digital experiences.</small></article>
+          <article><strong>Built before: Ohh</strong><small>A relationship app I launched, learned from and later closed.</small></article>
+          <article><strong>Building now: AfterFight</strong><small>A new product in development. The concept is public; the mechanics stay private.</small></article>
         </div>
       </section>
 
-      <footer><div className="wrap footer-inner"><div><div className="logo">Jane<span>.</span></div><small>Building useful things from real problems.</small></div><div className="socials"><a href="https://x.com/Iamjaneezy" target="_blank" rel="noreferrer" aria-label="X"><Twitter size={17}/></a><a href="https://github.com/janeezy" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17}/></a><a href="https://www.instagram.com/iamjaneezy" target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={17}/></a><a href="mailto:zemiolabs@gmail.com" aria-label="Email"><Mail size={17}/></a></div></div></footer>
+      <section className="wrap support-band">
+        <div><div className="kicker">Back an independent builder</div><h3>Support what I’m building next.</h3><p>Your support helps fund thoughtful products, experiments and the road to launch.</p></div>
+        <a className="coffee-link" href="https://buymeacoffee.com/janeezyoffb" target="_blank" rel="noreferrer">☕ Support my build</a>
+      </section>
+
+      <footer><div className="wrap footer-inner"><div><div className="logo">J<span>D</span></div><small>Building useful things from real problems.</small></div><div className="socials"><a href="https://x.com/Iamjaneezy" target="_blank" rel="noreferrer" aria-label="X"><Twitter size={17}/></a><a href="https://github.com/janeezy" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17}/></a><a href="https://www.instagram.com/iamjaneezy" target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={17}/></a><a href="mailto:zemiolabs@gmail.com" aria-label="Email"><Mail size={17}/></a></div></div></footer>
     </main>
   );
 }
