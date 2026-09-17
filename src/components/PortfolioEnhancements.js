@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import './PortfolioEnhancements.css';
 
-const AMAZON_NEW='https://a.co/d/0j3K9vrN';
+const AMAZON_NEW='https://www.amazon.com/Nobody-Pays-Working-Hard-Anymore-ebook/dp/B0HJDL4R17';
 const GUMROAD_NEW='https://iamjaneezystore.gumroad.com/l/qpdnta';
 const GUMROAD_STORE='https://iamjaneezystore.gumroad.com';
 
