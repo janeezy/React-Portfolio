@@ -10,3 +10,11 @@
 .bookgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.book{min-height:360px;border-radius:22px;border:1px solid #1112}.book.b3{background:#f6cb70;grid-column:1/-1;min-height:410px;grid-template-columns:.95fr 1.05fr}.book.b3 img{height:380px}.book.b4{background:#e8e4ff}.books .bookcta{background:#111;color:#fff!important;border-color:#111}
 .portrait{overflow:visible}.portrait img{object-position:center top}.float{left:-20px;bottom:22px;width:min(330px,62%);padding:22px 24px;box-shadow:10px 10px var(--acid);transform:rotate(-1.5deg)}.float span{font-size:12px;letter-spacing:.02em}.float b{font-size:34px;margin:8px 0}.float small{font-size:13px;line-height:1.45;color:#c8c8c8}.aboutphoto{object-position:center 16%}
 @media(max-width:850px){.bookgrid{grid-template-columns:1fr}.book.b3{grid-column:auto}.float{left:-10px;width:min(340px,78%)}}@media(max-width:520px){.book,.book.b3{grid-template-columns:1fr 1fr;min-height:290px;border-radius:16px}.book.b3 img{height:240px}.float{width:78%;padding:16px 18px;bottom:18px}.float b{font-size:27px}.float small{font-size:11px}}
+
+/* Restore original AfterFight card feel; keep portrait unobstructed */
+@media(min-width:851px){
+  .portrait .float{left:-42px;bottom:24px;width:270px;padding:18px;box-shadow:8px 8px var(--acid);transform:rotate(-3deg)}
+  .portrait .float span{font-size:10px}
+  .portrait .float b{font-size:25px;margin:4px 0}
+  .portrait .float small{font-size:10px;line-height:1.4}
+}
