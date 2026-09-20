@@ -156,3 +156,5 @@
   .bookshelf .shelf-card, .bookshelf .shelf-buy { transition: none; }
   .bookshelf .shelf-card:hover { transform: none; }
 }
+
+.shelf-amazon{margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;border:1px solid #111;font-size:11px;font-weight:800;transition:.2s}.shelf-amazon:hover{background:#111;color:#fff!important}@media(max-width:520px){.shelf-amazon{font-size:10px;padding:11px 12px}}
