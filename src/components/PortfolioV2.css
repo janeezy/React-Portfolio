@@ -60,3 +60,151 @@
   .portrait .float b{font-size:25px}
   .portrait .stamp{width:76px;height:76px;top:-20px;right:-4px;font-size:11px}
 }
+
+
+/* FINAL MOBILE RESPONSIVENESS PASS — 2026-09-20 */
+@media (max-width: 850px) {
+  html,body,.v2{max-width:100%;overflow-x:hidden}
+  .v2 nav,.v2 .hero,.v2 .section,.v2 footer{width:min(100% - 32px,1240px)}
+
+  .section{padding:72px 0}
+  .v2 header{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:18px!important;margin-bottom:34px}
+  .v2 header>p{max-width:100%!important;margin:0;font-size:15px;line-height:1.6}
+
+  /* About: one readable column on phones/tablets */
+  .aboutgrid{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:26px!important;
+    border-top:1px solid #111;
+    padding-top:26px!important;
+  }
+  .aboutintro{
+    display:block!important;
+    width:100%!important;
+  }
+  .aboutintro small{display:block;margin-bottom:14px}
+  .aboutintro h2{
+    width:100%!important;
+    max-width:760px!important;
+    font-size:clamp(42px,9vw,64px)!important;
+    line-height:.96!important;
+    letter-spacing:-.055em!important;
+    margin:0 0 24px!important;
+  }
+  .aboutphoto{
+    display:block!important;
+    width:100%!important;
+    max-width:560px!important;
+    height:auto!important;
+    aspect-ratio:4/5;
+    object-fit:cover;
+    object-position:center top;
+    margin:0!important;
+    border-radius:2px 42px 2px 2px;
+  }
+  .aboutcopy{
+    width:100%!important;
+    max-width:720px!important;
+    padding:0!important;
+  }
+  .aboutcopy p{
+    width:100%!important;
+    max-width:none!important;
+    font-size:17px!important;
+    line-height:1.7!important;
+    margin:0 0 18px!important;
+  }
+
+  .quote{margin-bottom:58px!important}
+
+  /* Work / cards */
+  .projects,.casegrid,.servicegrid,.bookgrid,.toolgroups{grid-template-columns:1fr!important}
+  .project,.case,.case.featured,.servicecard{min-height:0!important}
+  .case.featured{grid-row:auto!important}
+  .servicecard{padding:28px!important}
+  .servicecta{display:flex!important;flex-direction:column!important;align-items:flex-start!important}
+  .servicecta .pill{width:100%;justify-content:center;text-align:center}
+
+  /* Books */
+  .book,.book.b0{
+    grid-column:auto!important;
+    display:grid!important;
+    grid-template-columns:minmax(120px,.8fr) 1.2fr!important;
+    align-items:center!important;
+    min-height:0!important;
+    padding:18px!important;
+  }
+  .book img,.book.b0 img{height:260px!important;max-width:100%}
+
+  /* Support / consult */
+  .support,.consult{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    gap:28px!important;
+  }
+  .supportbtn,.consultactions{max-width:100%}
+  .supportbtn{white-space:normal}
+}
+
+@media (max-width: 520px) {
+  .v2 nav,.v2 .hero,.v2 .section,.v2 footer{width:calc(100% - 28px)}
+  .section{padding:62px 0}
+
+  .hero h1{font-size:clamp(46px,14vw,60px)!important;line-height:.92}
+  .lede{font-size:16px!important}
+  .actions{width:100%}
+  .actions .pill{width:100%;justify-content:center;text-align:center}
+
+  .v2 header h2{font-size:clamp(40px,12vw,52px)!important;line-height:.95!important}
+  .v2 header>p{font-size:15px}
+
+  .about{padding-top:60px!important;padding-bottom:66px!important}
+  .aboutgrid{gap:22px!important;padding-top:22px!important}
+  .aboutintro h2{
+    font-size:clamp(39px,12.5vw,50px)!important;
+    line-height:.94!important;
+    margin-bottom:18px!important;
+  }
+  .aboutphoto{
+    max-width:100%!important;
+    aspect-ratio:4/5;
+    border-radius:2px 30px 2px 2px;
+  }
+  .aboutcopy p{
+    font-size:16px!important;
+    line-height:1.66!important;
+    margin-bottom:17px!important;
+  }
+  .quote{font-size:clamp(32px,10vw,42px)!important;margin-bottom:46px!important}
+
+  .project,.case,.case.featured,.servicecard{padding:22px!important}
+  .project h3,.case h3,.servicecard h3{overflow-wrap:anywhere}
+  .caseTop{align-items:flex-start!important;flex-wrap:wrap!important}
+  .caseFlow{gap:7px!important;margin:32px 0!important}
+  .caseFoot{flex-direction:column!important;align-items:flex-start!important}
+  .caseFoot span{text-align:left!important}
+
+  .book,.book.b0{
+    grid-template-columns:1fr!important;
+    gap:14px!important;
+    padding:16px!important;
+  }
+  .book img,.book.b0 img{
+    width:100%!important;
+    height:280px!important;
+    object-fit:contain!important;
+  }
+
+  .toolgroups>div{min-height:0!important;padding:20px!important}
+  .servicecard h3{font-size:30px!important;margin-top:26px!important}
+
+  .support,.consult{padding:60px 18px!important}
+  .support h2,.consult h2{font-size:clamp(42px,12vw,56px)!important;line-height:.95!important}
+  .support p,.consult p{font-size:16px!important}
+  .supportbtn,.consultactions,.consultactions .pill{width:100%!important}
+  .supportbtn,.consultactions .pill{justify-content:center;text-align:center}
+
+  .mobileMenu{left:0!important;right:0!important}
+}
