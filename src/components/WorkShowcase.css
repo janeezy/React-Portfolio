@@ -1,0 +1,251 @@
+/* Scoped layout: three equal areas, not one stretched two-row feature. */
+.v2 .workShowcase {
+  padding-block: clamp(56px, 6vw, 80px);
+  scroll-margin-top: 24px;
+}
+
+.v2 .workShowcase .ws-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+  gap: 32px;
+  align-items: end;
+  margin: 0 0 28px;
+}
+
+.v2 .workShowcase .ws-eyebrow {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: 0.14em;
+}
+
+.v2 .workShowcase .ws-heading h2 {
+  margin: 12px 0 0;
+  max-width: 14ch;
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+}
+
+.v2 .workShowcase .ws-heading > p {
+  max-width: 420px;
+  margin: 0;
+  color: #625c56;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.v2 .workShowcase .ws-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+.v2 .workShowcase .ws-card {
+  --ws-card-ink: #111;
+  --ws-card-muted: #514d4a;
+  --ws-card-line: #1113;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(24px, 2.2vw, 30px);
+  border: 1px solid #111;
+  color: var(--ws-card-ink);
+  background: #f3f0e9;
+}
+
+.v2 .workShowcase .ws-card--systems {
+  --ws-card-ink: #f3f0e9;
+  --ws-card-muted: #c3c0b9;
+  --ws-card-line: #ffffff38;
+  background: #111;
+}
+
+.v2 .workShowcase .ws-card--software { background: #e8e4ff; }
+.v2 .workShowcase .ws-card--apps { background: #f0dfcd; }
+
+.v2 .workShowcase .ws-cardTop {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.v2 .workShowcase .ws-number {
+  display: grid;
+  place-items: center;
+  flex: 0 0 34px;
+  height: 34px;
+  border: 1px solid var(--ws-card-line);
+  border-radius: 50%;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.v2 .workShowcase .ws-card--systems .ws-number {
+  color: #111;
+  background: var(--acid, #eaff70);
+  border-color: var(--acid, #eaff70);
+}
+
+.v2 .workShowcase .ws-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: 0.09em;
+}
+
+.v2 .workShowcase .ws-card h3 {
+  margin: 0 0 18px;
+  color: var(--ws-card-ink);
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(28px, 2.5vw, 34px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  overflow-wrap: break-word;
+}
+
+.v2 .workShowcase .ws-description {
+  margin: 0;
+  color: var(--ws-card-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.v2 .workShowcase .ws-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  list-style: none;
+  margin: 22px 0 24px;
+  padding: 0;
+}
+
+.v2 .workShowcase .ws-tags li {
+  max-width: 100%;
+  padding: 6px 9px;
+  border: 1px solid var(--ws-card-line);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.v2 .workShowcase .ws-proof {
+  margin-top: auto;
+  border-top: 1px solid var(--ws-card-line);
+  padding-top: 18px;
+}
+
+.v2 .workShowcase .ws-proof strong {
+  display: block;
+  font-family: 'Manrope', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+}
+
+.v2 .workShowcase .ws-card--systems .ws-proof strong {
+  color: var(--acid, #eaff70);
+}
+
+.v2 .workShowcase .ws-proof p {
+  margin: 8px 0 0;
+  color: var(--ws-card-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.v2 .workShowcase .ws-process {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 28px;
+  margin-top: 18px;
+  padding: 18px 0;
+  border-block: 1px solid #1113;
+}
+
+.v2 .workShowcase .ws-process ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.v2 .workShowcase .ws-process li {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.v2 .workShowcase .ws-process li:not(:last-child)::after {
+  content: '\2192';
+  color: #716b64;
+}
+
+.v2 .workShowcase .ws-confidentiality {
+  margin: 14px 0 0;
+  color: #625c56;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Share content rows on wide screens so headings, tags and proof align. */
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 1001px) {
+    .v2 .workShowcase .ws-grid { row-gap: 0; }
+    .v2 .workShowcase .ws-card {
+      display: grid;
+      grid-row: span 5;
+      grid-template-rows: subgrid;
+      row-gap: 0;
+    }
+    .v2 .workShowcase .ws-tags { align-self: start; }
+    .v2 .workShowcase .ws-proof { margin-top: 0; }
+  }
+}
+
+@media (max-width: 1000px) {
+  .v2 .workShowcase .ws-grid { grid-template-columns: 1fr; }
+  .v2 .workShowcase .ws-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: 0 32px;
+  }
+  .v2 .workShowcase .ws-cardTop { grid-column: 1 / -1; margin-bottom: 20px; }
+  .v2 .workShowcase .ws-card h3 { margin-bottom: 0; }
+  .v2 .workShowcase .ws-tags { grid-column: 1 / -1; margin-block: 20px; }
+  .v2 .workShowcase .ws-proof { grid-column: 1 / -1; margin-top: 0; }
+  .v2 .workShowcase .ws-heading { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 620px) {
+  .v2 .workShowcase .ws-heading { grid-template-columns: 1fr; gap: 18px; }
+  .v2 .workShowcase .ws-heading > p { font-size: 15px; }
+  .v2 .workShowcase .ws-grid { gap: 12px; }
+  .v2 .workShowcase .ws-card { display: flex; padding: 24px; }
+  .v2 .workShowcase .ws-card h3 { margin-bottom: 16px; font-size: 29px; }
+  .v2 .workShowcase .ws-label { font-size: 9px; }
+  .v2 .workShowcase .ws-description { font-size: 15px; line-height: 1.65; }
+  .v2 .workShowcase .ws-tags { margin-block: 18px 22px; }
+  .v2 .workShowcase .ws-proof strong { font-size: 19px; }
+  .v2 .workShowcase .ws-process { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .v2 .workShowcase .ws-process ol { gap: 8px 16px; }
+  .v2 .workShowcase .ws-process li { gap: 16px; }
+}
