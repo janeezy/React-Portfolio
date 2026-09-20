@@ -27,6 +27,7 @@ export const BOOKS = [
     image: '/quiet-the-noise.png',
     href: 'https://iamjaneezystore.gumroad.com/l/vieeyb',
     retailer: 'Gumroad',
+    amazonHref: 'https://a.co/d/0cxUSUnC',
   },
   {
     id: 'selective-empathy',
@@ -34,6 +35,7 @@ export const BOOKS = [
     image: '/book-selective-empathy.png',
     href: 'https://iamjaneezystore.gumroad.com/l/ikgpou',
     retailer: 'Gumroad',
+    amazonHref: 'https://a.co/d/03ilrJ8u',
   },
   {
     id: 'ai-prompts',
@@ -81,6 +83,7 @@ export default function BooksShelf() {
                 </span>
               </div>
             </a>
+            {book.amazonHref && <a className="shelf-amazon" href={book.amazonHref} target="_blank" rel="noopener noreferrer" aria-label={`Buy physical copy of ${book.title} on Amazon`}>Buy physical book on Amazon <ArrowUpRight size={15} aria-hidden="true" /></a>}
           </article>
         ))}
       </div>
