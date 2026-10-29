@@ -208,3 +208,22 @@
 
   .mobileMenu{left:0!important;right:0!important}
 }
+
+/* Janeezy: films and commentary, alongside the engineering portfolio */
+.youtubeSection{padding-top:30px;padding-bottom:95px;scroll-margin-top:24px}
+.youtubeCard{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;background:var(--ink);color:var(--paper);padding:54px}
+.youtubeIntro,.youtubeCopy{min-width:0}
+.youtubeKicker{display:flex;align-items:center;gap:10px;color:var(--acid);font:800 10px Manrope,sans-serif;letter-spacing:.14em}
+.youtubeIntro h2{font:800 clamp(34px,4.2vw,56px)/1.04 Manrope,sans-serif;letter-spacing:-.055em;margin:34px 0 24px}
+.youtubeIntro h2 em{font-style:normal;color:var(--acid)}
+.youtubeHandle{font-size:13px;color:#c5c1b9}
+.youtubeCopy p{font-size:16px;line-height:1.65;color:#c5c1b9;margin:0 0 20px}
+.youtubeCopy p:first-child{font-size:20px;line-height:1.4;font-weight:700;color:var(--paper)}
+.v2 .youtubeButton{background:var(--acid);border-color:var(--acid);color:var(--ink);margin-top:5px;text-align:center}
+.youtubeTopics{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.youtubeTopics span{border:1px solid #62605a;border-radius:99px;padding:7px 10px;font-size:10px;color:var(--paper)}
+.youtubeButton:focus-visible{outline:3px solid var(--paper);outline-offset:5px}
+.v2 .socialrow,.v2 .footlinks{flex-wrap:wrap}
+@media(min-width:851px) and (max-width:1100px){.v2 nav .links{gap:16px;font-size:13px}}
+@media(max-width:850px){.youtubeSection{padding:28px 0 70px}.youtubeCard{grid-template-columns:1fr;gap:30px;padding:34px}.youtubeIntro h2{max-width:600px}}
+@media(max-width:520px){.youtubeCard{padding:26px 22px}.youtubeIntro h2{font-size:36px}.youtubeCopy p{font-size:15px}.youtubeCopy p:first-child{font-size:19px}.youtubeButton{width:100%;justify-content:center}}
